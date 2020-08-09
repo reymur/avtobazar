@@ -1,0 +1,46 @@
+
+.navbar__bg {
+    background-color: #d23055;;
+}
+.logo {
+    width: 55px;
+}
+.avto__logo {
+    width: 60px;
+    margin-top: 7px;
+}
+
+.border__b {
+    color: #343434;
+}
+
+.border__bottom_clear {
+    border-bottom: #ffffff solid 4px;
+    margin-bottom: -1px;
+}
+.title__text {
+    color: #d23055;;
+    /*font-weight: bold;*/
+    font-size: 1.2rem;
+    letter-spacing: 0.3px;
+    font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.button__to {
+    font-size: 0.9rem;
+    font-weight: 520;
+    letter-spacing: 2px;
+    background-color: #69bb10;
+    font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.text__size {
+    font-size: 0.8rem;
+}
+
+.badge__font_size {
+    font-size: 13px;
+}
+.badge__bg {
+    background-color: #219533;
+}
