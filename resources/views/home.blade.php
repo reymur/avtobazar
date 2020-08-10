@@ -15,32 +15,32 @@
             @include('modals.announcement')
         </div>
 
-        <div class="row col-lg-12 col-md-12 col-sm-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0 text-center">
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
             @if( count($cars) )
                 @foreach($cars as $car)
-                    <div class="col-lg-4 pb-2 mb-2 border-bottom">
-                        <table class="d-inline-flex col">
-                            <thead>
-                                <th>
-                                    <img class="avto__small_logo mr-4"
-                                         src="{{ asset('images/cars/image/'. $car->title) }}" alt="Logo">
-                                </th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="">
-                                            <span class="row avto__small_text">
-                                                {{ $car->name }}
+                    <div class="col-lg-4  col-md-4 col-sm-6 mb-3 border-bottom">
+                        <table class="d-inline-flex pb-1">
+                                <thead>
+                                    <th>
+                                        <img class="avto__small_logo mr-4"
+                                             src="{{ asset('images/cars/image/'. $car->title) }}" alt="Logo">
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="">
+                                                <span class="row avto__small_text">
+                                                    {{ $car->name }}
+                                                </span>
+                                                <span class="row mt-n2">
+                                                    12323
+                                                </span>
                                             </span>
-                                            <span class="row mt-n2">
-                                                12323
-                                            </span>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                     </div>
                 @endforeach
             @endif

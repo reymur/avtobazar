@@ -3,158 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/300px-Bajaj_Auto_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/600px-BMW.svg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/800px-Logo_MAN.svg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Alfa Romeo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Alpina 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Aston Martin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/BAIC image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Buick-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/CHANGAN-LOGO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Cadillac 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Chevrolet_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Chrysler 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Citroen 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Dacia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Daewoo logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Daihatsu 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Dnepr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Dodge17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Dukelogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/FAW_Car_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Ferrari 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Fiat 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Ford.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/GMC.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Gac.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Geely_Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/GreatWall.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/HOWO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Harley-Davidson.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Haval.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Honda 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Hovo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Hummer 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Hyundai 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/IJ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Isuzu 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Iveco.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/JAC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/JONWAY.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Jaguar-Cat_600_pixels.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Jeep 1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/KAvZ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/KTM_Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Kamaz.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Kawasaki Logo 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Kuba.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Lada.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Lamborghini 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Landrover.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Lexus logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Lifan.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Lincoln.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Logo_MAZ.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/MG 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Maserati.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Mazda 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/McLaren.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Mercedes Benz 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Mercedes Benz 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Mini.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Minsk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Mitsubishi 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Nama.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/NcLeran.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Neptun.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Nuravei.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Otokar.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Renault_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Rolls-royce.svg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/SEAT_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Saab-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Scina.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Scoda.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Skoda.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Smart.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Tesla.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/UAZ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Vasxod-logo.p.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Vespa.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/Volkswagen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ZAZ.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ZIL logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ZONGSHEN.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/bentley_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/bmc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/bmw.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/brilliance.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/byd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/chery.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/chevrolet-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/china-national-ice-hockey-team-logo-2C0623EEAA-seeklogo.com.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/daf-adblue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/denper.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/dongfeng.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/foton.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/gaz.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/hyndai-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/infiniti_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/iran_khodro.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/khazar_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/kia-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/kia_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/kinroad-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/kraz_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/lada-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logo-luaz.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logo-paz.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logo-yamaha.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logo_neoplan.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/logol.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/megellilogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/mersedes.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/mondial-vector-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/moskvich-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/nissan.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/opel-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/opel-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/peugeot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/piaggio logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/pontiac.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/porschelogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ravon_logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/rover_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/saipa-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/shacman.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/shaolin_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ssangyong.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/subaru_logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/suzuki.jpg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/tata.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/tofas.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/toyota-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/toyota-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/ural-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/volvo-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/avtologos/zontes.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo2.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo3.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo5.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo/logo7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/logos/logo7.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/all_cars.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/all_cars.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,7 +179,8 @@
       <updated>1596882920394</updated>
       <workItem from="1596882921640" duration="46746000" />
       <workItem from="1596971428494" duration="32690000" />
-      <workItem from="1597045324588" duration="27586000" />
+      <workItem from="1597045324588" duration="28124000" />
+      <workItem from="1597076573825" duration="889000" />
     </task>
     <servers />
   </component>
