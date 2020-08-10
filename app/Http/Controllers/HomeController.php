@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cars;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,10 +20,14 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return false|\Illuminate\Contracts\Foundation\Application
      */
     public function index()
     {
-        return view('home');
+        $cars = Cars::all();
+
+        if( ! $cars ) return false;
+
+        return view('home', compact('cars'));
     }
 }

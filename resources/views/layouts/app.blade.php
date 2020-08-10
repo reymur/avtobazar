@@ -29,7 +29,7 @@
                 </button>
 
                 <a class="d-inline-flex navbar-brand mr-auto" href="/">
-                    <img src="{{ asset('images/logo/logo5.png') }}" class="logo" alt="">
+                    <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
                     <h4 class="mb-0 logo__text">AvtoBazar</h4>
                 </a>
 
@@ -69,7 +69,7 @@
 
                 <div class="ml-sm-auto ml-md-auto mr-lg-auto ml-lg-3 d-inline-flex">
                     <a class="nav-link dropdown text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
+                        <img src="{{ asset('image/svg/answer.svg') }}" class="text-white" alt="answer">
                         <span class="badge badge-success badge__bg text-white rounded-circle badge__font_size">3</span>
                         <span class="sr-only">unread messages</span>
                     </a>

@@ -10924,6 +10924,20 @@ a.text-dark:focus {
   margin-top: 7px;
 }
 
+.avto__small_logo {
+  max-width: 35px;
+  max-height: 80%;
+  margin-top: 7px;
+}
+
+.avto__small_text {
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: #4f3d36;
+  letter-spacing: 1px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
 .border__b {
   color: #343434;
 }

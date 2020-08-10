@@ -7,7 +7,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -26,7 +26,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -45,7 +45,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -64,7 +64,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -83,7 +83,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -102,7 +102,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -121,7 +121,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -140,7 +140,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -159,7 +159,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -178,7 +178,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -197,7 +197,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -216,7 +216,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
@@ -235,7 +235,7 @@
                 <div class="card-body p-0 border-bottom border__b">
                     <a class="text-decoration-none text-primary d-inline-flex" href="">
                         <span class="border__bottom_clear">
-                            <img class="avto__logo" src="{{ asset('images/avtologos/bmw.jpg') }}" alt="Logo">
+                            <img class="avto__logo" src="{{ asset('image/avtologos/bmw.jpg') }}" alt="Logo">
                         </span>
                         <span class="mt-auto mb-2">
                             <p class="m-0 p-0 text-body">
