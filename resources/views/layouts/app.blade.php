@@ -23,18 +23,17 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-dark mb-2 navbar__bg">
-            <div class="container col-sm-10">
+            <div class="container col-md-10 col-sm-10">
                 <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <a class="d-inline-flex navbar-brand mr-auto" href="/">
                     <img src="{{ asset('images/logo/logo5.png') }}" class="logo" alt="">
-                    <h4 class="mb-0">AvtoBazar</h4>
+                    <h4 class="mb-0 logo__text">AvtoBazar</h4>
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                    <div class="ml-md-auto d-inline-flex">
                        <ul class="navbar-nav">
                            <li class="nav-item dropdown">
@@ -78,7 +77,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container ml-auto">
             <form class="form-inline my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="axtar..." aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Axtar</button>

@@ -10,4 +10,9 @@ class CarsController extends Controller
     {
         return view('pages.cars.index');
     }
+
+    public function car()
+    {
+        return view('pages.cars.current_car');
+    }
 }

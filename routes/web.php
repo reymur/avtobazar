@@ -19,4 +19,5 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('cars')->group(function() {
     Route::get('/', 'CarsController@index')->name('cars');
+    Route::get('/car', 'CarsController@car')->name('car');
 });

@@ -10912,6 +10912,13 @@ a.text-dark:focus {
   width: 55px;
 }
 
+.logo__text {
+  margin-top: 10px;
+  margin-left: -4px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
 .avto__logo {
   width: 60px;
   margin-top: 7px;
@@ -10930,7 +10937,7 @@ a.text-dark:focus {
   color: #d23055;
   /*font-weight: bold;*/
   font-size: 1.2rem;
-  letter-spacing: 0.3px;
+  letter-spacing: 1px;
   font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
@@ -10952,5 +10959,9 @@ a.text-dark:focus {
 
 .badge__bg {
   background-color: #219533;
+}
+
+.list__style {
+  list-style: none;
 }
 
