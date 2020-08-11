@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Car Names" beforeDir="false" afterPath="$PROJECT_DIR$/Car Names" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cars/image/Isuzu.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/image/isuzu.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cars/image/Iveco.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/image/iveco.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cars/image/Jeep.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/image/jeep.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cars/image/Kamaz.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/cars/image/hummer.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/image/hummer.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +185,7 @@
       <workItem from="1596882921640" duration="46746000" />
       <workItem from="1596971428494" duration="32690000" />
       <workItem from="1597045324588" duration="28124000" />
-      <workItem from="1597076573825" duration="889000" />
+      <workItem from="1597076573825" duration="22241000" />
     </task>
     <servers />
   </component>

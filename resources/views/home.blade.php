@@ -6,7 +6,7 @@
         <!-- Crumbs _page_links -->
         @include('crumbs._page_links', ['links' => ['Home']])
 
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-lg-4 mb-md-3 mb-sm-4 text-center d-inline-flex">
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-lg-4 mb-md-5 mb-sm-5 text-center d-inline-flex">
             <span class="col-lg-6 col-md-6 col-sm-7 px-sm-0 text-uppercase mr-lg-1 mr-sm-0 title__text">
                 <span class="">BÜTÜN MARKALAR ÜZRƏ</span>
             </span>
