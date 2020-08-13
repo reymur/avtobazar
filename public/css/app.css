@@ -10904,6 +10904,10 @@ a.text-dark:focus {
   }
 }
 
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .navbar__bg {
   background-color: #d23055;
 }
@@ -10950,7 +10954,7 @@ a.text-dark:focus {
 .title__text {
   color: #d23055;
   /*font-weight: bold;*/
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 1px;
   font-family: "Source Sans Pro", Arial, sans-serif;
 }
@@ -10977,5 +10981,18 @@ a.text-dark:focus {
 
 .list__style {
   list-style: none;
+}
+
+.model__types_text {
+  overflow: hidden;
+  display: inline-block;
+  max-width: 160px;
+  margin-bottom: 5px;
+  color: #186d9f;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  vertical-align: top;
+  white-space: nowrap;
 }
 

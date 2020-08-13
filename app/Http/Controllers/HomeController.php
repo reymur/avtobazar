@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Cars;
+use App\Car;
+use App\City;
+use App\Motor;
+use App\Select;
+use App\Type;
+use App\Year;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $cars = Cars::all();
+        $cars= Car::all();
 
         if( ! $cars ) return false;
 

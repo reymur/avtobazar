@@ -167,6 +167,11 @@ return [
          */
 
         /*
+         * Selects to all pages
+         */
+        App\Providers\CarOptionsProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

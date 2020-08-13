@@ -21,84 +21,40 @@
 
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header pb-0">
-                    <h4>Model</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-header pb-0 pt-1">
+                    <div class="row pl-2">
+                        <div class="list-group" style="display:contents" id="list-tab" role="tablist">
+                            <a class="col list-group-item p-2 list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Sadə</a>
+                            <a class="col list-group-item p-2 list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Ətraflı</a>
+                        </div>
+                    </div>
+                    <button type="button" class="close pt-4" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
-                <div class="modal-body pt-1">
-                    <form action="">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Texpasport</span>
+                <div class="modal-body pt-2">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                                @include('forms.modal_form_simple')
                             </div>
-                            <input type="text" aria-label="First name"
-                                   class="form-control" placeholder="Yeni ehtiyat hissəlari üçün">
-                        </div>
 
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Buraxılış</span>
-                            </div>
-                            <input type="text" aria-label="First name" class="form-control">
-
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Motor</span>
-                            </div>
-                            <input type="text" aria-label="First name" class="form-control">
-                        </div>
-
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Qiymət</span>
-                            </div>
-                            <input type="text" aria-label="First name" class="form-control" placeholder="min AZN">
-                            <input type="text" aria-label="Last name" class="form-control" placeholder="max AZN">
-
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bg-transparent">
-                                    <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-camera-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                                      <path fill-rule="evenodd" d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
-                                    </svg>
-                                </span>
-                            </div>
-                            <div class="custom-file col-2">
-                                <input type="file" class="custom-file" id="inputGroupFile04">
-                                <label class="custom-file-label" for="inputGroupFile04"></label>
+                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+{{--                                @include('forms.modal_form_details')--}}
+                                <form-details
+                                    :cars="{{ $cars }}"
+                                    :types="{{ $types }}"
+                                    :cities="{{ $cities }}"
+                                    :years="{{ $years }}"
+                                    :motors="{{ $motors }}"
+                                ></form-details>
                             </div>
                         </div>
-
-                        <div class="form-group mb-2 d-inline-flex">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="new" value="">
-                                <label class="form-check-label" for="new">Yeni</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="old" value="">
-                                <label class="form-check-label" for="old">İşlənmiş</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="all" value="">
-                                <label class="form-check-label" for="all">Fərqi yoxdu</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Ətraflı məlumat</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
-                                      placeholder="Satıcının sizi anlanması üçün məlumatı dəqiq və konkret yazın"></textarea>
-                        </div>
-                    </form>
                 </div>
 
-                <div class="modal-footer p-0 mr-2">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Xeyir</button>
-                    <button type="button" class="btn btn-primary">Göndər</button>
-                </div>
+                <modal-footer-buttons></modal-footer-buttons>
             </div>
         </div>
     </div>
 </div>
+
