@@ -3,6 +3,9 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.border-input-default {
+    border: 1px solid #ced4da;
+}
 .navbar__bg {
     background-color: #d23055;;
 }
@@ -86,4 +89,23 @@ body {
     font-size: 15px;
     vertical-align: top;
     white-space: nowrap;
+}
+
+.modal__image {
+    max-width: 155px;
+}
+
+/* Announce index left-bar */
+.left__bar-bg {
+    background-color: #e9ecef;
+}
+
+.flash__bg {
+    background-color: #eee !important;
+}
+.flash__shadow {
+    box-shadow: 0px 0px 9px 0px rgba(154, 147, 140, 0.5);
+}
+.flash__image {
+    width: 200px;
 }

@@ -2,33 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Car names.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Car.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/forms/modal_form_simple.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/select.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/avtom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/avtom.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Car Names" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Cars.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_10_074349_create_cars_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_10_074349_create_cars_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_10_182036_create_models_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/cars/image/mercedesmaybach.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/cars/image/maybach.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/crumbs/_page_links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/crumbs/_page_links.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFooterButtons.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFormSimple.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormSimple.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/car_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/car_card.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/current_car.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/model_types.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/index.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/select.php" beforeDir="false" afterPath="$PROJECT_DIR$/select.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +154,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectId" id="1foSOSmJEONdBP1hBeXSBmF2J3p" />
@@ -172,7 +167,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/vendor/laravel/ui/auth-backend/RegistersUsers.php" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/modal" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -183,7 +178,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/cars" />
       <recent name="$PROJECT_DIR$/public/js" />
@@ -210,7 +209,17 @@
       <workItem from="1597125533614" duration="28661000" />
       <workItem from="1597163390033" duration="20341000" />
       <workItem from="1597226613795" duration="31624000" />
-      <workItem from="1597261826484" duration="17718000" />
+      <workItem from="1597261826484" duration="17941000" />
+      <workItem from="1597304883220" duration="23172000" />
+      <workItem from="1597331270657" duration="4165000" />
+      <workItem from="1597337053239" duration="2082000" />
+      <workItem from="1597648184579" duration="1408000" />
+      <workItem from="1597651064712" duration="18729000" />
+      <workItem from="1597673259537" duration="10456000" />
+      <workItem from="1597690662684" duration="8836000" />
+      <workItem from="1597772769612" duration="27178000" />
+      <workItem from="1597830094049" duration="3531000" />
+      <workItem from="1597855535784" duration="1768000" />
     </task>
     <servers />
   </component>
@@ -218,6 +227,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="312" y="59" width="732" height="644" key="#Inspections" timestamp="1597695831822">
+      <screen x="0" y="27" width="1366" height="701" />
+    </state>
+    <state x="312" y="59" width="732" height="644" key="#Inspections/0.27.1366.701@0.27.1366.701" timestamp="1597695831822" />
     <state x="388" y="200" width="579" height="361" key="#Notifications" timestamp="1597138348561">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -230,6 +243,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.701@0.27.1366.701" timestamp="1597237159169" />
+    <state x="416" y="126" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597794920799">
+      <screen x="0" y="27" width="1366" height="701" />
+    </state>
+    <state x="416" y="126" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.701@0.27.1366.701" timestamp="1597794920799" />
     <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597048598521">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -254,21 +271,33 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="391" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1597192006597" />
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1597236438921">
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1597779622239">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1597236438921" />
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1597779622239" />
+    <state x="218" y="27" width="901" height="645" key="dock-window-1" timestamp="1597776023157">
+      <screen x="0" y="27" width="1366" height="701" />
+    </state>
+    <state x="218" y="27" width="901" height="645" key="dock-window-1/0.27.1366.701@0.27.1366.701" timestamp="1597776023157" />
+    <state x="465" y="332" width="901" height="645" key="dock-window-2" timestamp="1597776023158">
+      <screen x="0" y="27" width="1366" height="701" />
+    </state>
+    <state x="465" y="332" width="901" height="645" key="dock-window-2/0.27.1366.701@0.27.1366.701" timestamp="1597776023158" />
     <state x="375" y="100" width="616" height="554" key="find.popup" timestamp="1597270134633">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="375" y="100" width="616" height="554" key="find.popup/0.27.1366.701@0.27.1366.701" timestamp="1597270134633" />
+    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog" timestamp="1597695855983">
+      <screen x="0" y="27" width="1366" height="701" />
+    </state>
+    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1597695855983" />
     <state x="347" y="164" key="run.anything.popup" timestamp="1597153491573">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1597153491573" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597279893427">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597333228112">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1597279893427" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1597333228112" />
   </component>
 </project>

@@ -1,6 +1,6 @@
 <?php
 
-$selects = [
+$cities = [
     ['city' => 'Ağdam'],
     ['city' => 'Ağdaş'],
     ['city' => 'Ağca,bədi'],
