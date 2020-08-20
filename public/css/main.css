@@ -109,3 +109,7 @@ body {
 .flash__image {
     width: 200px;
 }
+
+.register__number-size {
+    width: 90px;
+}

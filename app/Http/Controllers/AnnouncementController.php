@@ -15,12 +15,15 @@ class AnnouncementController extends Controller
 
     public function flash()
     {
-        $announce = Announcement::where('user_id', Auth::user()->id)->latest()->first();
+        if( Auth::check() ){
+            $announce = Announcement::where('user_id', Auth::user()->id)->latest()->first();
 
-        if (!$announce) $announce = null;
+            if (!$announce) $announce = null;
 
-        return view('announcements.index')
-            ->with(['announce' => $announce]);
+            return view('announcements.index')
+                ->with(['announce' => $announce]);
+        }
+
     }
 
     public function sendAnnounce()
@@ -37,6 +40,6 @@ class AnnouncementController extends Controller
 
     public function incomingAnnounce()
     {
-
+        return view('announcements.incoming');
     }
 }

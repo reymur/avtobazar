@@ -9,6 +9,7 @@ Vue.component('form-simple', require('./components/modal/ModalFormSimple.vue').d
 Vue.component('form-details', require('./components/modal/ModalFormDetails.vue').default);
 Vue.component('modal-footer', require('./components/modal/ModalFooter.vue').default);
 Vue.component('modal-main-close-element', require('./components/modal/MainCloseElement.vue').default);
+Vue.component('register', require('./components/modal/Registration.vue').default);
 
 const app = new Vue({
     el: '#app',

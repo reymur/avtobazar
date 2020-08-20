@@ -2,27 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/avtom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/avtom.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/symfony2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFooterButtons.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ModalFormSimple.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormSimple.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/left_bar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/select.php" beforeDir="false" afterPath="$PROJECT_DIR$/select.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +160,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/vendor/laravel/ui/auth-backend/RegistersUsers.php" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/modal" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -178,14 +172,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/cars/registerNumbers" />
       <recent name="$PROJECT_DIR$/resources/js/components/modal" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/cars" />
       <recent name="$PROJECT_DIR$/public/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
     </key>
   </component>
   <component name="RunManager">
@@ -219,7 +214,12 @@
       <workItem from="1597690662684" duration="8836000" />
       <workItem from="1597772769612" duration="27178000" />
       <workItem from="1597830094049" duration="3531000" />
-      <workItem from="1597855535784" duration="1768000" />
+      <workItem from="1597855535784" duration="2252000" />
+      <workItem from="1597860407931" duration="11438000" />
+      <workItem from="1597908655448" duration="17651000" />
+      <workItem from="1597928452254" duration="9421000" />
+      <workItem from="1597940623349" duration="5565000" />
+      <workItem from="1597948377033" duration="4527000" />
     </task>
     <servers />
   </component>
@@ -235,10 +235,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="388" y="200" width="579" height="361" key="#Notifications/0.27.1366.701@0.27.1366.701" timestamp="1597138348561" />
-    <state x="376" y="169" width="603" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597053621394">
+    <state x="376" y="169" width="603" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597867751609">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="376" y="169" width="603" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.701@0.27.1366.701" timestamp="1597053621394" />
+    <state x="376" y="169" width="603" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.701@0.27.1366.701" timestamp="1597867751609" />
     <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597237159169">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -271,10 +271,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="391" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1597192006597" />
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1597779622239">
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1597861029778">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1597779622239" />
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1597861029778" />
     <state x="218" y="27" width="901" height="645" key="dock-window-1" timestamp="1597776023157">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -295,9 +295,9 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1597153491573" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597333228112">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597922808933">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1597333228112" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1597922808933" />
   </component>
 </project>

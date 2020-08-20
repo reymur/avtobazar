@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/sends';
 
     /**
      * Create a new controller instance.
@@ -50,25 +50,75 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        if( $data['status'] == 1 ) {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
+            ]);
+        }
+
+        if ( $data['status'] == 2 ) {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'address' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'confirmed', 'string', 'min:8'],
+//            'image' => ['image', 'bmp', 'png', 'jpg'],
+            ]);
+        }
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Illuminate\Http\JsonResponse
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if ($data['status'] == 1) {
+
+            $user = User::create([
+                'name' => $data['name'],
+                'password' => Hash::make($data['password']),
+                'status' => $data['status']
+            ]);
+
+            if( $user ) {
+               response()->json([
+                    'data' => 'user where status "2" has been created successfully'
+                ], 200);
+            }
+
+            return $user;
+        }
+
+        if($data['status'] == 2) {
+
+            $user = User::create([
+                'type' => $data['type'],
+                'name' => $data['name'],
+                'city' => $data['city'],
+                'address' => $data['address'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'image' => '',
+                'status' => $data['status'],
+
+            ]);
+
+            if( $user ) {
+                response()->json([
+                    'data' => 'user where status "2" has been created successfully'
+                ], 200);
+            }
+
+            return $user;
+        }
+
+        return response()->json([
+            'errors' => 'Whops!!!'
+        ], 404);
+
     }
 }

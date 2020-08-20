@@ -260,6 +260,7 @@ export default {
                 formdata.append('condition', this.condition);
                 formdata.append('texpassport', this.texPassInput);
                 formdata.append('note', this.note);
+
                 axios.post('cars/send-info',formdata, {
                     headers: {
                         'Content-Type': 'multipart/form-data'

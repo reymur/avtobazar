@@ -2351,6 +2351,353 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Registration.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal/Registration.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "registration",
+  data: function data() {
+    return {
+      radio: 'buyer',
+      autoNumber: '',
+      type: 1,
+      name: '',
+      email: '',
+      city: 1,
+      address: '',
+      password: '',
+      password_confirmation: '',
+      img: null,
+      image: null,
+      imageLoader: false,
+      errors: [],
+      status: 1
+    };
+  },
+  methods: {
+    inputControlAndSend: function inputControlAndSend() {
+      this.errors = [];
+      this.autoNumber = this.autoNumber.trim();
+      this.name = this.name.trim();
+      this.address = this.address.trim();
+      this.password = this.password.trim();
+      this.password_confirmation = this.password_confirmation.trim();
+
+      if (this.radio === 'buyer') {
+        if (this.autoNumber === '' || this.autoNumber.length == 0) {
+          // this.errors.push('Avtomobilin nömrəsini qeyd edin!')
+          document.getElementById('autoNumber').classList.add('border-danger');
+        } else {
+          document.getElementById('autoNumber').classList.remove('border-danger');
+        }
+
+        if (this.password === '' || this.password.length == 0) {
+          // this.errors.push(' Şifrəni yazmaq vacibdir!')
+          document.getElementById('passPuyer').classList.add('border-danger');
+        } else {
+          document.getElementById('passPuyer').classList.remove('border-danger');
+        }
+
+        this.status = 1;
+      } else if (this.radio === 'saller') {
+        if (this.name === '' || this.name.length == 0) {
+          document.getElementById('name').classList.add('border-danger');
+        } else {
+          document.getElementById('name').classList.remove('border-danger');
+        }
+
+        if (this.address === '' || this.address.length == 0) {
+          document.getElementById('address').classList.add('border-danger');
+        } else {
+          document.getElementById('address').classList.remove('border-danger');
+        }
+
+        if (this.password === '' || this.password.length == 0) {
+          document.getElementById('pass').classList.add('border-danger');
+        } else {
+          document.getElementById('pass').classList.remove('border-danger');
+        }
+
+        this.status = 2;
+      }
+
+      if (!this.errors.length) {
+        return this.sendData();
+      }
+    },
+    sendData: function sendData() {
+      var _this = this;
+
+      if (this.status == 1) {
+        axios.post('/register', {
+          name: this.autoNumber,
+          password: this.password,
+          status: this.status
+        }).then(function (res) {
+          if (res.status == 201) {
+            window.location.href = '/announce/sends';
+          }
+
+          console.log(res.status);
+        })["catch"](function (err) {
+          if (err.response.data.errors) {
+            _this.errors.push(err.response.data.errors);
+
+            console.log(_this.errors);
+          }
+        });
+      }
+
+      if (this.status == 2) {
+        var formData = new FormData();
+        formData.append('type', this.type);
+        formData.append('name', this.name);
+        formData.append('email', this.email);
+        formData.append('city', this.city);
+        formData.append('address', this.address);
+        formData.append('password', this.password);
+        formData.append('password_confirmation', this.password_confirmation);
+        formData.append('image', this.image);
+        formData.append('status', this.status);
+        axios.post('/register', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (res) {
+          if (res.status == 201) {
+            window.location.href = '/announce/sends';
+          }
+
+          console.log(res.status);
+        })["catch"](function (err) {
+          if (err.response.data.errors) {
+            _this.errors.push(err.response.data.errors);
+
+            console.log(_this.errors);
+          }
+        });
+      }
+    },
+    fileSelect: function fileSelect(e) {
+      var _this2 = this;
+
+      var file = (e.target.files || e.dataTransfer.files)[0];
+
+      if (file) {
+        var reader = new FileReader();
+        this.imageLoader = true;
+
+        reader.onload = function (e) {
+          _this2.img = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+        return this.image = file;
+      }
+
+      console.log(e);
+    },
+    radioListener: function radioListener() {
+      this.errors = [];
+    }
+  },
+  mounted: function mounted() {// Selected buyer for first
+    // this.radio = 'buyer'
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -38818,6 +39165,911 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "staticBackdrop",
+        "data-backdrop": "static",
+        "data-keyboard": "false",
+        tabindex: "-1",
+        "aria-labelledby": "staticBackdropLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "modal-dialog modal-dialog-centered modal-dialog-scrollable"
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body pt-2" }, [
+              _c(
+                "div",
+                { staticClass: "tab-content", attrs: { id: "nav-tabContent" } },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane fade show active",
+                      attrs: {
+                        id: "list-home",
+                        role: "tabpanel",
+                        "aria-labelledby": "list-home-list"
+                      }
+                    },
+                    [
+                      _c("form", [
+                        _c("div", { staticClass: "form-group ml-3" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-check form-check-inline" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.radio,
+                                    expression: "radio"
+                                  }
+                                ],
+                                staticClass: "form-check-input",
+                                attrs: {
+                                  type: "radio",
+                                  id: "inlineRadio1",
+                                  value: "buyer",
+                                  checked: ""
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.radio, "buyer")
+                                },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      _vm.radio = "buyer"
+                                    },
+                                    _vm.radioListener
+                                  ]
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "form-check-label",
+                                  attrs: { for: "inlineRadio1" }
+                                },
+                                [_vm._v("Alıcı")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-check form-check-inline" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.radio,
+                                    expression: "radio"
+                                  }
+                                ],
+                                staticClass: "form-check-input",
+                                attrs: {
+                                  type: "radio",
+                                  id: "inlineRadio2",
+                                  value: "saller"
+                                },
+                                domProps: {
+                                  checked: _vm._q(_vm.radio, "saller")
+                                },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      _vm.radio = "saller"
+                                    },
+                                    _vm.radioListener
+                                  ]
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "form-check-label",
+                                  attrs: { for: "inlineRadio2" }
+                                },
+                                [_vm._v("Satıcı")]
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 mb-1" }, [
+                          _vm.errors.length
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass: "invalid-feedback d-block mb-2"
+                                },
+                                _vm._l(_vm.errors, function(error) {
+                                  return _c(
+                                    "ul",
+                                    { staticClass: "alert-danger my-1" },
+                                    [
+                                      error.name
+                                        ? _c("li", { staticClass: "py-2" }, [
+                                            _vm._v(" " + _vm._s(error.name[0]))
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      error.email
+                                        ? _c("li", { staticClass: "py-2" }, [
+                                            _vm._v(" " + _vm._s(error.email[0]))
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      error.address
+                                        ? _c("li", { staticClass: "py-2" }, [
+                                            _vm._v(
+                                              " " + _vm._s(error.address[0])
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      error.password
+                                        ? _c("li", { staticClass: "py-2" }, [
+                                            _vm._v(
+                                              " " + _vm._s(error.password[0])
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _vm.radio === "buyer"
+                          ? _c("div", { staticClass: "col-auto" }, [
+                              _c("div", { staticClass: "input-group mb-2" }, [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.autoNumber,
+                                      expression: "autoNumber"
+                                    }
+                                  ],
+                                  staticClass: "form-control text-uppercase",
+                                  attrs: {
+                                    type: "text",
+                                    id: "autoNumber",
+                                    placeholder:
+                                      "Avtomobilin nömrəsini qeyd edin"
+                                  },
+                                  domProps: { value: _vm.autoNumber },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.autoNumber = $event.target.value
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-12 input-group p-1" },
+                                [
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.password,
+                                        expression: "password"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "password",
+                                      id: "passPuyer",
+                                      placeholder: "şifrəni yaz"
+                                    },
+                                    domProps: { value: _vm.password },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.password = $event.target.value
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.radio === "saller"
+                          ? _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 d-xs-inline-flex d-lg-inline-flex"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-xl-5 col-lg-5 col-md-12 col-sm-12 input-group p-1"
+                                    },
+                                    [
+                                      _vm._m(3),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.type,
+                                              expression: "type"
+                                            }
+                                          ],
+                                          staticClass: "custom-select",
+                                          attrs: { id: "type", required: "" },
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.type = $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { domProps: { value: 1 } },
+                                            [_vm._v("Mağaza")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { domProps: { value: 2 } },
+                                            [_vm._v("Ölüxana")]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-xl-7 col-lg-7 col-md-12 col-sm-12 input-group p-1"
+                                    },
+                                    [
+                                      _vm._m(4),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.name,
+                                            expression: "name"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "name",
+                                          placeholder: "Yerin adı"
+                                        },
+                                        domProps: { value: _vm.name },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.name = $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 d-xs-inline-flex d-lg-inline-flex"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-xl-5 col-lg-5 col-md-12 col-sm-12 input-group p-1"
+                                    },
+                                    [
+                                      _vm._m(5),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.city,
+                                              expression: "city"
+                                            }
+                                          ],
+                                          staticClass: "custom-select",
+                                          attrs: { id: "email", required: "" },
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.city = $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { domProps: { value: 1 } },
+                                            [_vm._v("Bakı")]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-xl-7 col-lg-7 col-md-12 col-sm-12 input-group p-1"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-prepend" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "input-group-text px-1"
+                                            },
+                                            [
+                                              _c(
+                                                "svg",
+                                                {
+                                                  staticClass: "bi bi-at",
+                                                  attrs: {
+                                                    width: "1.5em",
+                                                    height: "1.5em",
+                                                    viewBox: "0 0 16 16",
+                                                    fill: "currentColor",
+                                                    xmlns:
+                                                      "http://www.w3.org/2000/svg"
+                                                  }
+                                                },
+                                                [
+                                                  _c("path", {
+                                                    attrs: {
+                                                      "fill-rule": "evenodd",
+                                                      d:
+                                                        "M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.email,
+                                            expression: "email"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "city",
+                                          placeholder: "Email",
+                                          tabindex: "0",
+                                          "data-toggle": "tooltip",
+                                          "data-placement": "left",
+                                          title:
+                                            "Email ünavanını dəqiq olmalıdır çünki: ŞİFRƏ-niz Email ünvaniniza göndəriıəcək."
+                                        },
+                                        domProps: { value: _vm.email },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.email = $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "col-12 d-xs-inline-flex d-lg-inline-flex"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-12 input-group p-1" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-prepend" },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "input-group-text px-2"
+                                            },
+                                            [
+                                              _c(
+                                                "svg",
+                                                {
+                                                  staticClass: "bi bi-geo-alt",
+                                                  attrs: {
+                                                    width: "1em",
+                                                    height: "1em",
+                                                    viewBox: "0 0 16 16",
+                                                    fill: "currentColor",
+                                                    xmlns:
+                                                      "http://www.w3.org/2000/svg"
+                                                  }
+                                                },
+                                                [
+                                                  _c("path", {
+                                                    attrs: {
+                                                      "fill-rule": "evenodd",
+                                                      d:
+                                                        "M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                                                    }
+                                                  })
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.address,
+                                            expression: "address"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "address",
+                                          placeholder: "Ünvanı dəqiq yazın"
+                                        },
+                                        domProps: { value: _vm.address },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.address = $event.target.value
+                                          }
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-12" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-12 input-group p-1" },
+                                  [
+                                    _vm._m(6),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.password,
+                                          expression: "password"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "password",
+                                        id: "pass",
+                                        placeholder: "şifrəni yaz"
+                                      },
+                                      domProps: { value: _vm.password },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.password = $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-12 input-group p-1" },
+                                  [
+                                    _vm._m(7),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.password_confirmation,
+                                          expression: "password_confirmation"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "password",
+                                        id: "pass_confirm",
+                                        placeholder: "şifrəni təkrar yaz"
+                                      },
+                                      domProps: {
+                                        value: _vm.password_confirmation
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.password_confirmation =
+                                            $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-12 ml-1 mt-1" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "custom-file col-3 p-2" },
+                                  [
+                                    _c("input", {
+                                      staticClass: "custom-file-input",
+                                      attrs: {
+                                        type: "file",
+                                        value: "file",
+                                        id: "file"
+                                      },
+                                      on: { change: _vm.fileSelect }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass:
+                                          "custom-file-label pt-2 pl-2",
+                                        attrs: {
+                                          for: "file",
+                                          "data-browse": "Şəkil"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "p-0 border-0 input-group-text bg-transparent"
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                staticClass:
+                                                  "bi bi-camera-fill mt-n2",
+                                                attrs: {
+                                                  width: "2.4em",
+                                                  height: "2.4em",
+                                                  viewBox: "0 0 16 16",
+                                                  fill: "currentColor",
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  attrs: {
+                                                    d:
+                                                      "M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("path", {
+                                                  attrs: {
+                                                    "fill-rule": "evenodd",
+                                                    d:
+                                                      "M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.imageLoader
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image",
+                                        staticStyle: { width: "18rem" }
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "imageId card-img-top",
+                                          attrs: {
+                                            src: _vm.img,
+                                            id: "img",
+                                            alt: "Image"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer p-0 mr-2" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Xeyir")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "button", id: "save" },
+                              on: { click: _vm.inputControlAndSend }
+                            },
+                            [_vm._v("Göndər")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header py-1" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close pt-4",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text p-1" }, [
+        _c("img", {
+          staticClass: "register__number-size ",
+          attrs: { src: "images/cars/registerNumbers/number.png", alt: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text px-3" }, [
+        _vm._v(
+          "\n                                            Şifrə\n                                        "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text px-2" }, [
+        _vm._v(
+          "\n                                                Növü\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text px-1" }, [
+        _vm._v(
+          "\n                                                Adı\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text pl-2 pr-1" }, [
+        _vm._v(
+          "\n                                                Şəhər\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text px-3" }, [
+        _vm._v(
+          "\n                                                Şifrə\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text px-2" }, [
+        _vm._v(
+          "\n                                                Şifrə təstiqi\n                                            "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -50995,6 +52247,7 @@ Vue.component('form-simple', __webpack_require__(/*! ./components/modal/ModalFor
 Vue.component('form-details', __webpack_require__(/*! ./components/modal/ModalFormDetails.vue */ "./resources/js/components/modal/ModalFormDetails.vue")["default"]);
 Vue.component('modal-footer', __webpack_require__(/*! ./components/modal/ModalFooter.vue */ "./resources/js/components/modal/ModalFooter.vue")["default"]);
 Vue.component('modal-main-close-element', __webpack_require__(/*! ./components/modal/MainCloseElement.vue */ "./resources/js/components/modal/MainCloseElement.vue")["default"]);
+Vue.component('register', __webpack_require__(/*! ./components/modal/Registration.vue */ "./resources/js/components/modal/Registration.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -51351,6 +52604,75 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 component.options.__file = "resources/js/components/modal/ModalFormSimple.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modal/Registration.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/modal/Registration.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Registration.vue?vue&type=template&id=16033d06&scoped=true& */ "./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true&");
+/* harmony import */ var _Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Registration.vue?vue&type=script&lang=js& */ "./resources/js/components/modal/Registration.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "16033d06",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modal/Registration.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modal/Registration.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/modal/Registration.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Registration.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Registration.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Registration.vue?vue&type=template&id=16033d06&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Registration.vue?vue&type=template&id=16033d06&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_template_id_16033d06_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

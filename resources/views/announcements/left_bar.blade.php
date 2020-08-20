@@ -4,7 +4,10 @@
         <tbody class="d-lg-block d-md-inline-flex d-sm-inline-flex">
             <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route('send') }}" class="d-lg-block">
+                    <a href="{{ route('incoming') }}" class="d-lg-block
+                        {{ str_contains(request()->path(), 'incoming') ?
+                           'text-black-50' : ''
+                        }}">
                         Gələnlər
                         <span class="badge badge-success">2</span>
                     </a>
@@ -12,14 +15,13 @@
             </tr>
             <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    @if( str_contains(request()->path(), 'sends') )
-                        <a href="" class="d-lg-block">
-                            <span class="text-black-50">
-                                Göndərilənlər
-                            </span>
-                            <span class="badge badge-success">2</span>
-                        </a>
-                    @endif
+                    <a href="{{ route('send') }}" class="d-lg-block">
+                        <span class="{{ str_contains(request()->path(), 'sends') ?
+                                        'text-black-50' : '' }}">
+                            Göndərilənlər
+                        </span>
+                        <span class="badge badge-success">2</span>
+                    </a>
                 </td>
             </tr>
         </tbody>

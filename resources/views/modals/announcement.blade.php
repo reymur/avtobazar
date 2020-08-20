@@ -15,13 +15,18 @@
         </span>
     </button>
 
-    <!-- Modal -->
-    <Index
-        :cars="{{ $cars }}"
-        :types="{{ $types }}"
-        :cities="{{ $cities }}"
-        :years="{{ $years }}"
-        :motors="{{ $motors }}"
-    ></Index>
+    @if( Auth::check() )
+        <!-- Modal -->
+        <Index
+            :cars="{{ $cars }}"
+            :types="{{ $types }}"
+            :cities="{{ $cities }}"
+            :years="{{ $years }}"
+            :motors="{{ $motors }}"
+        ></Index>
+    @else
+        <!-- Registration -->
+        <register></register>
+    @endif
 </div>
 
