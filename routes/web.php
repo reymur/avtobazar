@@ -3,11 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
-//Route::post('register','RegisterController@register');
-
-Route::get('/', 'HomeController@index')->name('home')/*->middleware('verified')*/;
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('cars')->group(function() {
     Route::get('/', 'CarsController@index')->name('cars');
@@ -21,6 +19,11 @@ Route::prefix('announce')->group(function() {
     Route::get('/', 'AnnouncementController@index')->name('announce');
     Route::get('/flash', 'AnnouncementController@flash')->name('flash');
     Route::post('/flash-post', 'AnnouncementController@flash');
-    Route::get('/sends', 'AnnouncementController@sendAnnounce')->name('send')->middleware('verified');
+    Route::get('/sends', 'AnnouncementController@sendAnnounce')->name('send');
     Route::get('/incoming', 'AnnouncementController@incomingAnnounce')->name('incoming');
+});
+
+Route::prefix('seller')->middleware('auth')->group(function(){
+    Route::get('/', 'SellerController@index')->name('seller.index');
+    Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');
 });

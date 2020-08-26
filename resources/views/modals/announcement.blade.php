@@ -26,7 +26,11 @@
         ></Index>
     @else
         <!-- Registration -->
-        <register></register>
+        <register
+            :whos="{{ $who }}"
+            :cars="{{ $cars }}"
+            :cities="{{ $cities }}"
+        ></register>
     @endif
 </div>
 

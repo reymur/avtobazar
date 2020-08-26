@@ -18,24 +18,31 @@
                             <form>
                                 <div class="form-group ml-3">
                                     <div class="form-check form-check-inline">
-                                        <input v-model="radio" @change="radioListener" class="form-check-input" type="radio"
-                                                id="inlineRadio1" value="buyer" checked>
-                                        <label class="form-check-label" for="inlineRadio1">Alıcı</label>
+                                        <div class="custom-control custom-radio">
+                                            <input v-model="radio" @change="radioListener" value="buyer"
+                                                   type="radio" id="buyer" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="buyer">Alıcı</label>
+                                        </div>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input v-model="radio" @change="radioListener" class="form-check-input" type="radio"
-                                               id="inlineRadio2" value="saller">
-                                        <label class="form-check-label" for="inlineRadio2">Satıcı</label>
+                                        <div v-model="radio" @change="radioListener" class="custom-control custom-radio">
+                                            <input v-model="radio" @change="radioListener" value="saller"
+                                                   type="radio" id="saller" name="customRadio" class="custom-control-input">
+                                            <label class="custom-control-label" for="saller">Satıcı</label>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="col-12 mb-1">
                                     <div v-if="errors.length" class="invalid-feedback d-block mb-2">
-                                        <ul v-for="error in errors" class="alert-danger my-1">
-                                            <li class="py-2" v-if="error.name"> {{ error.name[0] }}</li>
-                                            <li class="py-2" v-if="error.email"> {{ error.email[0] }}</li>
-                                            <li class="py-2" v-if="error.address"> {{ error.address[0] }}</li>
-                                            <li class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
+                                        <ul class="alert-danger py-2 my-1">
+                                            <li v-for="error in errors" class="py-2" v-if="error.name"> {{ error.name[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.marka"> {{ error.marka[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.email"> {{ error.email[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.address"> {{ error.address[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.password_confirmation"> {{ error.password_confirmation[0] }}</li>
+                                            <li v-for="error in errors" class="py-2" v-if="error.image"> {{ error.image[0] }}</li>
                                         </ul>
                                     </div>
                                 </div><!--End Errors -->
@@ -63,6 +70,21 @@
                                 </div>
 
                                 <div v-if="radio === 'saller'" class="form-group">
+                                    <div class="col-12">
+                                        <div class="col-12 input-group p-1">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text px-1">
+                                                    <img src="images/users/saller_auto_logo/saller_marka_logo.jpg" alt="Logo">
+                                                </div>
+                                            </div>
+                                            <v-select id="marka" class="marka" taggable multiple
+                                                  v-model="marka" label="country"
+                                                  placeholder="dffffffffff"
+                                                  :options="car">
+                                            </v-select>
+                                        </div>
+                                    </div>
+
                                     <div class="col-12 d-xs-inline-flex d-lg-inline-flex">
                                         <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 input-group p-1">
                                             <div class="input-group-prepend">
@@ -70,9 +92,10 @@
                                                     Növü
                                                 </div>
                                             </div>
-                                            <select v-model="type" class="custom-select" id="type" required>
-                                                <option :value="1">Mağaza</option>
-                                                <option :value="2">Ölüxana</option>
+                                            <select v-model="who" class="custom-select" id="who" required>
+                                                <option v-if="whos.length" v-for="whoItem in whos" :value="whoItem.who">
+                                                    {{ whoItem.who }}
+                                                </option>
                                             </select>
                                         </div>
 
@@ -94,8 +117,10 @@
                                                     Şəhər
                                                 </div>
                                             </div>
-                                            <select v-model="city" class="custom-select" id="email" required>
-                                                <option :value="1">Bakı</option>
+                                            <select v-model="city" class="custom-select" id="city" required>
+                                                <option v-if="cities.length" v-for="city in cities" :value="city.city">
+                                                    {{ city.city }}
+                                                </option>
                                             </select>
                                         </div>
 
@@ -107,7 +132,7 @@
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <input v-model="email" type="text" class="form-control" id="city" placeholder="Email"
+                                            <input v-model="email" type="email" class="form-control" id="email" placeholder="Email"
                                                    tabindex="0" data-toggle="tooltip" data-placement="left"
                                                    title="Email ünavanını dəqiq olmalıdır çünki: ŞİFRƏ-niz Email ünvaniniza göndəriıəcək.">
                                         </div>
@@ -134,7 +159,7 @@
                                                 </div>
                                             </div>
                                             <input v-model="password" type="password" class="form-control"
-                                                   id="pass" placeholder="şifrəni yaz">
+                                                   id="password" placeholder="şifrəni yaz">
                                         </div>
 
                                         <div class="col-12 input-group p-1">
@@ -144,7 +169,7 @@
                                                 </div>
                                             </div>
                                             <input v-model="password_confirmation" type="password" class="form-control"
-                                                   id="pass_confirm" placeholder="şifrəni təkrar yaz">
+                                                   id="password_confirmation" placeholder="şifrəni təkrar yaz">
                                         </div>
                                     </div>
 
@@ -161,7 +186,7 @@
                                             </label>
                                         </div><!-- End Image Button -->
 
-                                        <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image" style="width: 18rem;">
+                                        <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 m-auto modal__regiser modal__image">
                                             <img :src="img" id="img" class="imageId card-img-top" alt="Image">
                                         </div><!-- End Image Show -->
                                     </div>
@@ -171,7 +196,11 @@
                                     <button type="button"
                                             class="btn btn-secondary"
                                             data-dismiss="modal">Xeyir</button>
-                                    <button @click="inputControlAndSend" type="button" id="save" class="btn btn-primary">Göndər</button>
+                                    <button @click="inputControlAndSend" type="button" id="send" class="btn btn-primary">
+                                        <span v-if="sendLoader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span v-if="sendLoader">Gözlə...</span>
+                                        <span v-else>Göndər</span>
+                                    </button>
                                 </div><!-- End Göndər button -->
                             </form>
                         </div>
@@ -186,14 +215,15 @@
 
 export default {
     name: "registration",
+    props: ['whos','cars','cities'],
     data(){
         return {
             radio: 'buyer',
             autoNumber: '',
-            type: 1,
+            who: this.whos[0].who,
             name: '',
             email: '',
-            city: 1,
+            city: this.cities[7].city,
             address: '',
             password: '',
             password_confirmation: '',
@@ -202,111 +232,170 @@ export default {
             imageLoader: false,
             errors: [],
             status: 1,
-
+            sendLoader: false,
+            disable: 'disabled',
+            marka: [],
+            car: [],
         }
     },
     methods: {
+        getCarNames(){
+            this.cars.forEach((val) => {
+                this.car.push( val.name )
+            })
+        },
         inputControlAndSend(){
-            this.errors = [];
-            this.autoNumber = this.autoNumber.trim();
-            this.name = this.name.trim();
-            this.address = this.address.trim();
-            this.password = this.password.trim();
-            this.password_confirmation = this.password_confirmation.trim();
-
             if( this.radio === 'buyer' ) {
-                if( this.autoNumber === '' ||
-                    this.autoNumber.length == 0 )
-                {
-                    // this.errors.push('Avtomobilin nömrəsini qeyd edin!')
-                    document.getElementById('autoNumber').classList.add('border-danger');
-                }else{
-                    document.getElementById('autoNumber').classList.remove('border-danger');
-                }
-
-                if( this.password === '' ||
-                    this.password.length == 0 )
-                {
-                    // this.errors.push(' Şifrəni yazmaq vacibdir!')
-                    document.getElementById('passPuyer').classList.add('border-danger');
-                }else{
-                    document.getElementById('passPuyer').classList.remove('border-danger');
-                }
-
-                this.status = 1;
-
-            }else if( this.radio === 'saller' ) {
-                if( this.name === '' || this.name.length == 0 ) {
-                    document.getElementById('name').classList.add('border-danger');
-                }else{
-                    document.getElementById('name').classList.remove('border-danger');
-                }
-                if( this.address === '' || this.address.length == 0 ) {
-                    document.getElementById('address').classList.add('border-danger');
-                }else{
-                    document.getElementById('address').classList.remove('border-danger');
-                }
-                if( this.password === '' || this.password.length == 0 ) {
-                    document.getElementById('pass').classList.add('border-danger');
-                }else{
-                    document.getElementById('pass').classList.remove('border-danger');
-                }
-
-                this.status = 2;
+                this.errors = [];
+                return this.sendBuyerData();
             }
-
-            if( ! this.errors.length ) {
-                return this.sendData();
+            else if( this.radio === 'saller' ) {
+                this.errors = [];
+                return this.sendSellerData();
             }
         },
-        sendData(){
-            if( this.status == 1 ) {
-                axios.post('/register', {
-                    name: this.autoNumber,
-                    password: this.password,
-                    status: this.status
-                }).then(res => {
-                    if( res.status == 201 ){
-                        window.location.href = '/announce/sends'
-                    }
-                    console.log(res.status)
-                })
-                .catch(err => {
-                    if(err.response.data.errors){
-                        this.errors.push(err.response.data.errors)
-                        console.log( this.errors )
-                    }
-                })
-            }
+        sendBuyerData(){
+            axios.post('/register', {
+                status: 1,
+                name: this.autoNumber.trim(),
+                password: this.password.trim()
+            }).then(res => {
+                if( res.status == 201 ){
+                    window.location.href = '/announce/sends'
+                }
+                console.log(res.status)
+            })
+            .catch(err => {
+                if(err.response.data.errors){
+                    this.errors.push(err.response.data.errors)
+                    console.log( this.errors )
+                }
 
-            if( this.status == 2 ) {
-                let formData = new FormData();
-                formData.append('type',this.type);
-                formData.append('name',this.name);
-                formData.append('email',this.email);
-                formData.append('city',this.city);
-                formData.append('address',this.address);
-                formData.append('password',this.password);
-                formData.append('password_confirmation',this.password_confirmation);
-                formData.append('image',this.image);
-                formData.append('status',this.status);
-                axios.post('/register', formData,{
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
+                // For Buyer Start
+                for(let i=0; i < this.errors.length; i++ ) {
+                    if (this.errors[i]['autoNumber']) {
+                        document.getElementById('autoNumber').classList.add('border-danger');
+                        break;
+                    } else {
+                        document.getElementById('autoNumber').classList.remove('border-danger')
                     }
-                }).then(res => {
-                    if( res.status == 201 ){
-                        window.location.href = '/announce/sends'
+                }
+
+                for(let i=0; i < this.errors.length; i++ ) {
+                    if (this.errors[i]['passPuyer']) {
+                        document.getElementById('passPuyer').classList.add('border-danger');
+                        break;
+                    } else {
+                        document.getElementById('passPuyer').classList.remove('border-danger')
                     }
-                    console.log(res.status)
-                })
-                .catch(err => {
-                    if(err.response.data.errors){
-                        this.errors.push(err.response.data.errors)
-                        console.log( this.errors )
+                }
+                // For Buyer End
+            })
+        },
+        sendSellerData(){
+            let formData = new FormData();
+            formData.append('status',2);
+            formData.append('who',this.who.trim());
+            formData.append('name',this.name.trim());
+            formData.append('email',this.email.trim());
+            formData.append('city',this.city.trim());
+            formData.append('address',this.address.trim());
+            formData.append('password',this.password.trim());
+            formData.append('password_confirmation', this.password_confirmation.trim());
+            formData.append('image',this.image);
+            formData.append('marka',this.marka);
+
+            this.addDisabled('disabled','disabled');
+            this.sendLoader = true;
+
+            axios.post('/register', formData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(res => {
+                if( res.status == 201 ){
+                    window.location.href = '/seller/profile/'+ res.data.user.id
+                    this.sendLoader = false;
+                    console.log('res - ', res.data.data.id)
+                }
+            })
+            .catch(err => {
+                if(err.response.data.errors){
+                    this.errors.push(err.response.data.errors)
+                    this.sendLoader = false;
+                    this.removeDisabled('disabled');
+                    console.log('RES - ', this.errors )
+                }
+                if(err.response.data){
+                    this.errors.push(err.response.data.message)
+                    this.sendLoader = false;
+                    this.removeDisabled('disabled');
+                    console.log('ERR - ', this.errors)
+                }
+
+                if(  this.errors.length ) {
+                    // For Seller Start
+                    for(let i=0; i < this.errors.length; i++ ) {
+                        if (this.errors[i]['marka']) {
+                            document.getElementById('vs1__combobox').classList.add('border-danger');
+                            break;
+                        } else {
+                            document.getElementById('vs1__combobox').classList.remove('border-danger')
+                        }
                     }
-                })
-            }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['email'] ) {
+                            document.getElementById('email').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('email').classList.remove('border-danger')
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['name'] ) {
+                            document.getElementById('name').classList.add('border-danger');
+                            break;
+                        }else {
+                            if( document.getElementById('name').classList.contains('border-danger') ){
+                                document.getElementById('name').classList.remove('border-danger')
+                            }
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['address'] ) {
+                            document.getElementById('address').classList.add('border-danger');
+                            break;
+                        }else {
+                            if( document.getElementById('address').classList.contains('border-danger') ){
+                                document.getElementById('address').classList.remove('border-danger')
+                            }
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['password'] ) {
+                            document.getElementById('password').classList.add('border-danger');
+                            document.getElementById('password_confirmation').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('password').classList.remove('border-danger')
+                            document.getElementById('password_confirmation').classList.remove('border-danger')
+                        }
+                    }
+                    // For Seller End
+                }
+            });
+        },
+        addDisabled(val, key){
+            document.getElementById('send')
+                .setAttribute(val,key);
+        },
+        removeDisabled(val){
+            document.getElementById('send')
+                    .removeAttribute(val);
         },
         fileSelect(e){
             const file = (e.target.files || e.dataTransfer.files)[0];
@@ -326,6 +415,7 @@ export default {
         }
     },
     mounted(){
+        this.getCarNames()
         // Selected buyer for first
         // this.radio = 'buyer'
     }

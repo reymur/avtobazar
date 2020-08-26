@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\SellerType;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -53,17 +54,31 @@ class RegisterController extends Controller
         if( $data['status'] == 1 ) {
             return Validator::make($data, [
                 'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'email' => ['string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8'],
             ]);
         }
 
         if ( $data['status'] == 2 ) {
+            if ( isset($data['image']) && $data['image'] !== "null" ) {
+                return Validator::make($data, [
+                    'name' => ['required', 'string', 'max:255', 'unique:users'],
+                    'marka' => ['required'],
+                    'address' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'password' => ['required', 'confirmed', 'string', 'min:8'],
+                    'password_confirmation' => ['required', 'string', 'min:8'],
+                    'image' => 'mimes:jpeg,bmp,png',
+                ]);
+            }
+
             return Validator::make($data, [
                 'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'marka' => ['required'],
                 'address' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', 'string', 'min:8'],
-//            'image' => ['image', 'bmp', 'png', 'jpg'],
+                'password_confirmation' => ['required', 'string', 'min:8'],
             ]);
         }
     }
@@ -84,33 +99,43 @@ class RegisterController extends Controller
                 'status' => $data['status']
             ]);
 
-            if( $user ) {
-               response()->json([
-                    'data' => 'user where status "2" has been created successfully'
-                ], 200);
-            }
-
             return $user;
         }
 
         if($data['status'] == 2) {
 
             $user = User::create([
-                'type' => $data['type'],
+                'who' => $data['who'],
                 'name' => $data['name'],
                 'city' => $data['city'],
                 'address' => $data['address'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'image' => '',
+                'image' => $this->getUserNewImageName($data['image']),
                 'status' => $data['status'],
-
             ]);
 
-            if( $user ) {
-                response()->json([
-                    'data' => 'user where status "2" has been created successfully'
-                ], 200);
+            if($user){
+                $marka = explode(',', $data['marka']);
+
+                if( isset($data['marka']) && is_array($marka) && count($marka) ){
+                    $count = count($marka);
+                    for($i = 0; $i < $count; $i++){
+                        SellerType::create([
+                            'title' => $marka[$i],
+                            'user_id' => $user->id,
+                        ]);
+                    }
+                }
+            }
+
+            if( ! is_null($user->image) ) {
+                $imageName = $user->image;
+                $this->makeUserImageFolderWithImages(
+                            $user->id,
+                            $data['image'],
+                            $imageName
+                        );
             }
 
             return $user;
@@ -120,5 +145,28 @@ class RegisterController extends Controller
             'errors' => 'Whops!!!'
         ], 404);
 
+    }
+
+    private function getUserNewImageName($image)
+    {
+        if( $image != "null" && ! is_null($image) ){
+            $extension = $image->getClientOriginalExtension();
+
+            return time() .'.'. $extension;
+        }
+
+        return NULL;
+    }
+
+    private function makeUserImageFolderWithImages($id, $image, $name )
+    {
+        $dir = public_path("images/users/sallers/id_{$id}/" );
+        $path = mkdir( $dir , 0777, true );
+
+        if( is_dir($dir) ) {
+            return Image::make( $image )
+                ->resize(500, 450)
+                ->save( $dir . $name );
+        }
     }
 }

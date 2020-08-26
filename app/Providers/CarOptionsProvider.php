@@ -6,6 +6,7 @@ use App\Car;
 use App\City;
 use App\Motor;
 use App\Type;
+use App\Who;
 use App\Year;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +30,7 @@ class CarOptionsProvider extends ServiceProvider
      */
     public function boot()
     {
+        $who = Who::get();
         $cars = Car::with('types')->get();
         $types = Type::get();
 
@@ -37,10 +39,12 @@ class CarOptionsProvider extends ServiceProvider
         $motors = Motor::all();
 
         View::share([
+            'who' => $who,
             'cars' => $cars,
             'types' => $types,
             'cities' => $cities,
             'years' => $years,
-            'motors' => $motors]);
+            'motors' => $motors
+        ]);
     }
 }
