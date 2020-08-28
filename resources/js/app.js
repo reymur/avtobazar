@@ -11,6 +11,10 @@ Vue.component('modal-footer', require('./components/modal/ModalFooter.vue').defa
 Vue.component('modal-main-close-element', require('./components/modal/MainCloseElement.vue').default);
 Vue.component('register', require('./components/modal/Registration.vue').default);
 Vue.component('saller', require('./components/modal/Saller.vue').default);
+Vue.component('buyer-login-form', require('./components/forms/BuyerLoginForm.vue').default);
+Vue.component('buyer-register-form', require('./components/forms/BuyerRegisterForm.vue').default);
+Vue.component('seller-login-form', require('./components/forms/SellerLoginForm.vue').default);
+Vue.component('seller-register-form', require('./components/forms/SellerRegisterForm.vue').default);
 
 import Vue from 'vue'
 import vSelect from 'vue-select'

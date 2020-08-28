@@ -3,49 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.styleci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.styleci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RegisterController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/CarOptionsProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/CarOptionsProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597794966.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795021.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795091.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795188.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795259.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795366.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795415.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795560.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795613.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795677.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795734.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795780.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795897.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597795938.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597796038.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597796077.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597796173.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597796202.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597796352.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597797271.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597800815.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597830256.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/announcement/1597855921.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/select.php" beforeDir="false" afterPath="$PROJECT_DIR$/select.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -256,7 +222,11 @@
       <workItem from="1598127409973" duration="12318000" />
       <workItem from="1598277239571" duration="43000000" />
       <workItem from="1598372403902" duration="18291000" />
-      <workItem from="1598460525092" duration="21191000" />
+      <workItem from="1598460525092" duration="21429000" />
+      <workItem from="1598606895814" duration="7919000" />
+      <workItem from="1598625987957" duration="14101000" />
+      <workItem from="1598643662179" duration="1032000" />
+      <workItem from="1598646303544" duration="4506000" />
     </task>
     <servers />
   </component>
@@ -276,10 +246,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="376" y="169" width="618" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.701@0.27.1366.701" timestamp="1598095489534" />
-    <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1598367192750">
+    <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1598625500687">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.701@0.27.1366.701" timestamp="1598367192750" />
+    <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1366.701@0.27.1366.701" timestamp="1598625500687" />
     <state x="416" y="126" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598352383203">
       <screen x="0" y="27" width="1366" height="701" />
     </state>

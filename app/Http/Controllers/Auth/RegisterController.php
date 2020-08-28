@@ -53,9 +53,8 @@ class RegisterController extends Controller
     {
         if( $data['status'] == 1 ) {
             return Validator::make($data, [
-                'name' => ['required', 'string', 'max:255', 'unique:users'],
-                'email' => ['string', 'email', 'max:255', 'unique:users'],
-                'password' => ['required', 'string', 'min:8'],
+                'autoNumber' => ['required', 'string',  'min:7', 'max:7', 'unique:users'],
+                'password' => ['required', 'string', 'min:6'],
             ]);
         }
 
@@ -92,9 +91,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         if ($data['status'] == 1) {
-
             $user = User::create([
-                'name' => $data['name'],
+                'marka' => $data['marka'],
+                'autoNumber' => strtoupper($data['autoNumber']),
                 'password' => Hash::make($data['password']),
                 'status' => $data['status']
             ]);
