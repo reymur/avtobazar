@@ -1971,13 +1971,18 @@ __webpack_require__.r(__webpack_exports__);
       this.errors = [];
       this.addDisabled('disabled', 'disabled');
       this.sendLoader = true;
-      axios.post('/register', {
+      axios.post('/login', {
         status: 1,
         autoNumber: this.autoNumber.trim(),
         password: this.password.trim()
       }).then(function (res) {
-        if (res.status == 201) {
-          window.location.href = '/announce/sends';
+        if (res.status == 204 || res.status == 201) {
+          if (res.data.user) {
+            window.location.href = '/buyer/profile/' + res.data.user.id;
+          } else {
+            window.location.href = '/';
+          }
+
           _this.sendLoader = false;
 
           _this.removeDisabled('disabled');
@@ -2124,10 +2129,9 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password.trim()
       }).then(function (res) {
         if (res.status == 201) {
-          window.location.href = '/announce/sends';
+          window.location.href = '/buyer/profile/' + res.data.user.id;
           _this.sendLoader = false;
-
-          _this.removeDisabled('disabled');
+          console.log('res - ', res.data.data.id);
         }
 
         console.log(res.status);
@@ -2228,6 +2232,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "sallerloginform",
   data: function data() {
@@ -2252,17 +2265,19 @@ __webpack_require__.r(__webpack_exports__);
     sendSellerData: function sendSellerData() {
       var _this = this;
 
+      this.errors = [];
       var formData = new FormData();
       formData.append('status', 2);
-      formData.append('name', this.name.trim());
       formData.append('email', this.email.trim());
       formData.append('password', this.password.trim());
       this.addDisabled('disabled', 'disabled');
       this.sendLoader = true;
       axios.post('/login', formData).then(function (res) {
         if (res.status == 201) {
+          _this.errors = [];
+          document.getElementById('email').classList.remove('border-danger');
+          document.getElementById('password').classList.remove('border-danger');
           window.location.href = '/seller/profile/' + res.data.user.id;
-          _this.sendLoader = false;
           console.log('res - ', res.data.data.id);
         }
       })["catch"](function (err) {
@@ -2271,9 +2286,11 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.sendLoader = false;
 
+          _this.addDangerBorder();
+
           _this.removeDisabled('disabled');
 
-          console.log('RES - ', _this.errors);
+          console.log('ERR 1 - ', _this.errors);
         }
 
         if (err.response.data) {
@@ -2283,64 +2300,34 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.removeDisabled('disabled');
 
-          console.log('ERR - ', _this.errors);
+          console.log('ERR 2 - ', _this.errors);
         }
 
-        if (_this.errors.length) {
-          // For Seller Start
-          for (var i = 0; i < _this.errors.length; i++) {
-            if (_this.errors[i]['marka']) {
-              document.getElementById('vs1__combobox').classList.add('border-danger');
-              break;
-            } else {
-              document.getElementById('vs1__combobox').classList.remove('border-danger');
-            }
-          }
-
-          for (var _i = 0; _i < _this.errors.length; _i++) {
-            if (_this.errors[_i]['email']) {
-              document.getElementById('email').classList.add('border-danger');
-              break;
-            } else {
-              document.getElementById('email').classList.remove('border-danger');
-            }
-          }
-
-          for (var _i2 = 0; _i2 < _this.errors.length; _i2++) {
-            if (_this.errors[_i2]['name']) {
-              document.getElementById('name').classList.add('border-danger');
-              break;
-            } else {
-              if (document.getElementById('name').classList.contains('border-danger')) {
-                document.getElementById('name').classList.remove('border-danger');
-              }
-            }
-          }
-
-          for (var _i3 = 0; _i3 < _this.errors.length; _i3++) {
-            if (_this.errors[_i3]['address']) {
-              document.getElementById('address').classList.add('border-danger');
-              break;
-            } else {
-              if (document.getElementById('address').classList.contains('border-danger')) {
-                document.getElementById('address').classList.remove('border-danger');
-              }
-            }
-          }
-
-          for (var _i4 = 0; _i4 < _this.errors.length; _i4++) {
-            if (_this.errors[_i4]['password']) {
-              document.getElementById('password').classList.add('border-danger');
-              document.getElementById('password_confirmation').classList.add('border-danger');
-              break;
-            } else {
-              document.getElementById('password').classList.remove('border-danger');
-              document.getElementById('password_confirmation').classList.remove('border-danger');
-            }
-          } // For Seller End
-
-        }
+        _this.addDangerBorder();
       });
+    },
+    addDangerBorder: function addDangerBorder() {
+      if (this.errors.length) {
+        // For Seller Start
+        for (var i = 0; i < this.errors.length; i++) {
+          if (this.errors[i]['email']) {
+            document.getElementById('email').classList.add('border-danger');
+            break;
+          } else {
+            document.getElementById('email').classList.remove('border-danger');
+          }
+        }
+
+        for (var _i = 0; _i < this.errors.length; _i++) {
+          if (this.errors[_i]['password']) {
+            document.getElementById('password').classList.add('border-danger');
+            break;
+          } else {
+            document.getElementById('password').classList.remove('border-danger');
+          }
+        } // For Seller End
+
+      }
     },
     addDisabled: function addDisabled(val, key) {
       document.getElementById('send').setAttribute(val, key);
@@ -2387,6 +2374,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39494,6 +39495,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
+    _c("div", { staticClass: "col-12 mb-1" }, [
+      _vm.errors.length
+        ? _c("div", { staticClass: "invalid-feedback d-block mb-2" }, [
+            _c(
+              "ul",
+              { staticClass: "alert-danger py-2 my-1" },
+              [
+                _vm._l(_vm.errors, function(error) {
+                  return error.email
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.email[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.password
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.password[0]))
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "col-12" }, [
       _c("div", { staticClass: "col-12 input-group p-1" }, [
         _c("div", { staticClass: "input-group-prepend" }, [
@@ -39655,6 +39685,75 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
+    _c("div", { staticClass: "col-12 mb-1" }, [
+      _vm.errors.length
+        ? _c("div", { staticClass: "invalid-feedback d-block mb-2" }, [
+            _c(
+              "ul",
+              { staticClass: "alert-danger py-2 my-1" },
+              [
+                _vm._l(_vm.errors, function(error) {
+                  return error.name
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.name[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.marka
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.marka[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.email
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.email[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.address
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.address[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.password
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.password[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.password_confirmation
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.password_confirmation[0]))
+                      ])
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.errors, function(error) {
+                  return error.image
+                    ? _c("li", { staticClass: "py-2" }, [
+                        _vm._v(" " + _vm._s(error.image[0]))
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "col-12" }, [
       _c(
         "div",
@@ -39669,7 +39768,7 @@ var render = function() {
               taggable: "",
               multiple: "",
               label: "country",
-              placeholder: "dffffffffff",
+              placeholder: "Ehtiyyat hissələrini satdığınız markanı seçin",
               options: _vm.car
             },
             model: {

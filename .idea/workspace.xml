@@ -3,15 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sallers/id_1/1598465308.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/sellers/id_1/1598465308.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sallers/id_2/1598465952.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/sellers/id_2/1598465952.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sallers/id_3/1598465133.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/sellers/id_3/1598465133.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sallers/id_4/1598466696.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/sellers/id_4/1598466696.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sallers/id_5/1598467013.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/sellers/id_5/1598467013.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/BuyerLoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/BuyerLoginForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/BuyerRegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/BuyerRegisterForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SellerLoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SellerLoginForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/profiles/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +167,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/.env" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/modal" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -167,14 +179,14 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/users/seller" />
       <recent name="$PROJECT_DIR$/resources/views/users/partials" />
       <recent name="$PROJECT_DIR$/public/images/users" />
       <recent name="$PROJECT_DIR$/public/images/cars/registerNumbers" />
-      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/components/modal" />
     </key>
   </component>
@@ -226,7 +238,8 @@
       <workItem from="1598606895814" duration="7919000" />
       <workItem from="1598625987957" duration="14101000" />
       <workItem from="1598643662179" duration="1032000" />
-      <workItem from="1598646303544" duration="4506000" />
+      <workItem from="1598646303544" duration="4718000" />
+      <workItem from="1598722419358" duration="17352000" />
     </task>
     <servers />
   </component>
@@ -278,10 +291,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="391" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1597192006597" />
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1598359549546">
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog" timestamp="1598726077562">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1598359549546" />
+    <state x="478" y="299" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1598726077562" />
     <state x="218" y="27" width="901" height="645" key="dock-window-1" timestamp="1597776023157">
       <screen x="0" y="27" width="1366" height="701" />
     </state>

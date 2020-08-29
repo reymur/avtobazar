@@ -159,7 +159,7 @@ class RegisterController extends Controller
 
     private function makeUserImageFolderWithImages($id, $image, $name )
     {
-        $dir = public_path("images/users/sallers/id_{$id}/" );
+        $dir = public_path("images/users/sellers/id_{$id}/" );
         $path = mkdir( $dir , 0777, true );
 
         if( is_dir($dir) ) {

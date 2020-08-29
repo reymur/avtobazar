@@ -1,5 +1,14 @@
 <template>
     <div class="">
+        <div class="col-12 mb-1">
+            <div v-if="errors.length" class="invalid-feedback d-block mb-2">
+                <ul class="alert-danger py-2 my-1">
+                    <li v-for="error in errors" class="py-2" v-if="error.email"> {{ error.email[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
+                </ul>
+            </div>
+        </div><!--End Errors -->
+
         <div class="col-12">
             <div class="col-12 input-group p-1">
                 <div class="input-group-prepend">
@@ -63,9 +72,10 @@ export default {
             }
         },
         sendSellerData(){
+            this.errors = [];
+
             let formData = new FormData();
             formData.append('status',2);
-            formData.append('name',this.name.trim());
             formData.append('email',this.email.trim());
             formData.append('password',this.password.trim());
 
@@ -74,80 +84,53 @@ export default {
 
             axios.post('/login', formData).then(res => {
                 if( res.status == 201 ){
+                    this.errors = [];
+                    document.getElementById('email').classList.remove('border-danger')
+                    document.getElementById('password').classList.remove('border-danger')
                     window.location.href = '/seller/profile/'+ res.data.user.id
-                    this.sendLoader = false;
                     console.log('res - ', res.data.data.id)
                 }
             })
-                .catch(err => {
+            .catch(err => {
                     if(err.response.data.errors){
                         this.errors.push(err.response.data.errors)
                         this.sendLoader = false;
+                        this.addDangerBorder();
                         this.removeDisabled('disabled');
-                        console.log('RES - ', this.errors )
+                        console.log('ERR 1 - ', this.errors )
                     }
                     if(err.response.data){
                         this.errors.push(err.response.data.message)
                         this.sendLoader = false;
                         this.removeDisabled('disabled');
-                        console.log('ERR - ', this.errors)
+                        console.log('ERR 2 - ', this.errors)
                     }
 
-                    if(  this.errors.length ) {
-                        // For Seller Start
-                        for(let i=0; i < this.errors.length; i++ ) {
-                            if (this.errors[i]['marka']) {
-                                document.getElementById('vs1__combobox').classList.add('border-danger');
-                                break;
-                            } else {
-                                document.getElementById('vs1__combobox').classList.remove('border-danger')
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['email'] ) {
-                                document.getElementById('email').classList.add('border-danger');
-                                break;
-                            }else {
-                                document.getElementById('email').classList.remove('border-danger')
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['name'] ) {
-                                document.getElementById('name').classList.add('border-danger');
-                                break;
-                            }else {
-                                if( document.getElementById('name').classList.contains('border-danger') ){
-                                    document.getElementById('name').classList.remove('border-danger')
-                                }
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['address'] ) {
-                                document.getElementById('address').classList.add('border-danger');
-                                break;
-                            }else {
-                                if( document.getElementById('address').classList.contains('border-danger') ){
-                                    document.getElementById('address').classList.remove('border-danger')
-                                }
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['password'] ) {
-                                document.getElementById('password').classList.add('border-danger');
-                                document.getElementById('password_confirmation').classList.add('border-danger');
-                                break;
-                            }else {
-                                document.getElementById('password').classList.remove('border-danger')
-                                document.getElementById('password_confirmation').classList.remove('border-danger')
-                            }
-                        }
-                        // For Seller End
-                    }
+                    this.addDangerBorder();
                 });
+        },
+        addDangerBorder(){
+            if(  this.errors.length ) {
+                // For Seller Start
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['email'] ) {
+                            document.getElementById('email').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('email').classList.remove('border-danger')
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['password'] ) {
+                            document.getElementById('password').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('password').classList.remove('border-danger')
+                        }
+                    }
+                // For Seller End
+            }
         },
         addDisabled(val, key){
             document.getElementById('send')

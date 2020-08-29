@@ -42,4 +42,9 @@ class User extends Authenticatable/* implements MustVerifyEmail*/
     {
         return $this->hasOne(Status::class, 'id', 'status');
     }
+
+    public function sellerTypes()
+    {
+        return $this->hasMany(SellerType::class, 'user_id');
+    }
 }

@@ -27,3 +27,7 @@ Route::prefix('seller')->middleware('auth')->group(function(){
     Route::get('/', 'SellerController@index')->name('seller.index');
     Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');
 });
+
+Route::prefix('buyer')->middleware('auth')->group(function(){
+    Route::get('/profile/{id}', 'BuyerController@profile')->name('buyer.profile');
+});

@@ -62,13 +62,17 @@ export default {
             this.addDisabled('disabled','disabled');
             this.sendLoader = true;
 
-            axios.post('/register', {
+            axios.post('/login', {
                 status: 1,
                 autoNumber: this.autoNumber.trim(),
                 password: this.password.trim()
             }).then(res => {
-                if( res.status == 201 ){
-                    window.location.href = '/announce/sends';
+                if( res.status == 204 || res.status == 201 ){
+                    if( res.data.user ){
+                        window.location.href = '/buyer/profile/'+ res.data.user.id ;
+                    }else{
+                        window.location.href = '/';
+                    }
                     this.sendLoader = false;
                     this.removeDisabled('disabled');
                 }

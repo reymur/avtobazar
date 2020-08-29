@@ -10921,10 +10921,23 @@ body {
 }
 
 .logo__text {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: -4px;
   font-weight: bolder;
   letter-spacing: 1px;
+}
+
+.logo__small-text {
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  position: absolute;
+  margin: 29px 0 0 -115px;
+}
+
+.small__text {
+  font-size: 12px;
+  font-weight: normal;
 }
 
 .avto__logo {
@@ -11056,6 +11069,11 @@ body {
   font-weight: bold;
   letter-spacing: 1px;
   padding: 10px 10px 10px 10px;
+}
+
+.seller__profile-image {
+  width: 180px;
+  margin: 20px 0 0 0;
 }
 
 .v-select {

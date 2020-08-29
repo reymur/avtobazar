@@ -1,5 +1,19 @@
 <template>
     <div class="">
+        <div class="col-12 mb-1">
+            <div v-if="errors.length" class="invalid-feedback d-block mb-2">
+                <ul class="alert-danger py-2 my-1">
+                    <li v-for="error in errors" class="py-2" v-if="error.name"> {{ error.name[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.marka"> {{ error.marka[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.email"> {{ error.email[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.address"> {{ error.address[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.password_confirmation"> {{ error.password_confirmation[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.image"> {{ error.image[0] }}</li>
+                </ul>
+            </div>
+        </div><!--End Errors -->
+
         <div class="col-12">
             <div class="col-12 input-group p-1">
                 <div class="input-group-prepend">
@@ -9,7 +23,7 @@
                 </div>
                 <v-select id="marka" class="marka" taggable multiple
                           v-model="marka" label="country"
-                          placeholder="dffffffffff"
+                          placeholder="Ehtiyyat hissələrini satdığınız markanı seçin"
                           :options="car">
                 </v-select>
             </div>

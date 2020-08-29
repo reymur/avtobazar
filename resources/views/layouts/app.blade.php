@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark mb-2 navbar__bg">
+        <nav class="navbar navbar-expand-lg navbar-dark mb-2 p-1 navbar__bg">
             <div class="container col-md-10 col-sm-10">
                 <button class="navbar-toggler mr-3" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -36,9 +36,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a class="d-inline-flex navbar-brand mr-auto" href="/">
-                    <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
-                    <h4 class="mb-0 logo__text">AvtoBazar</h4>
+                <a class=" navbar-brand mr-auto" href="/">
+                    <span class="d-inline-flex">
+                        <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
+                        <h4 class="mb-0 logo__text">AvtoSklad</h4>
+                    </span>
+                    <span class="logo__small-text">Ehiyyat Hissələrinin <span class="small__text">alışı və satışı</span></span>
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

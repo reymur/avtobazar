@@ -84,9 +84,9 @@ export default {
                 password: this.password.trim()
             }).then(res => {
                 if( res.status == 201 ){
-                    window.location.href = '/announce/sends';
+                    window.location.href = '/buyer/profile/'+ res.data.user.id
                     this.sendLoader = false;
-                    this.removeDisabled('disabled');
+                    console.log('res - ', res.data.data.id)
                 }
                 console.log(res.status)
             })

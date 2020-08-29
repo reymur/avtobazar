@@ -19,10 +19,10 @@ class SellerController extends Controller
 
     public function profile($id)
     {
-        $user = User::with(['statusName'])->find($id);
+        $user = User::where('status', 2)->with(['sellerTypes', 'statusName'])->find($id);
 
         if( ! $user ) return abort(404);
 
-        return view('users.profiles.profile', compact('user'));
+        return view('users.seller.profile', compact('user'));
     }
 }
