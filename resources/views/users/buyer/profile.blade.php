@@ -4,6 +4,8 @@
     <div class="container-lg container-xl">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
+        @include('partials.announcement_panel')
+
         <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
             <div class="col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2">
                 @include('users.partials.user_left_bar')

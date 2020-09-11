@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\City;
 use App\Motor;
+use App\Status;
 use App\Type;
 use App\User;
+use App\Who;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -1772,6 +1774,27 @@ class HomeController extends Controller
         foreach($cities as $c){
             City::create([
                 'city' => $c['city'],
+            ]);
+        }
+
+        $status = [
+            ['status' => 'Alıcı'],
+            ['status' => 'Satıcı'],
+            ['status' => 'Hamısı'],
+        ];
+        foreach($status as $c){
+            Status::create([
+                'status' => $c['status'],
+            ]);
+        }
+
+        $who = [
+            ['who' => 'Mağaza'],
+            ['who' => 'Ölüxana'],
+        ];
+        foreach($who as $c){
+            Who::create([
+                'who' => $c['who'],
             ]);
         }
     }

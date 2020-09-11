@@ -10916,6 +10916,11 @@ body {
   background-color: #d23055;
 }
 
+.drop__menu {
+  right: 40px;
+  left: auto;
+}
+
 .logo {
   width: 55px;
 }
@@ -10959,6 +10964,15 @@ body {
   font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
+.user__nav-image-parent {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.user__nav-image {
+  border-radius: 50%;
+}
+
 .border__b {
   color: #343434;
 }
@@ -10969,7 +10983,7 @@ body {
 }
 
 .title__text {
-  color: #d23055;
+  color: #1f1f1f;
   /*font-weight: bold;*/
   font-size: 1.1rem;
   letter-spacing: 1px;
@@ -11074,6 +11088,79 @@ body {
 .seller__profile-image {
   width: 180px;
   margin: 20px 0 0 0;
+}
+
+.outline__none {
+  outline: none;
+}
+
+.text__bold {
+  font-weight: bolder;
+}
+
+.annonce_panel {
+  display: block;
+  margin-bottom: 20px;
+  height: 40px;
+  background: #e34267;
+}
+
+.annonce_panel-element {
+  position: relative;
+  padding: 0;
+  color: #ffffff;
+  display: inline-flex;
+  border-right: #ffffff 1px solid;
+}
+
+.annonce__panel-a {
+  padding: 10px 15px 4px 15px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.annonce__panel-a:hover {
+  padding: 10px 15px 4px 15px;
+  color: #d6d6d6;
+}
+
+.annonce__btn_for_all {
+  height: 48px;
+  position: absolute;
+  border-radius: 0;
+  padding-top: 11px;
+  background-color: #3ac857;
+  margin: -5px 0 -9px -198px;
+  box-shadow: -2px 1px 3px 0 #959595;
+}
+
+.annonce__btn_for_all-text {
+  margin: 2px 0 0 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.annonce__btn_for_all-a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.annonce__btn_for_all-a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.modal__main-title {
+  letter-spacing: 1px;
+  font-size: 17px;
+  padding: 6px 0 3px 10px;
+  margin: 0;
+  color: #888;
+}
+
+.spare__parts {
+  letter-spacing: 1px;
 }
 
 .v-select {

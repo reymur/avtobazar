@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <select v-model="who" class="custom-select" id="who" required>
-                    <option v-if="whos.length" v-for="whoItem in whos" :value="whoItem.who">
+                    <option v-if="whos.length" v-for="whoItem in whos" :value="whoItem.id">
                         {{ whoItem.who }}
                     </option>
                 </select>
@@ -135,10 +135,7 @@
             </div><!-- End Image Show -->
         </div>
 
-        <div class="modal-footer pt-2 pb-2 pr-0 mr-0">
-            <button type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal">Xeyir</button>
+        <div class="modal-footer pt-2 pb-0 pr-0 mr-0">
             <button @click="sendSellerData" type="button" id="send" class="btn btn-primary">
                 <span v-if="sendLoader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span v-if="sendLoader">Gözlə...</span>
@@ -154,7 +151,6 @@ export default {
     props: ['whos','cars','cities'],
     data(){
         return {
-            who: '',
             name: '',
             email: '',
             city: '',
@@ -165,6 +161,8 @@ export default {
             image: null,
             imageLoader: false,
             errors: [],
+            who: null,
+            whoValue: null,
             status: 1,
             disable: 'disabled',
             marka: [],
@@ -175,7 +173,7 @@ export default {
     methods: {
         setWhosValue(){
             if( this.whos.length ){
-                this.who = this.whos[0].who;
+                return this.who = this.whos[0].id;
             }
         },
         setCitiesValue(){
@@ -196,8 +194,8 @@ export default {
         },
         sendSellerData(){
             let formData = new FormData();
+            formData.append('who',this.who);
             formData.append('status',2);
-            formData.append('who',this.who.trim());
             formData.append('name',this.name.trim());
             formData.append('email',this.email.trim());
             formData.append('city',this.city.trim());
@@ -221,75 +219,75 @@ export default {
                     console.log('res - ', res.data.data.id)
                 }
             })
-                .catch(err => {
-                    if(err.response.data.errors){
-                        this.errors.push(err.response.data.errors)
-                        this.sendLoader = false;
-                        this.removeDisabled('disabled');
-                        console.log('RES - ', this.errors )
+            .catch(err => {
+                if(err.response){
+                    this.errors.push(err.response.data.errors)
+                    this.sendLoader = false;
+                    this.removeDisabled('disabled');
+                    console.log('RES - ', this.errors )
+                }
+                if(err.response){
+                    this.errors.push(err.response.data.message)
+                    this.sendLoader = false;
+                    this.removeDisabled('disabled');
+                    console.log('ERR - ', this.errors)
+                }
+
+                if(  this.errors.length ) {
+                    // For Seller Start
+                    for(let i=0; i < this.errors.length; i++ ) {
+                        if (this.errors[i]['marka']) {
+                            document.getElementById('vs1__combobox').classList.add('border-danger');
+                            break;
+                        } else {
+                            document.getElementById('vs1__combobox').classList.remove('border-danger')
+                        }
                     }
-                    if(err.response.data){
-                        this.errors.push(err.response.data.message)
-                        this.sendLoader = false;
-                        this.removeDisabled('disabled');
-                        console.log('ERR - ', this.errors)
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['email'] ) {
+                            document.getElementById('email').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('email').classList.remove('border-danger')
+                        }
                     }
 
-                    if(  this.errors.length ) {
-                        // For Seller Start
-                        for(let i=0; i < this.errors.length; i++ ) {
-                            if (this.errors[i]['marka']) {
-                                document.getElementById('vs1__combobox').classList.add('border-danger');
-                                break;
-                            } else {
-                                document.getElementById('vs1__combobox').classList.remove('border-danger')
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['name'] ) {
+                            document.getElementById('name').classList.add('border-danger');
+                            break;
+                        }else {
+                            if( document.getElementById('name').classList.contains('border-danger') ){
+                                document.getElementById('name').classList.remove('border-danger')
                             }
                         }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['email'] ) {
-                                document.getElementById('email').classList.add('border-danger');
-                                break;
-                            }else {
-                                document.getElementById('email').classList.remove('border-danger')
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['name'] ) {
-                                document.getElementById('name').classList.add('border-danger');
-                                break;
-                            }else {
-                                if( document.getElementById('name').classList.contains('border-danger') ){
-                                    document.getElementById('name').classList.remove('border-danger')
-                                }
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['address'] ) {
-                                document.getElementById('address').classList.add('border-danger');
-                                break;
-                            }else {
-                                if( document.getElementById('address').classList.contains('border-danger') ){
-                                    document.getElementById('address').classList.remove('border-danger')
-                                }
-                            }
-                        }
-
-                        for(let i=0; i < this.errors.length; i++ ){
-                            if( this.errors[i]['password'] ) {
-                                document.getElementById('password').classList.add('border-danger');
-                                document.getElementById('password_confirmation').classList.add('border-danger');
-                                break;
-                            }else {
-                                document.getElementById('password').classList.remove('border-danger')
-                                document.getElementById('password_confirmation').classList.remove('border-danger')
-                            }
-                        }
-                        // For Seller End
                     }
-                });
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['address'] ) {
+                            document.getElementById('address').classList.add('border-danger');
+                            break;
+                        }else {
+                            if( document.getElementById('address').classList.contains('border-danger') ){
+                                document.getElementById('address').classList.remove('border-danger')
+                            }
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['password'] ) {
+                            document.getElementById('password').classList.add('border-danger');
+                            document.getElementById('password_confirmation').classList.add('border-danger');
+                            break;
+                        }else {
+                            document.getElementById('password').classList.remove('border-danger')
+                            document.getElementById('password_confirmation').classList.remove('border-danger')
+                        }
+                    }
+                    // For Seller End
+                }
+            });
         },
         addDisabled(val, key){
             document.getElementById('send')

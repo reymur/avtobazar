@@ -47,10 +47,5 @@
                     </a>
                 </td>
             </tr>
-            <tr>
-                <td class="text-left p-xl-1 p-lg-1 pt-md-0 pt-sm-0">
-                    @include('modals.saller_modal')
-                </td>
-            </tr>
         </tbody>
     </table>

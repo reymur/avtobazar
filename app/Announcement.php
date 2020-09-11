@@ -10,6 +10,6 @@ class Announcement extends Model
 
     public function getImageName()
     {
-        return $this->belongsTo(self::class,'id');
+        return $this->belongsTo(User::class,'id', 'user_id');
     }
 }

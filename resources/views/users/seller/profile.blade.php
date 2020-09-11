@@ -4,13 +4,15 @@
     <div class="container-lg container-xl">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
+        @include('partials.announcement_panel')
+
         <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
             <div class="col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2">
                 @include('users.partials.user_left_bar')
             </div>
 
             <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0 pb-3 flash__bg border-left border-white">
-                <div class="col-12 pt-3 pl-4 ml-5 mt-2 mb-3">
+                <div class="col-10 pt-3 pl-4 ml-2 mt-2 mb-3">
                     @isset( $user )
                         <h5 class="ml-2 text-uppercase">{{ $user->name ?? "Adsız" }}</h5>
                     @else
@@ -48,7 +50,7 @@
                                     <tr>
                                         <th>Növü:</th>
                                         <td class="text-center">
-                                            {{ $user->who ?? 'Yox' }}
+                                            {{ $user->whos->who ?? 'Yox' }}
                                         </td>
                                         <td class="text-right">
                                             <a href="">
@@ -92,9 +94,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Email</th>
-                                        <td class="text-center">
-                                            <div class="border border-info p-2 text-left">
+                                        <th>Marka</th>
+                                        <td class="p-2">
+                                            <div class="border border-info p-2 text-center">
                                                 @isset( $user->sellerTypes )
                                                     @if( count($user->sellerTypes) )
                                                         @foreach($user->sellerTypes as $key => $marka)

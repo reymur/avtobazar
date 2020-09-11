@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 
 class CarsController extends Controller
 {
-    public function getModel(Request $request)
+    public function getModels(Request $request)
     {
         $model = Car::with('types')->where('title', $request->name)->first();
 
@@ -20,18 +20,20 @@ class CarsController extends Controller
         return view('pages.cars.models', compact('model'));
     }
 
-    public function getModelTypes(Request $request)
+    public function getModelType(Request $request)
     {
-        $type = Type::with('parent')->where('title', $request->name)->first();
+        $type = Type::with('parent')->where('title', $request->title)->first();
 
         if( ! $type ) return abort(404);
 
-        return view('pages.cars.model_types', compact('type'));
+        return view('partials.model_type', compact('type'));
     }
 
     public function getJsonModelTypes(Request $request)
     {
-        $model = Type::where('parent_id', $request->id)->get();
+        $marka = Car::where('name', $request->name)->first();
+
+        $model = Type::where('parent_id', $marka->id)->get();
 
         if( ! $model ) {
             return response()->json([

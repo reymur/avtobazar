@@ -37,9 +37,6 @@
         </div>
 
         <div class="modal-footer pt-2 pb-2 pr-0 mr-0">
-            <button type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal">Xeyir</button>
             <button @click="sendSellerData" type="button" id="send" class="btn btn-primary">
                 <span v-if="sendLoader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span v-if="sendLoader">Gözlə...</span>

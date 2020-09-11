@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Who extends Model
 {
-    //
+    public $guarded = [];
 }

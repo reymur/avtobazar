@@ -25,7 +25,6 @@ class CreateAnnouncementsTable extends Migration
             $table->string('condition')->nullable();
             $table->string('texpassport')->nullable();
             $table->string('city')->nullable();
-            $table->string('note')->nullable();
             $table->string('image')->nullable();
             $table->string('answer')->nullable();
             $table->timestamps();

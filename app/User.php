@@ -47,4 +47,14 @@ class User extends Authenticatable/* implements MustVerifyEmail*/
     {
         return $this->hasMany(SellerType::class, 'user_id');
     }
+
+    public function whos()
+    {
+        return $this->hasOne(Who::class, 'id', 'who');
+    }
+
+    public function getAnnounceImageName()
+    {
+        $this->hasOne(Announcement::class, 'user_id', 'id');
+    }
 }
