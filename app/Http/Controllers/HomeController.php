@@ -1791,6 +1791,7 @@ class HomeController extends Controller
         $who = [
             ['who' => 'Mağaza'],
             ['who' => 'Ölüxana'],
+            ['who' => 'Hər ikisi'],
         ];
         foreach($who as $c){
             Who::create([

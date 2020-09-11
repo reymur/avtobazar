@@ -3174,7 +3174,7 @@ __webpack_require__.r(__webpack_exports__);
           formdata.append('motor', this.motorSelect);
           formdata.append('who', this.toSelect);
           formdata.append('when', this.when);
-          formdata.append('citySelect', this.citySelect);
+          formdata.append('city', this.citySelect);
           formdata.append('condition', this.condition);
           formdata.append('texpassport', this.texPassInput.trim());
           formdata.append('image', this.image);
@@ -3188,15 +3188,48 @@ __webpack_require__.r(__webpack_exports__);
             if (res.status == 200) {
               // window.location.href = '/announce/sends';
               console.log(res);
-            }
+            } // if( res.data ){
+            //     res.data.forEach( (key, val) => {
 
-            _this5.removeDangerBorder('spare_parts');
 
-            _this5.removeDangerBorder('vs1__combobox');
+            console.log('image - ', res.data.data.image);
+            console.log('texpassport - ', res.data.data.texpassport); // });
 
-            _this5.removeDangerBorder('texpassport');
+            if (res.data && res.data.data) {
+              var _image = res.data.data.image;
+              var texpassport = res.data.data.texpassport;
 
-            _this5.removeDangerBorder('image');
+              if (_image == null && texpassport == null) {
+                _this5.removeDangerBorder('spare_parts');
+
+                _this5.removeDangerBorder('vs1__combobox');
+              } else if (_image == null) {
+                _this5.removeDangerBorder('spare_parts');
+
+                _this5.removeDangerBorder('vs1__combobox');
+
+                _this5.removeDangerBorder('texpassport');
+              } else if (texpassport == null) {
+                _this5.removeDangerBorder('spare_parts');
+
+                _this5.removeDangerBorder('vs1__combobox');
+
+                _this5.removeDangerBorder('image');
+              } else {
+                _this5.removeDangerBorder('spare_parts');
+
+                _this5.removeDangerBorder('vs1__combobox');
+
+                _this5.removeDangerBorder('texpassport');
+
+                _this5.removeDangerBorder('image');
+              }
+            } // this.removeDangerBorder('spare_parts')
+            // this.removeDangerBorder('vs1__combobox')
+            // this.removeDangerBorder('texpassport')
+            // this.removeDangerBorder('image')
+            // }
+
           })["catch"](function (err) {
             _this5.errors = [];
 

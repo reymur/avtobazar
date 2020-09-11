@@ -16,6 +16,7 @@ class CreateAnnouncementsTable extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
+            $table->string('name')->nullable();
             $table->string('spare_parts')->nullable();
             $table->string('marka')->nullable();
             $table->string('model')->nullable();
@@ -29,6 +30,8 @@ class CreateAnnouncementsTable extends Migration
             $table->string('answer')->nullable();
             $table->timestamps();
         });
+
+
     }
 
     /**

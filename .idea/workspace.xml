@@ -2,50 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/partials/cars_card.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/partials/models_card.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Announcement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Announcement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CarsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Who.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Who.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_17_202655_create_announcements_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_08_17_202655_create_announcements_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_1/1598465308.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_2/1598465952.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_3/1598465133.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_4/1598466696.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_5/1598467013.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_6/1598736736.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_7/1598739331.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_08_17_202655_create_announcements_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/id_1/1599842545.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/BuyerLoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/BuyerLoginForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/BuyerRegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/BuyerRegisterForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SellerLoginForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SellerLoginForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/crumbs/_page_links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/crumbs/_page_links.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/car_card.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/model_types.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/all_cars.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/buyer/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/buyer/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +240,8 @@
       <workItem from="1599830833167" duration="1775000" />
       <workItem from="1599832761096" duration="1045000" />
       <workItem from="1599834136686" duration="2396000" />
-      <workItem from="1599837000827" duration="5573000" />
+      <workItem from="1599837000827" duration="5759000" />
+      <workItem from="1599833888456" duration="17081000" />
     </task>
     <servers />
   </component>
@@ -357,9 +321,9 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1598281363337" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599839217011">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1599834388459">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1599839217011" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1599834388459" />
   </component>
 </project>

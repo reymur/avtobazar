@@ -311,7 +311,7 @@ export default {
                     formdata.append('motor', this.motorSelect);
                     formdata.append('who', this.toSelect);
                     formdata.append('when', this.when);
-                    formdata.append('citySelect', this.citySelect);
+                    formdata.append('city', this.citySelect);
                     formdata.append('condition', this.condition);
                     formdata.append('texpassport', this.texPassInput.trim());
                     formdata.append('image', this.image);
@@ -328,10 +328,43 @@ export default {
                             console.log(res)
                         }
 
-                        this.removeDangerBorder('spare_parts')
-                        this.removeDangerBorder('vs1__combobox')
-                        this.removeDangerBorder('texpassport')
-                        this.removeDangerBorder('image')
+                        // if( res.data ){
+                        //     res.data.forEach( (key, val) => {
+                                console.log('image - ', res.data.data.image);
+                                console.log('texpassport - ', res.data.data.texpassport);
+                            // });
+                        if( res.data && res.data.data ){
+                            let image = res.data.data.image;
+                            let texpassport = res.data.data.texpassport;
+
+                            if( image == null && texpassport == null ){
+                                this.removeDangerBorder('spare_parts');
+                                this.removeDangerBorder('vs1__combobox');
+                            }
+                            else if( image == null ){
+                                this.removeDangerBorder('spare_parts');
+                                this.removeDangerBorder('vs1__combobox');
+                                this.removeDangerBorder('texpassport');
+
+                            }
+                            else if( texpassport == null ){
+                                this.removeDangerBorder('spare_parts');
+                                this.removeDangerBorder('vs1__combobox');
+                                this.removeDangerBorder('image');
+                            }
+                            else{
+                                this.removeDangerBorder('spare_parts')
+                                this.removeDangerBorder('vs1__combobox')
+                                this.removeDangerBorder('texpassport')
+                                this.removeDangerBorder('image')
+                            }
+                        }
+
+                        // this.removeDangerBorder('spare_parts')
+                        // this.removeDangerBorder('vs1__combobox')
+                        // this.removeDangerBorder('texpassport')
+                        // this.removeDangerBorder('image')
+                        // }
                     })
                     .catch(err => {
                         this.errors = [];
