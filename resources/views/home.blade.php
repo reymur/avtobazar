@@ -8,7 +8,7 @@
 
         @include('partials.announcement_panel')
 
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-lg-4 mb-md-5 mb-sm-5 text-center d-inline-flex">
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-lg-4 mb-md-5 mb-sm-5 mt-xl-5 mt-lg-5 mt-md-4 mt-sm-4 text-center d-inline-flex">
             <span class="col-lg-6 col-md-6 col-sm-7 px-sm-0 mr-lg-1 mr-sm-0 text-uppercase title__text">
                 <span class="text__bold">Modellər </span>
                 ÜZRƏ Ehtiyyat Hissələrini

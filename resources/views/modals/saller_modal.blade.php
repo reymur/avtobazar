@@ -15,7 +15,7 @@
 
 @if( Auth::check() )
     <!-- Modal -->
-    <saller></saller>
+    <saller :user="{{ Auth::user() }}"></saller>
 @endif
 </div>
 

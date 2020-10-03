@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use App\Car;
 use App\City;
 use App\Motor;
@@ -9,6 +10,7 @@ use App\Type;
 use App\User;
 use App\Year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
@@ -23,7 +25,10 @@ class SellerController extends Controller
 
         if (!$user) return abort(404);
 
-        return view('users.seller.profile', compact('user'));
+        return view('users.seller.profile')->with([
+            'user' => $user,
+            'ordersNullCount' => $this->getOrdersNullCount()
+        ]);
     }
 
     public function getWhos(Request $request)
@@ -37,7 +42,7 @@ class SellerController extends Controller
             'status' => 2
         ])->get();
 
-        if( ! count($users) ) {
+        if( $users->count() == 0 ) {
             return response()->json([
                 'errors' => 'error'
             ],404);
@@ -52,7 +57,7 @@ class SellerController extends Controller
     {
         $users = User::where('status', 2)->get();
 
-        if( ! count($users) ) {
+        if( $users->count() == 0 ) {
             return response()->json([
                 'errors' => 'error'
             ],404);
@@ -61,5 +66,12 @@ class SellerController extends Controller
         return response()->json([
             'users' => $users
         ],200);
+    }
+
+    public function getOrdersNullCount()
+    {
+        $user = Auth::user();
+        $orders = User::with('announcement')->where('id', $user->id);
+        return $orders->first()->announcement->count();
     }
 }

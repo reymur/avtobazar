@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Car;
 use App\City;
+use App\FuelType;
 use App\Motor;
 use App\Type;
 use App\Who;
@@ -11,7 +12,7 @@ use App\Year;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class CarOptionsProvider extends ServiceProvider
+class GlobalVarsProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -37,6 +38,7 @@ class CarOptionsProvider extends ServiceProvider
         $cities = City::all();
         $years = Year::orderBy('id','desc')->get();
         $motors = Motor::all();
+        $fuel_types = FuelType::all();
 
         View::share([
             'who' => $who,
@@ -44,7 +46,8 @@ class CarOptionsProvider extends ServiceProvider
             'types' => $types,
             'cities' => $cities,
             'years' => $years,
-            'motors' => $motors
+            'motors' => $motors,
+            'fuel_types' => $fuel_types,
         ]);
     }
 }

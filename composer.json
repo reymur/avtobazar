@@ -38,7 +38,11 @@
         "psr-4": {
             "App\\": "app/"
         },
-        "files": ["app/Helpers/getImageName.php"],
+        "files": [
+            "app/Helpers/getImageName.php",
+            "app/Helpers/changeSendSession.php",
+            "app/Helpers/getUserLeftBarOrderCount.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

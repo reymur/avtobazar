@@ -4,8 +4,8 @@
         <tbody class="d-lg-block d-md-inline-flex d-sm-inline-flex">
             <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route('incoming') }}" class="d-lg-block
-                        {{ str_contains(request()->path(), 'incoming') ?
+                    <a href="{{ route('answers') }}" class="d-lg-block
+                        {{ str_contains(request()->path(), 'answers') ?
                            'text-black-50' : ''
                         }}">
                         Gələnlər
@@ -20,7 +20,13 @@
                                         'text-black-50' : '' }}">
                             Göndərilənlər
                         </span>
-                        <span class="badge badge-success">2</span>
+                        <span class="badge badge-success">
+                            @if( isset($sends) )
+                                {{ $sends->count() }}
+                            @else
+                                0
+                            @endif
+                        </span>
                     </a>
                 </td>
             </tr>

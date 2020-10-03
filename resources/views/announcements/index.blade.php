@@ -5,7 +5,7 @@
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
-            @include('announcements.left_bar')
+            @include('announcements.left_bar', ['sends' => $sends])
 
             <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0">
                 <div class="col-12 p-md-2 p-sm-0 flash__bg">

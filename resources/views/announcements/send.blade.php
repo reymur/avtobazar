@@ -4,115 +4,74 @@
     <div class="container-lg container-xl">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
-        <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
-            @include('announcements.left_bar')
+        @include('partials.announcement_panel')
 
-            <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0">
-                <div class="col-12 p-md-2 p-sm-0 flash__bg">
+        <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
+            <div class="col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2">
+                @include('users.partials.user_left_bar')
+            </div>
+
+            <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0 pb-3 flash__bg border-left border-white">
+                <div class="col-12 p-md-2 p-sm-0 mt-4 flash__bg">
+                    <div class="ml-5 mb-3">
+                        <h5 class="text-uppercase send__title ml-4">Göndərilənlər</h5>
+                    </div>
+
                     <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
                         @isset( $announce )
-                            <div class="row mb-3 ml-1">
+                            <div class="row mb-4 ml-1">
+                                @if( session()->has('send_flash') )
+                                    <div class="d-inline-flex">
+                                        <span class="mr-1">Elan göndərildi:</span>
+                                        @if( isset($store) && $store->count() )
+                                            <a href="{{ route(
+                                                            'send_to_post',['who' => $store->first()->who,
+                                                            'pin' => $store->first()->pivot->pivotParent->pin]
+                                                        ) }}"
+                                               class="badge badge-success p-2">
+                                                {{ count($store) .' mağaza' ?? 0 }}
+                                            </a>
+                                        @endif
+
+                                        @if( (isset($store) && $store->count()) && (isset($morg) && $morg->count()) )
+                                            <span class="send__to-element">|</span>
+                                        @endif
+
+                                        @if( isset($morg) && $morg->count() )
+                                            <a href="{{ route(
+                                                            'send_to_post',['who' => $morg->first()->who,
+                                                            'pin' => $morg->first()->pivot->pivotParent->pin]
+                                                        ) }}"
+                                               class="badge badge-success p-2">
+                                                {{ count($morg) .' ölüxana' }}
+                                            </a>
+                                        @endif
+                                    </div>
+                                &nbsp;
+                                &nbsp;
+                                &nbsp;
+                                @endif
+
                                 <div class="">
-                                    Elan göndərildi:
-                                    <span class="badge badge-success p-1">2 Mağaza</span>
-                                    |
-                                    <span class="badge badge-success p-1">2 Ölüxana</span>
+                                    Cavab: <span class="badge badge-danger p-2">Gözlənilir</span>
                                 </div>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <div class="">
-                                    Cavab: <span class="badge badge-danger p-1">Gözlənilir</span>
-                                </div>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <span class="ml-auto mr-4 mx-2 text-black-50">
-                                    {{ Illuminate\Support\Carbon::now()->diffForHumans($announce->created_at) }}
-                                </span>
                             </div>
-                            <table class="table table-bordered">
-                                <tbody>
-                                @if( $announce->spare_parts )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Ehtiyat hissəsi:</td>
-                                        <td class="text-break text-center">{{ $announce->spare_parts }}</td>
-                                    </tr>
-                                @endif
 
-                                @if( $announce->marka )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Marka:</td>
-                                        <td class="text-break text-center">{{ $announce->marka }}</td>
-                                    </tr>
+                            @if( session()->has('send_flash') )
+                                @include('partials.send_flash_table')
+                            @else
+                                @if( isset($announce_all) && count($announce_all) > 0 )
+                                    @include('partials.send_all_announce')
+                                @else
+                                    <span class="">Yox</span>
                                 @endif
+                            @endif
 
-                                @if( $announce->model )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Model:</td>
-                                        <td class="text-break text-center">{{ $announce->model }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->year )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Buraxılış:</td>
-                                        <td class="text-break text-center">{{ $announce->year }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->motor )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Motor:</td>
-                                        <td class="text-break text-center">{{ $announce->motor }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->texpassport )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Texpassport:</td>
-                                        <td class="text-break text-center">{{ $announce->texpassport }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->store )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Göndərildi:</td>
-                                        <td class="text-break text-center">{{ $announce->store }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->condition )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Vəziyyəti:</td>
-                                        <td class="text-break text-center">{{ $announce->condition }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->city )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Şəhər:</td>
-                                        <td class="text-break text-center">{{ $announce->city }}</td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->image )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Şəkil:</td>
-                                        <td class="text-break text-center">
-                                            <img class="flash__image" src="{{ asset('/images/announcement/'.$announce->image) }}" alt="Image">
-                                        </td>
-                                    </tr>
-                                @endif
-
-                                @if( $announce->note )
-                                    <tr>
-                                        <td scope="row" class="text-right text-black-50">Əlavə məlumat:</td>
-                                        <td class="text-break text-center">{{ $announce->note }}</td>
-                                    </tr>
-                                @endif
-                                </tbody>
-                            </table>
+                            <div class="mt-4 pt-1">
+                                {{ $announce_all->links() }}
+                            </div>
+                        @else
+                            <h3 class="text-center not__announce">Elan tapılmadı!</h3>
                         @endisset
                     </div>
                 </div>

@@ -2,86 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\AnnouncementUser;
+use App\Condition;
 use App\User;
 use App\Announcement;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SendAnnounceRequest;
 use Intervention\Image\Facades\Image;
+use NunoMaduro\Collision\Provider;
 
 class AnnouncementController extends Controller
 {
     public function index()
     {
-        return view('announcements.index');
+        return view('announcements.index')->with('sends', $this->sendsCount());
     }
 
     public function flash()
     {
         if (Auth::check()) {
-            $announce = Announcement::where('user_id', Auth::user()->id)->latest()->first();
-
-            if (!$announce) $announce = null;
-
-            return view('announcements.index')
-                ->with(['announce' => $announce]);
+            return redirect()->route('send')
+                ->with('send_flash', 1);
         }
-
     }
 
     public function sendAnnounce(Request $request)
     {
-
         $this->announceValidate($request);
 
         $when = [];
+
         if ($request->when) {
             $when = explode(',', $request->when);
         }
 
         if ( $request->when === 'Hamısı' && $request->image != 'null' ) {
-            $this->whenWithAllWithImage($request);
+            $pin = mt_rand(0, 999999);
+            $has_seller_types = $this->whenWithAllWithImage($request, $pin, $when);
 
-            return response()->json([
-                'data' => [
-                    'image' => $request->image,
-                    'texpassport' => $request->texpassport,
-                ]
-            ], 200);
+            return $this->jsonReturn($request, $has_seller_types);
         }
         elseif ( $request->when === 'Hamısı' && $request->image == 'null' ) {
-            $this->whenWithAllWithoutImage($request);
+            $pin = mt_rand(0, 999999);
+            $has_seller_types = $this->whenWithAllWithoutImage($request, $pin);
 
-            return response()->json([
-                'data' => [
-                    'image' => $request->image,
-                    'texpassport' => $request->texpassport,
-                ]
-            ], 200);
+            return $this->jsonReturn($request, $has_seller_types);
         }
         elseif ( $request->when !== 'Hamısı' && $request->image != 'null' ) {
             if (count($when) > 0) {
-                $this->whenWithoutAllWithImage($request, $when, $withimage= true);
+                $pin = mt_rand(0, 999999);
+                $has_seller_types = $this->whenWithoutAllWithImage($request, $when, $pin, $withimage= true);
+
+                return $this->jsonReturn($request, $has_seller_types);
             }
 
-            return response()->json([
-                'data' => [
-                    'image' => $request->image,
-                    'texpassport' => $request->texpassport,
-                ]
-            ], 200);
+            return false;
         }
         elseif ( $request->when !== 'Hamısı' && $request->image == 'null' ) {
             if (count($when) > 0) {
-                $this->whenWithoutAllWithoutImage($request, $when, $withimage= false);
+                $pin = mt_rand(0, 999999);
+                $has_seller_types = $this->whenWithoutAllWithoutImage($request, $when, $pin, $withimage = false);
+
+                return $this->jsonReturn($request, $has_seller_types);
             }
 
-            return response()->json([
-                'data' => [
-                    'image' => $request->image,
-                    'texpassport' => $request->texpassport,
-                ]
-            ], 200);
+            return false;
         }
 
         return response()->json([
@@ -89,104 +76,168 @@ class AnnouncementController extends Controller
         ], 404);
     }
 
-    protected function whenWithoutAllWithImage($request, $when, $withimage)
-    {
-        $this->createAnnounce($request, $when, $withimage);
+    protected function jsonReturn($request, $has_seller_types){
+        if($has_seller_types != 0){
+            return response()->json([
+                'data' => [
+                    'user_id' => Auth::user()->id,
+                    'image' => $request->image,
+                    'texpassport' => $request->texpassport,
+                ]
+            ], 200);
+        }else{
+            return response()->json([
+                'data' => [
+                    'errors' => ['has_seller_types' => ['Axtardığınız markaya uyğun "EHTIYAT HISƏLƏRİ" hələlik dəstəklənmir!']],
+                ]
+            ], 333);
+        }
+
     }
 
-    protected function whenWithoutAllWithoutImage($request, $when, $withimage)
+    protected function whenWithoutAllWithImage($request, $when, $pin, $withimage)
     {
-        $this->createAnnounce($request, $when, $withimage);
+        return $this->createAnnounce($request, $when, $pin, $withimage);
     }
 
-    protected function createAnnounce($request, $when, $withimage)
+    protected function whenWithoutAllWithoutImage($request, $when, $pin, $withimage)
+    {
+        return $this->createAnnounce($request, $when, $pin, $withimage);
+    }
+
+    protected function createAnnounce($request, $when, $pin, $withimage)
     {
         $time = time();
+        $has_seller_type = 0;
 
-        foreach ( $when  as $item ) {
+        if( isset($when) && count($when) > 0 ){
             $announce = Announcement::create([
-                'user_id'     => Auth::user()->id,
-                'name'        => $item                                ?? NULL,
-                'spare_parts' => $request->spare_parts                ?? NULL,
-                'marka'       => $request->marka                      ?? NULL,
-                'model'       => $request->model                      ?? NULL,
-                'year'        => $request->year                       ?? NULL,
-                'motor'       => $request->motor                      ?? NULL,
-                'store'       => $request->who                        ?? NULL,
-                'condition'   => $request->condition                  ?? NULL,
-                'texpassport' => $request->texpassport                ?? NULL,
-                'city'        => $request->city                       ?? NULL,
-                'image'       => $withimage ? $this->setImageName($time, $request->image) : NULL,
+                'user_id' => Auth::user()->id,
+                'spare_parts' => $request->spare_parts ?? NULL,
+                'marka' => $request->marka ?? NULL,
+                'model' => $request->model ?? NULL,
+                'year' => $request->year ?? NULL,
+                'motor' => $request->motor ?? NULL,
+                'fuel_type' => $request->fuel_type ?? NULL,
+                'condition' => $request->condition ?? NULL,
+                'texpassport' => $request->texpassport ?? NULL,
+                'city' => $request->city ?? NULL,
+                'pin' => $pin,
+                'image' => $withimage ? $this->setImageName($time, $request->image) : NULL,
             ]);
+
+            foreach ($when as $name) {
+                $user = User::with('sellerTypes')->where(['name' => $name, 'status' => 2])->first();
+
+                if ( ($user->count() > 0) && ($user->sellerTypes->count() > 0) ){
+                    foreach ( $user->sellerTypes as $seller_type ) {
+                        if( $seller_type->title == $request->marka ){
+                            $announce->user()->attach($user);
+                            $has_seller_type++;
+                        }
+                    }
+                }
+            }
         }
+
+        if( $has_seller_type == 0 ) return $has_seller_type;
 
         if( isset($announce->image) && $withimage ){
             if( $request->image )
                 $this->announceImageSave($request->image, $announce->image, $announce->user_id);
         }
+
+        return  $has_seller_type;
     }
 
-    protected function whenWithAllWithImage($request)
+    protected function whenWithAllWithImage($request, $pin, $when)
     {
         $time = time();
+        $status = Auth::user()->status;
+        $has_seller_type = 0;
 
-        $users = User::where(['who' => $request->who, 'status' => 2])->get();
+        $users = User::with('sellerTypes')->where(['who' => $request->who, 'status' => 2])->get();
 
         if( $request->who == 3 ){
-            $users = User::where(['status' => 2])->get();
+            $users = User::with('sellerTypes')->where(['status' => 2])->get();
         }
 
         if( count($users) > 0 ){
+            $announce = Announcement::create([
+                'user_id'     => Auth::user()->id,
+                'spare_parts' => $request->spare_parts                ?? NULL,
+                'marka'       => $request->marka                      ?? NULL,
+                'model'       => $request->model                      ?? NULL,
+                'year'        => $request->year                       ?? NULL,
+                'motor'       => $request->motor                      ?? NULL,
+                'fuel_type'   => $request->fuel_type                  ?? NULL,
+                'condition'   => $request->condition                  ?? NULL,
+                'texpassport' => $request->texpassport                ?? NULL,
+                'city'        => $request->city                       ?? NULL,
+                'pin'         => $pin,
+                'image'       => $this->setImageName($time, $request->image) ?? NULL,
+            ]);
+
             foreach ( $users as $user ) {
-                $announce = Announcement::create([
-                    'user_id'     => Auth::user()->id,
-                    'name'        => $user->name                          ?? NULL,
-                    'spare_parts' => $request->spare_parts                ?? NULL,
-                    'marka'       => $request->marka                      ?? NULL,
-                    'model'       => $request->model                      ?? NULL,
-                    'year'        => $request->year                       ?? NULL,
-                    'motor'       => $request->motor                      ?? NULL,
-                    'store'       => $request->who                        ?? NULL,
-                    'condition'   => $request->condition                  ?? NULL,
-                    'texpassport' => $request->texpassport                ?? NULL,
-                    'city'        => $request->city                       ?? NULL,
-                    'image'       => $this->setImageName($time, $request->image) ?? NULL,
-                ]);
+                if( $user->id != Auth::user()->id){
+                    foreach ($user->sellerTypes as $seller_type){
+                        if($seller_type->title == $request->marka){
+                            $announce->user()->attach($user);
+                            $has_seller_type++;
+                        }
+                    }
+                }
             }
         }
+
+        if( $has_seller_type == 0 ) return $has_seller_type;
 
         if( isset($announce->image) ){
             if( $request->image )
                 $this->announceImageSave($request->image, $announce->image, $announce->id);
         }
+
+        return $has_seller_type;
     }
 
-    protected function whenWithAllWithoutImage($request)
+    protected function whenWithAllWithoutImage($request, $pin)
     {
-        $users = User::where(['who' => $request->who, 'status' => 2])->get();
+        $has_seller_type = 0;
+        $users = User::with('sellerTypes')->where(['who' => $request->who, 'status' => 2])->get();
 
         if( $request->who == 3 ){
-            $users = User::where(['status' => 2])->get();
+            $users = User::with('sellerTypes')->where(['status' => 2])->get();
         }
 
         if( count($users) > 0 ){
+            $announce = Announcement::create([
+                'user_id' => Auth::user()->id,
+                'spare_parts' => $request->spare_parts ?? NULL,
+                'marka' => $request->marka ?? NULL,
+                'model' => $request->model ?? NULL,
+                'year' => $request->year ?? NULL,
+                'motor' => $request->motor ?? NULL,
+                'fuel_type' => $request->fuel_type  ?? NULL,
+                'condition' => $request->condition ?? NULL,
+                'texpassport' => $request->texpassport ?? NULL,
+                'city' => $request->city ?? NULL,
+                'image' => NULL,
+                'pin' => $pin,
+            ]);
+
             foreach ( $users as $user ) {
-                $announce = Announcement::create([
-                    'user_id'     => Auth::user()->id,
-                    'name'        => $user->name                          ?? NULL,
-                    'spare_parts' => $request->spare_parts                ?? NULL,
-                    'marka'       => $request->marka                      ?? NULL,
-                    'model'       => $request->model                      ?? NULL,
-                    'year'        => $request->year                       ?? NULL,
-                    'motor'       => $request->motor                      ?? NULL,
-                    'store'       => $request->who                        ?? NULL,
-                    'condition'   => $request->condition                  ?? NULL,
-                    'texpassport' => $request->texpassport                ?? NULL,
-                    'city'        => $request->city                       ?? NULL,
-                    'image'       => NULL,
-                ]);
+                if( $user->id != Auth::user()->id){
+                    foreach ($user->sellerTypes as $seller_type) {
+                        if ($seller_type->title == $request->marka) {
+                            $announce->user()->attach($user);
+                            $has_seller_type++;
+                        }
+                    }
+                }
             }
         }
+
+        return $has_seller_type;
     }
 
     protected function setImageName($time, $image)
@@ -212,49 +263,203 @@ class AnnouncementController extends Controller
     public function Send()
     {
         if (Auth::check()) {
-            $announce = Announcement::where('user_id', Auth::user()->id)->latest()->first();
+            $announce = Announcement::with('getSeller','getAllSellers','getImageByName')
+                ->where(['user_id' => Auth::user()->id]);
 
-            if (!$announce) $announce = null;
+            $announce_all = $announce;
+            $announce = $announce->get();
+            $announce_all = $announce_all->orderByDesc('created_at')->paginate(5);
+
+            if( $announce && $announce->count() > 0 ){
+                $condition = Condition::where('id', (int)$announce->last()->condition)->first();
+            }else{
+                $condition = null;
+            }
+
+            if( $announce && $announce->count() > 0 ){
+                $stores = [];
+                $pin = $announce->last()->pin;
+                $store = $announce->last()->user->where('who',1);
+                $morg = $announce->last()->user->where('who',2);
+            }
+
+            if ( $announce->count() < 0 ) {
+                $announce = null;
+            }
 
             return view('announcements.send')
-                ->with(['announce' => $announce]);
+                ->with([
+                    'announce'     => $announce->last(),
+                    'announce_all' => $announce_all,
+                    'condition'    => $condition,
+                    'store'        => $store ?? NULL,
+                    'morg'         => $morg  ?? NULL,
+                ]);
         }
     }
 
-    public function incomingAnnounce()
+    public function SendTo(Request $request)
     {
-        return view('announcements.incoming');
+        if( !$request->who && !$request->pin ) return abort(404);
+
+        $announce = Announcement::with('user','getSeller')->where([
+            'pin'     => $request->pin,
+            'user_id' => Auth::user()->id
+        ])->first();
+
+        if( $announce->count() == 0 ) return abort(404);
+
+        $sellers = $announce->user->where('who', $request->who);
+
+        if( $sellers->count() == 0 ) return abort(404);
+
+        return view('announcements.send_to')->with([
+            'sellers' => $sellers,
+            'sends' => Auth::user()->getSends,
+        ]);
+    }
+
+    public function answersAnnounce()
+    {
+        return view('announcements.answers', [
+            'sends' => Auth::user()->getSends,
+        ]);
+    }
+
+    public function ordersAnnounce()
+    {
+        if( Auth::check() ) {
+
+            $user = Auth::user();
+            $orders = User::with('announcement')->where('id', $user->id);
+
+            if ( $orders->get()->count() == 0 && $orders->first()->announcement->count() == 0 ) {
+                return abort(404);
+            }
+
+            return view('announcements.orders', [
+                'sends' => Auth::user()->getSends,
+                'orders' => $orders,
+                'answerPaginate' => $this->getOrdersPaginate($orders, 6)
+            ]);
+        }
+        else {
+            return redirect()->route('home');
+        }
     }
 
     protected function announceValidate($request)
     {
-        if( $request->texpassport == '' && $request->image == 'null' ){
-            $request->validate([
-                'spare_parts' => 'required',
-                'when' => 'required',
-            ]);
+        if( $request->who == 1 ){
+            if( $request->image == 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                    'texpassport' => 'required',
+                ]);
+            }
+            elseif( $request->image != 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                    'texpassport' => 'required',
+                    'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
+                ]);
+            }
         }
-        elseif( $request->texpassport != '' && $request->image == 'null' ){
-            $request->validate([
-                'spare_parts' => 'required',
-                'when' => 'required',
-                'texpassport' => 'required',
-            ]);
+        elseif( $request->who == 2 ){
+            if( $request->image == 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                ]);
+            }
+            elseif( $request->image != 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                    'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
+                ]);
+            }
         }
-        elseif( $request->texpassport == '' && $request->image != 'null' ){
-            $request->validate([
-                'spare_parts' => 'required',
-                'when' => 'required',
-                'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
-            ]);
+        elseif( $request->who == 3 ){
+            if( $request->image == 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                    'texpassport' => 'required',
+                ]);
+            }
+            elseif( $request->image != 'null' ){
+                $request->validate([
+                    'spare_parts' => 'required',
+                    'when' => 'required',
+                    'texpassport' => 'required',
+                    'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
+                ]);
+            }
         }
-        else{
-            $request->validate([
-                'spare_parts' => 'required',
-                'when' => 'required',
-                'texpassport' => 'required',
-                'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
-            ]);
+    }
+
+    public function getOrdersPaginate($orders, $count)
+    {
+        return $orders->first()->announcement()
+            ->orderByDesc('created_at')->paginate($count);
+    }
+
+    public function orderAnnounceDelete($id)
+    {
+        if( Auth::check() ) {
+            $order = Announcement::find($id);
+
+            if( $order->count() == 0 ) redirect()->back();
+
+            $order->user()->detach(Auth::user()->id);
+
+            return redirect()->back();
         }
+    }
+
+    public function buyerAnnounceAelete($id)
+    {
+        if( Auth::check() ) {
+            $user = Auth::user();
+            $announce = Announcement::find($id);
+            $image = $announce->image ?? false;
+            $path = public_path('images/users/announcement/');
+
+            if( !$announce ) return redirect()->back();
+
+            if( $announce->user_id == $user->id ){
+                $deleted = $announce->delete();
+
+                if( $deleted ) {
+                    $deleted = AnnouncementUser::where('announcement_id',$announce->id)->delete();
+
+                    if( $deleted ) {
+                        $this->buyerImageDelete($path, $image);
+                    }
+
+                    return redirect()->back();
+                }
+            }
+
+            return redirect()->back();
+        }
+    }
+
+    protected function buyerImageDelete($path, $image)
+    {
+        if( isset($path) && isset($image) ){
+            if( is_dir($path) ){
+                if( is_file( $path.'/'.$image ) ){
+                    unlink($path.'/'.$image );
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

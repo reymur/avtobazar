@@ -35,7 +35,7 @@
                         <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
                         <h4 class="mb-0 logo__text">AvtoSklad</h4>
                     </span>
-                    <span class="logo__small-text">Ehiyyat Hissələrinin <span class="small__text">alışı və satışı</span></span>
+                    <span class="logo__small-text">Ehiyat Hissələrinin <span class="small__text">alışı və satışı</span></span>
                 </a>
 
 

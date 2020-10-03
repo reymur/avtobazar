@@ -170,7 +170,7 @@ return [
          * Selects to all pages
          */
         Intervention\Image\ImageServiceProvider::class,
-        App\Providers\CarOptionsProvider::class,
+        App\Providers\GlobalVarsProvider::class,
 
         /*
          * Application Service Providers...

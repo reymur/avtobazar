@@ -39,7 +39,8 @@
 
 <script>
 export default {
-name: "Saller"
+    name: "Saller",
+    props: ['user']
 }
 </script>
 

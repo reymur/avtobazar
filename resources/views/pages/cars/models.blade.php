@@ -24,9 +24,9 @@
             </div>
 
             <div class="container-lg p-lg-3 p-sm-0 mt-4">
-                <div class="row p-sm-0 col-lg-12 mx-auto">
+                <div class="row col-lg-12 p-sm-0 mx-auto">
                     @foreach($model->types as $type)
-                        <div class="col-lg-3 p-sm-0 col-md-4 col-sm-6">
+                        <div class="col-lg-3 col-md-4 col-sm-6 p-sm-0">
                             @include('partials.models_card')
                         </div>
                     @endforeach

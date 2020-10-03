@@ -19,10 +19,11 @@ Vue.component('login-not-modal', require('./components/register/Login.vue').defa
 Vue.component('register-not-modal', require('./components/register/Register.vue').default);
 
 import Vue from 'vue'
+// import Vuetify from 'vuetify';
+
 import vSelect from 'vue-select'
 
 Vue.component('v-select', vSelect)
-
 
 const app = new Vue({
     el: '#app',

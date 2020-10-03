@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Announcement;
 use App\Car;
 use App\City;
+use App\Condition;
+use App\FuelType;
 use App\Motor;
 use App\Status;
 use App\Type;
 use App\User;
 use App\Who;
 use App\Year;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,6 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        session()->forget('send_flash');
 //        $this->addItems();
 
         $cars= Car::all();
@@ -1796,6 +1801,33 @@ class HomeController extends Controller
         foreach($who as $c){
             Who::create([
                 'who' => $c['who'],
+            ]);
+        }
+
+        $fuel_types = [
+            ['title' => 'Benzin'],
+            ['title' => 'Dizel'],
+            ['title' => 'Qaz'],
+            ['title' => 'Hibrid'],
+            ['title' => 'Elektron'],
+        ];
+        foreach($fuel_types as $c){
+            FuelType::create([
+                'title' => $c['title'],
+            ]);
+        }
+
+        $condition = [
+            ['title' => 'Yeni'],
+            ['title' => 'Az işlənmiş'],
+            ['title' => 'İşlənmiş'],
+            ['title' => 'Normal'],
+            ['title' => 'Köhnə'],
+            ['title' => 'Fərqi yoxdu'],
+        ];
+        foreach($condition as $c){
+            Condition::create([
+                'title' => $c['title'],
             ]);
         }
     }

@@ -11,8 +11,8 @@
                     </div>
 
                     <!--MainCloseElement-->
-                    <button type="button" class="close pt-4" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button @click="resetModal" type="button" class="close pt-4" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span><!--Close icon-->
                     </button>
                 </div>
 
@@ -20,11 +20,13 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                             <form-details
+                                :user="user"
                                 :cars="cars"
                                 :types="types"
                                 :cities="cities"
                                 :years="years"
                                 :motors="motors"
+                                :fuelTypes="fuelTypes"
                             ></form-details>
                         </div>
 
@@ -50,7 +52,18 @@
 
 export default {
     name: "index",
-    props: ['cars','types','cities','years','motors'],
+    props: ['user','cars','types','cities','years','motors','fuelTypes'],
+    data(){
+        return {
+            resetModalDetails: 0
+        }
+    },
+    methods: {
+        resetModal(){
+            this.resetModalDetails = 1;
+            this.$root.$emit('remove', this.resetModalDetails);
+        }
+    },
     mounted(){
         // console.log()
     }

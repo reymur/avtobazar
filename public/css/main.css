@@ -132,7 +132,11 @@ body {
     box-shadow: 0 0 1px 0 rgba(154, 147, 140, 0.5);
 }
 .flash__image {
-    width: 220px;
+    width: 100px;
+}
+
+.flash__texpass {
+    letter-spacing: 1.5px;
 }
 
 .register__number-size {
@@ -188,11 +192,16 @@ body {
     font-weight: bolder;
 }
 
+.not__announce {
+    letter-spacing: 1.5px;
+}
+
 .annonce_panel {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     height: 40px;
     background: #e34267;
+    z-index: 1001;
 }
 
 .annonce_panel-element {
@@ -249,4 +258,35 @@ body {
 
 .spare__parts {
     letter-spacing: 1px;
+}
+
+.send__to-element {
+    margin: 0 2px 0 2px;
+}
+
+.send__all-image {
+    width: 20px;
+    border-radius: 15%;
+}
+
+.send__title {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+}
+
+.send__all-td {
+    vertical-align: bottom;
+}
+
+.letter__spacing {
+    letter-spacing: 1.5px;
+}
+.show__seller-image {
+    width: 40px;
+    border-radius: 12%;
+}
+
+.show__all-name {
+    left: 35px;
+    top: 24px;
 }

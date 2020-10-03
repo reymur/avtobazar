@@ -5,7 +5,7 @@
                 <div class="col-12 mb-1">
                     <div v-if="errors.length" class="invalid-feedback d-block mb-2">
                         <ul v-for="error in errors" class="alert-danger my-1 py-2">
-                            <li v-for="err in error['spare_parts']" class="py-2">
+                            <li v-for="err in error['has_seller_types']" class="py-2">
                                 {{ err }}
                             </li>
                             <li v-for="err in error['when']" class="py-2">
@@ -15,6 +15,9 @@
                                 {{ err }}
                             </li>
                             <li v-for="err in error['note']" class="py-2">
+                                {{ err }}
+                            </li>
+                            <li v-for="err in error['image']" class="py-2">
                                 {{ err }}
                             </li>
                             <li v-for="err in error['image']" class="py-2">
@@ -36,7 +39,7 @@
             <div class="form-group">
                 <label for="spare_parts" class="spare__parts">Ehtiyyat Hissəsi haqda məlumat:</label>
                 <textarea v-model="spare_parts" class="form-control" id="spare_parts" col="auto" rows="2"
-                          placeholder="Satıcının sizi anlanması üçün məlumatı dəqiq və konkret yazın Məsələn: 4 ədəd şam, 1 ədəd yanacağ filteri
+                          placeholder="Satıcının sizi anlanması üçün məlumatı dəqiq və konkret yazın Məsələn: 4 ədəd şam, 1 ədəd yanacağ filteri, və sayrə...
                           "></textarea>
             </div><!-- End spare_parts (Ehtiyat) -->
 
@@ -83,6 +86,17 @@
 
             <div class="input-group is-invalid mb-2">
                 <div class="input-group-prepend">
+                    <label class="input-group-text" for="fuel_type">Qebul edən?</label>
+                </div>
+                <select v-model="fuelType" class="custom-select" id="fuel_type" required>
+                    <option :value="1">Benzin</option>
+                    <option :value="2">Dizel</option>
+                    <option :value="3">Qaz</option>
+                    <option :value="4">Hibrid</option>
+                    <option :value="5">Elektrik</option>
+                </select><!-- End To (Qebul etsin) -->
+
+                <div class="input-group-prepend">
                     <label class="input-group-text" for="to">Qebul edən?</label>
                 </div>
                 <select v-model="toSelect" @change="toFunc" class="custom-select" id="to" required>
@@ -96,7 +110,7 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="when">Hansı?</label>
                 </div>
-                <v-select v-model="when" id="when" class="marka"
+                <v-select v-model="when" @input="whosChange" id="when" class="marka"
                           taggable multiple label="country"
                           placeholder="Mağaza və ya ölüxananı seçin"
                           :options="whos">
@@ -176,7 +190,7 @@
 <script>
 export default {
     name: "formDetails",
-    props: ['cars','types','cities','years','motors'],
+    props: ['user','cars','types','cities','years','motors','fuelTypes','resetModalDetails'],
     data(){
         return {
             imageLoader: false,
@@ -190,6 +204,7 @@ export default {
             model: '',
             yearSelect: 2020,
             motorSelect: 2000,
+            fuelType: 1,
             toSelect: 1,
             whos: [],
             condition: 1,
@@ -206,12 +221,18 @@ export default {
         }
     },
     methods: {
+        whosChange(e){
+            this.when.forEach( (key, val) => {
+                if( key === 'Hamısı' ){
+                    this.when = ['Hamısı'];
+                    console.log('22222 = ', this.when )
+                }
+            });
+        },
         changeConditionValue(){
             if( this.toSelect === 1 ){ this.condition = 1 }
             else if( this.toSelect === 2 ){ this.condition = 2 }
             else if( this.toSelect === 3 ){ this.condition = 6 }
-
-            console.log( this.toSelect === 3  )
         },
         getWhos(){
             this.whos = [];
@@ -225,16 +246,17 @@ export default {
                         this.whos = ['Hamısı'];
                     }
 
-                    res.data.users.forEach( val => {
-                        this.whos.push(val.name)
+                    res.data.users.forEach( user => {
+                        if( this.user.id != user.id){
+                            this.whos.push(user.name);
+                        }
                     })
-                    console.log('resddd = ', this.whos)
 
                     return this.whos;
                 }
             })
             .catch(err => {
-                console.log('err = ', err.response)
+                console.log('err = ', err)
             })
 
             this.changeConditionValue();
@@ -256,7 +278,9 @@ export default {
         toFunc(){
             if( this.toSelect == 2 ){
                 setTimeout(() => {
-                    this.texPass = false
+                    this.when = [];
+                    this.texPass = false;
+                    this.texPassInput = '';
                     this.condition = 2;
                 },800)
             }
@@ -268,6 +292,7 @@ export default {
             }
             else{
                 setTimeout(() => {
+                    this.when = [];
                     this.texPass = true
                     this.condition = 1;
                 },800)
@@ -309,6 +334,7 @@ export default {
                     formdata.append('model', this.model);
                     formdata.append('year', this.yearSelect);
                     formdata.append('motor', this.motorSelect);
+                    formdata.append('fuel_type', this.fuelType);
                     formdata.append('who', this.toSelect);
                     formdata.append('when', this.when);
                     formdata.append('city', this.citySelect);
@@ -324,62 +350,74 @@ export default {
                     .then(res => {
                         console.log('fffff = ', res.data)
                         if( res.status == 200 ) {
-                            // window.location.href = '/announce/sends';
+                            if( res.data && res.data.data ){
+
+                                let user_id = null;
+                                let image = null;
+                                let texpassport = null;
+
+                                if( res.data.data.user_id ) user_id = res.data.data.user_id;
+                                if( res.data.data.image ) image = res.data.data.image;
+                                if( res.data.data.texpassport ) texpassport = res.data.data.texpassport;
+
+                                if( texpassport != null ) {
+                                    this.removeDangerBorder('texpassport');
+                                }
+
+                                if( image == null ){
+                                    this.removeDangerBorder('spare_parts');
+                                    this.removeDangerBorder('vs1__combobox');
+                                }
+                                else if( image == null ){
+                                    this.removeDangerBorder('spare_parts');
+                                    this.removeDangerBorder('vs1__combobox');
+                                }
+                                else if( texpassport == null ){
+                                    this.removeDangerBorder('spare_parts');
+                                    this.removeDangerBorder('vs1__combobox');
+                                    this.removeDangerBorder('image');
+                                }
+                                else{
+                                    this.removeDangerBorder('spare_parts')
+                                    this.removeDangerBorder('vs1__combobox')
+                                    this.removeDangerBorder('image')
+                                }
+                            }
+
+                            window.location.href = '/announce/send-flash';
                             console.log(res)
                         }
-
-                        // if( res.data ){
-                        //     res.data.forEach( (key, val) => {
-                                console.log('image - ', res.data.data.image);
-                                console.log('texpassport - ', res.data.data.texpassport);
-                            // });
-                        if( res.data && res.data.data ){
-                            let image = res.data.data.image;
-                            let texpassport = res.data.data.texpassport;
-
-                            if( image == null && texpassport == null ){
-                                this.removeDangerBorder('spare_parts');
-                                this.removeDangerBorder('vs1__combobox');
-                            }
-                            else if( image == null ){
-                                this.removeDangerBorder('spare_parts');
-                                this.removeDangerBorder('vs1__combobox');
-                                this.removeDangerBorder('texpassport');
-
-                            }
-                            else if( texpassport == null ){
-                                this.removeDangerBorder('spare_parts');
-                                this.removeDangerBorder('vs1__combobox');
-                                this.removeDangerBorder('image');
-                            }
-                            else{
-                                this.removeDangerBorder('spare_parts')
-                                this.removeDangerBorder('vs1__combobox')
-                                this.removeDangerBorder('texpassport')
-                                this.removeDangerBorder('image')
-                            }
+                        else{
+                            console.log(44444444444444444)
                         }
-
-                        // this.removeDangerBorder('spare_parts')
-                        // this.removeDangerBorder('vs1__combobox')
-                        // this.removeDangerBorder('texpassport')
-                        // this.removeDangerBorder('image')
-                        // }
                     })
                     .catch(err => {
                         this.errors = [];
                         this.removeDisabled('disabled');
                         this.sendLoader = false;
 
-                        if( err.response.data && err.response.data.errors ){
-                            this.errors.push( err.response.data.errors);
+                        if(err.response){
+                            if( err.response.data && err.response.status == 333 ){
+                                if( err.response.data.data.errors ){
+                                    this.errors.push( err.response.data.data.errors);
+                                    console.log( 'Seller - ', err.response.data.data.errors );
+                                }
+                            }
 
-                            this.addDangerBorder(err.response.data.errors, 'spare_parts')
-                            this.addDangerBorder(err.response.data.errors, 'when')
-                            this.addDangerBorder(err.response.data.errors, 'texpassport')
-                            this.addDangerBorder(err.response.data.errors, 'image')
+                            if( err.response.data && err.response && err.response.data.errors ){
+                                this.errors.push( err.response.data.errors);
+
+                                if( err.response.data.errors.spare_parts )
+                                    this.addDangerBorder(err.response.data.errors, 'spare_parts');
+                                if( err.response.data.errors.when )
+                                    this.addDangerBorder(err.response.data.errors, 'when');
+                                if( err.response.data.errors.texpassport )
+                                    this.addDangerBorder(err.response.data.errors, 'texpassport');
+                                if( err.response.data.errors.image )
+                                    this.addDangerBorder(err.response.data.errors, 'image');
+                            }
+                            console.log( 'Err - ', err.response.data.errors )
                         }
-                        console.log( 'Err - ', err.response.data.errors )
                     })
                 }
                 else{
@@ -399,7 +437,9 @@ export default {
                     }
                     this.sendLoader = false;
                 }
-
+            }
+            else{
+                console.log(99999999999)
             }
         },
         addDisabled(key, val){
@@ -430,13 +470,45 @@ export default {
             if( document.getElementById(id).classList.contains('border-danger') ){
                 document.getElementById(id).classList.remove('border-danger');
             }
+        },
+        childFunc(){
+            this.marka = 'BMW';
+            this.carsSelect();
+            this.yearSelect = 2020;
+            this.motorSelect = 2000;
+            this.toSelect = 1;
+            this.condition = 1;
+            this.citySelect = 'Bakı';
+            this.exampleCar = {name:'BMW'};
+            this.exampleModel = [{name:'X5'}];
+
+            if( this.errors.length > 0 ){
+                if( this.errors[0].spare_parts ){
+                    this.removeDangerBorder( 'spare_parts' )
+                }
+                if( this.errors[0].texpassport ){
+                    this.removeDangerBorder( 'texpassport' )
+                }
+                if( this.errors[0].when ){
+                    this.removeDangerBorder( 'vs1__combobox' )
+                }
+                if( this.errors[0].image ){
+                    this.removeDangerBorder( 'image' )
+                }
+            }
+
+            this.errors = [];
         }
     },
     mounted(){
         this.carsSelect();
         this.getWhos();
-        // console.log(this.file)
-        // console.log(this.cities)
+        this.$root.$on('remove',  (id) => {
+            this.childFunc()
+        })
+
+        // this.whosSelect();
+        console.log('AAAAAA - ',this.fuelTypes)
     }
 }
 </script>

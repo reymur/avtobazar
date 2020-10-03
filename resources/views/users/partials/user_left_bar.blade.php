@@ -1,49 +1,98 @@
 
-
+{{--{{ dd( $ordersNullCount ) }}--}}
 <table class="mx-xl-auto mx-lg-auto text-md-left text-sm-left">
         <tbody class="d-lg-block d-md-inline-flex d-sm-inline-flex">
             <tr>
-                <td class="text-left pb-xl-3 pb-lg-3 p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route("buyer.profile", ['id' => Auth::user()->id]) }}"
-                             class="d-lg-block border-bottom border-info text-decoration-none
-                                    btn-outline-light
-                             {{ str_contains(request()->path(), 'profile') ?
-                                'text-black-50 border-bottom border-dark' : ''
-                             }}">
-                        Profil
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route("seller.profile", ['id' => Auth::user()->id]) }}" class="d-lg-block
-                                 {{ str_contains(request()->path(), 'incoming') ?
-                                    'text-black-50 border-bottom border-dark' : ''
+                <td class="text-left pb-xl-3 pb-lg-3 p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
+                    @if( Auth::user()->status == 1 )
+                        <a href="{{ route("buyer.profile", ['id' => Auth::user()->id]) }}"
+                                 class="d-lg-block border-bottom text-decoration-none px-2
+                                 {{ str_contains(request()->path(), 'profile') ?
+                                    'text-dark border-bottom border-dark text-decoration-none' : 'text-black-50'
                                  }}">
-                        Ümumi
+
+                            <span class="letter__spacing"> Profil </span>
+                        </a>
+                    @endif
+
+                    @if( Auth::user()->status == 2 )
+                        <a href="{{ route("seller.profile", ['id' => Auth::user()->id]) }}"
+                           class="d-lg-block border-bottom text-decoration-none px-2
+                             {{ str_contains(request()->path(), 'profile') ?
+                                'text-dark border-bottom border-dark text-decoration-none' : 'text-black-50'
+                             }}">
+
+                            <span class="letter__spacing"> Profil </span>
+                        </a>
+                    @endif
+                </td>
+            </tr>
+            @if( Auth::check() && Auth::user()->status == 2 )
+                <tr>
+                    <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
+                        <a href="{{ route('orders') }}" class="d-lg-block
+                                {{ str_contains(request()->path(), 'orders') ?
+                                   'text-black-50 border-bottom border-dark text-decoration-none' : ''
+                                }}">
+                            @if( Auth::check() )
+                                @if( getUserLeftBarOrderCount() !== null && !empty(getUserLeftBarOrderCount()) )
+                                    Sifarişlər
+                                    <span class="badge badge-success">
+                                        {{ getUserLeftBarOrderCount() }}
+                                    </span>
+                                @else
+                                    Sifarişlər
+                                    <span class="badge badge-danger">
+                                        0
+                                    </span>
+                                @endif
+                            @endif
+                        </a>
+                    </td>
+                </tr>
+            @endif
+
+{{--            <tr>--}}
+{{--                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">--}}
+{{--                    <a href="{{ route("buyer.profile", ['id' => Auth::user()->id]) }}"--}}
+{{--                       class="d-lg-block">--}}
+
+{{--                        Ümumi <span class="badge badge-success">2</span>--}}
+{{--                    </a>--}}
+{{--                </td>--}}
+{{--            </tr>--}}
+
+            <tr>
+                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
+                    <a href="{{ route('answers') }}" class="d-lg-block
+                        {{ str_contains(request()->path(), 'answers') ?
+                            'text-black-50 border-bottom border-dark text-decoration-none' : ''
+                        }}">
+                        Cavablar
                         <span class="badge badge-success">2</span>
                     </a>
                 </td>
             </tr>
+
             <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route('incoming') }}" class="d-lg-block
-                            {{ str_contains(request()->path(), 'incoming') ?
-                               'text-black-50 border-bottom border-dark' : ''
-                            }}">
-                        Sifarişlər
-                        <span class="badge badge-success">2</span>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                    <a href="{{ route('send') }}" class="d-lg-block">
-                            <span class="{{ str_contains(request()->path(), 'sends') ?
-                                            'text-black-50 border-bottom border-dark' : '' }}">
-                                Cavablar
-                            </span>
-                        <span class="badge badge-success">2</span>
+                    <a href="{{ route('send') }}" class="d-lg-block
+                        {{ str_contains(request()->path(), 'sends') ?
+                            'text-black-50 border-bottom border-dark text-decoration-none' : ''
+                        }}">
+                        @if( Auth::check() )
+                            @if( isset(Auth::user()->getSends) && Auth::user()->getSends->count() > 0 )
+                                Göndərilənlər
+                                <span class="badge badge-success">
+                                    {{ Auth::user()->getSends->count() }}
+                                </span>
+                            @else
+                                Göndərilənlər
+                                <span class="badge badge-danger">
+                                    0
+                                </span>
+                            @endif
+                        @endif
                     </a>
                 </td>
             </tr>

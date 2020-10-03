@@ -18,11 +18,13 @@
     @if( Auth::check() )
         <!-- Modal -->
         <Index
+            :user="{{ Auth::user() }}"
             :cars="{{ $cars }}"
             :types="{{ $types }}"
             :cities="{{ $cities }}"
             :years="{{ $years }}"
             :motors="{{ $motors }}"
+            :fuelTypes="{{ $fuel_types }}"
         ></Index>
     @else
         <!-- Registration -->

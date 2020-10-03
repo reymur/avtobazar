@@ -57,4 +57,29 @@ class User extends Authenticatable/* implements MustVerifyEmail*/
     {
         $this->hasOne(Announcement::class, 'user_id', 'id');
     }
+
+    public function getMyName()
+    {
+        return $this->hasOne(self::class, 'name', 'name');
+    }
+
+    public function getSends()
+    {
+        return $this->hasMany(Announcement::class, 'user_id', 'id');
+    }
+
+    public function getOrders()
+    {
+        return $this->hasMany(Announcement::class, 'name', 'name' );
+    }
+
+    public function announcement()
+    {
+        return $this->belongsToMany(Announcement::class, 'announcement_users', 'user_id', 'announcement_id');
+    }
+
+//    public function getSellerAnswers()
+//    {
+//        return $this->belongsToMany(User::class, 'answers', 'user_id');
+//    }
 }

@@ -16,22 +16,20 @@ class CreateAnnouncementsTable extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->string('name')->nullable();
             $table->string('spare_parts')->nullable();
             $table->string('marka')->nullable();
             $table->string('model')->nullable();
             $table->string('year')->nullable();
             $table->string('motor')->nullable();
-            $table->string('store')->nullable();
+            $table->string('fuel_type')->nullable();
             $table->string('condition')->nullable();
             $table->string('texpassport')->nullable();
             $table->string('city')->nullable();
             $table->string('image')->nullable();
+            $table->integer('pin')->nullable();
             $table->string('answer')->nullable();
             $table->timestamps();
         });
-
-
     }
 
     /**
