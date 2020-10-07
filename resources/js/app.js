@@ -1,7 +1,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 
 Vue.component('index', require('./components/modal/Index.vue').default);
@@ -18,12 +18,15 @@ Vue.component('seller-register-form', require('./components/forms/SellerRegister
 Vue.component('login-not-modal', require('./components/register/Login.vue').default);
 Vue.component('register-not-modal', require('./components/register/Register.vue').default);
 
-import Vue from 'vue'
-// import Vuetify from 'vuetify';
+// import Vue from 'vue';
 
-import vSelect from 'vue-select'
+import vSelect from 'vue-select';
 
-Vue.component('v-select', vSelect)
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+
+Vue.component('v-select', vSelect);
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 
 const app = new Vue({
     el: '#app',

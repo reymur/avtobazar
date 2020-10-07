@@ -2,47 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Announcement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Announcement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BuyerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BuyerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/CarOptionsProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/GlobalVarsProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Who.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Who.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_11_150404_create_announcements_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1599849268.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1599849333.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1599849389.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1599849452.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_1/1599840510.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_3/1599840706.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_4/1599842268.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_2/1601569587.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_3/1601569673.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_4/1601572004.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Saller.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/Saller.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/incoming.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/answers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/left_bar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/send.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/send.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/errors/404.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/announcement.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/saller_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/saller_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SellerRegisterForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,7 +166,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/nuxt/plugin.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.css&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/demo.html&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue/types/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.common.js&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/.env" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/modal" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -312,6 +287,12 @@
       <workItem from="1601719693202" duration="10330000" />
       <workItem from="1601734046188" duration="3116000" />
       <workItem from="1601745936219" duration="11819000" />
+      <workItem from="1601987996650" duration="11052000" />
+      <workItem from="1602000165361" duration="2051000" />
+      <workItem from="1602010245802" duration="6807000" />
+      <workItem from="1602064943192" duration="5785000" />
+      <workItem from="1602071532541" duration="4686000" />
+      <workItem from="1602084900284" duration="4941000" />
     </task>
     <servers />
   </component>
@@ -343,22 +324,22 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.701@0.27.1366.701" timestamp="1601723671654" />
-    <state width="1320" height="150" key="GridCell.Tab.0.bottom" timestamp="1596935330064">
+    <state width="1320" height="150" key="GridCell.Tab.0.bottom" timestamp="1602017191906">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state width="1320" height="150" key="GridCell.Tab.0.bottom/0.27.1366.701@0.27.1366.701" timestamp="1596935330064" />
-    <state width="1320" height="150" key="GridCell.Tab.0.center" timestamp="1596935330063">
+    <state width="1320" height="150" key="GridCell.Tab.0.bottom/0.27.1366.701@0.27.1366.701" timestamp="1602017191906" />
+    <state width="1320" height="150" key="GridCell.Tab.0.center" timestamp="1602017191906">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state width="1320" height="150" key="GridCell.Tab.0.center/0.27.1366.701@0.27.1366.701" timestamp="1596935330063" />
-    <state width="1320" height="150" key="GridCell.Tab.0.left" timestamp="1596935330063">
+    <state width="1320" height="150" key="GridCell.Tab.0.center/0.27.1366.701@0.27.1366.701" timestamp="1602017191906" />
+    <state width="1320" height="150" key="GridCell.Tab.0.left" timestamp="1602017191905">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state width="1320" height="150" key="GridCell.Tab.0.left/0.27.1366.701@0.27.1366.701" timestamp="1596935330063" />
-    <state width="1320" height="150" key="GridCell.Tab.0.right" timestamp="1596935330064">
+    <state width="1320" height="150" key="GridCell.Tab.0.left/0.27.1366.701@0.27.1366.701" timestamp="1602017191905" />
+    <state width="1320" height="150" key="GridCell.Tab.0.right" timestamp="1602017191906">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state width="1320" height="150" key="GridCell.Tab.0.right/0.27.1366.701@0.27.1366.701" timestamp="1596935330064" />
+    <state width="1320" height="150" key="GridCell.Tab.0.right/0.27.1366.701@0.27.1366.701" timestamp="1602017191906" />
     <state x="482" y="81" width="391" height="600" key="NewPhpClassDialog" timestamp="1597192006597">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -395,9 +376,9 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1601723567413" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1601476443121">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602070124996">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1601476443121" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1602070124996" />
   </component>
 </project>

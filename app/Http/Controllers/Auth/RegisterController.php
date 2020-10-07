@@ -51,6 +51,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        if( $data['phone'] ) $data['phone'] = $this->setPhoneNumber( $data['phone'] );
+
         if( $data['status'] == 1 ) {
             return Validator::make($data, [
                 'autoNumber' => ['required', 'string',  'min:7', 'max:7', 'unique:users'],
@@ -65,6 +67,7 @@ class RegisterController extends Controller
                     'marka' => ['required'],
                     'address' => ['required', 'string', 'max:255'],
                     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                    'phone' => ['required', 'unique:users', 'min:10','max:10'],
                     'password' => ['required', 'confirmed', 'string', 'min:8'],
                     'password_confirmation' => ['required', 'string', 'min:8'],
                     'image' => 'mimes:jpeg,bmp,png',
@@ -76,6 +79,7 @@ class RegisterController extends Controller
                 'marka' => ['required'],
                 'address' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'phone' => ['required', 'unique:users', 'min:10','max:10'],
                 'password' => ['required', 'confirmed', 'string', 'min:8'],
                 'password_confirmation' => ['required', 'string', 'min:8'],
             ]);
@@ -109,6 +113,7 @@ class RegisterController extends Controller
                 'city' => $data['city'],
                 'address' => $data['address'],
                 'email' => $data['email'],
+                'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
                 'image' => $this->getUserNewImageName($data['image']),
                 'status' => $data['status'],
@@ -131,7 +136,7 @@ class RegisterController extends Controller
             if( ! is_null($user->image) ) {
                 $imageName = $user->image;
                 $this->makeUserImageFolderWithImages(
-                            $user->id,
+                            $user,
                             $data['image'],
                             $imageName
                         );
@@ -157,15 +162,47 @@ class RegisterController extends Controller
         return NULL;
     }
 
-    private function makeUserImageFolderWithImages($id, $image, $name )
+    private function makeUserImageFolderWithImages($user, $image, $name )
     {
-        $dir = public_path("images/users/sellers/id_{$id}/" );
+        $dir = public_path("images/users/sellers/id_{$user->id}" );
+
+        $this->clearSellerDir($dir);
+
         $path = mkdir( $dir , 0777, true );
 
         if( is_dir($dir) ) {
             return Image::make( $image )
                 ->resize(500, 450)
-                ->save( $dir . $name );
+                ->save( $dir .'/'. $name );
         }
+    }
+
+    private function setPhoneNumber($phone)
+    {
+        $new_phone = '';
+
+        if( empty($phone) ) return false;
+
+        for($i=0; $i < (int)strlen($phone); $i++){
+            if($phone[$i] !== " ") {
+                $new_phone .= $phone[$i];
+            }
+        }
+
+        return $new_phone;
+    }
+
+    private function clearSellerDir($dir):bool
+    {
+        if( is_dir( $dir ) ){
+            foreach ( glob($dir.'/*') as $file ){
+                if( !empty($file) ) unlink($file);
+            }
+
+            rmdir($dir);
+        }
+
+        if( ! is_dir( $dir ) ) return true;
+        else return false;
     }
 }

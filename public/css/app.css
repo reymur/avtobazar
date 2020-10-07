@@ -11204,6 +11204,10 @@ body {
   top: 24px;
 }
 
+.border__danger {
+  border: 1px solid #e3342f !important;
+}
+
 .v-select {
   position: relative;
   font-family: inherit;

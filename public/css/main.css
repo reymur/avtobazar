@@ -290,3 +290,7 @@ body {
     left: 35px;
     top: 24px;
 }
+
+.border__danger {
+    border: 1px solid #e3342f !important;
+}

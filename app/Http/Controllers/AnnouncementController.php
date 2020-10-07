@@ -420,7 +420,7 @@ class AnnouncementController extends Controller
         }
     }
 
-    public function buyerAnnounceAelete($id)
+    public function buyerAnnounceADelete($id)
     {
         if( Auth::check() ) {
             $user = Auth::user();

@@ -6,6 +6,7 @@
                     <li v-for="error in errors" class="py-2" v-if="error.name"> {{ error.name[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.marka"> {{ error.marka[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.email"> {{ error.email[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.phone"> {{ error.phone[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.address"> {{ error.address[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.password_confirmation"> {{ error.password_confirmation[0] }}</li>
@@ -82,6 +83,25 @@
             </div>
         </div>
 
+        <div class="col-12 d-xs-inline-flex d-lg-inline-flex py-1 pr-0">
+            <div class="col-12 input-group p-1">
+                <div class="input-group-prepend">
+                    <div class="input-group-text px-2">
+                        <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <vue-phone-number-input
+                    default-country-code="AZ"
+                    valid-color="green"
+                    error-color="red"
+                    class="col-11 pl-0 pr-1"
+                    id="phone" v-model="phone"/>
+            </div>
+        </div>
+
         <div class="col-12 d-xs-inline-flex d-lg-inline-flex">
             <div class="col-12 input-group p-1">
                 <div class="input-group-prepend">
@@ -147,12 +167,13 @@
 
 <script>
 export default {
-    name: "sallerregisterform",
-    props: ['whos','cars','cities'],
+    name: "sellerregisterform",
+    props: ['whos','cars','cities','ignoredCountries'],
     data(){
         return {
             name: '',
             email: '',
+            phone: '',
             city: '',
             address: '',
             password: '',
@@ -198,6 +219,7 @@ export default {
             formData.append('status',2);
             formData.append('name',this.name.trim());
             formData.append('email',this.email.trim());
+            formData.append('phone',this.phone.trim());
             formData.append('city',this.city.trim());
             formData.append('address',this.address.trim());
             formData.append('password',this.password.trim());
@@ -216,10 +238,13 @@ export default {
                 if( res.status == 201 ){
                     window.location.href = '/seller/profile/'+ res.data.user.id
                     this.sendLoader = false;
+                    this.removeAllDangerBorders();
                     console.log('res - ', res.data.data.id)
                 }
             })
             .catch(err => {
+                this.errors = [];
+
                 if(err.response){
                     this.errors.push(err.response.data.errors)
                     this.sendLoader = false;
@@ -250,6 +275,15 @@ export default {
                             break;
                         }else {
                             document.getElementById('email').classList.remove('border-danger')
+                        }
+                    }
+
+                    for(let i=0; i < this.errors.length; i++ ){
+                        if( this.errors[i]['phone'] ) {
+                            document.getElementById('phone').classList.add('border__danger');
+                            break;
+                        }else {
+                            document.getElementById('phone').classList.remove('border__danger')
                         }
                     }
 
@@ -312,6 +346,29 @@ export default {
         },
         radioListener(){
             this.errors = [];
+        },
+        removeAllDangerBorders(){
+            if ( document.getElementById('marka').classList.contains('border-danger') ) {
+                document.getElementById('vs1__combobox').classList.remove('border-danger')
+            }
+            if( document.getElementById('email').classList.contains('border-danger') ) {
+                document.getElementById('email').classList.remove('border-danger');
+            }
+            if( document.getElementById('phone').classList.contains('border__danger') ) {
+                document.getElementById('phone').classList.remove('border__danger');
+            }
+            if( document.getElementById('name').classList.contains('border-danger') ) {
+                document.getElementById('name').classList.remove('border-danger')
+            }
+            if( document.getElementById('address').classList.contains('border-danger') ) {
+                document.getElementById('address').classList.remove('border-danger');
+            }
+            if( document.getElementById('password').classList.contains('border-danger') ) {
+                document.getElementById('password').classList.remove('border-danger');
+            }
+            if( document.getElementById('password_confirmation').classList.contains('border-danger') ) {
+                document.getElementById('password_confirmation').classList.remove('border-danger')
+            }
         }
     },
     mounted(){
