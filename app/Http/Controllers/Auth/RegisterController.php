@@ -51,8 +51,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if( $data['phone'] ) $data['phone'] = $this->setPhoneNumber( $data['phone'] );
-
         if( $data['status'] == 1 ) {
             return Validator::make($data, [
                 'autoNumber' => ['required', 'string',  'min:7', 'max:7', 'unique:users'],
@@ -61,6 +59,8 @@ class RegisterController extends Controller
         }
 
         if ( $data['status'] == 2 ) {
+            if( $data['phone'] ) $data['phone'] = $this->setPhoneNumber( $data['phone'] );
+
             if ( isset($data['image']) && $data['image'] !== "null" ) {
                 return Validator::make($data, [
                     'name' => ['required', 'string', 'max:255', 'unique:users'],

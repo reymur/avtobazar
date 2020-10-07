@@ -59,6 +59,11 @@ body {
     width: 50px;
     border-radius: 50%;
 }
+
+.user__nav-image-svg {
+    width: 37px;
+    border-radius: 50%;
+}
 .user__nav-image {
     border-radius: 50%;
 }
@@ -293,4 +298,9 @@ body {
 
 .border__danger {
     border: 1px solid #e3342f !important;
+}
+
+.answer__modal-bg {
+    background-color: #f7f4f4;
+    box-shadow: 0px 3px 11px 0px #8c8c8c;
 }

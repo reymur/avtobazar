@@ -116,10 +116,15 @@
                     </tbody>
                 </table>
                 <div class="modal-footer py-1">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Cavab</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Bağla</button>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#answer">
+                        Cavab
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@include('modals.order_answer_modal')
