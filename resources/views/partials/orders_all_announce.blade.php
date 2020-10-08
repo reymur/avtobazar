@@ -7,12 +7,12 @@
                         $order->getSellerAnswers->count() > 0 &&
                         $order->pivot->user_id == Auth::user()->id &&
                         !is_null($order->getSellerAnswers->first()) &&
-                        $order->getSellerAnswers->first()->id == Auth::user()->id
+                        $order->getSellerAnswers->first()->user_id === Auth::user()->id
                     )
                     <tr>
                         <td class="text-left send__all-td pt-2 pb-1 pb-0">
                             <div class="d-block">
-                                @include('modals.orders_all_modal')
+                                @include('modals.orders_all_modal', ['disabled' => 1])
                             </div>
                         </td>
                         <td class="text-right send__all-td pt-2 pb-1 pb-0 pr-0">

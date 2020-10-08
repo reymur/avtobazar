@@ -35,14 +35,15 @@
                                    'text-black-50 border-bottom border-dark text-decoration-none' : ''
                                 }}">
                             @if( Auth::check() )
-                                @if( getUserLeftBarOrderCount() !== null && !empty(getUserLeftBarOrderCount()) )
+                                @if( count(getUserLeftBarOrderCount()[0]) !== null && !empty(count(getUserLeftBarOrderCount()[0])) )
                                     Sifarişlər
-                                    <span class="badge badge-success">
-                                        {{ getUserLeftBarOrderCount() }}
-                                    </span>
+                                        <span class="
+                                            {{ (getUserLeftBarOrderCount()[1] !== 0) ? 'badge badge-success' : 'badge badge-secondary' }}">
+                                            {{ count(getUserLeftBarOrderCount()[0]) }}
+                                        </span>
                                 @else
                                     Sifarişlər
-                                    <span class="badge badge-danger">
+                                    <span class="badge badge-secondary">
                                         0
                                     </span>
                                 @endif
@@ -63,18 +64,6 @@
 {{--            </tr>--}}
 
             <tr>
-                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
-                    <a href="{{ route('answers') }}" class="d-lg-block
-                        {{ str_contains(request()->path(), 'answers') ?
-                            'text-black-50 border-bottom border-dark text-decoration-none' : ''
-                        }}">
-                        Cavablar
-                        <span class="badge badge-success">2</span>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
                     <a href="{{ route('send') }}" class="d-lg-block
                         {{ str_contains(request()->path(), 'sends') ?
@@ -88,10 +77,30 @@
                                 </span>
                             @else
                                 Göndərilənlər
-                                <span class="badge badge-danger">
+                                <span class="badge badge-secondary">
                                     0
                                 </span>
                             @endif
+                        @endif
+                    </a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
+                    <a href="{{ route('answers') }}" class="d-lg-block
+                        {{ str_contains(request()->path(), 'answers') ?
+                            'text-black-50 border-bottom border-dark text-decoration-none' : ''
+                        }}">
+                        Cavablar
+                        @if( getUserLeftBarAnswerCount() != 0 )
+                            <span class="badge badge-success">
+                                {{ getUserLeftBarAnswerCount() }}
+                            </span>
+                        @else
+                            <span class="badge badge-secondary">
+                                0
+                            </span>
                         @endif
                     </a>
                 </td>

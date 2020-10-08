@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnnouncementUser;
+use App\Answer;
 use App\Condition;
 use App\User;
 use App\Announcement;
@@ -321,15 +322,67 @@ class AnnouncementController extends Controller
 
     public function answersAnnounce()
     {
-        return view('announcements.answers', [
-            'sends' => Auth::user()->getSends,
+        if ( Auth::check() ) {
+            $answers = user::with('userAnnounces')
+                ->where('id', Auth::user()->id)->first();
+
+//            dd(  $answers->  );
+
+            $answers_all = $answers;
+            $answers = $answers->userAnnounces;
+            $answers_all = $answers_all->userAnnounces()->orderByDesc('created_at')->paginate(6);
+
+//            dd(  $answers_all  );
+
+            return view('announcements.answers')
+                ->with([
+                    'answers'      => $answers,
+                    'answers_all' => $answers_all,
+                ]);
+        }
+
+
+        $count = 0;
+        $answers = Answer::all();
+
+        foreach ($answers as $answer) {
+            if( $answer->answerAnnounce->first()->user_id == Auth::user()->id ){
+
+                $count++;
+            }
+        }
+    }
+
+    public function answersAnnounceCreate(Request $request)
+    {
+        $request->validate([
+            'which' => 'required',
+            'price' => 'required|numeric'
         ]);
+
+        $answer = Answer::create([
+            'announcement_id' => $request->order_id ?? 0,
+            'user_id' => Auth::user()->id ?? 0,
+            'which' => $request->which,
+            'price' => $request->price,
+        ]);
+
+        if( $answer ){
+            return response()->json([
+                'message' => [
+                    ['Siz '.".$request->spare_parts.".' elanına cavab verdiniz.']
+                ]
+            ], 200);
+        }
+
+        return response()->json([
+            'errors' => ['Whops' => ['Whos!!!']]
+        ], 404);
     }
 
     public function ordersAnnounce()
     {
         if( Auth::check() ) {
-
             $user = Auth::user();
             $orders = User::with('announcement')->where('id', $user->id);
 
@@ -338,7 +391,7 @@ class AnnouncementController extends Controller
             }
 
             return view('announcements.orders', [
-                'sends' => Auth::user()->getSends,
+//                'sends' => Auth::user()->getSends,
                 'orders' => $orders,
                 'answerPaginate' => $this->getOrdersPaginate($orders, 6)
             ]);

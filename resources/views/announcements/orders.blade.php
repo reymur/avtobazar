@@ -18,6 +18,12 @@
                     </div>
 
                     <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
+                        <div class="text-success">
+                            @if( session('message') )
+                                {{ session('message') }}
+                            @endif
+                        </div>
+
                         @include('partials.orders_all_announce')
                     </div>
                 </div>

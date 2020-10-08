@@ -41,7 +41,8 @@
         "files": [
             "app/Helpers/getImageName.php",
             "app/Helpers/changeSendSession.php",
-            "app/Helpers/getUserLeftBarOrderCount.php"
+            "app/Helpers/getUserLeftBarOrderCount.php",
+            "app/Helpers/getUserLeftBarAnswerCount.php"
         ],
         "classmap": [
             "database/seeds",

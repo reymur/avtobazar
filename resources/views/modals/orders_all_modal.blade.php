@@ -1,8 +1,13 @@
 <!-- Button trigger modal -->
-<a href="" class="" data-toggle="modal" data-target="#send_all-{{ $order->id }}">
-    {{ $order->spare_parts ?? 'Yox' }}
-</a>
-
+@isset( $disabled )
+    <div class="" disabled="">
+        {{ $order->spare_parts ?? 'Yox' }}
+    </div>
+@else
+    <a href="" class="" data-toggle="modal" disabled="disabled" data-target="#send_all-{{ $order->id }}">
+        {{ $order->spare_parts ?? 'Yox' }}
+    </a>
+@endisset
 <!-- Modal -->
 <div class="modal fade" id="send_all-{{ $order->id }}" tabindex="-1" aria-labelledby="send_all" aria-hidden="true">
     <div class="modal-dialog">
@@ -126,5 +131,6 @@
     </div>
 </div>
 
-
-@include('modals.order_answer_modal')
+@if( $order )
+    @include('modals.order_answer_modal',['order' => $order ])
+@endif

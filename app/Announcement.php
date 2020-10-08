@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Announcement extends Model
 {
@@ -52,7 +53,8 @@ class Announcement extends Model
 
     public function getSellerAnswers()
     {
-        return $this->belongsToMany(User::class, 'answers', 'announcement_id', 'user_id');
+        return $this->hasMany(Answer::class, 'announcement_id', 'id')
+            ->where('user_id', Auth::user()->id);
     }
 
     public function getSender()
@@ -70,4 +72,8 @@ class Announcement extends Model
         return $this->hasOne(Condition::class, 'id', 'condition');
     }
 
+    public function getUserAnswers()
+    {
+        return $this->hasMany(Answer::class, 'announcement_id', 'id');
+    }
 }

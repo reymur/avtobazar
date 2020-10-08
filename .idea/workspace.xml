@@ -3,12 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Announcement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Announcement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/getUserLeftBarOrderCount.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/getUserLeftBarOrderCount.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_01_130910_create_answers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_01_130910_create_answers_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/answers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/answers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/orders.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/order_answer_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/order_answer_modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modals/orders_all_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/orders_all_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/buyer/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/buyer/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/orders_all_announce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/orders_all_announce.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +35,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -284,7 +296,10 @@
       <workItem from="1602071532541" duration="4686000" />
       <workItem from="1602084900284" duration="5197000" />
       <workItem from="1602090515109" duration="1537000" />
-      <workItem from="1602099433785" duration="6741000" />
+      <workItem from="1602099433785" duration="6941000" />
+      <workItem from="1602147019500" duration="14167000" />
+      <workItem from="1602161710214" duration="12550000" />
+      <workItem from="1602176546187" duration="17862000" />
     </task>
     <servers />
   </component>
@@ -336,10 +351,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="391" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1597192006597" />
-    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog" timestamp="1602100733319">
+    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog" timestamp="1602183285006">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1602100733319" />
+    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1602183285006" />
     <state x="172" y="27" width="1012" height="701" key="SettingsEditor" timestamp="1600373723876">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -348,10 +363,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state width="544" height="446" key="SwitcherDM/0.27.1366.701@0.27.1366.701" timestamp="1601113229320" />
-    <state x="218" y="27" width="901" height="645" key="dock-window-1" timestamp="1597776023157">
+    <state x="266" y="27" width="815" height="645" key="dock-window-1" timestamp="1602148128924">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="218" y="27" width="901" height="645" key="dock-window-1/0.27.1366.701@0.27.1366.701" timestamp="1597776023157" />
+    <state x="266" y="27" width="815" height="645" key="dock-window-1/0.27.1366.701@0.27.1366.701" timestamp="1602148128924" />
     <state x="465" y="332" width="901" height="645" key="dock-window-2" timestamp="1597776023158">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -368,9 +383,9 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1601723567413" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602070124996">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1602172974550">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1602070124996" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1602172974550" />
   </component>
 </project>

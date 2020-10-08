@@ -17,6 +17,8 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->bigInteger('announcement_id');
             $table->bigInteger('user_id');
+            $table->string('which')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }

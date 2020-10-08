@@ -302,5 +302,13 @@ body {
 
 .answer__modal-bg {
     background-color: #f7f4f4;
-    box-shadow: 0px 3px 11px 0px #8c8c8c;
+    box-shadow: 0 3px 11px 0 #8c8c8c;
+}
+
+.z__index-1 {
+    z-index: 10011;
+}
+
+.show__sellers-answers {
+    box-shadow: -1px -1px 3px -1px #000;
 }
