@@ -3529,6 +3529,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderAnswerModal",
   props: ['order_id'],
@@ -3536,13 +3540,19 @@ __webpack_require__.r(__webpack_exports__);
     return {
       which: '',
       price: '',
-      errors: []
+      errors: [],
+      loader: false,
+      disabled: false
     };
   },
   methods: {
     saveAnswer: function saveAnswer() {
       var _this = this;
 
+      this.errors = [];
+      this.loader = true;
+      this.disabled = 'disabled';
+      this.addDisabled('disabled', 'disabled');
       axios.post('/announce/answers-create', {
         which: this.which,
         price: this.price,
@@ -3552,18 +3562,27 @@ __webpack_require__.r(__webpack_exports__);
           window.location.href = '/announce/orders';
         }
       })["catch"](function (err) {
-        _this.errors = [];
-
         if (err.response.data.errors !== undefined) {
           _this.errors.push(err.response.data.errors);
+
+          _this.loader = false;
+          _this.disabled = false; // this.removeDisabled('disabled');
 
           console.log('err = ', _this.errors);
         }
       });
+    },
+    addDisabled: function addDisabled(key, val) {
+      // alert(2222222)
+      document.getElementById('answerA').setAttribute(key, val);
+    },
+    removeDisabled: function removeDisabled(key) {
+      document.getElementById('answer').removeAttribute(key);
     }
   },
   mounted: function mounted() {
     console.log(' MMM - ', this.order_id);
+    this.addDisabled('disabled', 'disabled');
   }
 });
 
@@ -3956,13 +3975,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
   props: ['answer_id', 'seller_id'],
   data: function data() {
     return {
       which: null,
-      price: null
+      price: null,
+      loader: false
     };
   },
   methods: {
@@ -43061,26 +43083,26 @@ var render = function() {
             ? _c(
                 "div",
                 { staticClass: "invalid-feedback d-block mb-2" },
-                _vm._l(_vm.errors, function(error) {
+                _vm._l(_vm.errors, function(err) {
                   return _c(
                     "ul",
                     { staticClass: "alert-danger my-1 py-2" },
                     [
-                      _vm._l(error["which"], function(error) {
+                      _vm._l(err["which"], function(e) {
                         return _c("li", { staticClass: "py-2" }, [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(error) +
+                              _vm._s(e) +
                               "\n                        "
                           )
                         ])
                       }),
                       _vm._v(" "),
-                      _vm._l(error["price"], function(error) {
+                      _vm._l(err["price"], function(e) {
                         return _c("li", { staticClass: "py-2" }, [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(error) +
+                              _vm._s(e) +
                               "\n                        "
                           )
                         ])
@@ -43108,10 +43130,21 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success",
-              attrs: { type: "button" },
+              attrs: { id: "answerA", disabled: _vm.disabled, type: "button" },
               on: { click: _vm.saveAnswer }
             },
-            [_vm._v("Göndər")]
+            [
+              _vm.loader
+                ? _c("span", {
+                    staticClass: "spinner-border spinner-border-sm",
+                    attrs: { role: "status", "aria-hidden": "true" }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loader
+                ? _c("span", [_vm._v("Gözlə...")])
+                : _c("span", [_vm._v("Göndər")])
+            ]
           )
         ])
       ])
@@ -43794,7 +43827,16 @@ var render = function() {
             : _vm._e()
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.sendLoader
+      ? _c("span", {
+          staticClass: "spinner-border spinner-border-sm",
+          attrs: { role: "status", "aria-hidden": "true" }
+        })
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.sendLoader ? _c("span", [_vm._v("Gözlə...")]) : _vm._e()
   ])
 }
 var staticRenderFns = []

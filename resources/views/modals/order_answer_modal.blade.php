@@ -4,7 +4,7 @@
 {{--</a>--}}
 
 <!-- Modal -->
-<div class="modal fade" id="answer" tabindex="-1" aria-labelledby="send_all" aria-hidden="true">
+<div class="modal fade" id="answer-{{ $order->id }}" tabindex="-1" aria-labelledby="answer-{{ $order->id }}" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-sm">
         @if( $order )
             <order-answer-modal

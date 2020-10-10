@@ -326,17 +326,17 @@ class AnnouncementController extends Controller
             $answers = user::with('userAnnounces')
                 ->where('id', Auth::user()->id)->first();
 
-//            dd(  $answers->  );
+//            dd(  $answers->userAnnounces );
 
             $answers_all = $answers;
             $answers = $answers->userAnnounces;
-            $answers_all = $answers_all->userAnnounces()->orderByDesc('created_at')->paginate(6);
+            $answers_all = $answers_all->userAnnounces()->paginate(6);
 
 //            dd(  $answers_all  );
 
             return view('announcements.answers')
                 ->with([
-                    'answers'      => $answers,
+//                    'answers'     => $answers,
                     'answers_all' => $answers_all,
                 ]);
         }
@@ -393,16 +393,15 @@ class AnnouncementController extends Controller
     {
         if( Auth::check() ) {
             $user = Auth::user();
-            $orders = User::with('announcement')->where('id', $user->id);
+            $orders = User::with('announcementUser')->where('id', $user->id);
 
             if ( $orders->get()->count() == 0 && $orders->first()->announcement->count() == 0 ) {
                 return abort(404);
             }
 
             return view('announcements.orders', [
-//                'sends' => Auth::user()->getSends,
                 'orders' => $orders,
-                'answerPaginate' => $this->getOrdersPaginate($orders, 6)
+                'ordersPaginate' => $this->getOrdersPaginate($orders, 6)
             ]);
         }
         else {
@@ -465,8 +464,8 @@ class AnnouncementController extends Controller
 
     public function getOrdersPaginate($orders, $count)
     {
-        return $orders->first()->announcement()
-            ->orderByDesc('created_at')->paginate($count);
+        return $orders->first()->announcementUser()
+            ->orderByDesc('id')->paginate($count);
     }
 
     public function orderAnnounceDelete($id)

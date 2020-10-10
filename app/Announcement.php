@@ -53,7 +53,7 @@ class Announcement extends Model
 
     public function getSellerAnswers()
     {
-        return $this->hasMany(Answer::class, 'announcement_id', 'id')
+        return $this->hasOne(Answer::class, 'announcement_id', 'id')
             ->where('user_id', Auth::user()->id);
     }
 

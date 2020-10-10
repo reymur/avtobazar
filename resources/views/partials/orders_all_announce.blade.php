@@ -1,13 +1,13 @@
 
 <table class="table border-top-0 border-bottom">
     <tbody>
-        @if( isset($answerPaginate) && ($answerPaginate->count() > 0) )
-            @foreach( $answerPaginate as $order )
-                @if(    !is_null($order->getSellerAnswers) &&
-                        $order->getSellerAnswers->count() > 0 &&
-                        $order->pivot->user_id == Auth::user()->id &&
-                        !is_null($order->getSellerAnswers->first()) &&
-                        $order->getSellerAnswers->first()->user_id === Auth::user()->id
+        @if( isset($ordersPaginate) && ($ordersPaginate->count() > 0) )
+            @foreach( $ordersPaginate as $order )
+{{--                {{ dd( $order->announcement->getSellerAnswers ) }}--}}
+                @if(    !is_null($order->announcement->getSellerAnswers) &&
+                        $order->announcement->getSellerAnswers->count() > 0 &&
+                        !is_null($order->announcement->getSellerAnswers->first()) &&
+                        $order->announcement->getSellerAnswers->user_id === Auth::user()->id
                     )
                     <tr>
                         <td class="text-left send__all-td pt-2 pb-1 pb-0">
@@ -26,7 +26,7 @@
                             </div>
                         </td>
                         <td class="col-1 text-right pl-1 pt-1 pl-0">
-                            <a href="{{ route('order_delete',['id' => $order->pivot->announcement_id]) }}" class="text-dark">
+                            <a href="{{ route('order_delete',['id' => $order->announcement->id]) }}" class="text-dark">
                                 <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
@@ -48,7 +48,7 @@
                             </div>
                         </td>
                         <td class="col-1 text-right  pt-1 pl-0">
-                            <a href="{{ route('order_delete',['id' => $order->pivot->announcement_id]) }}" class="text-dark">
+                            <a href="{{ route('order_delete',['id' => $order->announcement_id]) }}" class="text-dark">
                                 <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                 </svg>
@@ -61,7 +61,7 @@
             <tr>
                 <td class="text-left send__all-td pt-4 pb-0">
                     <div class="d-block">
-                        {{ $answerPaginate->links() }}
+                        {{ $ordersPaginate->links() }}
                     </div>
                 </td>
             </tr>

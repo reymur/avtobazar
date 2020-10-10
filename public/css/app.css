@@ -11216,6 +11216,7 @@ body {
 .answer__modal-bg {
   background-color: #f7f4f4;
   box-shadow: 0 3px 11px 0 #8c8c8c;
+  /*z-index: 10001;*/
 }
 
 .z__index-1 {

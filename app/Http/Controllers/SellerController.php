@@ -71,7 +71,8 @@ class SellerController extends Controller
     public function getOrdersNullCount()
     {
         $user = Auth::user();
-        $orders = User::with('announcement')->where('id', $user->id);
-        return $orders->first()->announcement->count();
+        $orders = User::with('announcements')->where('id', $user->id);
+//        dd( $orders->first()->announcements );
+        return $orders->first()->announcements->count();
     }
 }

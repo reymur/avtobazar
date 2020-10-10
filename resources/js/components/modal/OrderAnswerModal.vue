@@ -31,12 +31,12 @@
 
                 <div class="">
                     <div v-if="errors.length" class="invalid-feedback d-block mb-2">
-                        <ul v-for="error in errors" class="alert-danger my-1 py-2">
-                            <li v-for="error in error['which']" class="py-2">
-                                {{ error }}
+                        <ul v-for="err in errors" class="alert-danger my-1 py-2">
+                            <li v-for="e in err['which']" class="py-2">
+                                {{ e }}
                             </li>
-                            <li v-for="error in error['price']" class="py-2">
-                                {{ error }}
+                            <li v-for="e in err['price']" class="py-2">
+                                {{ e }}
                             </li>
                         </ul>
                     </div>
@@ -44,7 +44,11 @@
 
                 <div class="modal-footer py-1">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Xeyir</button>
-                    <button @click="saveAnswer" type="button" class="btn btn-success">Göndər</button>
+                    <button @click="saveAnswer" id="answerA" :disabled="disabled" type="button" class="btn btn-success">
+                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-if="loader">Gözlə...</span>
+                        <span v-else>Göndər</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -60,10 +64,17 @@ export default {
             which: '',
             price: '',
             errors: [],
+            loader: false,
+            disabled: false,
         }
     },
     methods: {
         saveAnswer(){
+            this.errors = [];
+            this.loader = true;
+            this.disabled = 'disabled';
+            this.addDisabled('disabled','disabled');
+
             axios.post('/announce/answers-create',{
                 which: this.which,
                 price: this.price,
@@ -75,16 +86,26 @@ export default {
                 }
             })
             .catch(err => {
-                this.errors = [];
                 if( err.response.data.errors !== undefined ) {
                     this.errors.push(err.response.data.errors);
+                    this.loader = false;
+                    this.disabled = false;
+                    // this.removeDisabled('disabled');
                     console.log('err = ', this.errors);
                 }
             })
-        }
+        },
+        addDisabled(key, val){
+            // alert(2222222)
+            document.getElementById('answerA').setAttribute(key,val);
+        },
+        removeDisabled(key){
+            document.getElementById('answer').removeAttribute(key);
+        },
     },
     mounted() {
         console.log( ' MMM - ', this.order_id )
+        this.addDisabled('disabled','disabled');
     }
 }
 </script>

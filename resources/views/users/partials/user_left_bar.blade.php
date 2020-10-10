@@ -35,6 +35,7 @@
                                    'text-black-50 border-bottom border-dark text-decoration-none' : ''
                                 }}">
                             @if( Auth::check() )
+{{--                                {{ dd( getUserLeftBarOrderCount()[0] ) }}--}}
                                 @if( count(getUserLeftBarOrderCount()[0]) !== null && !empty(count(getUserLeftBarOrderCount()[0])) )
                                     Sifarişlər
                                         <span class="

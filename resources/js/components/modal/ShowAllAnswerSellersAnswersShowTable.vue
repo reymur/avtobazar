@@ -18,6 +18,8 @@
                 </tr>
             </tbody>
         </table>
+        <span v-if="sendLoader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span v-if="sendLoader">Gözlə...</span>
     </div>
 </template>
 
@@ -29,6 +31,7 @@ export default {
         return {
             which: null,
             price: null,
+            loader: false,
         }
     },
     methods: {

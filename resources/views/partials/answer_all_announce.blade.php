@@ -6,6 +6,7 @@
     </thead>
     <tbody>
         @foreach( $answers_all as $answer )
+{{--            {{ dd( $answer->user ) }}--}}
             @if( !is_null($answer->getUserAnswers) && count($answer->getUserAnswers) > 0 )
                 <tr>
                     <td class="text-left send__all-td pt-1 pb-0">

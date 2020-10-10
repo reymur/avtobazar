@@ -1,7 +1,7 @@
 <!-- Button trigger modal -->
 <a href="" class="p-1" data-toggle="modal" data-target="#show_all_sellers-{{ $answer->id }}">
     <span class="badge badge-success">
-        {{ count($answer->user) ?? 0 }}
+        {{ count($answer->getUserAnswers) ?? 0 }}
     </span>
      Cavab
 </a>
@@ -18,7 +18,7 @@
                         </svg>
                     </span>
                     <span class="text-uppercase letter__spacing">
-                        <span class="">{{ count($answer->user) }}</span>
+                        <span class="">{{ count($answer->getUserAnswers) }}</span>
                         Cavab
                     </span>
                 </h6>
@@ -30,32 +30,35 @@
             <div class="modal-body pt-2 pb-1">
                 <table class="table table-bordered">
                     <tbody>
-                        @foreach( $answer->user as $seller )
+{{--                    {{ dd( $answer->getUserAnswers ) }}--}}
+                        @foreach( $answer->getUserAnswers as $seller )
+{{--                            {{ dd( $seller->user ) }}--}}
                             <tr>
                                 <td class="py-1 pr-0 d-flex">
                                     <div class="col-5 text-left pl-1 mt-2">
                                         <a href="" class="pb-2 answer__seller">
                                             <span class="d-flex pl-2">
-                                                {{ $seller->name }}
+                                                {{ $seller->user->name }}
                                             </span>
                                         </a>
 
                                         <div class="d-flex answer__phone-div">
-                                            <a href="tel:{{ $seller->phone }}" class="answer__phone-a">
+                                            <a href="tel:{{ $seller->user->phone }}" class="answer__phone-a">
                                                 <span class="pr-1">
                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-forward-fill text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                       <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
                                                     </svg>
                                                 </span>
 
-                                                {{ $seller->phone }}
+                                                {{ $seller->user->phone }}
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-7 text-right ml-auto pr-0">
+{{--                                        {{ dd( $answer->id ) }}--}}
                                         <show-all-answer-sellers-answers-show-table
                                             :answer_id="{{ $answer->id }}"
-                                            :seller_id="{{ $seller->id }}"
+                                            :seller_id="{{ $seller->user->id }}"
                                         >
                                         </show-all-answer-sellers-answers-show-table>
 {{--                                            @if( $seller->image )--}}
