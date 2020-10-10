@@ -340,17 +340,6 @@ class AnnouncementController extends Controller
                     'answers_all' => $answers_all,
                 ]);
         }
-
-
-        $count = 0;
-        $answers = Answer::all();
-
-        foreach ($answers as $answer) {
-            if( $answer->answerAnnounce->first()->user_id == Auth::user()->id ){
-
-                $count++;
-            }
-        }
     }
 
     public function answersAnnounceCreate(Request $request)
@@ -377,6 +366,26 @@ class AnnouncementController extends Controller
 
         return response()->json([
             'errors' => ['Whops' => ['Whos!!!']]
+        ], 404);
+    }
+
+    public function getShowAllAnswerVue(Request $request)
+    {
+        if( isset($request->answer_id) && isset($request->seller_id) ){
+            $answer = Answer::where([
+                'announcement_id' => $request->answer_id,
+                'user_id'         => $request->seller_id
+            ])->first();
+        }
+
+        if( !is_null($answer) && $answer->count() ){
+            return response()->json([
+                'answer' => $answer
+            ], 200);
+        }
+
+        return response()->json([
+            'error' => 'Woops!!!'
         ], 404);
     }
 

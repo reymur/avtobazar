@@ -10,9 +10,12 @@ function getUserLeftBarAnswerCount(){
     $answers = Answer::all();
 
     foreach ($answers as $answer) {
-        if( $answer->answerAnnounce->first()->user_id == Auth::user()->id ){
+        if( !is_null($answer->answerAnnounce->first()) ) {
 
-            $count++;
+            if ($answer->answerAnnounce->first()->user_id === Auth::user()->id) {
+
+                $count++;
+            }
         }
     }
 

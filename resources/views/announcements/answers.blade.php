@@ -20,9 +20,7 @@
                     <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
                         @isset( $answers_all )
                             <div class="row mb-4 ml-1">
-                                <div class="">
-                                    Cavab: <span class="badge badge-danger p-2">Gözlənilir</span>
-                                </div>
+                                @include('partials.answer_count_show')
                             </div>
 
                             @if( count($answers_all) > 0 )

@@ -3,9 +3,9 @@
     <tbody>
     @if( $announce->created_at )
         <div class="mr-3 mx-2 text-right text-black-50">
-                                                    <span>
-                                                        {{ Illuminate\Support\Carbon::now()->diffForHumans($announce->created_at) }}
-                                                    </span>
+            <span>
+                {{ Illuminate\Support\Carbon::now()->diffForHumans($announce->created_at) }}
+            </span>
         </div>
     @endif
     @if( $announce->spare_parts )

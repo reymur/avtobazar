@@ -52,9 +52,7 @@
                                 &nbsp;
                                 @endif
 
-                                <div class="">
-                                    Cavab: <span class="badge badge-danger p-2">Gözlənilir</span>
-                                </div>
+                                @include('partials.answer_count_show')
                             </div>
 
                             @if( session()->has('send_flash') )
