@@ -2,10 +2,20 @@
     <div class="">
         <!-- Button trigger modal -->
         <a href="" @click="showSellers()" class="p-1" data-toggle="modal" :data-target="'#show_all_sellers-'+answer.id">
-            <span class="badge badge-success">
-                {{ answer_users.length }}
+            <span v-if="is_seen !== 0" class="">
+                <span class="badge badge-secondary">
+                    {{ answer_users.length }}
+                </span>
+                <span class="text-secondary">
+                    Baxılıb
+                </span>
             </span>
-            Cavab
+            <span v-if="is_seen === 0" class="">
+                <span class="badge badge-success">
+                    {{ answer_users.length }}
+                </span>
+                Cavab
+            </span>
         </a>
 
         <!-- Modal -->
@@ -82,10 +92,11 @@
 <script>
 export default {
     name: "ShowAllAnswerSellers",
-    props: ['answer','answer_users'],
+    props: ['answer','answer_users','answer_seen'],
     data(){
         return {
             seller_user: [],
+            is_seen: this.answer_seen,
             errors: null,
             loader: false,
         }
@@ -96,13 +107,16 @@ export default {
             this.seller_user = [];
 
             axios.post('/announce/get-answer-sellers-vue',{
-                seller_id:seller.user_id
+                seller_id:seller.user_id,
+                announcement_id:this.answer.id,
             })
             .then( res => {
                 if( res.status == 200 ) {
                     if( res.data.seller !== undefined ) {
                         this.seller_user.push(res.data.seller);
+                        this.is_seen = res.data.seen;
                         this.loader = false;
+                        console.log('seen - ', typeof res.data.seen )
                     }
                 }
             })
@@ -123,7 +137,7 @@ export default {
     mounted(){
         // this.getSeller(seller)
         // console.log( 'AAA@@@ = ', this.answer_users);
-        // console.log( 'COUNT = ', this.count );
+        // console.log( 'SEEN = ', this.answer_seen );
     }
 }
 </script>

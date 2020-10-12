@@ -391,8 +391,13 @@ class AnnouncementController extends Controller
             $seller = User::select('id', 'name', 'phone')->where('id', $request->seller_id)->first();
 
             if( !is_null($seller) ) {
+                if( !empty($request->announcement_id) ){
+                    $updated = $this->answerSeenUpdate($request->announcement_id);
+                }
+
                 return response()->json([
-                    'seller' => $seller
+                    'seller' => $seller,
+                    'seen' => $updated
                 ], 200);
             }
 
@@ -400,6 +405,26 @@ class AnnouncementController extends Controller
                 'errors' => 'Satıcı tapılmadı!'
             ], 404);
         }
+    }
+
+    protected function answerSeenUpdate($announcement_id){
+        $announce = Announcement::find($announcement_id);
+
+        if( ! $announce ) return false;
+
+        if( $announce->user_id == Auth::user()->id ) {
+            if($announce->getAnswerUsers->first()->seen == null ) {
+                $is_updated = $announce
+                    ->getAnswerUsers->first()
+                    ->updateSeen();
+
+                return $announce->getAnswerUsers->first()->seen ?? false;
+            }
+
+            return $announce->getAnswerUsers->first()->seen ?? false;
+        }
+
+        return false;
     }
 
     public function ordersAnnounce()

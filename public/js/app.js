@@ -4078,6 +4078,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4161,10 +4173,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellers",
-  props: ['answer', 'answer_users'],
+  props: ['answer', 'answer_users', 'answer_seen'],
   data: function data() {
     return {
       seller_user: [],
+      is_seen: this.answer_seen,
       errors: null,
       loader: false
     };
@@ -4176,13 +4189,16 @@ __webpack_require__.r(__webpack_exports__);
       this.loader = true;
       this.seller_user = [];
       axios.post('/announce/get-answer-sellers-vue', {
-        seller_id: seller.user_id
+        seller_id: seller.user_id,
+        announcement_id: this.answer.id
       }).then(function (res) {
         if (res.status == 200) {
           if (res.data.seller !== undefined) {
             _this.seller_user.push(res.data.seller);
 
+            _this.is_seen = res.data.seen;
             _this.loader = false;
+            console.log('seen - ', _typeof(res.data.seen));
           }
         }
       })["catch"](function (err) {
@@ -4203,7 +4219,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {// this.getSeller(seller)
     // console.log( 'AAA@@@ = ', this.answer_users);
-    // console.log( 'COUNT = ', this.count );
+    // console.log( 'SEEN = ', this.answer_seen );
   }
 });
 
@@ -44432,12 +44448,34 @@ var render = function() {
         }
       },
       [
-        _c("span", { staticClass: "badge badge-success" }, [
-          _vm._v(
-            "\n            " + _vm._s(_vm.answer_users.length) + "\n        "
-          )
-        ]),
-        _vm._v("\n        Cavab\n    ")
+        _vm.is_seen !== 0
+          ? _c("span", {}, [
+              _c("span", { staticClass: "badge badge-secondary" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.answer_users.length) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-secondary" }, [
+                _vm._v("\n                Baxılıb\n            ")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.is_seen === 0
+          ? _c("span", {}, [
+              _c("span", { staticClass: "badge badge-success" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.answer_users.length) +
+                    "\n            "
+                )
+              ]),
+              _vm._v("\n            Cavab\n        ")
+            ])
+          : _vm._e()
       ]
     ),
     _vm._v(" "),
