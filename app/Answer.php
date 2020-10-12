@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Answer extends Model
 {
@@ -10,7 +11,8 @@ class Answer extends Model
 
     public function announcement()
     {
-        return $this->belongsToMany(Announcement::class,'id','announcement_id');
+        return $this->belongsTo(Announcement::class,'announcement_id','id')
+            ->where('user_id', Auth::user()->id);
     }
 
     public function answerAnnounce()

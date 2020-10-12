@@ -7,32 +7,29 @@ use Illuminate\Support\Facades\Auth;
     function getUserLeftBarOrderCount(){
         $new_orders = 0;
         $user = Auth::user();
-        $orders = User::with('announcementUser','getMyAnswers')
-            ->where('id', $user->id)
-            ->first();
 
-//        dd( $orders->announcementUser );
-//        dd( $orders->getMyAnswers );
-        $i = 0;
-        $arr = [];
+        if( $user->announcementUser->count() ) {
+            $orders = $user->announcementUser->map(function ($user) {
+                return $user->only(['announcement_id', 'user_id']);
+            })->pluck('announcement_id')->toArray();
 
-        if( $orders->getMyAnswers->count() ) {
-            foreach ($orders->announcementUser as $order ) {
-                foreach ( $orders->getMyAnswers   as $answer ) {
-                    if (($answer->user_id == $order->user_id) &&
-                        ($answer->announcement_id == $order->announcement_id)) {
+            if( $user->getMyAnswers->count() ) {
+                $answers = $user->getMyAnswers->map(function ($user) {
+                    return $user->only(['announcement_id', 'user_id']);
+                })->pluck('announcement_id')->toArray();
 
-                    } elseif ($answer->user_id == Auth::user()->id) {
-                        $arr[$i++] = $order;
-                        $new_orders++;
-                    }
-                }
+                $new_orders = collect($orders)->diff( collect($answers) )->count();
+                return [$user->announcementUser->count(), $new_orders];
             }
-        }else{
-            $new_orders = $orders->announcementUser->count();
+
+            return [
+                $user->announcementUser->count(),
+                $new_orders = $user->announcementUser->count()
+            ];
         }
 
-//        dd( $new_orders );
-
-        return [$orders->announcementUser, $new_orders];
+        return [
+            $user->announcementUser->count(),
+            $new_orders = $user->getMyAnswers->count()
+        ];
     }

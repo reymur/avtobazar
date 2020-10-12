@@ -18,7 +18,7 @@
                         <td class="text-right send__all-td pt-2 pb-1 pb-0 pr-0">
                             <div class="d-block">
                                 <span class="badge badge-light">
-                                    <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-check2-all" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-check2-all text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                       <path fill-rule="evenodd" d="M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                       <path d="M6.25 8.043l-.896-.897a.5.5 0 1 0-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0-.708-.708L8.5 10.293l-.543-.543-.707.707z"/>
                                     </svg>
@@ -58,13 +58,15 @@
                 @endif
             @endforeach
 
-            <tr>
-                <td class="text-left send__all-td pt-4 pb-0">
-                    <div class="d-block">
-                        {{ $ordersPaginate->links() }}
-                    </div>
-                </td>
-            </tr>
-        @endisset
+            @if( $ordersPaginate->links() )
+                <tr>
+                    <td class="text-left border-0 send__all-td pt-2 pb-0">
+                        <div class="send__all-td pt-2 pb-0 d-block">
+                            {{ $ordersPaginate->links() }}
+                        </div>
+                    </td>
+                </tr>
+            @endif
+        @endif
     </tbody>
 </table>

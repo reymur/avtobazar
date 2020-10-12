@@ -72,7 +72,7 @@ class Announcement extends Model
         return $this->hasOne(Condition::class, 'id', 'condition');
     }
 
-    public function getUserAnswers()
+    public function getAnswerUsers()
     {
         return $this->hasMany(Answer::class, 'announcement_id', 'id');
     }

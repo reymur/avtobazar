@@ -2,26 +2,17 @@
 
 use App\Answer;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 function getUserLeftBarAnswerCount(){
     $i = 0;
     $count = [];
-    $answers = Answer::all();
-
-//    dd( $answers );
-
-    foreach ($answers as $answer) {
-        if( !is_null($answer->answerAnnounce->first()) ) {
-
-            if ($answer->answerAnnounce->first()->user_id == Auth::user()->id) {
-
-                $count[$i++] = $answer->answerAnnounce;
-            }
-        }
-    }
+    $answers = Answer::whereHas('announcement', function(Builder $query){
+        return $query->where('user_id', Auth::user()->id);
+    })->get();
 
 //    dd( $count );
 
-    return count($count);
+    return $answers->count() ?? 0;
 }

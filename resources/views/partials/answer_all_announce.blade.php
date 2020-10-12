@@ -6,17 +6,20 @@
     </thead>
     <tbody>
         @foreach( $answers_all as $answer )
-{{--            {{ dd( $answer->user ) }}--}}
-            @if( !is_null($answer->getUserAnswers) && count($answer->getUserAnswers) > 0 )
+            @if( !is_null($answer->getAnswerUsers) && count($answer->getAnswerUsers) > 0 )
                 <tr>
                     <td class="text-left send__all-td pt-1 pb-0">
                         <div class="d-block">
-                            @include('modals.answer_all_modal')
+                            <answer-all-modal :answer="{{ $answer }}"></answer-all-modal>
                         </div>
                     </td>
 
                     <td class="text-right pt-1 pb-1 pr-1">
                         @if( isset($answer->user) && count($answer->user) > 0 )
+                            <show-all-answer-sellers
+                                :answer="{{ $answer }}"
+                                :answer_users="{{ $answer->getAnswerUsers }}"
+                            ></show-all-answer-sellers>
                             @include('modals.show_all_answer_sellers')
                         @endif
                     </td>

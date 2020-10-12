@@ -73,7 +73,6 @@ export default {
             this.errors = [];
             this.loader = true;
             this.disabled = 'disabled';
-            this.addDisabled('disabled','disabled');
 
             axios.post('/announce/answers-create',{
                 which: this.which,
@@ -105,7 +104,7 @@ export default {
     },
     mounted() {
         console.log( ' MMM - ', this.order_id )
-        this.addDisabled('disabled','disabled');
+        // this.addDisabled('disabled','disabled');
     }
 }
 </script>

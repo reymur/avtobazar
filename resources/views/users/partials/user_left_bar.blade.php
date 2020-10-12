@@ -35,19 +35,19 @@
                                    'text-black-50 border-bottom border-dark text-decoration-none' : ''
                                 }}">
                             @if( Auth::check() )
-{{--                                {{ dd( getUserLeftBarOrderCount()[0] ) }}--}}
-                                @if( count(getUserLeftBarOrderCount()[0]) !== null && !empty(count(getUserLeftBarOrderCount()[0])) )
-                                    Sifarişlər
-                                        <span class="
-                                            {{ (getUserLeftBarOrderCount()[1] !== 0) ? 'badge badge-success' : 'badge badge-secondary' }}">
-                                            {{ count(getUserLeftBarOrderCount()[0]) }}
+                                @if( getUserLeftBarOrderCount() !== null && count(getUserLeftBarOrderCount()) > 0 )
+                                    @if( getUserLeftBarOrderCount()[1] > 0 )
+                                        Sifarişlər
+                                            <span class="badge badge-success">
+                                                {{ getUserLeftBarOrderCount()[1] }}
+                                            </span>
+                                    @else
+                                        Sifarişlər
+                                        <span class="badge badge-secondary">
+                                            {{ getUserLeftBarOrderCount()[0] }}
                                         </span>
-                                @else
-                                    Sifarişlər
-                                    <span class="badge badge-secondary">
-                                        0
-                                    </span>
-                                @endif
+                                    @endif
+                                @endisset
                             @endif
                         </a>
                     </td>
