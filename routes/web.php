@@ -26,6 +26,7 @@ Route::prefix('announce')->group(function() {
     Route::post('/answers-create', 'AnnouncementController@answersAnnounceCreate')->name('answers_create');
     Route::post('/get-show-all-answer-vue', 'AnnouncementController@getShowAllAnswerVue')->name('get_show_all_answer_vue');
     Route::post('/get-answer-sellers-vue', 'AnnouncementController@getAnswerSellersVue')->name('get_answer_sellers_vue');
+    Route::post('/side-bar-answers-vue', 'AnnouncementController@getUserLeftBarAnswer')->name('side_bar_answers_vue');
     Route::get('/orders', 'AnnouncementController@ordersAnnounce')->name('orders');
     Route::get('/orders-delete/{id}', 'AnnouncementController@orderAnnounceDelete')->name('order_delete');
     Route::get('/buyer-announce-delete/{id}', 'AnnouncementController@buyerAnnounceADelete')->name('buyer_announce_delete');

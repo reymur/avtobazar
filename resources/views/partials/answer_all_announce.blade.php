@@ -16,13 +16,11 @@
 
                     <td class="text-right pt-1 pb-1 pr-1">
                         @if( isset($answer->user) && count($answer->user) > 0 )
-{{--                            {{ dd( $answer->getAnswerUsers->first()->seen  ) }}--}}
                             <show-all-answer-sellers
                                 :answer="{{ $answer }}"
                                 :answer_users="{{ $answer->getAnswerUsers }}"
-                                :answer_seen="{{ $answer->getAnswerUsers->first()->seen ?? '0' }}"
+                                :answer_seen="{{ $answer->getAnswerUsers }}"
                             ></show-all-answer-sellers>
-                            @include('modals.show_all_answer_sellers')
                         @endif
                     </td>
 

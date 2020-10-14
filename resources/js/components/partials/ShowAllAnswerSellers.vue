@@ -2,19 +2,19 @@
     <div class="">
         <!-- Button trigger modal -->
         <a href="" @click="showSellers()" class="p-1" data-toggle="modal" :data-target="'#show_all_sellers-'+answer.id">
-            <span v-if="is_seen !== 0" class="">
-                <span class="badge badge-secondary">
-                    {{ answer_users.length }}
+            <span v-if="(not_seen !== null && not_seen.length > 0) && client_for_seen == null" class="">
+                <span class="badge badge-success">
+                    {{ not_seen.length }}
                 </span>
                 <span class="text-secondary">
-                    Baxılıb
+                    Cavab
                 </span>
             </span>
-            <span v-if="is_seen === 0" class="">
-                <span class="badge badge-success">
-                    {{ answer_users.length }}
+            <span v-else class="">
+                <span class="badge badge-secondary">
+                    {{ default_seen.length }}
                 </span>
-                Cavab
+                Baxılıb
             </span>
         </a>
 
@@ -24,15 +24,15 @@
                 <div  v-if="seller_user.length"  class="modal-content">
                     <div class="modal-header">
                         <h6 class="modal-title" :id="'show_all_sellers-'+answer.id">
-                    <span class="mr-0">
-                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                        </svg>
-                    </span>
+                            <span class="mr-0">
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                                </svg>
+                            </span>
                             <span class="text-uppercase letter__spacing">
-                        <span class="">{{ answer_users.length }}</span>
-                        Cavab
-                    </span>
+                                <span class="">{{ answer_users.length }}</span>
+                                 Cavab
+                            </span>
                         </h6>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,6 +70,7 @@
                                             <show-all-answer-sellers-answers-show-table
                                                 :answer_id="answer.id"
                                                 :seller_id="seller.id"
+                                                :not_seen="not_seen"
                                             >
                                             </show-all-answer-sellers-answers-show-table>
                                         </div>
@@ -96,7 +97,11 @@ export default {
     data(){
         return {
             seller_user: [],
-            is_seen: this.answer_seen,
+            seen: [],
+            is_seen: [],
+            not_seen: [],
+            client_for_seen: null,
+            default_seen: this.answer_seen,
             errors: null,
             loader: false,
         }
@@ -114,16 +119,19 @@ export default {
                 if( res.status == 200 ) {
                     if( res.data.seller !== undefined ) {
                         this.seller_user.push(res.data.seller);
-                        this.is_seen = res.data.seen;
+                        this.seen.push(res.data.seen);
                         this.loader = false;
-                        console.log('seen - ', typeof res.data.seen )
+                        this.client_for_seen = true;
+                        console.log('seen111 - ',this.seen )
                     }
                 }
             })
             .catch( err => {
-                if( err.response.data !== undefined ) {
-                    if( err.response.data.errors !== undefined ) {
-                        this.errors = err.response.data.errors;
+                if( err.response !== undefined ) {
+                    if( err.response.data !== undefined ) {
+                        if( err.response.data.errors !== undefined ) {
+                            this.errors = err.response.data.errors;
+                        }
                     }
                 }
             });
@@ -131,13 +139,24 @@ export default {
         showSellers(){
             this.answer_users.forEach((seller) => {
                 this.getSeller(seller);
-            })
+            });
         },
+        getAnswerSeen(){
+            if( this.answer_seen.length > 0 ){
+                this.answer_seen.forEach( val => {
+                    if( val.seen != null ){
+                        this.is_seen.push(val)
+                    }else{
+                        this.not_seen.push(val)
+                    }
+                });
+            }
+        }
     },
     mounted(){
-        // this.getSeller(seller)
-        // console.log( 'AAA@@@ = ', this.answer_users);
-        // console.log( 'SEEN = ', this.answer_seen );
+        this.getAnswerSeen();
+        // console.log( 'not_seen = ', this.seen );
+        console.log( 'SEEN = ', this.answer_seen );
     }
 }
 </script>

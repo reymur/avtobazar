@@ -4,10 +4,23 @@
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/getUserLeftBarAnswerCount.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/getUserLeftBarAnswerCount.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/MainCloseElement.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/MainCloseElement.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/register/Registration.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/Saller.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/Saller.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellersTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/answer_all_announce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/answer_all_announce.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/answer_count_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/answer_count_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,15 +182,15 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/partials" />
-      <recent name="$PROJECT_DIR$/resources/views/users/seller" />
-      <recent name="$PROJECT_DIR$/resources/views/users/partials" />
-      <recent name="$PROJECT_DIR$/public/images/users" />
-      <recent name="$PROJECT_DIR$/public/images/cars/registerNumbers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/components/modal" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/js/components" />
+      <recent name="$PROJECT_DIR$/resources/js/components/register" />
+      <recent name="$PROJECT_DIR$/resources/js/components/partials" />
+      <recent name="$PROJECT_DIR$/resources/views/partials" />
+      <recent name="$PROJECT_DIR$/resources/views/users/seller" />
     </key>
   </component>
   <component name="RunManager">
@@ -296,7 +309,11 @@
       <workItem from="1602499199477" duration="10851000" />
       <workItem from="1602510912138" duration="6477000" />
       <workItem from="1602521900226" duration="12213000" />
-      <workItem from="1602536505446" duration="7935000" />
+      <workItem from="1602536505446" duration="8159000" />
+      <workItem from="1602594096716" duration="13048000" />
+      <workItem from="1602608431107" duration="14222000" />
+      <workItem from="1602623583841" duration="5037000" />
+      <workItem from="1602666819761" duration="10454000" />
     </task>
     <servers />
   </component>

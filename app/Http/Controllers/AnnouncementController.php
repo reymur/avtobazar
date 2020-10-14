@@ -7,7 +7,7 @@ use App\Answer;
 use App\Condition;
 use App\User;
 use App\Announcement;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SendAnnounceRequest;
@@ -324,11 +324,7 @@ class AnnouncementController extends Controller
             $user = user::with('userAnnounces')
                 ->where('id', Auth::user()->id)->first();
 
-//            dd(  $user->userAnnounces->getUserAnswers );
-
-            $answers_all = $user->userAnnounces()->paginate(2);
-
-//            dd(  $answers_all  );
+            $answers_all = $user->userAnnounces()->orderByDesc('created_at')->paginate(2);
 
             return view('announcements.answers')
                 ->with([
@@ -390,9 +386,9 @@ class AnnouncementController extends Controller
 
             $seller = User::select('id', 'name', 'phone')->where('id', $request->seller_id)->first();
 
-            if( !is_null($seller) ) {
-                if( !empty($request->announcement_id) ){
-                    $updated = $this->answerSeenUpdate($request->announcement_id);
+            if( !is_null($seller) && !empty($seller) ) {
+                if(  !is_null($request->announcement_id) && !empty($request->announcement_id) ){
+                    $updated = $this->answerSeenUpdate($request);
                 }
 
                 return response()->json([
@@ -407,24 +403,45 @@ class AnnouncementController extends Controller
         }
     }
 
-    protected function answerSeenUpdate($announcement_id){
-        $announce = Announcement::find($announcement_id);
+    protected function answerSeenUpdate($request){
+        $answer = Answer::where([
+            'announcement_id' => $request->announcement_id,
+            'user_id' => $request->seller_id,
+        ])->first();
 
-        if( ! $announce ) return false;
+        if( ! $answer ) return null;
 
-        if( $announce->user_id == Auth::user()->id ) {
-            if($announce->getAnswerUsers->first()->seen == null ) {
-                $is_updated = $announce
-                    ->getAnswerUsers->first()
-                    ->updateSeen();
+        if( $answer->announcement->user_id == Auth::user()->id ) {
+            if($answer->seen == null ) {
+                $is_updated = $answer->updateSeen();
 
-                return $announce->getAnswerUsers->first()->seen ?? false;
+                return $is_updated ? $answer->id : null;
             }
 
-            return $announce->getAnswerUsers->first()->seen ?? false;
+            return null;
         }
 
-        return false;
+        return null;;
+    }
+
+    public function getUserLeftBarAnswer(Request $request){
+        if( Auth::check() ) {
+            $answers = Answer::whereHas('announcement', function (Builder $query) {
+                return $query->where('user_id', Auth::user()->id);
+            })->get();
+
+            if( !$answers->count() ) {
+                return response()->json([
+                    'errors' => 'Woops!!!'
+                ], 404);
+            }
+
+            return response()->json([
+                'answers' => $answers
+            ], 200);
+        }
+
+        return redrect()->route('home');
     }
 
     public function ordersAnnounce()

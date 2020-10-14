@@ -27,7 +27,7 @@ class Answer extends Model
 
     public function updateSeen()
     {
-        return $this->belongsTo(self::class,'announcement_id', 'announcement_id')
+        return $this->belongsTo(self::class,'user_id', 'user_id')
                     ->update(['seen' => Auth::user()->id]);
     }
 

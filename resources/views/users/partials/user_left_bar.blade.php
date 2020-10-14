@@ -34,35 +34,14 @@
                                 {{ str_contains(request()->path(), 'orders') ?
                                    'text-black-50 border-bottom border-dark text-decoration-none' : ''
                                 }}">
-                            @if( Auth::check() )
-                                @if( getUserLeftBarOrderCount() !== null && count(getUserLeftBarOrderCount()) > 0 )
-                                    @if( getUserLeftBarOrderCount()[1] > 0 )
-                                        Sifarişlər
-                                            <span class="badge badge-success">
-                                                {{ getUserLeftBarOrderCount()[1] }}
-                                            </span>
-                                    @else
-                                        Sifarişlər
-                                        <span class="badge badge-secondary">
-                                            {{ getUserLeftBarOrderCount()[0] }}
-                                        </span>
-                                    @endif
-                                @endisset
-                            @endif
+                            <user-side-bar-orders
+                                :orders="{{ getUserLeftBarOrderCount()[0] }}"
+                                :new_orders="{{ getUserLeftBarOrderCount()[1] }}"
+                            ></user-side-bar-orders>
                         </a>
                     </td>
                 </tr>
             @endif
-
-{{--            <tr>--}}
-{{--                <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">--}}
-{{--                    <a href="{{ route("buyer.profile", ['id' => Auth::user()->id]) }}"--}}
-{{--                       class="d-lg-block">--}}
-
-{{--                        Ümumi <span class="badge badge-success">2</span>--}}
-{{--                    </a>--}}
-{{--                </td>--}}
-{{--            </tr>--}}
 
             <tr>
                 <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
@@ -93,16 +72,23 @@
                         {{ str_contains(request()->path(), 'answers') ?
                             'text-black-50 border-bottom border-dark text-decoration-none' : ''
                         }}">
-                        Cavablar
-                        @if( getUserLeftBarAnswerCount() != 0 )
-                            <span class="badge badge-success">
-                                {{ getUserLeftBarAnswerCount() }}
-                            </span>
-                        @else
-                            <span class="badge badge-secondary">
-                                0
-                            </span>
-                        @endif
+                        <user-side-bar-answers></user-side-bar-answers>
+{{--                        Cavablar--}}
+{{--                        @if( getUserLeftBarAnswerCount()->count() > 0 && !is_null(getUserLeftBarAnswerCount()) )--}}
+{{--                            @if( getUserLeftBarAnswerCount()->first()->seen )--}}
+{{--                                <span class="badge badge-secondary">--}}
+{{--                                    {{ getUserLeftBarAnswerCount()->count() }}--}}
+{{--                                </span>--}}
+{{--                            @else--}}
+{{--                                <span class="badge badge-success">--}}
+{{--                                    {{ getUserLeftBarAnswerCount()->count() }}--}}
+{{--                                </span>--}}
+{{--                            @endif--}}
+{{--                        @else--}}
+{{--                            <span class="badge badge-secondary">--}}
+{{--                                0--}}
+{{--                            </span>--}}
+{{--                        @endif--}}
                     </a>
                 </td>
             </tr>

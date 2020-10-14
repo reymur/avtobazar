@@ -11245,6 +11245,13 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.answer__price-div-for-seen {
+  padding: 5px 10px 3px 9px;
+  color: #fff;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .answer__price {
   font-size: 17px;
 }
