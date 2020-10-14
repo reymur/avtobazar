@@ -3,33 +3,43 @@
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
-                    <td v-if="price" class="text-right border-0 pt-1 pb-0 pr-3 d-inline-flex">
-                        <div v-if="price" class="text-right border-0 answer__which letter__spacing">
-                            <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <span v-if="loader">Gözlə...</span>
+                    <td v-if="price" class="text-right border-0 pt-1 pb-0 pr-3">
+                        <div v-for="not_seen in is_not_seen" class="d-inline-flex">
+                            <div class="text-right border-0 answer__which letter__spacing">
+                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span v-if="loader">Gözlə...</span>
 
-                            {{ which }}
+                                {{ not_seen.which }}
+                            </div>
+
+                            <div class="answer__price-div d-inline">
+                                <span  v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span v-if="loader">Gözlə...</span>
+
+                                <span class="answer__price">
+                                    {{ not_seen.price }}
+                                </span>
+                                <span class="answer__price-currency">AZE</span>
+                            </div>
                         </div>
 
+                        <div v-if="!is_not_seen.length" class="d-inline-flex">
+                            <div class="text-right border-0 answer__which letter__spacing">
+                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span v-if="loader">Gözlə...</span>
 
-                        <div v-for="not_seen in is_not_seen" class="answer__price-div d-inline">
-                            <span  v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <span v-if="loader">Gözlə...</span>
+                                {{ answer_def.which }}
+                            </div>
 
-                            <span class="answer__price">
-                                {{ not_seen.price }}
-                            </span>
-                            <span class="answer__price-currency">AZE</span>
-                        </div>
+                            <div  class="answer__price-div-for-seen bg-secondary d-inline">
+                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span v-if="loader">Gözlə...</span>
 
-                        <div v-if="!is_not_seen.length"  class="answer__price-div-for-seen bg-secondary d-inline">
-                            <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <span v-if="loader">Gözlə...</span>
-
-                            <span class="answer__price">
+                                <span class="answer__price">
                                 {{ answer_def.price }}
                             </span>
-                            <span class="answer__price-currency">AZE</span>
+                                <span class="answer__price-currency">AZE</span>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -43,7 +53,7 @@
 <script>
 export default {
     name: "ShowAllAnswerSellersAnswersShowTable",
-    props: ['answer_id','seller_id','not_seen'],
+    props: ['answer_id','seller_id','not_seen','seller'],
     data(){
         return {
             which: null,

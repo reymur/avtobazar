@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Answer extends Model
 {
-    protected $fillable = ['announcement_id','user_id','which','price'];
+    protected $fillable = ['announcement_id','user_id','which','price','seen'];
 
     public function announcement()
     {
@@ -24,13 +24,6 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
-
-    public function updateSeen()
-    {
-        return $this->belongsTo(self::class,'user_id', 'user_id')
-                    ->update(['seen' => Auth::user()->id]);
-    }
-
 
 }
 

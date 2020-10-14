@@ -23,15 +23,17 @@
                                 @include('partials.answer_count_show')
                             </div>
 
-                            @if( count($answers_all) > 0 )
-                                @include('partials.answer_all_announce')
+                            @if( $answers_all->count() > 0 )
+                                <answer-all-announce
+                                    :answers_all="{{ $answers_all }}"
+                                ></answer-all-announce>
                             @else
                                 <span class="">Yox</span>
                             @endif
 
-                            <div class="mt-4 pt-1">
-                                {{ $answers_all->links() }}
-                            </div>
+{{--                            <div class="mt-4 pt-1">--}}
+{{--                                {{ $answers_all_paginate->links() }}--}}
+{{--                            </div>--}}
                         @else
                             <h3 class="text-center not__announce">Elan tapılmadı!</h3>
                         @endisset

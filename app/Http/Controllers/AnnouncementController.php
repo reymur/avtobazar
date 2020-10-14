@@ -321,16 +321,50 @@ class AnnouncementController extends Controller
     public function answersAnnounce()
     {
         if (Auth::check()) {
-            $user = user::with('userAnnounces')
-                ->where('id', Auth::user()->id)->first();
+            $answers_all = $this->getAllAnswers();
 
-            $answers_all = $user->userAnnounces()->orderByDesc('created_at')->paginate(2);
+            $answers_all = $answers_all;
+            $answers_all_paginate = $answers_all->orderByDesc('created_at')->paginate(2);
 
             return view('announcements.answers')
                 ->with([
-                    'answers_all' => $answers_all,
+                    'answers_all' => $answers_all->get(),
+                    'answers_all_paginate' => $answers_all_paginate,
                 ]);
         }
+    }
+
+    public function getAllAnswers(){
+        $answers_all = Announcement::with('getanswerusers','user')
+            ->where('user_id',Auth::user()->id);
+
+        return $answers_all ?? false;
+    }
+
+    public function answersAnnouncePostVue()
+    {
+        $answers = $this->getAllAnswers();
+
+        if( $answers->get()->count() ) {
+            return response()->json([
+                'answers_all' => $answers->get()
+            ], 200);
+        }
+
+        return response()->json([
+            'errors' => 'Woops answers = ' . $answers
+        ], 404);
+    }
+
+    public function getAnswersDetailsVue(Request $request)
+    {
+        if( Auth::check() ){
+            if( isset($request->answer) && !is_null($request->answer) ){
+
+            }
+        }
+
+        return redirect()->route('home');
     }
 
     public function answersAnnounceCreate(Request $request)
@@ -413,7 +447,9 @@ class AnnouncementController extends Controller
 
         if( $answer->announcement->user_id == Auth::user()->id ) {
             if($answer->seen == null ) {
-                $is_updated = $answer->updateSeen();
+                $is_updated = $answer->update([
+                                            'seen' => Auth::user()->id
+                                        ]);
 
                 return $is_updated ? $answer->id : null;
             }

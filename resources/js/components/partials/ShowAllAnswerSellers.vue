@@ -6,15 +6,17 @@
                 <span class="badge badge-success">
                     {{ not_seen.length }}
                 </span>
-                <span class="text-secondary">
+                <span class="text-primary">
                     Cavab
                 </span>
             </span>
             <span v-else class="">
                 <span class="badge badge-secondary">
-                    {{ default_seen.length }}
+                    {{ answer_seen.length }}
                 </span>
-                Baxılıb
+                <span class="text-secondary">
+                    Baxılıb
+                </span>
             </span>
         </a>
 
@@ -42,7 +44,7 @@
                     <div class="modal-body pt-2 pb-1">
                         <table class="table table-bordered">
                             <tbody>
-                                <tr v-if="seller_user.length" v-for="seller in seller_user">
+                                <tr v-if="answer.user.length" v-for="seller in answer.user">
                                     <td class="py-1 pr-0 d-flex">
                                         <div class="col-5 text-left pl-1 mt-2">
                                             <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -86,22 +88,20 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
 export default {
     name: "ShowAllAnswerSellers",
-    props: ['answer','answer_users','answer_seen'],
+    props: ['answer','answer_users'],
     data(){
         return {
             seller_user: [],
-            seen: [],
             is_seen: [],
             not_seen: [],
+            answer_seen: this.answer_users,
             client_for_seen: null,
-            default_seen: this.answer_seen,
             errors: null,
             loader: false,
         }
@@ -119,7 +119,6 @@ export default {
                 if( res.status == 200 ) {
                     if( res.data.seller !== undefined ) {
                         this.seller_user.push(res.data.seller);
-                        this.seen.push(res.data.seen);
                         this.loader = false;
                         this.client_for_seen = true;
                         console.log('seen111 - ',this.seen )
@@ -156,7 +155,7 @@ export default {
     mounted(){
         this.getAnswerSeen();
         // console.log( 'not_seen = ', this.seen );
-        console.log( 'SEEN = ', this.answer_seen );
+        console.log( 'answer_users = ', this.answer.user );
     }
 }
 </script>
