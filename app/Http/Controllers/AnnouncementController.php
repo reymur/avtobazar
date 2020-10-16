@@ -324,7 +324,7 @@ class AnnouncementController extends Controller
             $answers_all = $this->getAllAnswers();
 
             $answers_all = $answers_all;
-            $answers_all_paginate = $answers_all->orderByDesc('created_at')->paginate(2);
+            $answers_all_paginate = $answers_all->orderByDesc('updated_at')->paginate(2);
 
             return view('announcements.answers')
                 ->with([
@@ -437,27 +437,39 @@ class AnnouncementController extends Controller
         }
     }
 
-    protected function answerSeenUpdate($request){
-        $answer = Answer::where([
-            'announcement_id' => $request->announcement_id,
-            'user_id' => $request->seller_id,
-        ])->first();
+    protected function answerSeenUpdate(Request $request){
+        if( !is_null($request->announcement_id) && !empty($request->announcement_id) ){
+            $answer = Answer::where([
+                'announcement_id' => $request->announcement_id,
+                'user_id' => $request->seller_id,
+            ])->first();
 
-        if( ! $answer ) return null;
+            if( ! $answer ) return null;
 
-        if( $answer->announcement->user_id == Auth::user()->id ) {
-            if($answer->seen == null ) {
-                $is_updated = $answer->update([
-                                            'seen' => Auth::user()->id
-                                        ]);
+            if( $answer->announcement->user_id == Auth::user()->id ) {
+                if($answer->seen == null ) {
+                    $is_updated = $answer->update([
+                        'seen' => Auth::user()->id
+                    ]);
 
-                return $is_updated ? $answer->id : null;
+                    if( $is_updated ){
+                        return response()->json([
+                            'answers' => $answer,
+                        ], 200);
+                    }
+                }
+
+                return response()->json([
+                    'answers' => $answer,
+                ], 200);
             }
 
-            return null;
+            return response()->json([
+                'answers' => $answer,
+            ], 200);
         }
 
-        return null;;
+        return null;
     }
 
     public function getUserLeftBarAnswer(Request $request){

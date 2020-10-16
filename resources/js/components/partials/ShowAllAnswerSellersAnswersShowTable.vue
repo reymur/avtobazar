@@ -3,41 +3,57 @@
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
-                    <td v-if="price" class="text-right border-0 pt-1 pb-0 pr-3">
-                        <div v-for="not_seen in is_not_seen" class="d-inline-flex">
+                    <td v-if="answer_info2 != null && close_modal" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
+                        <div class="d-inline-flex pt-1">
                             <div class="text-right border-0 answer__which letter__spacing">
                                 <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 <span v-if="loader">Gözlə...</span>
 
-                                {{ not_seen.which }}
+                                <span class="text-h1">
+                                    {{ answer_info2.which }}
+                                </span>
                             </div>
 
-                            <div class="answer__price-div d-inline">
-                                <span  v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <span v-if="loader">Gözlə...</span>
-
-                                <span class="answer__price">
-                                    {{ not_seen.price }}
+                            <div v-if="answer_info2.seen != null" class="bg-secondary answer__price-div-for-seen">
+                                 <span class="answer__price">
+                                    {{ answer_info2.price }}
+                                </span>
+                                <span class="answer__price-currency">AZE</span>
+                            </div>
+                            <div v-else class="answer__price-div">
+                                 <span class="answer__price">
+                                    {{ answer_info2.price }}
                                 </span>
                                 <span class="answer__price-currency">AZE</span>
                             </div>
                         </div>
+                    </td>
 
-                        <div v-if="!is_not_seen.length" class="d-inline-flex">
+                    <td v-else-if="answer_info && !close_modal" class="text-right border-0 pt-1 pb-0 pr-3">
+                        <div class="d-inline-flex pt-1">
+                            <div v-if="answer_info.seen == null" class="text-right border-0 m-0 answer__which letter__spacing">
+                                <span class="badge badge-success mr-2 text-uppercase new__price-el">Yeni</span>
+                            </div>
+
                             <div class="text-right border-0 answer__which letter__spacing">
                                 <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 <span v-if="loader">Gözlə...</span>
 
-                                {{ answer_def.which }}
+                                <span class="text-h1">
+                                    {{ answer_info.which }}
+                                </span>
                             </div>
 
-                            <div  class="answer__price-div-for-seen bg-secondary d-inline">
-                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <span v-if="loader">Gözlə...</span>
-
-                                <span class="answer__price">
-                                {{ answer_def.price }}
-                            </span>
+                            <div v-if="answer_info.seen != null" class="bg-secondary answer__price-div-for-seen">
+                                 <span class="answer__price">
+                                    {{ answer_info.price }}
+                                </span>
+                                <span class="answer__price-currency">AZE</span>
+                            </div>
+                            <div v-else class="answer__price-div">
+                                 <span class="answer__price">
+                                    {{ answer_info.price }}
+                                </span>
                                 <span class="answer__price-currency">AZE</span>
                             </div>
                         </div>
@@ -53,15 +69,11 @@
 <script>
 export default {
     name: "ShowAllAnswerSellersAnswersShowTable",
-    props: ['answer_id','seller_id','not_seen','seller'],
+    props: ['answer_id','seller_id','close_modal'],
     data(){
         return {
-            which: null,
-            price: null,
-            is_seen: [],
-            is_not_seen: [],
-            seen_id: null,
-            answer_def: null,
+            answer_info: null,
+            answer_info2: null,
             loader: false,
         }
     },
@@ -76,13 +88,11 @@ export default {
             .then( res => {
                 if( res.status == 200 ) {
                     if( res.data.answer !== undefined ) {
-                        this.which = res.data.answer.which;
-                        this.price = res.data.answer.price;
-                        this.seen_id = res.data.answer.id;
-                        this.answer_def = res.data.answer;
-                        this.getSeenAnswers();
+                        this.answer_info = res.data.answer;
                         this.loader = false;
-                        // console.log('res.status - ', res.data);
+                        this.getNewAnswers( this.answer_id, this.seller_id );
+                        // this.AnswerTestOnSeen( this.answer_info, this.answer_id, this.seller_id );
+                        console.log('this.answer_info - ', this.answer_info.seen);
                     }
                 }
                 // console.log('res - ', res.data);
@@ -91,17 +101,49 @@ export default {
                 // console.log( '', err.data);
             });
         },
-        getSeenAnswers(){
-            if( this.not_seen.length ){
-                this.not_seen.forEach( val => {
-                    if( val.id == this.answer_def.id ){
-                        this.is_not_seen.push(val);
+        // AnswerTestOnSeen(answer_info, answer_id, seller_id){
+        //     answer_info.forEach( val => {
+        //         if( val.seen == null ){
+        //             alert( answer_info );
+        //             this.getNewAnswers(answer_id, seller_id)
+        //         }
+        //         alert( 3333333 );
+        //     });
+        //     alert( 4444444444 );
+        // },
+        getNewAnswers(answer_id, seller_id){
+            axios.post('/announce/answer-seen-update-vue',{
+                seller_id:seller_id,
+                announcement_id:answer_id,
+            })
+            .then( res => {
+                if( res.status == 200 ) {
+                    if( res.data.answers !== undefined ) {
+                        this.answer_info2 = res.data.answers;
+                        console.log('ANSWER new1 - ', res.data.answers )
                     }
-                });
+                    // console.log('ANSWER new2 - ', res.data.answers )
+                }
+            })
+            .catch( err => {
+                if( err.response !== undefined ) {
+                    if( err.response.data !== undefined ) {
+                        if( err.response.data.errors !== undefined ) {
+                            this.errors = err.response.data.errors;
+                        }
+                    }
+                }
+            });
+        },
+        userClick(){
+            if(this.user_click == true ){
+                this.getUserAnswer();
+                console.log('AAAAAAAAAAAAAAAAAAa' )
             }
         }
     },
     mounted(){
+        this.userClick();
         this.getUserAnswer();
     }
 }

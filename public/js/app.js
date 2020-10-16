@@ -3651,22 +3651,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllAnnounce",
-  props: ['answers_all'],
   data: function data() {
     return {
-      answers: []
+      answers: null
     };
   },
   methods: {
-    // getAnswerAllDetails(){
-    //     if( this.answers_all != null && this.answers_all.length > 0 ) {
-    //         this.answers_all.forEach( answer => {
-    //             this.answerAxios(answer);
-    //         });
-    //     }
-    // },
     answersAnnounce: function answersAnnounce() {
       var _this = this;
 
@@ -3674,12 +3667,18 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           if (res.data.answers_all !== undefined) {
             _this.answers = res.data.answers_all;
-            console.log('snswers --- ', _this.answers);
+            console.log('ANSWERS EMIT --- ', _this.answers);
           }
         }
       })["catch"](function (err) {
-        console.log('err_snswers -- ', err.response.data);
+        if (err.response) {
+          console.log('err_snswers -- ', err.response.data);
+        }
       });
+    },
+    resetAnswers: function resetAnswers(data) {
+      this.answersAnnounce();
+      console.log('EMITTTTT --- ', this.reset_answers);
     }
   },
   mounted: function mounted() {
@@ -3964,63 +3963,52 @@ __webpack_require__.r(__webpack_exports__);
       answer_seen: this.answer_users,
       client_for_seen: null,
       errors: null,
-      loader: false
+      loader: false,
+      user_click: false,
+      close_modal: false
     };
   },
   methods: {
-    getSeller: function getSeller(seller) {
-      var _this = this;
-
-      this.loader = true;
-      this.seller_user = [];
-      axios.post('/announce/get-answer-sellers-vue', {
-        seller_id: seller.user_id,
-        announcement_id: this.answer.id
-      }).then(function (res) {
-        if (res.status == 200) {
-          if (res.data.seller !== undefined) {
-            _this.seller_user.push(res.data.seller);
-
-            _this.loader = false;
-            _this.client_for_seen = true;
-            console.log('seen111 - ', _this.seen);
-          }
-        }
-      })["catch"](function (err) {
-        if (err.response !== undefined) {
-          if (err.response.data !== undefined) {
-            if (err.response.data.errors !== undefined) {
-              _this.errors = err.response.data.errors;
-            }
-          }
-        }
-      });
-    },
     showSellers: function showSellers() {
-      var _this2 = this;
+      this.user_click = true; // setTimeout(() => {
+      //     this.getAnswerSeen();
+      //     this.is_seen = [];
+      //     this.not_seen = [];
+      // }, 500);
 
-      this.answer_users.forEach(function (seller) {
-        _this2.getSeller(seller);
+      console.log('this.user_click ===== ', this.user_click);
+      this.$emit('resetAnswersInParent', {
+        data: 1
       });
     },
     getAnswerSeen: function getAnswerSeen() {
-      var _this3 = this;
+      var _this = this;
 
-      if (this.answer_seen.length > 0) {
-        this.answer_seen.forEach(function (val) {
+      if (this.answer_users.length > 0) {
+        this.answer_users.forEach(function (val) {
           if (val.seen != null) {
-            _this3.is_seen.push(val);
+            _this.is_seen.push(val);
           } else {
-            _this3.not_seen.push(val);
+            _this.not_seen.push(val);
           }
         });
       }
+    },
+    closeButton: function closeButton() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.getAnswerSeen();
+
+        _this2.is_seen = [];
+        _this2.not_seen = [];
+      }, 400);
+      this.close_modal = true;
     }
   },
   mounted: function mounted() {
-    this.getAnswerSeen(); // console.log( 'not_seen = ', this.seen );
-
-    console.log('answer_users = ', this.answer.user);
+    this.getAnswerSeen(); // console.log( 'answer.user = ', this.answer.user );
+    // console.log( 'answer_users = ', this.answer_users );
   }
 });
 
@@ -4087,17 +4075,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
-  props: ['answer_id', 'seller_id', 'not_seen', 'seller'],
+  props: ['answer_id', 'seller_id', 'close_modal'],
   data: function data() {
     return {
-      which: null,
-      price: null,
-      is_seen: [],
-      is_not_seen: [],
-      seen_id: null,
-      answer_def: null,
+      answer_info: null,
+      answer_info2: null,
       loader: false
     };
   },
@@ -4112,33 +4112,62 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         if (res.status == 200) {
           if (res.data.answer !== undefined) {
-            _this.which = res.data.answer.which;
-            _this.price = res.data.answer.price;
-            _this.seen_id = res.data.answer.id;
-            _this.answer_def = res.data.answer;
+            _this.answer_info = res.data.answer;
+            _this.loader = false;
 
-            _this.getSeenAnswers();
+            _this.getNewAnswers(_this.answer_id, _this.seller_id); // this.AnswerTestOnSeen( this.answer_info, this.answer_id, this.seller_id );
 
-            _this.loader = false; // console.log('res.status - ', res.data);
+
+            console.log('this.answer_info - ', _this.answer_info.seen);
           }
         } // console.log('res - ', res.data);
 
       })["catch"](function (err) {// console.log( '', err.data);
       });
     },
-    getSeenAnswers: function getSeenAnswers() {
+    // AnswerTestOnSeen(answer_info, answer_id, seller_id){
+    //     answer_info.forEach( val => {
+    //         if( val.seen == null ){
+    //             alert( answer_info );
+    //             this.getNewAnswers(answer_id, seller_id)
+    //         }
+    //         alert( 3333333 );
+    //     });
+    //     alert( 4444444444 );
+    // },
+    getNewAnswers: function getNewAnswers(answer_id, seller_id) {
       var _this2 = this;
 
-      if (this.not_seen.length) {
-        this.not_seen.forEach(function (val) {
-          if (val.id == _this2.answer_def.id) {
-            _this2.is_not_seen.push(val);
+      axios.post('/announce/answer-seen-update-vue', {
+        seller_id: seller_id,
+        announcement_id: answer_id
+      }).then(function (res) {
+        if (res.status == 200) {
+          if (res.data.answers !== undefined) {
+            _this2.answer_info2 = res.data.answers;
+            console.log('ANSWER new1 - ', res.data.answers);
+          } // console.log('ANSWER new2 - ', res.data.answers )
+
+        }
+      })["catch"](function (err) {
+        if (err.response !== undefined) {
+          if (err.response.data !== undefined) {
+            if (err.response.data.errors !== undefined) {
+              _this2.errors = err.response.data.errors;
+            }
           }
-        });
+        }
+      });
+    },
+    userClick: function userClick() {
+      if (this.user_click == true) {
+        this.getUserAnswer();
+        console.log('AAAAAAAAAAAAAAAAAAa');
       }
     }
   },
   mounted: function mounted() {
+    this.userClick();
     this.getUserAnswer();
   }
 });
@@ -43952,7 +43981,7 @@ var render = function() {
         _vm._l(_vm.answers, function(answer) {
           return _vm.answers != null && _vm.answers.length > 0
             ? _c("tr", [
-                _c("td", { staticClass: "text-left send__all-td pt-1 pb-0" }, [
+                _c("td", { staticClass: "text-left send__all-td pt-3 pb-2" }, [
                   _c(
                     "div",
                     { staticClass: "d-block" },
@@ -43964,54 +43993,59 @@ var render = function() {
                 answer.user != null && answer.user.length > 0
                   ? _c(
                       "td",
-                      { staticClass: "text-right pt-1 pb-1 pr-1" },
+                      { staticClass: "text-right pt-1 pb-1 pr-1 align-middle" },
                       [
                         _c("show-all-answer-sellers", {
                           attrs: {
                             answer: answer,
                             answer_users: answer.getanswerusers
-                          }
+                          },
+                          on: { resetAnswersInParent: _vm.resetAnswers }
                         })
                       ],
                       1
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _c("td", { staticClass: "col-1 text-right pt-1 pl-0" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-dark",
-                      attrs: {
-                        href: "announce/buyer-announce-delete/" + answer.id
-                      }
-                    },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "bi bi-x",
-                          attrs: {
-                            width: "1.6em",
-                            height: "1.6em",
-                            viewBox: "0 0 16 16",
-                            fill: "currentColor",
-                            xmlns: "http://www.w3.org/2000/svg"
-                          }
-                        },
-                        [
-                          _c("path", {
+                _c(
+                  "td",
+                  { staticClass: "col-1 text-right pt-1 pl-0 align-middle" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-dark",
+                        attrs: {
+                          href: "announce/buyer-announce-delete/" + answer.id
+                        }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "bi bi-x",
                             attrs: {
-                              "fill-rule": "evenodd",
-                              d:
-                                "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                              width: "1.6em",
+                              height: "1.6em",
+                              viewBox: "0 0 16 16",
+                              fill: "currentColor",
+                              xmlns: "http://www.w3.org/2000/svg"
                             }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ])
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "fill-rule": "evenodd",
+                                d:
+                                  "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
               ])
             : _vm._e()
         }),
@@ -44410,246 +44444,234 @@ var render = function() {
         attrs: {
           id: "show_all_sellers-" + _vm.answer.id,
           tabindex: "-1",
+          "data-backdrop": "static",
+          "data-keyboard": "false",
           "aria-labelledby": "show_all_sellers-" + _vm.answer.id,
           "aria-hidden": "true"
         }
       },
       [
         _c("div", { staticClass: "modal-dialog" }, [
-          _vm.seller_user.length
-            ? _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c(
-                    "h6",
-                    {
-                      staticClass: "modal-title",
-                      attrs: { id: "show_all_sellers-" + _vm.answer.id }
-                    },
-                    [
-                      _c("span", { staticClass: "mr-0" }, [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "bi bi-arrow-right-short",
-                            attrs: {
-                              width: "1.5em",
-                              height: "1.5em",
-                              viewBox: "0 0 16 16",
-                              fill: "currentColor",
-                              xmlns: "http://www.w3.org/2000/svg"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                "fill-rule": "evenodd",
-                                d:
-                                  "M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                              }
-                            })
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "text-uppercase letter__spacing" },
-                        [
-                          _c("span", {}, [
-                            _vm._v(_vm._s(_vm.answer_users.length))
-                          ]),
-                          _vm._v(
-                            "\n                             Cavab\n                        "
-                          )
-                        ]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(0)
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
-                  _c("table", { staticClass: "table table-bordered" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h6",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "show_all_sellers-" + _vm.answer.id }
+                },
+                [
+                  _c("span", { staticClass: "mr-0" }, [
                     _c(
-                      "tbody",
-                      _vm._l(_vm.answer.user, function(seller) {
-                        return _vm.answer.user.length
-                          ? _c("tr", [
-                              _c("td", { staticClass: "py-1 pr-0 d-flex" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "col-5 text-left pl-1 mt-2" },
-                                  [
-                                    _vm.loader
-                                      ? _c("span", {
-                                          staticClass:
-                                            "spinner-border spinner-border-sm",
-                                          attrs: {
-                                            role: "status",
-                                            "aria-hidden": "true"
-                                          }
-                                        })
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.loader
-                                      ? _c("span", [_vm._v("Gözlə...")])
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass: "pb-2 answer__seller",
-                                        attrs: { href: "" }
-                                      },
-                                      [
-                                        seller.name
-                                          ? _c(
-                                              "span",
-                                              { staticClass: "d-flex pl-2" },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                " +
-                                                    _vm._s(seller.name) +
-                                                    "\n                                            "
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e()
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "d-flex answer__phone-div"
-                                      },
-                                      [
-                                        seller.phone
-                                          ? _c(
-                                              "a",
-                                              {
-                                                staticClass: "answer__phone-a",
-                                                attrs: { href: "tel:" }
-                                              },
-                                              [
-                                                _c(
-                                                  "span",
-                                                  { staticClass: "pr-1" },
-                                                  [
-                                                    _c(
-                                                      "svg",
-                                                      {
-                                                        staticClass:
-                                                          "bi bi-telephone-forward-fill text-success",
-                                                        attrs: {
-                                                          width: "1em",
-                                                          height: "1em",
-                                                          viewBox: "0 0 16 16",
-                                                          fill: "currentColor",
-                                                          xmlns:
-                                                            "http://www.w3.org/2000/svg"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          attrs: {
-                                                            "fill-rule":
-                                                              "evenodd",
-                                                            d:
-                                                              "M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(
-                                                  "\n\n                                                " +
-                                                    _vm._s(seller.phone) +
-                                                    "\n                                            "
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                seller.id
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "col-7 text-right ml-auto pr-0"
-                                      },
-                                      [
-                                        _c(
-                                          "show-all-answer-sellers-answers-show-table",
-                                          {
-                                            attrs: {
-                                              answer_id: _vm.answer.id,
-                                              seller_id: seller.id,
-                                              not_seen: _vm.not_seen
-                                            }
-                                          }
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
-                              ])
-                            ])
-                          : _vm._e()
-                      }),
-                      0
+                      "svg",
+                      {
+                        staticClass: "bi bi-arrow-right-short",
+                        attrs: {
+                          width: "1.5em",
+                          height: "1.5em",
+                          viewBox: "0 0 16 16",
+                          fill: "currentColor",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                          }
+                        })
+                      ]
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
-                ])
+                  _c(
+                    "span",
+                    { staticClass: "text-uppercase letter__spacing" },
+                    [
+                      _c("span", {}, [_vm._v(_vm._s(_vm.answer_users.length))]),
+                      _vm._v(
+                        "\n                             Cavab\n                        "
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  },
+                  on: { click: _vm.closeButton }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
+              _c("table", { staticClass: "table table-bordered" }, [
+                _c(
+                  "tbody",
+                  _vm._l(_vm.answer.user, function(seller) {
+                    return _vm.answer.user.length && _vm.user_click
+                      ? _c("tr", [
+                          _c("td", { staticClass: "py-1 pr-0 d-flex" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-5 text-left pl-1 mt-2" },
+                              [
+                                _vm.loader
+                                  ? _c("span", {
+                                      staticClass:
+                                        "spinner-border spinner-border-sm",
+                                      attrs: {
+                                        role: "status",
+                                        "aria-hidden": "true"
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.loader
+                                  ? _c("span", [_vm._v("Gözlə...")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "pb-2 answer__seller",
+                                    attrs: { href: "" }
+                                  },
+                                  [
+                                    seller.name
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "d-flex pl-2" },
+                                          [
+                                            _vm._v(
+                                              "\n                                                " +
+                                                _vm._s(seller.name) +
+                                                "\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "d-flex answer__phone-div" },
+                                  [
+                                    seller.phone
+                                      ? _c(
+                                          "a",
+                                          {
+                                            staticClass: "answer__phone-a",
+                                            attrs: { href: "tel:" }
+                                          },
+                                          [
+                                            _c(
+                                              "span",
+                                              { staticClass: "pr-1" },
+                                              [
+                                                _c(
+                                                  "svg",
+                                                  {
+                                                    staticClass:
+                                                      "bi bi-telephone-forward-fill text-success",
+                                                    attrs: {
+                                                      width: "1em",
+                                                      height: "1em",
+                                                      viewBox: "0 0 16 16",
+                                                      fill: "currentColor",
+                                                      xmlns:
+                                                        "http://www.w3.org/2000/svg"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("path", {
+                                                      attrs: {
+                                                        "fill-rule": "evenodd",
+                                                        d:
+                                                          "M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\n                                                " +
+                                                _vm._s(seller.phone) +
+                                                "\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            seller.id && _vm.answer.id
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "col-7 text-right ml-auto pl-0 pr-0"
+                                  },
+                                  [
+                                    _c(
+                                      "show-all-answer-sellers-answers-show-table",
+                                      {
+                                        attrs: {
+                                          answer_id: _vm.answer.id,
+                                          seller_id: seller.id,
+                                          close_modal: _vm.close_modal
+                                        }
+                                      }
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      : _vm._e()
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer py-1" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.closeButton }
+                  },
+                  [_vm._v("Bağla")]
+                )
               ])
-            : _vm._e()
+            ])
+          ])
         ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer py-1" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Bağla")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44675,39 +44697,19 @@ var render = function() {
     _c("table", { staticClass: "table mt-1 mb-0" }, [
       _c("tbody", [
         _c("tr", [
-          _vm.price
+          _vm.answer_info2 != null && _vm.close_modal
             ? _c(
                 "td",
-                { staticClass: "text-right border-0 pt-1 pb-0 pr-3" },
+                { staticClass: "text-right border-0 pt-1 pb-0 pl-0 pr-3" },
                 [
-                  _vm._l(_vm.is_not_seen, function(not_seen) {
-                    return _c("div", { staticClass: "d-inline-flex" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-right border-0 answer__which letter__spacing"
-                        },
-                        [
-                          _vm.loader
-                            ? _c("span", {
-                                staticClass: "spinner-border spinner-border-sm",
-                                attrs: { role: "status", "aria-hidden": "true" }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.loader
-                            ? _c("span", [_vm._v("Gözlə...")])
-                            : _vm._e(),
-                          _vm._v(
-                            "\n\n                            " +
-                              _vm._s(not_seen.which) +
-                              "\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "answer__price-div d-inline" }, [
+                  _c("div", { staticClass: "d-inline-flex pt-1" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "text-right border-0 answer__which letter__spacing"
+                      },
+                      [
                         _vm.loader
                           ? _c("span", {
                               staticClass: "spinner-border spinner-border-sm",
@@ -44719,79 +44721,29 @@ var render = function() {
                           ? _c("span", [_vm._v("Gözlə...")])
                           : _vm._e(),
                         _vm._v(" "),
-                        _c("span", { staticClass: "answer__price" }, [
+                        _c("span", { staticClass: "text-h1" }, [
                           _vm._v(
                             "\n                                " +
-                              _vm._s(not_seen.price) +
+                              _vm._s(_vm.answer_info2.which) +
                               "\n                            "
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "answer__price-currency" }, [
-                          _vm._v("AZE")
                         ])
-                      ])
-                    ])
-                  }),
-                  _vm._v(" "),
-                  !_vm.is_not_seen.length
-                    ? _c("div", { staticClass: "d-inline-flex" }, [
-                        _c(
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.answer_info2.seen != null
+                      ? _c(
                           "div",
                           {
                             staticClass:
-                              "text-right border-0 answer__which letter__spacing"
+                              "bg-secondary answer__price-div-for-seen"
                           },
                           [
-                            _vm.loader
-                              ? _c("span", {
-                                  staticClass:
-                                    "spinner-border spinner-border-sm",
-                                  attrs: {
-                                    role: "status",
-                                    "aria-hidden": "true"
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.loader
-                              ? _c("span", [_vm._v("Gözlə...")])
-                              : _vm._e(),
-                            _vm._v(
-                              "\n\n                            " +
-                                _vm._s(_vm.answer_def.which) +
-                                "\n                        "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "answer__price-div-for-seen bg-secondary d-inline"
-                          },
-                          [
-                            _vm.loader
-                              ? _c("span", {
-                                  staticClass:
-                                    "spinner-border spinner-border-sm",
-                                  attrs: {
-                                    role: "status",
-                                    "aria-hidden": "true"
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.loader
-                              ? _c("span", [_vm._v("Gözlə...")])
-                              : _vm._e(),
-                            _vm._v(" "),
                             _c("span", { staticClass: "answer__price" }, [
                               _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.answer_def.price) +
-                                  "\n                        "
+                                "\n                                " +
+                                  _vm._s(_vm.answer_info2.price) +
+                                  "\n                            "
                               )
                             ]),
                             _vm._v(" "),
@@ -44802,11 +44754,110 @@ var render = function() {
                             )
                           ]
                         )
-                      ])
-                    : _vm._e()
-                ],
-                2
+                      : _c("div", { staticClass: "answer__price-div" }, [
+                          _c("span", { staticClass: "answer__price" }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.answer_info2.price) +
+                                "\n                            "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "answer__price-currency" },
+                            [_vm._v("AZE")]
+                          )
+                        ])
+                  ])
+                ]
               )
+            : _vm.answer_info && !_vm.close_modal
+            ? _c("td", { staticClass: "text-right border-0 pt-1 pb-0 pr-3" }, [
+                _c("div", { staticClass: "d-inline-flex pt-1" }, [
+                  _vm.answer_info.seen == null
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "text-right border-0 m-0 answer__which letter__spacing"
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "badge badge-success mr-2 text-uppercase new__price-el"
+                            },
+                            [_vm._v("Yeni")]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-right border-0 answer__which letter__spacing"
+                    },
+                    [
+                      _vm.loader
+                        ? _c("span", {
+                            staticClass: "spinner-border spinner-border-sm",
+                            attrs: { role: "status", "aria-hidden": "true" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.loader ? _c("span", [_vm._v("Gözlə...")]) : _vm._e(),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-h1" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.answer_info.which) +
+                            "\n                            "
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.answer_info.seen != null
+                    ? _c(
+                        "div",
+                        {
+                          staticClass: "bg-secondary answer__price-div-for-seen"
+                        },
+                        [
+                          _c("span", { staticClass: "answer__price" }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.answer_info.price) +
+                                "\n                            "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "answer__price-currency" },
+                            [_vm._v("AZE")]
+                          )
+                        ]
+                      )
+                    : _c("div", { staticClass: "answer__price-div" }, [
+                        _c("span", { staticClass: "answer__price" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.answer_info.price) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "answer__price-currency" }, [
+                          _vm._v("AZE")
+                        ])
+                      ])
+                ])
+              ])
             : _vm._e()
         ])
       ])

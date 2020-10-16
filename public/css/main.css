@@ -339,6 +339,11 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.answer__spare-parts {
+    color: #37251e;
+    letter-spacing: 0.5px;
+}
+
 .answer__price {
     font-size: 17px;
 }
@@ -346,6 +351,11 @@ body {
 .answer__price-currency {
     font-size: 12px;
 }
+    .new__price-el {
+        font-size: 9px;
+        margin-right: 4px;
+        padding: 5px 4px 3px 4px;
+    }
 
 .answer__phone-div {
 
@@ -353,3 +363,7 @@ body {
     .answer__phone-a {
         color: #105288;
     }
+
+.vertical__align {
+    vertical-align: middle;
+}

@@ -21,9 +21,9 @@
         </a>
 
         <!-- Modal -->
-        <div class="modal fade" :id="'show_all_sellers-'+ answer.id" tabindex="-1" :aria-labelledby="'show_all_sellers-'+answer.id" aria-hidden="true">
+        <div class="modal fade" :id="'show_all_sellers-'+answer.id" tabindex="-1" data-backdrop="static" data-keyboard="false" :aria-labelledby="'show_all_sellers-'+answer.id" aria-hidden="true">
             <div class="modal-dialog">
-                <div  v-if="seller_user.length"  class="modal-content">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h6 class="modal-title" :id="'show_all_sellers-'+answer.id">
                             <span class="mr-0">
@@ -37,14 +37,14 @@
                             </span>
                         </h6>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button @click="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body pt-2 pb-1">
                         <table class="table table-bordered">
                             <tbody>
-                                <tr v-if="answer.user.length" v-for="seller in answer.user">
+                                <tr v-if="answer.user.length && user_click" v-for="seller in answer.user">
                                     <td class="py-1 pr-0 d-flex">
                                         <div class="col-5 text-left pl-1 mt-2">
                                             <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -68,11 +68,11 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <div v-if="seller.id" class="col-7 text-right ml-auto pr-0">
+                                        <div v-if="seller.id && answer.id" class="col-7 text-right ml-auto pl-0 pr-0">
                                             <show-all-answer-sellers-answers-show-table
                                                 :answer_id="answer.id"
                                                 :seller_id="seller.id"
-                                                :not_seen="not_seen"
+                                                :close_modal="close_modal"
                                             >
                                             </show-all-answer-sellers-answers-show-table>
                                         </div>
@@ -82,7 +82,7 @@
                         </table>
 
                         <div class="modal-footer py-1">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Bağla</button>
+                            <button @click="closeButton" type="button" class="btn btn-secondary" data-dismiss="modal">Bağla</button>
                         </div>
                     </div>
                 </div>
@@ -104,45 +104,27 @@ export default {
             client_for_seen: null,
             errors: null,
             loader: false,
+            user_click: false,
+            close_modal: false,
         }
     },
     methods:{
-        getSeller(seller){
-            this.loader = true;
-            this.seller_user = [];
-
-            axios.post('/announce/get-answer-sellers-vue',{
-                seller_id:seller.user_id,
-                announcement_id:this.answer.id,
-            })
-            .then( res => {
-                if( res.status == 200 ) {
-                    if( res.data.seller !== undefined ) {
-                        this.seller_user.push(res.data.seller);
-                        this.loader = false;
-                        this.client_for_seen = true;
-                        console.log('seen111 - ',this.seen )
-                    }
-                }
-            })
-            .catch( err => {
-                if( err.response !== undefined ) {
-                    if( err.response.data !== undefined ) {
-                        if( err.response.data.errors !== undefined ) {
-                            this.errors = err.response.data.errors;
-                        }
-                    }
-                }
-            });
-        },
         showSellers(){
-            this.answer_users.forEach((seller) => {
-                this.getSeller(seller);
+            this.user_click = true;
+
+            // setTimeout(() => {
+            //     this.getAnswerSeen();
+            //     this.is_seen = [];
+            //     this.not_seen = [];
+            // }, 500);
+            console.log( 'this.user_click ===== ', this.user_click );
+            this.$emit('resetAnswersInParent',{
+                data:1
             });
         },
         getAnswerSeen(){
-            if( this.answer_seen.length > 0 ){
-                this.answer_seen.forEach( val => {
+            if( this.answer_users.length > 0 ){
+                this.answer_users.forEach( val => {
                     if( val.seen != null ){
                         this.is_seen.push(val)
                     }else{
@@ -150,12 +132,20 @@ export default {
                     }
                 });
             }
+        },
+        closeButton(){
+            setTimeout(() => {
+                this.getAnswerSeen();
+                this.is_seen = [];
+                this.not_seen = [];
+            }, 400);
+            this.close_modal = true;
         }
     },
     mounted(){
         this.getAnswerSeen();
-        // console.log( 'not_seen = ', this.seen );
-        console.log( 'answer_users = ', this.answer.user );
+        // console.log( 'answer.user = ', this.answer.user );
+        // console.log( 'answer_users = ', this.answer_users );
     }
 }
 </script>
