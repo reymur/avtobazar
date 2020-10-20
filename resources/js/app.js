@@ -18,11 +18,13 @@ Vue.component('seller-register-form', require('./components/forms/SellerRegister
 Vue.component('login-not-modal', require('./components/register/Login.vue').default);
 Vue.component('register-not-modal', require('./components/register/Register.vue').default);
 Vue.component('order-answer-modal', require('./components/modal/OrderAnswerModal.vue').default);
+Vue.component('user-left-side-bar', require('./components/partials/UserLeftSideBar.vue').default);
 Vue.component('user-side-bar-orders', require('./components/side/UserSideBarOrders.vue').default);
+Vue.component('answers', require('./components/pages/Answers.vue').default);
 Vue.component('answer-all-announce', require('./components/partials/AnswerAllAnnounce.vue').default);
 Vue.component('user-side-bar-answers', require('./components/side/UserSideBarAnswers.vue').default);
 Vue.component('answer-all-modal', require('./components/modal/AnswerAllModal.vue').default);
-Vue.component('show-all-answer-sellers', require('./components/partials/ShowAllAnswerSellers.vue').default);
+Vue.component('show-all-answer-sellers', require('./components/modal/ShowAllAnswerSellers.vue').default);
 Vue.component('show-all-answer-sellers-answers-show-table', require('./components/partials/ShowAllAnswerSellersAnswersShowTable.vue').default);
 
 import Vue from 'vue';

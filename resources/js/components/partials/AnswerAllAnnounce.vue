@@ -40,6 +40,7 @@ export default {
     data(){
         return {
             answers:null,
+            answer_users:null,
         }
     },
     methods:{
@@ -49,25 +50,31 @@ export default {
                 if( res.status == 200 ){
                     if( res.data.answers_all !== undefined ){
                         this.answers = res.data.answers_all;
-                        console.log( 'ANSWERS EMIT --- ', this.answers );
+                        // console.log( 'ANSWERS EMIT --- ', this.answers );
                     }
                 }
             })
             .catch( err => {
                 if( err.response ){
-                    console.log( 'err_snswers -- ', err.response.data );
+                    // console.log( 'err_snswers -- ', err.response.data );
                 }
             });
         },
         resetAnswers(data){
             this.answersAnnounce();
-            console.log( 'EMITTTTT --- ', this.reset_answers )
+            this.$emit('resetAnswersInParent',{
+                data:1
+            })
+            // console.log( 'EMITTTTT --- ', this.answer_users )
         }
     },
-    mounted(){
+    created() {
         this.answersAnnounce();
-        // console.log( 'AAAAAAQQQQQ --- ', this.a )
-    }
+    },
+    // mounted(){
+    //     this.answersAnnounce();
+    //     console.log( 'AAAAAAQQQQQ --- ', this.answer_users )
+    // }
 }
 </script>
 

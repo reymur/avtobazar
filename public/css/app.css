@@ -11279,6 +11279,12 @@ body {
   vertical-align: middle;
 }
 
+.show__seller-text {
+  font-size: 1.1em;
+  color: #0a0abf;
+  background-color: #edf2f7;
+}
+
 .v-select {
   position: relative;
   font-family: inherit;

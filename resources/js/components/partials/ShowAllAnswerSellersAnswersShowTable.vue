@@ -29,7 +29,7 @@
                         </div>
                     </td>
 
-                    <td v-else-if="answer_info && !close_modal" class="text-right border-0 pt-1 pb-0 pr-3">
+                    <td v-else-if="answer_info" class="text-right border-0 pt-1 pb-0 pr-3">
                         <div class="d-inline-flex pt-1">
                             <div v-if="answer_info.seen == null" class="text-right border-0 m-0 answer__which letter__spacing">
                                 <span class="badge badge-success mr-2 text-uppercase new__price-el">Yeni</span>
@@ -90,28 +90,31 @@ export default {
                     if( res.data.answer !== undefined ) {
                         this.answer_info = res.data.answer;
                         this.loader = false;
-                        this.getNewAnswers( this.answer_id, this.seller_id );
-                        // this.AnswerTestOnSeen( this.answer_info, this.answer_id, this.seller_id );
-                        console.log('this.answer_info - ', this.answer_info.seen);
+                        this.AnswerTestOnSeen( res.data.answer, this.answer_id, this.seller_id );
+                        // console.log('this.answer_info - ', this.answer_info.seen, 'Status = ',res.status);
                     }
                 }
                 // console.log('res - ', res.data);
             })
             .catch( err => {
-                // console.log( '', err.data);
+                console.log( 'this.answer_info - ', err.data);
             });
         },
-        // AnswerTestOnSeen(answer_info, answer_id, seller_id){
-        //     answer_info.forEach( val => {
-        //         if( val.seen == null ){
-        //             alert( answer_info );
-        //             this.getNewAnswers(answer_id, seller_id)
-        //         }
-        //         alert( 3333333 );
-        //     });
-        //     alert( 4444444444 );
-        // },
-        getNewAnswers(answer_id, seller_id){
+        AnswerTestOnSeen(answer_info, answer_id, seller_id){
+            if( answer_info != null && answer_info !== undefined ){
+                if( answer_info.seen == null && answer_info.seen !== undefined ){
+                    this.collGetNewAnswers(answer_id, seller_id);
+                }else{
+                    this.answer_info2 = null;
+                }
+            }
+        },
+        collGetNewAnswers(answer_id, seller_id){
+            // setTimeout(() => {
+                this.getNewUserAnswers(answer_id, seller_id);
+            // }, 200);
+        },
+        getNewUserAnswers(answer_id, seller_id){
             axios.post('/announce/answer-seen-update-vue',{
                 seller_id:seller_id,
                 announcement_id:answer_id,
@@ -120,7 +123,7 @@ export default {
                 if( res.status == 200 ) {
                     if( res.data.answers !== undefined ) {
                         this.answer_info2 = res.data.answers;
-                        console.log('ANSWER new1 - ', res.data.answers )
+                        console.log('ANSWER new - ', res.data.answers )
                     }
                     // console.log('ANSWER new2 - ', res.data.answers )
                 }
@@ -136,15 +139,18 @@ export default {
             });
         },
         userClick(){
-            if(this.user_click == true ){
-                this.getUserAnswer();
-                console.log('AAAAAAAAAAAAAAAAAAa' )
-            }
+            // if(this.close_modal == true ){
+            //     this.getUserAnswer();
+            //     console.log('AAAAAAAAAAAAAAAAAAa' )
+            // }
         }
     },
-    mounted(){
-        this.userClick();
+    created() {
         this.getUserAnswer();
+    },
+    mounted(){
+        // this.userClick();
+        // this.getUserAnswer();
     }
 }
 </script>

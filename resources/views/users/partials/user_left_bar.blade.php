@@ -73,22 +73,6 @@
                             'text-black-50 border-bottom border-dark text-decoration-none' : ''
                         }}">
                         <user-side-bar-answers></user-side-bar-answers>
-{{--                        Cavablar--}}
-{{--                        @if( getUserLeftBarAnswerCount()->count() > 0 && !is_null(getUserLeftBarAnswerCount()) )--}}
-{{--                            @if( getUserLeftBarAnswerCount()->first()->seen )--}}
-{{--                                <span class="badge badge-secondary">--}}
-{{--                                    {{ getUserLeftBarAnswerCount()->count() }}--}}
-{{--                                </span>--}}
-{{--                            @else--}}
-{{--                                <span class="badge badge-success">--}}
-{{--                                    {{ getUserLeftBarAnswerCount()->count() }}--}}
-{{--                                </span>--}}
-{{--                            @endif--}}
-{{--                        @else--}}
-{{--                            <span class="badge badge-secondary">--}}
-{{--                                0--}}
-{{--                            </span>--}}
-{{--                        @endif--}}
                     </a>
                 </td>
             </tr>

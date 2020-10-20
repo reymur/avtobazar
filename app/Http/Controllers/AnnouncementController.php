@@ -323,8 +323,11 @@ class AnnouncementController extends Controller
         if (Auth::check()) {
             $answers_all = $this->getAllAnswers();
 
+//            dd( $answers_all->get()[5]->getIsAnswers[8]->user );
+//            dd( mt_rand(0, 999) );
+
             $answers_all = $answers_all;
-            $answers_all_paginate = $answers_all->orderByDesc('updated_at')->paginate(2);
+            $answers_all_paginate = $answers_all->orderByDesc('created_at')->paginate(2);
 
             return view('announcements.answers')
                 ->with([
@@ -335,8 +338,11 @@ class AnnouncementController extends Controller
     }
 
     public function getAllAnswers(){
-        $answers_all = Announcement::with('getanswerusers','user')
-            ->where('user_id',Auth::user()->id);
+        $answers_all = Announcement::with('getIsAnswers','getanswerusers','user')
+            ->where('user_id',Auth::user()->id)
+             ->whereHas('getIsAnswers', function(Builder $builder){
+                 return $builder->where('id','!=', null);
+             });
 
         return $answers_all ?? false;
     }
@@ -345,7 +351,7 @@ class AnnouncementController extends Controller
     {
         $answers = $this->getAllAnswers();
 
-        if( $answers->get()->count() ) {
+        if( $answers && $answers->get()->count() > 0 ){
             return response()->json([
                 'answers_all' => $answers->get()
             ], 200);
@@ -401,16 +407,20 @@ class AnnouncementController extends Controller
                 'announcement_id' => $request->answer_id,
                 'user_id' => $request->seller_id
             ])->first();
-        }
 
-        if (!is_null($answer) && $answer->count()) {
+            if ( !is_null($answer) && !empty($answer) ) {
+                return response()->json([
+                    'answer' => $answer
+                ], 200);
+            }
+
             return response()->json([
-                'answer' => $answer
-            ], 200);
+                'error' => 'Woops!!! for - '. $request->answer_id .'/+'. $request->seller_id
+            ], 404);
         }
 
         return response()->json([
-            'error' => 'Woops!!!'
+            'error' => 'Woops!!! for - answer_id and seller_id'. $request->answer_id .'/'. $request->seller_id
         ], 404);
     }
 

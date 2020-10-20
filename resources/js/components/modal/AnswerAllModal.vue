@@ -18,7 +18,7 @@
                                 </svg>
                             </span>
                             <span v-if="answer.spare_parts" class="text-uppercase letter__spacing">
-                                {{ answer.spare_parts }}
+                                {{ answer.created_at }}
                             </span>
                             <span v-else class="text-uppercase letter__spacing">
                                 Yox
@@ -33,12 +33,12 @@
                         <table class="table table-bordered">
                             <tbody>
 
-                                <div v-if="answer.created_at" class="mr-3 mx-2 text-right text-black-50">
-                                    <span>
-                                        {{ answer.created_at }}
-    <!--                                    {{ Illuminate\Support\Carbon::now()->diffForHumans($answer->created_at) }}-->
-                                    </span>
-                                </div>
+<!--                                <div v-if="answer.created_at" class="mr-3 mx-2 text-right text-black-50">-->
+<!--                                    <span>-->
+<!--                                        {{ answer.created_at }}-->
+<!--    &lt;!&ndash;                                    {{ Illuminate\Support\Carbon::now()->diffForHumans($answer->created_at) }}&ndash;&gt;-->
+<!--                                    </span>-->
+<!--                                </div>-->
 
                                 <tr v-if="answer.spare_parts">
                                     <td scope="row" class="text-right text-black-50 py-2">Ehtiyat hissəsi:</td>
@@ -72,24 +72,23 @@
 
                                 <tr v-if="answer.texpassport">
                                     <td scope="row" class="text-right text-black-50 py-2">Texpassport:</td>
-                                    <td class="text-break text-center text-uppercase py-2 flash__texpass">{{ answer.texpassport }}</td>
+                                    <td class="text-break text-center text-uppercase py-2 flash__texpass">
+                                        {{ answer.texpassport }}
+                                    </td>
                                 </tr>
 
-                                <tr v-if="answer.texpassport">
+                                <tr v-if="answer.city">
                                     <td scope="row" class="text-right text-black-50 py-2">Şəhər:</td>
-                                    <td class="text-break text-center py-2">{{ answer.texpassport }}</td>
+                                    <td class="text-break text-center py-2">{{ answer.city }}</td>
                                 </tr>
 
                                 <tr v-if="answer.image">
                                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                                     <td class="text-break text-center py-2">
-<!--                                        <img class="flash__image" :src="'/images/users/announcement/'+ answer.image" alt="Image">-->
+                                        <img :src="'/images/users/announcement/'+answer.image" :alt="answer.image"
+                                            class="modal__image"
+                                        >
                                     </td>
-                                </tr>
-
-                                <tr v-if="answer.image">
-                                    <td scope="row" class="text-right text-black-50 py-2">Əlavə məlumat:</td>
-                                    <td class="text-break text-center py-2">{{ answer.image }}</td>
                                 </tr>
 
                             </tbody>

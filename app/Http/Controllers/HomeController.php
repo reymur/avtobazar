@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Announcement;
+use App\Answer;
 use App\Car;
 use App\City;
 use App\Condition;
@@ -37,6 +38,16 @@ class HomeController extends Controller
     {
 //        session()->forget('send_flash');
 //        $this->addItems();
+
+//        for($i=21; $i < 121; $i++) {
+//            Answer::create([
+//                'announcement_id' => 6,
+//                'user_id' => 7,
+//                'which' => 'Orjinal',
+//                'price' => mt_rand(0, 999),
+//                'seen' => null,
+//            ]);
+//        }
 
         $cars= Car::all();
 

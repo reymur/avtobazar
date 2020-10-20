@@ -76,4 +76,9 @@ class Announcement extends Model
     {
         return $this->hasMany(Answer::class, 'announcement_id', 'id');
     }
+
+    public function getIsAnswers()
+    {
+        return $this->hasMany(Answer::class, 'announcement_id', 'id');
+    }
 }
