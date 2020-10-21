@@ -104,6 +104,7 @@ export default {
             if( answer_info != null && answer_info !== undefined ){
                 if( answer_info.seen == null && answer_info.seen !== undefined ){
                     this.collGetNewAnswers(answer_id, seller_id);
+                    this.resetAnswersInUserSideBar(answer_id);
                 }else{
                     this.answer_info2 = null;
                 }
@@ -137,6 +138,13 @@ export default {
                     }
                 }
             });
+        },
+        resetAnswersInUserSideBar(answer_id){
+            if( answer_id != null ) {
+                this.$emit('resetAnswersInUserSideBarOne', {
+                    answer_id: answer_id
+                });
+            }
         },
         userClick(){
             // if(this.close_modal == true ){

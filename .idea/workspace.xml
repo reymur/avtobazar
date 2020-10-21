@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Announcement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Announcement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellers.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/answers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/answers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/side/UserSideBarAnswers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/side/UserSideBarAnswers.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +321,9 @@
       <workItem from="1603119723825" duration="912000" />
       <workItem from="1603138523594" duration="3782000" />
       <workItem from="1603185575925" duration="9619000" />
-      <workItem from="1603200016447" duration="8661000" />
+      <workItem from="1603200016447" duration="8835000" />
+      <workItem from="1603228090287" duration="3136000" />
+      <workItem from="1603276953088" duration="7006000" />
     </task>
     <servers />
   </component>

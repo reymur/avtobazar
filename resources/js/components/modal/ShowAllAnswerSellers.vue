@@ -94,6 +94,7 @@
                                                     :answer_id="answer.id"
                                                     :seller_id="seller.id"
                                                     :close_modal="close_modal"
+                                                    @resetAnswersInUserSideBarOne="resetAnswersInUserSideBarTwo"
                                                 >
                                                 </show-all-answer-sellers-answers-show-table>
                                             </div>
@@ -163,10 +164,13 @@ export default {
         showSellers(){
             this.user_click = true;
             this.returnAnsweredUsers();
-            // console.log( 'this.user_click ===== ', this.user_click );
-            this.$emit('resetAnswersInParent',{
-                data:1
-            });
+        },
+        resetAnswersInUserSideBarTwo(answer_id){
+            if( answer_id != null ) {
+                this.$emit('resetAnswersInUserSideBarThree', {
+                    answer_id: answer_id.answer_id
+                });
+            }
         },
         getAnswerSeen(){
             if( this.answer_users.length > 0 ){

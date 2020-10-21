@@ -25,6 +25,7 @@
 <script>
 export default {
     name: "UserSideBarOrders",
+    props: ['reset_answers'],
     data(){
         return {
             old_answers:[],
@@ -47,18 +48,32 @@ export default {
              });
         },
         getNewAnswers(answers){
-            answers.forEach( val => {
-                if( val.seen == null ) {
-                    this.new_answers.push(val);
-                }else{
-                    this.old_answers.push(val);
-                }
-            })
+            if( answers != null && answers !== undefined ) {
+                this.new_answers = [];
+                this.old_answers = [];
+
+                answers.forEach(val => {
+                    if (val.seen == null) {
+                        this.new_answers.push(val);
+                    } else {
+                        this.old_answers.push(val);
+                    }
+                });
+            }
+        }
+    },
+    watch:{
+        reset_answers(){
+            if( this.new_answers != null ) {
+                setTimeout(() => {
+                    this.getAnswers();
+                }, 1500);
+            }
         }
     },
     mounted() {
         this.getAnswers();
-        console.log( 'AAAAAAAAAAAAAAa', this.new_answers )
+        console.log( 'AAAAAAAAAAAAAAa', this.reset_answers )
     }
 }
 </script>

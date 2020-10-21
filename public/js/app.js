@@ -3729,6 +3729,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellers",
   props: ['answer', 'answer_users'],
@@ -3782,11 +3783,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     showSellers: function showSellers() {
       this.user_click = true;
-      this.returnAnsweredUsers(); // console.log( 'this.user_click ===== ', this.user_click );
-
-      this.$emit('resetAnswersInParent', {
-        data: 1
-      });
+      this.returnAnsweredUsers();
+    },
+    resetAnswersInUserSideBarTwo: function resetAnswersInUserSideBarTwo(answer_id) {
+      if (answer_id != null) {
+        this.$emit('resetAnswersInUserSideBarThree', {
+          answer_id: answer_id.answer_id
+        });
+      }
     },
     getAnswerSeen: function getAnswerSeen() {
       var _this2 = this;
@@ -3877,25 +3881,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersTable",
-  props: ['answers_all', 'auth_user', 'auth_check', 'auth_user_get_sends', 'orders', 'new_orders', ''],
+  props: ['answers_all', 'auth_user', 'auth_check', 'new_orders', 'orders', 'auth_user_get_sends'],
   data: function data() {
     return {
       reset_answers: null
     };
   },
   methods: {
-    resetAnswers: function resetAnswers(e) {
-      if (e.data == 1) {
-        this.reset_answers = true;
-        this.NeedResetAnswers();
+    resetAnswersInUserSideBarSeven: function resetAnswersInUserSideBarSeven(answer_id) {
+      if (answer_id != null) {
+        return this.reset_answers = answer_id.answer_id;
       }
     }
   },
-  computed: {
-    NeedResetAnswers: function NeedResetAnswers() {
-      alert('resetAnswersInParent' + this.reset_answers);
-    }
-  },
+  computed: {},
   mounted: function mounted() {}
 });
 
@@ -3969,11 +3968,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    resetAnswers: function resetAnswers(data) {
+    resetAnswersInUserSideBarFife: function resetAnswersInUserSideBarFife(answer_id) {
       this.answersAnnounce();
-      this.$emit('resetAnswersInParent', {
-        data: 1
-      }); // console.log( 'EMITTTTT --- ', this.answer_users )
+
+      if (answer_id != null) {
+        this.$emit('resetAnswersInUserSideBarSex', {
+          answer_id: answer_id.answer_id
+        });
+      }
     }
   },
   created: function created() {
@@ -4263,6 +4265,7 @@ __webpack_require__.r(__webpack_exports__);
       if (answer_info != null && answer_info !== undefined) {
         if (answer_info.seen == null && answer_info.seen !== undefined) {
           this.collGetNewAnswers(answer_id, seller_id);
+          this.resetAnswersInUserSideBar(answer_id);
         } else {
           this.answer_info2 = null;
         }
@@ -4295,6 +4298,13 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       });
+    },
+    resetAnswersInUserSideBar: function resetAnswersInUserSideBar(answer_id) {
+      if (answer_id != null) {
+        this.$emit('resetAnswersInUserSideBarOne', {
+          answer_id: answer_id
+        });
+      }
     },
     userClick: function userClick() {// if(this.close_modal == true ){
       //     this.getUserAnswer();
@@ -5236,6 +5246,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
+  props: ['reset_answers'],
   data: function data() {
     return {
       old_answers: [],
@@ -5261,18 +5272,33 @@ __webpack_require__.r(__webpack_exports__);
     getNewAnswers: function getNewAnswers(answers) {
       var _this2 = this;
 
-      answers.forEach(function (val) {
-        if (val.seen == null) {
-          _this2.new_answers.push(val);
-        } else {
-          _this2.old_answers.push(val);
-        }
-      });
+      if (answers != null && answers !== undefined) {
+        this.new_answers = [];
+        this.old_answers = [];
+        answers.forEach(function (val) {
+          if (val.seen == null) {
+            _this2.new_answers.push(val);
+          } else {
+            _this2.old_answers.push(val);
+          }
+        });
+      }
+    }
+  },
+  watch: {
+    reset_answers: function reset_answers() {
+      var _this3 = this;
+
+      if (this.new_answers != null) {
+        setTimeout(function () {
+          _this3.getAnswers();
+        }, 1500);
+      }
     }
   },
   mounted: function mounted() {
     this.getAnswers();
-    console.log('AAAAAAAAAAAAAAa', this.new_answers);
+    console.log('AAAAAAAAAAAAAAa', this.reset_answers);
   }
 });
 
@@ -44542,6 +44568,10 @@ var render = function() {
                                               answer_id: _vm.answer.id,
                                               seller_id: seller.id,
                                               close_modal: _vm.close_modal
+                                            },
+                                            on: {
+                                              resetAnswersInUserSideBarOne:
+                                                _vm.resetAnswersInUserSideBarTwo
                                             }
                                           }
                                         )
@@ -44655,7 +44685,10 @@ var render = function() {
                             {},
                             [
                               _c("answer-all-announce", {
-                                on: { resetAnswersInParent: _vm.resetAnswers }
+                                on: {
+                                  resetAnswersInUserSideBarSex:
+                                    _vm.resetAnswersInUserSideBarSeven
+                                }
                               })
                             ],
                             1
@@ -44734,7 +44767,10 @@ var render = function() {
                             answer: answer,
                             answer_users: answer.getanswerusers
                           },
-                          on: { resetAnswersInParent: _vm.resetAnswers }
+                          on: {
+                            resetAnswersInUserSideBarThree:
+                              _vm.resetAnswersInUserSideBarFife
+                          }
                         })
                       ],
                       1

@@ -17,7 +17,7 @@
                         <show-all-answer-sellers
                             :answer="answer"
                             :answer_users="answer.getanswerusers"
-                            @resetAnswersInParent="resetAnswers"
+                            @resetAnswersInUserSideBarThree="resetAnswersInUserSideBarFife"
                         ></show-all-answer-sellers>
                     </td>
 
@@ -60,12 +60,14 @@ export default {
                 }
             });
         },
-        resetAnswers(data){
+        resetAnswersInUserSideBarFife(answer_id){
             this.answersAnnounce();
-            this.$emit('resetAnswersInParent',{
-                data:1
-            })
-            // console.log( 'EMITTTTT --- ', this.answer_users )
+
+            if( answer_id != null ) {
+                this.$emit('resetAnswersInUserSideBarSex', {
+                    answer_id: answer_id.answer_id
+                })
+            }
         }
     },
     created() {

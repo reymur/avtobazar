@@ -24,7 +24,7 @@
                         </div>
 
                         <div v-if="answers_all.length > 0" class="">
-                            <answer-all-announce @resetAnswersInParent="resetAnswers"></answer-all-announce>
+                            <answer-all-announce @resetAnswersInUserSideBarSex="resetAnswersInUserSideBarSeven"></answer-all-announce>
                         </div>
                         <div v-else class="">
                             <span class="">Yox</span>
@@ -41,24 +41,25 @@
 <script>
 export default {
     name: "ShowAllAnswerSellersTable",
-    props: ['answers_all','auth_user','auth_check','auth_user_get_sends','orders','new_orders',''],
+    props: [
+        'answers_all', 'auth_user',
+        'auth_check', 'new_orders',
+        'orders', 'auth_user_get_sends'
+    ],
     data(){
         return {
             reset_answers: null,
         }
     },
     methods: {
-        resetAnswers(e){
-            if( e.data == 1 ){
-                this.reset_answers = true;
-                this.NeedResetAnswers();
+        resetAnswersInUserSideBarSeven(answer_id){
+            if( answer_id != null ) {
+                return this.reset_answers = answer_id.answer_id;
             }
-        }
+        },
     },
     computed:{
-        NeedResetAnswers(){
-            alert('resetAnswersInParent'+ this.reset_answers)
-        }
+
     },
     mounted() {
 
