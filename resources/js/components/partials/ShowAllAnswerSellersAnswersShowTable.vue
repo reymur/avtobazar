@@ -69,37 +69,16 @@
 <script>
 export default {
     name: "ShowAllAnswerSellersAnswersShowTable",
-    props: ['answer_id','seller_id','close_modal'],
+    props: ['answer_users','answer_id','seller_id','close_modal'],
     data(){
         return {
             answer_info: null,
             answer_info2: null,
+            answer_update: null,
             loader: false,
         }
     },
     methods: {
-        getUserAnswer(){
-            this.loader = true;
-
-            axios.post('/announce/get-show-all-answer-vue',{
-                answer_id:this.answer_id,
-                seller_id:this.seller_id
-            })
-            .then( res => {
-                if( res.status == 200 ) {
-                    if( res.data.answer !== undefined ) {
-                        this.answer_info = res.data.answer;
-                        this.loader = false;
-                        this.AnswerTestOnSeen( res.data.answer, this.answer_id, this.seller_id );
-                        // console.log('this.answer_info - ', this.answer_info.seen, 'Status = ',res.status);
-                    }
-                }
-                // console.log('res - ', res.data);
-            })
-            .catch( err => {
-                console.log( 'this.answer_info - ', err.data);
-            });
-        },
         AnswerTestOnSeen(answer_info, answer_id, seller_id){
             if( answer_info != null && answer_info !== undefined ){
                 if( answer_info.seen == null && answer_info.seen !== undefined ){
@@ -111,9 +90,9 @@ export default {
             }
         },
         collGetNewAnswers(answer_id, seller_id){
-            // setTimeout(() => {
+            setTimeout(() => {
                 this.getNewUserAnswers(answer_id, seller_id);
-            // }, 200);
+            }, 200);
         },
         getNewUserAnswers(answer_id, seller_id){
             axios.post('/announce/answer-seen-update-vue',{
@@ -124,9 +103,8 @@ export default {
                 if( res.status == 200 ) {
                     if( res.data.answers !== undefined ) {
                         this.answer_info2 = res.data.answers;
-                        console.log('ANSWER new - ', res.data.answers )
+                        this.answer_update = res.status;
                     }
-                    // console.log('ANSWER new2 - ', res.data.answers )
                 }
             })
             .catch( err => {
@@ -142,23 +120,44 @@ export default {
         resetAnswersInUserSideBar(answer_id){
             if( answer_id != null ) {
                 this.$emit('resetAnswersInUserSideBarOne', {
-                    answer_id: answer_id
+                    id: answer_id
                 });
             }
         },
-        userClick(){
-            // if(this.close_modal == true ){
-            //     this.getUserAnswer();
-            //     console.log('AAAAAAAAAAAAAAAAAAa' )
-            // }
-        }
+        getAnswersUser(){
+            if( this.answer_users !== undefined && this.answer_users != null && this.answer_users.length ){
+                if( this.answer_id !== undefined && this.answer_id != null ){
+                    if( this.seller_id !== undefined && this.seller_id != null ){
+                        this.answeredUsersFilter(this.answer_users, this.seller_id);
+
+                        if( this.answer_info.length > 0 && this.answer_info[0] != null ) {
+                            this.answer_info = this.answer_info[0]
+                            this.AnswerTestOnSeen(this.answer_info, this.answer_id, this.seller_id)
+                        }else{
+                            this.answer_info = null;
+                        }
+                    }
+                }
+            }
+        },
+        answeredUsersFilter(answer_users, seller_id){
+            this.answer_info = answer_users.filter( user => {
+                return user.user_id == seller_id
+            });
+        },
     },
     created() {
-        this.getUserAnswer();
+        // this.getUserAnswer();
+        this.getAnswersUser();
     },
     mounted(){
         // this.userClick();
         // this.getUserAnswer();
+        // console.log('answer_id = ', this.answer_id)
+        // console.log('users = ', this.users)
+        // this.getAnswersUser();
+        // console.log('answer_info = ', this.answer_info)
+        // console.log('answered_user = ', this.answered_user)
     }
 }
 </script>

@@ -1,21 +1,33 @@
 <template>
     <div class="d-inline-flex">
-        <span class="pr-1">
-            Cavablar
-        </span>
+<!--        <span class="pr-3">-->
+<!--             Cavablar:-->
+<!--        </span>-->
 
-        <div v-if="old_answers.length > 0" class="">
-            <span v-if="new_answers !== null && new_answers.length" class="badge badge-success">
+        <div v-if="new_answers !== null" class="">
+            <span class="letter__spacing">
+                Yeni
+            </span>
+            <span v-if="new_answers.length > 0" class="badge badge-success mt-n2">
                 {{ new_answers.length }}
             </span>
-
-            <span v-else class="badge badge-secondary">
-                {{ old_answers.length }}
+            <span v-else class="badge badge-secondary mt-n2">
+                0
             </span>
         </div>
 
-        <div v-else class="">
-            <span class="badge badge-secondary">
+        <span class="ml-1 mr-1">
+            |
+        </span>
+
+        <div v-if="old_answers != null" class="">
+            <span class="letter__spacing">
+                 Ümumi
+            </span>
+            <span v-if="old_answers.length > 0" class="badge badge-secondary mt-n2">
+                {{ old_answers.length }}
+            </span>
+            <span v-else class="badge badge-secondary mt-n2">
                 0
             </span>
         </div>
@@ -35,16 +47,16 @@ export default {
     methods: {
         getAnswers(){
             axios.post('/announce/side-bar-answers-vue')
-             .then( res => {
-                 if( res.status == 200 ) {
-                     if( res.data.answers !== undefined ) {
-                         this.getNewAnswers(res.data.answers);
-                     }
-                 }
-             })
-             .catch( err => {
-                 console.log( 'err = ', err.response );
-             });
+                .then( res => {
+                    if( res.status == 200 ) {
+                        if( res.data.answers !== undefined ) {
+                            this.getNewAnswers(res.data.answers);
+                        }
+                    }
+                })
+                .catch( err => {
+                    console.log( 'err = ', err.response );
+                });
         },
         getNewAnswers(answers){
             if( answers != null && answers !== undefined ) {
@@ -54,9 +66,9 @@ export default {
                 answers.forEach(val => {
                     if (val.seen == null) {
                         this.new_answers.push(val);
-                    } else {
-                        this.old_answers.push(val);
                     }
+
+                    this.old_answers.push(val);
                 });
             }
         }

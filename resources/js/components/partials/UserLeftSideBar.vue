@@ -16,7 +16,8 @@
 
                 <tr v-if="auth_check && auth_user.status == 2">
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
-                        <a :href="'/announce/orders'" class="d-lg-block text-black-50 border-bottom border-dark text-decoration-none">
+                        <a :href="'/announce/orders'"
+                           :class="'d-lg-block text-black-50 '+current_page">
                             <user-side-bar-orders
                                 :orders="orders"
                                 :new_orders="new_orders"
@@ -27,7 +28,8 @@
 
                 <tr>
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
-                        <a v-if="auth_check" :href="'/announce/sends'" class="d-lg-block text-black-50 border-bottom border-dark text-decoration-none">
+                        <a v-if="auth_check" :href="'/announce/sends'"
+                           :class="'d-lg-block text-black-50 '+current_page">
                             <span v-if="auth_user_get_sends != null && auth_user_get_sends.length > 0" class="">
                                 Göndərilənlər
                                 <span class="badge badge-success">
@@ -47,7 +49,8 @@
 
                 <tr>
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
-                        <a :href="'/announce/answers'" class="d-lg-block text-black-50 border-bottom border-dark text-decoration-none">
+                        <a :href="'/announce/answers'"
+                           :class="'d-lg-block text-black-50 '+current_page">
                             <user-side-bar-answers :reset_answers="reset_answers"></user-side-bar-answers>
                         </a>
                     </td>
@@ -61,17 +64,31 @@
 <script>
 export default {
     name: "UserLeftSideBar",
-    props: ['auth_user','auth_check','auth_user_get_sends','orders','new_orders','reset_answers'],
+    props: [
+        'auth_user','auth_check',
+        'auth_user_get_sends','orders',
+        'new_orders','reset_answers'
+    ],
     data(){
         return {
-            my_reset_answers:this.reset_answers,
+            current_page: '',
         }
     },
     methods:{
-
+        currentPage(){
+            let curr = window.location.pathname
+            if( curr.indexOf('/answers') != -1 ){
+                this.current_page = 'border-bottom border-dark text-decoration-none'
+            }else if( curr.indexOf('/sends') != -1 ){
+                this.current_page = 'border-bottom border-dark text-decoration-none'
+            }else if( curr.indexOf('/orders') != -1 ){
+                this.current_page = 'border-bottom border-dark text-decoration-none'
+            }
+        }
     },
     mounted() {
-
+        console.log( ' window.location.pathname11 = ',  window.location.pathname.indexOf('/sends') )
+        this.currentPage()
     }
 }
 </script>

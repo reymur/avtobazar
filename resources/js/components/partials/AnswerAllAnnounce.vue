@@ -7,16 +7,16 @@
             </thead>
             <tbody>
                 <tr v-if="answers != null && answers.length > 0" v-for="answer in answers">
-                    <td class="text-left send__all-td pt-3 pb-2">
+                    <td class="col-9 text-left send__all-td pt-3 pb-2">
                         <div class="d-block">
                             <answer-all-modal :answer="answer"></answer-all-modal>
                         </div>
                     </td>
 
-                    <td v-if="answer.user != null && answer.user.length > 0" class="text-right pt-1 pb-1 pr-1 align-middle">
+                    <td v-if="answer.user != null && answer.user.length > 0" class="col-3 text-right pt-1 pb-1 pr-1 align-middle">
                         <show-all-answer-sellers
                             :answer="answer"
-                            :answer_users="answer.getanswerusers"
+                            :answer_users="answer.get_is_answers"
                             @resetAnswersInUserSideBarThree="resetAnswersInUserSideBarFife"
                         ></show-all-answer-sellers>
                     </td>
@@ -48,24 +48,23 @@ export default {
             axios.post('/announce/answers-post')
             .then( res => {
                 if( res.status == 200 ){
-                    if( res.data.answers_all !== undefined ){
+                    if(res.data.answers_all != null && res.data.answers_all !== undefined ){
                         this.answers = res.data.answers_all;
-                        // console.log( 'ANSWERS EMIT --- ', this.answers );
                     }
                 }
             })
             .catch( err => {
-                if( err.response ){
-                    // console.log( 'err_snswers -- ', err.response.data );
+                if( err.response.data != null ){
+                    console.log( 'err_snswers -- ', err.response.data );
                 }
             });
         },
-        resetAnswersInUserSideBarFife(answer_id){
+        resetAnswersInUserSideBarFife(answer){
             this.answersAnnounce();
 
-            if( answer_id != null ) {
+            if( answer.id != null ) {
                 this.$emit('resetAnswersInUserSideBarSex', {
-                    answer_id: answer_id.answer_id
+                    id: answer.id
                 })
             }
         }

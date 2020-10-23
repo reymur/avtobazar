@@ -72,11 +72,6 @@ class Announcement extends Model
         return $this->hasOne(Condition::class, 'id', 'condition');
     }
 
-    public function getanswerusers()
-    {
-        return $this->hasMany(Answer::class, 'announcement_id', 'id');
-    }
-
     public function getIsAnswers()
     {
         return $this->hasMany(Answer::class, 'announcement_id', 'id');

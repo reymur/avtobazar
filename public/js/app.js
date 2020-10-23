@@ -3730,6 +3730,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellers",
   props: ['answer', 'answer_users'],
@@ -3740,13 +3741,15 @@ __webpack_require__.r(__webpack_exports__);
       show_count: true,
       is_seen: [],
       not_seen: [],
+      seen_null_update: [],
       answer_seen: this.answer_users,
       client_for_seen: null,
       errors: null,
       loader: false,
       user_click: false,
       close_modal: false,
-      open_modal_window: false
+      open_modal_window: false,
+      count: null
     };
   },
   methods: {
@@ -3760,71 +3763,100 @@ __webpack_require__.r(__webpack_exports__);
               arr.push(user);
             }
           });
-        }); // console.log( 'AAAAAAAAAAAAA ===== ', arr );
-
+        });
         return this.filtered_answer_users = arr;
       }
     },
-    returnAnsweredUsers: function returnAnsweredUsers() {
+    showAnsweredUsers: function showAnsweredUsers() {
       var _this = this;
 
       if (this.filtered_answer_users.length > 0) {
         this.loader = true;
         this.answered_users = [];
         var i = 0;
-        this.filtered_answer_users.forEach(function (answer) {
+        this.filtered_answer_users.forEach(function (user) {
           setTimeout(function () {
-            _this.answered_users.push(answer);
+            _this.answered_users.push(user);
 
             _this.loader = false;
           }, 200);
         });
       }
     },
-    showSellers: function showSellers() {
-      this.user_click = true;
-      this.returnAnsweredUsers();
+    getAnswersSeller: function getAnswersSeller(seller, answer_id, seller_id) {
+      var arr = this.answer_users.filter(function (user) {
+        return user.user_id == seller_id;
+      });
+      return arr[0];
     },
-    resetAnswersInUserSideBarTwo: function resetAnswersInUserSideBarTwo(answer_id) {
-      if (answer_id != null) {
+    updateUserSeenTable: function updateUserSeenTable(answer_id, seller_id) {
+      var _this2 = this;
+
+      axios.post('/announce/answer-seen-update-vue', {
+        seller_id: seller_id,
+        announcement_id: answer_id
+      }).then(function (res) {
+        if (res.status == 200) {
+          if (res.data.answers !== undefined) {
+            _this2.answer_info2 = res.data.answers;
+            _this2.answer_update = res.status;
+          }
+        }
+      })["catch"](function (err) {
+        if (err.response !== undefined) {
+          if (err.response.data !== undefined) {
+            if (err.response.data.errors !== undefined) {
+              _this2.errors = err.response.data.errors;
+            }
+          }
+        }
+      });
+    },
+    showSellers: function showSellers() {
+      this.answeredUsersFilter(this.answer);
+      this.user_click = true;
+      this.showAnsweredUsers();
+    },
+    resetAnswersInUserSideBarTwo: function resetAnswersInUserSideBarTwo(answer) {
+      if (answer.id != null) {
         this.$emit('resetAnswersInUserSideBarThree', {
-          answer_id: answer_id.answer_id
+          id: answer.id
         });
       }
     },
     getAnswerSeen: function getAnswerSeen() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.answer_users.length > 0) {
         this.answer_users.filter(function (val) {
           if (val.seen != null) {
-            return _this2.is_seen.push(val);
+            return _this3.is_seen.push(val);
           } else {
-            return _this2.not_seen.push(val);
+            return _this3.not_seen.push(val);
           }
         });
       }
     },
     closeButton: function closeButton() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.user_click = false;
       setTimeout(function () {
-        _this3.getAnswerSeen();
+        _this4.getAnswerSeen();
 
-        _this3.is_seen = [];
-        _this3.not_seen = [];
+        _this4.is_seen = [];
+        _this4.not_seen = [];
       }, 400);
       this.close_modal = true;
     }
   },
   created: function created() {
-    this.answeredUsersFilter(this.answer); // this.collAnsweredUsersFilter();
+    this.getAnswerSeen();
   },
   mounted: function mounted() {
     // this.answeredUsersFilter(this.answer);
-    this.getAnswerSeen(); // console.log( 'answer.getisanswers = ',  this.answered_users );
-    // console.log( 'answer_users = ', this.answer_users );
+    // this.getAnswerSeen();
+    console.log('location = ', window.location.pathname);
   }
 });
 
@@ -3888,9 +3920,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    resetAnswersInUserSideBarSeven: function resetAnswersInUserSideBarSeven(answer_id) {
-      if (answer_id != null) {
-        return this.reset_answers = answer_id.answer_id;
+    resetAnswersInUserSideBarSeven: function resetAnswersInUserSideBarSeven(answer) {
+      if (answer.id != null) {
+        this.reset_answers = answer.id;
       }
     }
   },
@@ -3959,21 +3991,22 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/announce/answers-post').then(function (res) {
         if (res.status == 200) {
-          if (res.data.answers_all !== undefined) {
-            _this.answers = res.data.answers_all; // console.log( 'ANSWERS EMIT --- ', this.answers );
+          if (res.data.answers_all != null && res.data.answers_all !== undefined) {
+            _this.answers = res.data.answers_all;
           }
         }
       })["catch"](function (err) {
-        if (err.response) {// console.log( 'err_snswers -- ', err.response.data );
+        if (err.response.data != null) {
+          console.log('err_snswers -- ', err.response.data);
         }
       });
     },
-    resetAnswersInUserSideBarFife: function resetAnswersInUserSideBarFife(answer_id) {
+    resetAnswersInUserSideBarFife: function resetAnswersInUserSideBarFife(answer) {
       this.answersAnnounce();
 
-      if (answer_id != null) {
+      if (answer.id != null) {
         this.$emit('resetAnswersInUserSideBarSex', {
-          answer_id: answer_id.answer_id
+          id: answer.id
         });
       }
     }
@@ -3985,6 +4018,110 @@ __webpack_require__.r(__webpack_exports__);
   //     console.log( 'AAAAAAQQQQQ --- ', this.answer_users )
   // }
 
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UserSideBarOrders",
+  props: ['reset_answers'],
+  data: function data() {
+    return {
+      old_answers: [],
+      new_answers: []
+    };
+  },
+  methods: {
+    getAnswers: function getAnswers() {
+      var _this = this;
+
+      axios.post('/announce/side-bar-answers-vue').then(function (res) {
+        if (res.status == 200) {
+          if (res.data.answers !== undefined) {
+            _this.getNewAnswers(res.data.answers);
+          }
+        }
+      })["catch"](function (err) {
+        console.log('err = ', err.response);
+      });
+    },
+    getNewAnswers: function getNewAnswers(answers) {
+      var _this2 = this;
+
+      if (answers != null && answers !== undefined) {
+        this.new_answers = [];
+        this.old_answers = [];
+        answers.forEach(function (val) {
+          if (val.seen == null) {
+            _this2.new_answers.push(val);
+          }
+
+          _this2.old_answers.push(val);
+        });
+      }
+    }
+  },
+  watch: {
+    reset_answers: function reset_answers() {
+      var _this3 = this;
+
+      if (this.new_answers != null) {
+        setTimeout(function () {
+          _this3.getAnswers();
+        }, 1000);
+      }
+    }
+  },
+  created: function created() {
+    this.getAnswers();
+  },
+  mounted: function mounted() {// this.getAnswers();
+  }
 });
 
 /***/ }),
@@ -4230,37 +4367,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
-  props: ['answer_id', 'seller_id', 'close_modal'],
+  props: ['answer_users', 'answer_id', 'seller_id', 'close_modal'],
   data: function data() {
     return {
       answer_info: null,
       answer_info2: null,
+      answer_update: null,
       loader: false
     };
   },
   methods: {
-    getUserAnswer: function getUserAnswer() {
-      var _this = this;
-
-      this.loader = true;
-      axios.post('/announce/get-show-all-answer-vue', {
-        answer_id: this.answer_id,
-        seller_id: this.seller_id
-      }).then(function (res) {
-        if (res.status == 200) {
-          if (res.data.answer !== undefined) {
-            _this.answer_info = res.data.answer;
-            _this.loader = false;
-
-            _this.AnswerTestOnSeen(res.data.answer, _this.answer_id, _this.seller_id); // console.log('this.answer_info - ', this.answer_info.seen, 'Status = ',res.status);
-
-          }
-        } // console.log('res - ', res.data);
-
-      })["catch"](function (err) {
-        console.log('this.answer_info - ', err.data);
-      });
-    },
     AnswerTestOnSeen: function AnswerTestOnSeen(answer_info, answer_id, seller_id) {
       if (answer_info != null && answer_info !== undefined) {
         if (answer_info.seen == null && answer_info.seen !== undefined) {
@@ -4272,8 +4388,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     collGetNewAnswers: function collGetNewAnswers(answer_id, seller_id) {
-      // setTimeout(() => {
-      this.getNewUserAnswers(answer_id, seller_id); // }, 200);
+      var _this = this;
+
+      setTimeout(function () {
+        _this.getNewUserAnswers(answer_id, seller_id);
+      }, 200);
     },
     getNewUserAnswers: function getNewUserAnswers(answer_id, seller_id) {
       var _this2 = this;
@@ -4285,9 +4404,8 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           if (res.data.answers !== undefined) {
             _this2.answer_info2 = res.data.answers;
-            console.log('ANSWER new - ', res.data.answers);
-          } // console.log('ANSWER new2 - ', res.data.answers )
-
+            _this2.answer_update = res.status;
+          }
         }
       })["catch"](function (err) {
         if (err.response !== undefined) {
@@ -4302,21 +4420,43 @@ __webpack_require__.r(__webpack_exports__);
     resetAnswersInUserSideBar: function resetAnswersInUserSideBar(answer_id) {
       if (answer_id != null) {
         this.$emit('resetAnswersInUserSideBarOne', {
-          answer_id: answer_id
+          id: answer_id
         });
       }
     },
-    userClick: function userClick() {// if(this.close_modal == true ){
-      //     this.getUserAnswer();
-      //     console.log('AAAAAAAAAAAAAAAAAAa' )
-      // }
+    getAnswersUser: function getAnswersUser() {
+      if (this.answer_users !== undefined && this.answer_users != null && this.answer_users.length) {
+        if (this.answer_id !== undefined && this.answer_id != null) {
+          if (this.seller_id !== undefined && this.seller_id != null) {
+            this.answeredUsersFilter(this.answer_users, this.seller_id);
+
+            if (this.answer_info.length > 0 && this.answer_info[0] != null) {
+              this.answer_info = this.answer_info[0];
+              this.AnswerTestOnSeen(this.answer_info, this.answer_id, this.seller_id);
+            } else {
+              this.answer_info = null;
+            }
+          }
+        }
+      }
+    },
+    answeredUsersFilter: function answeredUsersFilter(answer_users, seller_id) {
+      this.answer_info = answer_users.filter(function (user) {
+        return user.user_id == seller_id;
+      });
     }
   },
   created: function created() {
-    this.getUserAnswer();
+    // this.getUserAnswer();
+    this.getAnswersUser();
   },
   mounted: function mounted() {// this.userClick();
     // this.getUserAnswer();
+    // console.log('answer_id = ', this.answer_id)
+    // console.log('users = ', this.users)
+    // this.getAnswersUser();
+    // console.log('answer_info = ', this.answer_info)
+    // console.log('answered_user = ', this.answered_user)
   }
 });
 
@@ -4391,16 +4531,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserLeftSideBar",
   props: ['auth_user', 'auth_check', 'auth_user_get_sends', 'orders', 'new_orders', 'reset_answers'],
   data: function data() {
     return {
-      my_reset_answers: this.reset_answers
+      current_page: ''
     };
   },
-  methods: {},
-  mounted: function mounted() {}
+  methods: {
+    currentPage: function currentPage() {
+      var curr = window.location.pathname;
+
+      if (curr.indexOf('/answers') != -1) {
+        this.current_page = 'border-bottom border-dark text-decoration-none';
+      } else if (curr.indexOf('/sends') != -1) {
+        this.current_page = 'border-bottom border-dark text-decoration-none';
+      } else if (curr.indexOf('/orders') != -1) {
+        this.current_page = 'border-bottom border-dark text-decoration-none';
+      }
+    }
+  },
+  mounted: function mounted() {
+    console.log(' window.location.pathname11 = ', window.location.pathname.indexOf('/sends'));
+    this.currentPage();
+  }
 });
 
 /***/ }),
@@ -5261,12 +5419,10 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           if (res.data.answers !== undefined) {
             _this.getNewAnswers(res.data.answers);
-
-            console.log('res111 = ', res.data.answers);
           }
         }
       })["catch"](function (err) {
-        console.log('err111 = ', err.response);
+        console.log('err = ', err.response);
       });
     },
     getNewAnswers: function getNewAnswers(answers) {
@@ -5292,13 +5448,14 @@ __webpack_require__.r(__webpack_exports__);
       if (this.new_answers != null) {
         setTimeout(function () {
           _this3.getAnswers();
-        }, 1500);
+        }, 1000);
       }
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getAnswers();
-    console.log('AAAAAAAAAAAAAAa', this.reset_answers);
+  },
+  mounted: function mounted() {// this.getAnswers();
   }
 });
 
@@ -44565,6 +44722,7 @@ var render = function() {
                                           "show-all-answer-sellers-answers-show-table",
                                           {
                                             attrs: {
+                                              answer_users: _vm.answer_users,
                                               answer_id: _vm.answer.id,
                                               seller_id: seller.id,
                                               close_modal: _vm.close_modal
@@ -44673,11 +44831,16 @@ var render = function() {
               [
                 _vm.answers_all != null
                   ? _c("div", {}, [
-                      _c("div", { staticClass: "row mb-4 ml-1" }, [
-                        _vm._v(
-                          "\n                        'partials.answer_count_show'\n                    "
-                        )
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "row mb-4 ml-1" },
+                        [
+                          _c("answer-count-show", {
+                            attrs: { reset_answers: _vm.reset_answers }
+                          })
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _vm.answers_all.length > 0
                         ? _c(
@@ -44748,24 +44911,31 @@ var render = function() {
         _vm._l(_vm.answers, function(answer) {
           return _vm.answers != null && _vm.answers.length > 0
             ? _c("tr", [
-                _c("td", { staticClass: "text-left send__all-td pt-3 pb-2" }, [
-                  _c(
-                    "div",
-                    { staticClass: "d-block" },
-                    [_c("answer-all-modal", { attrs: { answer: answer } })],
-                    1
-                  )
-                ]),
+                _c(
+                  "td",
+                  { staticClass: "col-9 text-left send__all-td pt-3 pb-2" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "d-block" },
+                      [_c("answer-all-modal", { attrs: { answer: answer } })],
+                      1
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 answer.user != null && answer.user.length > 0
                   ? _c(
                       "td",
-                      { staticClass: "text-right pt-1 pb-1 pr-1 align-middle" },
+                      {
+                        staticClass:
+                          "col-3 text-right pt-1 pb-1 pr-1 align-middle"
+                      },
                       [
                         _c("show-all-answer-sellers", {
                           attrs: {
                             answer: answer,
-                            answer_users: answer.getanswerusers
+                            answer_users: answer.get_is_answers
                           },
                           on: {
                             resetAnswersInUserSideBarThree:
@@ -44836,6 +45006,74 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "d-inline-flex" }, [
+    _vm.new_answers !== null
+      ? _c("div", {}, [
+          _c("span", { staticClass: "letter__spacing" }, [
+            _vm._v("\n                Yeni\n            ")
+          ]),
+          _vm._v(" "),
+          _vm.new_answers.length > 0
+            ? _c("span", { staticClass: "badge badge-success mt-n2" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.new_answers.length) +
+                    "\n            "
+                )
+              ])
+            : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                _vm._v("\n                0\n            ")
+              ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("span", { staticClass: "ml-1 mr-1" }, [
+      _vm._v("\n            |\n        ")
+    ]),
+    _vm._v(" "),
+    _vm.old_answers != null
+      ? _c("div", {}, [
+          _c("span", { staticClass: "letter__spacing" }, [
+            _vm._v("\n                 Ümumi\n            ")
+          ]),
+          _vm._v(" "),
+          _vm.old_answers.length > 0
+            ? _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.old_answers.length) +
+                    "\n            "
+                )
+              ])
+            : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                _vm._v("\n                0\n            ")
+              ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -45424,8 +45662,7 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          staticClass:
-                            "d-lg-block text-black-50 border-bottom border-dark text-decoration-none",
+                          class: "d-lg-block text-black-50 " + _vm.current_page,
                           attrs: { href: "/announce/orders" }
                         },
                         [
@@ -45452,8 +45689,7 @@ var render = function() {
                     ? _c(
                         "a",
                         {
-                          staticClass:
-                            "d-lg-block text-black-50 border-bottom border-dark text-decoration-none",
+                          class: "d-lg-block text-black-50 " + _vm.current_page,
                           attrs: { href: "/announce/sends" }
                         },
                         [
@@ -45503,8 +45739,7 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      staticClass:
-                        "d-lg-block text-black-50 border-bottom border-dark text-decoration-none",
+                      class: "d-lg-block text-black-50 " + _vm.current_page,
                       attrs: { href: "/announce/answers" }
                     },
                     [
@@ -73467,6 +73702,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('register-not-modal', __web
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('order-answer-modal', __webpack_require__(/*! ./components/modal/OrderAnswerModal.vue */ "./resources/js/components/modal/OrderAnswerModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('user-left-side-bar', __webpack_require__(/*! ./components/partials/UserLeftSideBar.vue */ "./resources/js/components/partials/UserLeftSideBar.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('user-side-bar-orders', __webpack_require__(/*! ./components/side/UserSideBarOrders.vue */ "./resources/js/components/side/UserSideBarOrders.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('answer-count-show', __webpack_require__(/*! ./components/partials/AnswerCountShow.vue */ "./resources/js/components/partials/AnswerCountShow.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('answers', __webpack_require__(/*! ./components/pages/Answers.vue */ "./resources/js/components/pages/Answers.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('answer-all-announce', __webpack_require__(/*! ./components/partials/AnswerAllAnnounce.vue */ "./resources/js/components/partials/AnswerAllAnnounce.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('user-side-bar-answers', __webpack_require__(/*! ./components/side/UserSideBarAnswers.vue */ "./resources/js/components/side/UserSideBarAnswers.vue")["default"]);
@@ -74316,6 +74552,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerAllAnnounce_vue_vue_type_template_id_74f0088c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerAllAnnounce_vue_vue_type_template_id_74f0088c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/AnswerCountShow.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/partials/AnswerCountShow.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true& */ "./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true&");
+/* harmony import */ var _AnswerCountShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnswerCountShow.vue?vue&type=script&lang=js& */ "./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnswerCountShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1fdc883c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/partials/AnswerCountShow.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerCountShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnswerCountShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/AnswerCountShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerCountShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/AnswerCountShow.vue?vue&type=template&id=1fdc883c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnswerCountShow_vue_vue_type_template_id_1fdc883c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

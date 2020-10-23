@@ -323,7 +323,7 @@ class AnnouncementController extends Controller
         if (Auth::check()) {
             $answers_all = $this->getAllAnswers();
 
-//            dd( $answers_all->get()[5]->getIsAnswers[8]->user );
+//            dd( $answers_all->get()[5]->getanswerusers );
 //            dd( mt_rand(0, 999) );
 
             $answers_all = $answers_all;
@@ -338,7 +338,7 @@ class AnnouncementController extends Controller
     }
 
     public function getAllAnswers(){
-        $answers_all = Announcement::with('getIsAnswers','getanswerusers','user')
+        $answers_all = Announcement::with('getIsAnswers','user')
             ->where('user_id',Auth::user()->id)
              ->whereHas('getIsAnswers', function(Builder $builder){
                  return $builder->where('id','!=', null);

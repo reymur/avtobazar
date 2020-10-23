@@ -90,14 +90,15 @@
                                             </div>
                                         </div>
                                         <div v-if="seller.id && answer.id" class="col-7 text-right ml-auto pl-0 pr-0">
-                                                <show-all-answer-sellers-answers-show-table
-                                                    :answer_id="answer.id"
-                                                    :seller_id="seller.id"
-                                                    :close_modal="close_modal"
-                                                    @resetAnswersInUserSideBarOne="resetAnswersInUserSideBarTwo"
-                                                >
-                                                </show-all-answer-sellers-answers-show-table>
-                                            </div>
+                                            <show-all-answer-sellers-answers-show-table
+                                                :answer_users="answer_users"
+                                                :answer_id="answer.id"
+                                                :seller_id="seller.id"
+                                                :close_modal="close_modal"
+                                                @resetAnswersInUserSideBarOne="resetAnswersInUserSideBarTwo"
+                                            >
+                                            </show-all-answer-sellers-answers-show-table>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -124,6 +125,7 @@ export default {
             show_count: true,
             is_seen: [],
             not_seen: [],
+            seen_null_update:[],
             answer_seen: this.answer_users,
             client_for_seen: null,
             errors: null,
@@ -131,6 +133,7 @@ export default {
             user_click: false,
             close_modal: false,
             open_modal_window: false,
+            count: null,
         }
     },
     methods:{
@@ -144,31 +147,62 @@ export default {
                         }
                     });
                 });
-                // console.log( 'AAAAAAAAAAAAA ===== ', arr );
+
                 return this.filtered_answer_users = arr;
             }
         },
-        returnAnsweredUsers(){
+        showAnsweredUsers(){
             if( this.filtered_answer_users.length > 0 ){
                 this.loader = true;
                 this.answered_users = [];
                 let i = 0;
-                this.filtered_answer_users.forEach(( answer ) => {
+                this.filtered_answer_users.forEach(( user ) => {
                     setTimeout(() => {
-                        this.answered_users.push(answer);
+                        this.answered_users.push(user);
                         this.loader = false;
                     },200);
                 });
             }
         },
-        showSellers(){
-            this.user_click = true;
-            this.returnAnsweredUsers();
+        getAnswersSeller(seller, answer_id, seller_id){
+            let arr = this.answer_users.filter( user => {
+                return user.user_id == seller_id
+            });
+
+            return arr[0];
         },
-        resetAnswersInUserSideBarTwo(answer_id){
-            if( answer_id != null ) {
+        updateUserSeenTable(answer_id, seller_id){
+            axios.post('/announce/answer-seen-update-vue',{
+                seller_id:seller_id,
+                announcement_id:answer_id,
+            })
+                .then( res => {
+                    if( res.status == 200 ) {
+                        if( res.data.answers !== undefined ) {
+                            this.answer_info2 = res.data.answers;
+                            this.answer_update = res.status;
+                        }
+                    }
+                })
+                .catch( err => {
+                    if( err.response !== undefined ) {
+                        if( err.response.data !== undefined ) {
+                            if( err.response.data.errors !== undefined ) {
+                                this.errors = err.response.data.errors;
+                            }
+                        }
+                    }
+                });
+        },
+        showSellers(){
+            this.answeredUsersFilter(this.answer);
+            this.user_click = true;
+            this.showAnsweredUsers();
+        },
+        resetAnswersInUserSideBarTwo(answer){
+            if( answer.id != null ) {
                 this.$emit('resetAnswersInUserSideBarThree', {
-                    answer_id: answer_id.answer_id
+                    id: answer.id
                 });
             }
         },
@@ -196,14 +230,12 @@ export default {
         }
     },
     created() {
-        this.answeredUsersFilter(this.answer);
-        // this.collAnsweredUsersFilter();
+        this.getAnswerSeen();
     },
     mounted(){
         // this.answeredUsersFilter(this.answer);
-        this.getAnswerSeen();
-        // console.log( 'answer.getisanswers = ',  this.answered_users );
-        // console.log( 'answer_users = ', this.answer_users );
+        // this.getAnswerSeen();
+        console.log( 'location = ',  window.location.pathname );
     }
 }
 </script>

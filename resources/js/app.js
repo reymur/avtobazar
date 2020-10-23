@@ -20,6 +20,7 @@ Vue.component('register-not-modal', require('./components/register/Register.vue'
 Vue.component('order-answer-modal', require('./components/modal/OrderAnswerModal.vue').default);
 Vue.component('user-left-side-bar', require('./components/partials/UserLeftSideBar.vue').default);
 Vue.component('user-side-bar-orders', require('./components/side/UserSideBarOrders.vue').default);
+Vue.component('answer-count-show', require('./components/partials/AnswerCountShow.vue').default);
 Vue.component('answers', require('./components/pages/Answers.vue').default);
 Vue.component('answer-all-announce', require('./components/partials/AnswerAllAnnounce.vue').default);
 Vue.component('user-side-bar-answers', require('./components/side/UserSideBarAnswers.vue').default);

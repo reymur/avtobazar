@@ -20,7 +20,7 @@
                 <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
                     <div v-if="answers_all != null" class="">
                         <div class="row mb-4 ml-1">
-                            'partials.answer_count_show'
+                            <answer-count-show :reset_answers="reset_answers"></answer-count-show>
                         </div>
 
                         <div v-if="answers_all.length > 0" class="">
@@ -52,9 +52,9 @@ export default {
         }
     },
     methods: {
-        resetAnswersInUserSideBarSeven(answer_id){
-            if( answer_id != null ) {
-                return this.reset_answers = answer_id.answer_id;
+        resetAnswersInUserSideBarSeven(answer){
+            if( answer.id != null ) {
+                this.reset_answers = answer.id;
             }
         },
     },
