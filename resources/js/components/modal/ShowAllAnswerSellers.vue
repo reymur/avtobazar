@@ -134,21 +134,28 @@ export default {
             close_modal: false,
             open_modal_window: false,
             count: null,
+            a: [],
+            b: [],
         }
     },
     methods:{
         answeredUsersFilter(answer){
             let arr = [];
+            let new_answers = [];
+            let old_answers = [];
+            this.filtered_answer_users = [];
+
             if( answer.user != null ){
                 answer.user.forEach((user) => {
                     answer.get_is_answers.forEach((getisanswers) => {
                         if( user.id == getisanswers.user_id ){
-                            arr.push(user);
+                            if ( getisanswers.seen == null ) new_answers.push(user)
+                            if ( getisanswers.seen != null ) old_answers.push(user)
                         }
                     });
                 });
 
-                return this.filtered_answer_users = arr;
+                return this.filtered_answer_users = arr.concat(new_answers, old_answers);
             }
         },
         showAnsweredUsers(){
@@ -156,20 +163,14 @@ export default {
                 this.loader = true;
                 this.answered_users = [];
                 let i = 0;
+
                 this.filtered_answer_users.forEach(( user ) => {
                     setTimeout(() => {
                         this.answered_users.push(user);
                         this.loader = false;
-                    },200);
+                    },100);
                 });
             }
-        },
-        getAnswersSeller(seller, answer_id, seller_id){
-            let arr = this.answer_users.filter( user => {
-                return user.user_id == seller_id
-            });
-
-            return arr[0];
         },
         updateUserSeenTable(answer_id, seller_id){
             axios.post('/announce/answer-seen-update-vue',{
@@ -235,7 +236,7 @@ export default {
     mounted(){
         // this.answeredUsersFilter(this.answer);
         // this.getAnswerSeen();
-        console.log( 'location = ',  window.location.pathname );
+        // console.log( 'this.filtered_answer_users = ',  this.filtered_answer_users );
     }
 }
 </script>

@@ -3749,22 +3749,28 @@ __webpack_require__.r(__webpack_exports__);
       user_click: false,
       close_modal: false,
       open_modal_window: false,
-      count: null
+      count: null,
+      a: [],
+      b: []
     };
   },
   methods: {
     answeredUsersFilter: function answeredUsersFilter(answer) {
       var arr = [];
+      var new_answers = [];
+      var old_answers = [];
+      this.filtered_answer_users = [];
 
       if (answer.user != null) {
         answer.user.forEach(function (user) {
           answer.get_is_answers.forEach(function (getisanswers) {
             if (user.id == getisanswers.user_id) {
-              arr.push(user);
+              if (getisanswers.seen == null) new_answers.push(user);
+              if (getisanswers.seen != null) old_answers.push(user);
             }
           });
         });
-        return this.filtered_answer_users = arr;
+        return this.filtered_answer_users = arr.concat(new_answers, old_answers);
       }
     },
     showAnsweredUsers: function showAnsweredUsers() {
@@ -3779,15 +3785,9 @@ __webpack_require__.r(__webpack_exports__);
             _this.answered_users.push(user);
 
             _this.loader = false;
-          }, 200);
+          }, 100);
         });
       }
-    },
-    getAnswersSeller: function getAnswersSeller(seller, answer_id, seller_id) {
-      var arr = this.answer_users.filter(function (user) {
-        return user.user_id == seller_id;
-      });
-      return arr[0];
     },
     updateUserSeenTable: function updateUserSeenTable(answer_id, seller_id) {
       var _this2 = this;
@@ -3853,10 +3853,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getAnswerSeen();
   },
-  mounted: function mounted() {
-    // this.answeredUsersFilter(this.answer);
+  mounted: function mounted() {// this.answeredUsersFilter(this.answer);
     // this.getAnswerSeen();
-    console.log('location = ', window.location.pathname);
+    // console.log( 'this.filtered_answer_users = ',  this.filtered_answer_users );
   }
 });
 
@@ -4441,7 +4440,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     answeredUsersFilter: function answeredUsersFilter(answer_users, seller_id) {
-      this.answer_info = answer_users.filter(function (user) {
+      return this.answer_info = answer_users.filter(function (user) {
         return user.user_id == seller_id;
       });
     }

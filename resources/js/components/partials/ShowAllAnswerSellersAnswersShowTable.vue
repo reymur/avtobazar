@@ -141,8 +141,8 @@ export default {
             }
         },
         answeredUsersFilter(answer_users, seller_id){
-            this.answer_info = answer_users.filter( user => {
-                return user.user_id == seller_id
+            return this.answer_info = answer_users.filter( user => {
+                return user.user_id == seller_id;
             });
         },
     },

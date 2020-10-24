@@ -16,6 +16,10 @@ use NunoMaduro\Collision\Provider;
 
 class AnnouncementController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('announcements.index')->with('sends', $this->sendsCount());
