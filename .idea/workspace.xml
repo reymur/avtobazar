@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="" />
+    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -322,7 +331,15 @@
       <workItem from="1603359638190" duration="15303000" />
       <workItem from="1603375857086" duration="4761000" />
       <workItem from="1603491818696" duration="4386000" />
-      <workItem from="1603532263301" duration="9987000" />
+      <workItem from="1603532263301" duration="10052000" />
+      <workItem from="1603711382787" duration="7556000" />
+      <workItem from="1603796358446" duration="8527000" />
+      <workItem from="1603830703080" duration="10416000" />
+      <workItem from="1603882185475" duration="11109000" />
+      <workItem from="1603894294658" duration="3950000" />
+      <workItem from="1603922347450" duration="3430000" />
+      <workItem from="1603972216365" duration="9737000" />
+      <workItem from="1603982338491" duration="5786000" />
     </task>
     <servers />
   </component>
@@ -406,13 +423,13 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1598037059930" />
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1603367074558">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1603977418655">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1603367074558" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603319167404">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1603977418655" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603983730116">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1603319167404" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1603983730116" />
   </component>
 </project>

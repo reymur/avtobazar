@@ -2882,6 +2882,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllModal",
   props: ['answer'],
@@ -3731,12 +3750,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellers",
-  props: ['answer', 'answer_users'],
+  props: ['answer', 'new_answers_count', 'answer_users', 'collAnsweredUsersFilter'],
   data: function data() {
     return {
       answered_users: [],
+      answers_count: this.new_answers_count,
       filtered_answer_users: 0,
       show_count: true,
       is_seen: [],
@@ -3750,9 +3780,46 @@ __webpack_require__.r(__webpack_exports__);
       close_modal: false,
       open_modal_window: false,
       count: null,
-      a: [],
-      b: []
+      show_only_new_answers: []
     };
+  },
+  watch: {
+    collAnsweredUsersFilter: function collAnsweredUsersFilter() {
+      var _this = this;
+
+      if (this.collAnsweredUsersFilter === true) {
+        var answer = [];
+        var new_answers = []; //
+        // if( this.answer_users.length > 0 ){
+        //     this.answer_users.filter( val => {
+        //         if( val.seen == null ){
+        //             return this.show_only_new_answers.push(val)
+        //         }
+        //     });
+        // }
+
+        console.log('answer = ', this.answer);
+        console.log('new_answers_count = ', this.answers_count);
+
+        if (this.answers_count != null) {
+          this.answers_count.forEach(function (answer) {
+            answer.get_is_answers.forEach(function (isanswers) {
+              // if (user.id == isanswers.user_id) {
+              if (isanswers.seen == null) {
+                new_answers.push(answer);
+                answer = _this.answer;
+              } // }
+
+            });
+          }); // this.answer = answer;
+
+          this.show_only_new_answers.push(new_answers);
+          console.log('show_only_new_answers = ', this.show_only_new_answers.length);
+        }
+      } else {
+        this.show_only_new_answers = [];
+      }
+    }
   },
   methods: {
     answeredUsersFilter: function answeredUsersFilter(answer) {
@@ -3774,44 +3841,43 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showAnsweredUsers: function showAnsweredUsers() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.filtered_answer_users.length > 0) {
         this.loader = true;
         this.answered_users = [];
-        var i = 0;
         this.filtered_answer_users.forEach(function (user) {
           setTimeout(function () {
-            _this.answered_users.push(user);
+            _this2.answered_users.push(user);
 
-            _this.loader = false;
+            _this2.loader = false;
           }, 100);
         });
       }
     },
-    updateUserSeenTable: function updateUserSeenTable(answer_id, seller_id) {
-      var _this2 = this;
-
-      axios.post('/announce/answer-seen-update-vue', {
-        seller_id: seller_id,
-        announcement_id: answer_id
-      }).then(function (res) {
-        if (res.status == 200) {
-          if (res.data.answers !== undefined) {
-            _this2.answer_info2 = res.data.answers;
-            _this2.answer_update = res.status;
-          }
-        }
-      })["catch"](function (err) {
-        if (err.response !== undefined) {
-          if (err.response.data !== undefined) {
-            if (err.response.data.errors !== undefined) {
-              _this2.errors = err.response.data.errors;
-            }
-          }
-        }
-      });
-    },
+    // updateUserSeenTable(answer_id, seller_id){
+    //     axios.post('/announce/answer-seen-update-vue',{
+    //         seller_id:seller_id,
+    //         announcement_id:answer_id,
+    //     })
+    //         .then( res => {
+    //             if( res.status == 200 ) {
+    //                 if( res.data.answers !== undefined ) {
+    //                     this.answer_info2 = res.data.answers;
+    //                     this.answer_update = res.status;
+    //                 }
+    //             }
+    //         })
+    //         .catch( err => {
+    //             if( err.response !== undefined ) {
+    //                 if( err.response.data !== undefined ) {
+    //                     if( err.response.data.errors !== undefined ) {
+    //                         this.errors = err.response.data.errors;
+    //                     }
+    //                 }
+    //             }
+    //         });
+    // },
     showSellers: function showSellers() {
       this.answeredUsersFilter(this.answer);
       this.user_click = true;
@@ -3841,6 +3907,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.user_click = false;
+      this.$emit('resetAnswersInUserSideBarThree', {
+        id: Math.random(9)
+      });
       setTimeout(function () {
         _this4.getAnswerSeen();
 
@@ -3910,15 +3979,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersTable",
   props: ['answers_all', 'auth_user', 'auth_check', 'new_orders', 'orders', 'auth_user_get_sends'],
   data: function data() {
     return {
-      reset_answers: null
+      reset_answers: null,
+      showOnlyNewAnswers: false,
+      showAllAnswers: false,
+      collAnsweredUsersFilter: false
     };
   },
   methods: {
+    showOnlyNewAnswersParent: function showOnlyNewAnswersParent() {
+      this.showOnlyNewAnswers = true;
+      this.collAnsweredUsersFilter = true;
+      this.showAllAnswers = false;
+    },
+    showAllAnswersParent: function showAllAnswersParent() {
+      this.showOnlyNewAnswers = false;
+      this.collAnsweredUsersFilter = false;
+      this.showAllAnswers = true;
+    },
     resetAnswersInUserSideBarSeven: function resetAnswersInUserSideBarSeven(answer) {
       if (answer.id != null) {
         this.reset_answers = answer.id;
@@ -3976,27 +4067,102 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllAnnounce",
+  props: ['showOnlyNewAnswers', 'showAllAnswers', 'collAnsweredUsersFilter'],
   data: function data() {
     return {
-      answers: null,
-      answer_users: null
+      answers: [],
+      new_answers: [],
+      answer_users: null,
+      isTrue: false
     };
   },
+  watch: {
+    showOnlyNewAnswers: function showOnlyNewAnswers() {
+      if (this.showOnlyNewAnswers) {
+        this.answersAnnounce(true);
+        console.log('Old answers1 = ', this.answers);
+      }
+    },
+    showAllAnswers: function showAllAnswers() {
+      if (this.showAllAnswers) {
+        this.answersAnnounce(false);
+        console.log('Old answers2 = ', this.answers);
+      }
+    },
+    isTrue: function isTrue() {
+      if (this.isTrue) {
+        this.getNewAnswers();
+        console.log('New answers = ', this.answers);
+      }
+    }
+  },
   methods: {
-    answersAnnounce: function answersAnnounce() {
+    getNewAnswers: function getNewAnswers() {
+      var i = 0;
+      var j = 0;
+      var arr = [];
+      var new_answers = [];
+      this.answers.forEach(function (answer) {
+        if (answer.user != null) {
+          answer.user.forEach(function (user) {
+            answer.get_is_answers.filter(function (getisanswers) {
+              if (user.id == getisanswers.user_id) {
+                if (getisanswers.seen == null) arr.push(answer);
+              }
+            });
+          });
+        }
+      });
+      new_answers = arr.filter(function (answer) {
+        if (arr[i++] != arr[++j]) return answer;
+      });
+      this.new_answers[0] = new_answers;
+      this.new_answers[1] = arr;
+      console.log('answers -- ', this.new_answers[0].length > 0);
+    },
+    answersAnnounce: function answersAnnounce(count) {
       var _this = this;
 
       axios.post('/announce/answers-post').then(function (res) {
         if (res.status == 200) {
           if (res.data.answers_all != null && res.data.answers_all !== undefined) {
             _this.answers = res.data.answers_all;
+            if (count) _this.isTrue = true;else _this.isTrue = false;
           }
         }
       })["catch"](function (err) {
         if (err.response.data != null) {
-          console.log('err_snswers -- ', err.response.data);
+          console.log('err_answers -- ', err.response.data);
         }
       });
     },
@@ -4014,7 +4180,12 @@ __webpack_require__.r(__webpack_exports__);
     this.answersAnnounce();
   } // mounted(){
   //     this.answersAnnounce();
-  //     console.log( 'AAAAAAQQQQQ --- ', this.answer_users )
+  //     let arr = [];
+  //     arr = [{
+  //         a:'qqqqqqq'
+  //     }];
+  //
+  //     console.log( 'Old answers --- ', this.answers )
   // }
 
 });
@@ -4066,6 +4237,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
   props: ['reset_answers'],
@@ -4076,6 +4256,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    showOnlyNewAnswers: function showOnlyNewAnswers(e) {
+      e.preventDefault();
+      this.$emit('showOnlyNewAnswersInParent');
+    },
+    showAllAnswers: function showAllAnswers(e) {
+      e.preventDefault();
+      this.$emit('showAllnswersInParent');
+    },
     getAnswers: function getAnswers() {
       var _this = this;
 
@@ -4366,7 +4554,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
-  props: ['answer_users', 'answer_id', 'seller_id', 'close_modal'],
+  props: ['answer_users', 'answer_id', 'seller_id', 'close_modal', 'clickToNewAnswers'],
   data: function data() {
     return {
       answer_info: null,
@@ -4440,9 +4628,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     answeredUsersFilter: function answeredUsersFilter(answer_users, seller_id) {
-      return this.answer_info = answer_users.filter(function (user) {
+      var arr = [];
+      arr = this.answer_info = answer_users.filter(function (user) {
         return user.user_id == seller_id;
       });
+      return arr;
     }
   },
   created: function created() {
@@ -43025,26 +43215,28 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _vm.answer.spare_parts
-                    ? _c(
-                        "span",
-                        { staticClass: "text-uppercase letter__spacing" },
-                        [
+                    ? _c("span", { staticClass: "text-black-50" }, [
+                        _c("span", {}, [
                           _vm._v(
-                            "\n                                " +
+                            "\n                                    " +
                               _vm._s(_vm.answer.created_at) +
-                              "\n                            "
+                              "\n                                "
                           )
-                        ]
-                      )
-                    : _c(
-                        "span",
-                        { staticClass: "text-uppercase letter__spacing" },
-                        [
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "ml-2" }, [
                           _vm._v(
-                            "\n                                Yox\n                            "
+                            "\n                                    " +
+                              _vm._s(_vm.answer.city) +
+                              "\n                                "
                           )
-                        ]
-                      )
+                        ])
+                      ])
+                    : _c("span", { staticClass: "letter__spacing" }, [
+                        _vm._v(
+                          "\n                                Yox\n                            "
+                        )
+                      ])
                 ]
               ),
               _vm._v(" "),
@@ -43055,20 +43247,26 @@ var render = function() {
               _c("table", { staticClass: "table table-bordered" }, [
                 _c("tbody", [
                   _vm.answer.spare_parts
-                    ? _c("tr", [
+                    ? _c("tr", {}, [
                         _c(
                           "td",
                           {
-                            staticClass: "text-right text-black-50 py-2",
-                            attrs: { scope: "row" }
+                            staticClass: "text-break text-center p-2",
+                            attrs: { colspan: "2" }
                           },
-                          [_vm._v("Ehtiyat hissəsi:")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "text-break text-center py-2" },
-                          [_vm._v(_vm._s(_vm.answer.spare_parts))]
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "p-2 show__seller-text" },
+                              [
+                                _vm._v(
+                                  "\n                                            " +
+                                    _vm._s(_vm.answer.spare_parts) +
+                                    "\n                                        "
+                                )
+                              ]
+                            )
+                          ]
                         )
                       ])
                     : _vm._e(),
@@ -43092,26 +43290,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.answer.marka
-                    ? _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "text-right text-black-50 py-2",
-                            attrs: { scope: "row" }
-                          },
-                          [_vm._v("Marka:")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "text-break text-center py-2" },
-                          [_vm._v(_vm._s(_vm.answer.marka))]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.answer.model
+                  _vm.answer.marka && _vm.answer.model && _vm.answer.motor
                     ? _c("tr", [
                         _c(
                           "td",
@@ -43125,7 +43304,67 @@ var render = function() {
                         _c(
                           "td",
                           { staticClass: "text-break text-center py-2" },
-                          [_vm._v(_vm._s(_vm.answer.model))]
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.answer.marka) +
+                                "\n                                            "
+                            ),
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bi bi-slash ml-n1 mr-n1",
+                                attrs: {
+                                  width: "1.5em",
+                                  height: "1.5em",
+                                  viewBox: "0 0 16 16",
+                                  fill: "currentColor",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    "fill-rule": "evenodd",
+                                    d:
+                                      "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.answer.model) +
+                                "\n                                            "
+                            ),
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bi bi-slash ml-n1 mr-n1",
+                                attrs: {
+                                  width: "1.5em",
+                                  height: "1.5em",
+                                  viewBox: "0 0 16 16",
+                                  fill: "currentColor",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    "fill-rule": "evenodd",
+                                    d:
+                                      "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.answer.motor) +
+                                "\n                                    "
+                            )
+                          ]
                         )
                       ])
                     : _vm._e(),
@@ -43145,25 +43384,6 @@ var render = function() {
                           "td",
                           { staticClass: "text-break text-center py-2" },
                           [_vm._v(_vm._s(_vm.answer.year))]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.answer.motor
-                    ? _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "text-right text-black-50 py-2",
-                            attrs: { scope: "row" }
-                          },
-                          [_vm._v("Motor:")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "text-break text-center py-2" },
-                          [_vm._v(_vm._s(_vm.answer.motor))]
                         )
                       ])
                     : _vm._e(),
@@ -43192,25 +43412,6 @@ var render = function() {
                                 "\n                                    "
                             )
                           ]
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.answer.city
-                    ? _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "text-right text-black-50 py-2",
-                            attrs: { scope: "row" }
-                          },
-                          [_vm._v("Şəhər:")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "text-break text-center py-2" },
-                          [_vm._v(_vm._s(_vm.answer.city))]
                         )
                       ])
                     : _vm._e(),
@@ -44377,14 +44578,13 @@ var render = function() {
         }
       },
       [
-        _vm.not_seen !== null &&
-        _vm.not_seen.length > 0 &&
-        _vm.client_for_seen == null
+        _vm.show_only_new_answers != null &&
+        _vm.show_only_new_answers.length > 0
           ? _c("span", {}, [
               _c("span", { staticClass: "badge badge-success" }, [
                 _vm._v(
                   "\n                " +
-                    _vm._s(_vm.not_seen.length) +
+                    _vm._s(_vm.show_only_new_answers.length) +
                     "\n            "
                 )
               ]),
@@ -44394,17 +44594,35 @@ var render = function() {
               ])
             ])
           : _c("span", {}, [
-              _c("span", { staticClass: "badge badge-secondary" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.answer_seen.length) +
-                    "\n            "
-                )
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "text-secondary" }, [
-                _vm._v("\n                Baxılıb\n            ")
-              ])
+              _vm.not_seen != null &&
+              _vm.not_seen.length > 0 &&
+              _vm.client_for_seen == null
+                ? _c("span", {}, [
+                    _c("span", { staticClass: "badge badge-success" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.not_seen.length) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-primary" }, [
+                      _vm._v("\n                    Cavab\n                ")
+                    ])
+                  ])
+                : _c("span", {}, [
+                    _c("span", { staticClass: "badge badge-secondary" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.answer_seen.length) +
+                          "\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-secondary" }, [
+                      _vm._v("\n                    Baxılıb\n                ")
+                    ])
+                  ])
             ])
       ]
     ),
@@ -44835,7 +45053,12 @@ var render = function() {
                         { staticClass: "row mb-4 ml-1" },
                         [
                           _c("answer-count-show", {
-                            attrs: { reset_answers: _vm.reset_answers }
+                            attrs: { reset_answers: _vm.reset_answers },
+                            on: {
+                              showOnlyNewAnswersInParent:
+                                _vm.showOnlyNewAnswersParent,
+                              showAllnswersInParent: _vm.showAllAnswersParent
+                            }
                           })
                         ],
                         1
@@ -44847,6 +45070,12 @@ var render = function() {
                             {},
                             [
                               _c("answer-all-announce", {
+                                attrs: {
+                                  showOnlyNewAnswers: _vm.showOnlyNewAnswers,
+                                  showAllAnswers: _vm.showAllAnswers,
+                                  collAnsweredUsersFilter:
+                                    _vm.collAnsweredUsersFilter
+                                },
                                 on: {
                                   resetAnswersInUserSideBarSex:
                                     _vm.resetAnswersInUserSideBarSeven
@@ -44907,88 +45136,182 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.answers, function(answer) {
-          return _vm.answers != null && _vm.answers.length > 0
-            ? _c("tr", [
-                _c(
-                  "td",
-                  { staticClass: "col-9 text-left send__all-td pt-3 pb-2" },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "d-block" },
-                      [_c("answer-all-modal", { attrs: { answer: answer } })],
-                      1
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                answer.user != null && answer.user.length > 0
-                  ? _c(
-                      "td",
-                      {
-                        staticClass:
-                          "col-3 text-right pt-1 pb-1 pr-1 align-middle"
-                      },
-                      [
-                        _c("show-all-answer-sellers", {
-                          attrs: {
-                            answer: answer,
-                            answer_users: answer.get_is_answers
-                          },
-                          on: {
-                            resetAnswersInUserSideBarThree:
-                              _vm.resetAnswersInUserSideBarFife
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "col-1 text-right pt-1 pl-0 align-middle" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "text-dark",
-                        attrs: {
-                          href: "announce/buyer-announce-delete/" + answer.id
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "bi bi-x",
+        [
+          _vm._l(_vm.new_answers[0], function(answer) {
+            return _vm.showOnlyNewAnswers &&
+              _vm.new_answers[0] != null &&
+              _vm.new_answers[0].length > 0
+              ? _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "col-9 text-left send__all-td pt-3 pb-2" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-block" },
+                        [_c("answer-all-modal", { attrs: { answer: answer } })],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  answer.user != null && answer.user.length > 0
+                    ? _c(
+                        "td",
+                        {
+                          staticClass:
+                            "col-3 text-right pt-1 pb-1 pr-1 align-middle"
+                        },
+                        [
+                          _c("show-all-answer-sellers", {
                             attrs: {
-                              width: "1.6em",
-                              height: "1.6em",
-                              viewBox: "0 0 16 16",
-                              fill: "currentColor",
-                              xmlns: "http://www.w3.org/2000/svg"
+                              answer: answer,
+                              new_answers_count: _vm.answers[1],
+                              answer_users: answer.get_is_answers,
+                              collAnsweredUsersFilter:
+                                _vm.collAnsweredUsersFilter
+                            },
+                            on: {
+                              resetAnswersInUserSideBarThree:
+                                _vm.resetAnswersInUserSideBarFife
                             }
-                          },
-                          [
-                            _c("path", {
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "col-1 text-right pt-1 pl-0 align-middle" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-dark",
+                          attrs: {
+                            href: "announce/buyer-announce-delete/" + answer.id
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "bi bi-x",
                               attrs: {
-                                "fill-rule": "evenodd",
-                                d:
-                                  "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                width: "1.6em",
+                                height: "1.6em",
+                                viewBox: "0 0 16 16",
+                                fill: "currentColor",
+                                xmlns: "http://www.w3.org/2000/svg"
                               }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e()
-        }),
-        0
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "fill-rule": "evenodd",
+                                  d:
+                                    "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.answers, function(answer) {
+            return !_vm.showOnlyNewAnswers &&
+              _vm.answers != null &&
+              _vm.answers.length > 0
+              ? _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "col-9 text-left send__all-td pt-3 pb-2" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-block" },
+                        [_c("answer-all-modal", { attrs: { answer: answer } })],
+                        1
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  answer.user != null && answer.user.length > 0
+                    ? _c(
+                        "td",
+                        {
+                          staticClass:
+                            "col-3 text-right pt-1 pb-1 pr-1 align-middle"
+                        },
+                        [
+                          _c("show-all-answer-sellers", {
+                            attrs: {
+                              answer: answer,
+                              new_answers_count: null,
+                              answer_users: answer.get_is_answers,
+                              collAnsweredUsersFilter:
+                                _vm.collAnsweredUsersFilter
+                            },
+                            on: {
+                              resetAnswersInUserSideBarThree:
+                                _vm.resetAnswersInUserSideBarFife
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    { staticClass: "col-1 text-right pt-1 pl-0 align-middle" },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-dark",
+                          attrs: {
+                            href: "announce/buyer-announce-delete/" + answer.id
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "bi bi-x",
+                              attrs: {
+                                width: "1.6em",
+                                height: "1.6em",
+                                viewBox: "0 0 16 16",
+                                fill: "currentColor",
+                                xmlns: "http://www.w3.org/2000/svg"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "fill-rule": "evenodd",
+                                  d:
+                                    "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e()
+          })
+        ],
+        2
       )
     ])
   ])
@@ -45029,44 +45352,67 @@ var render = function() {
   return _c("div", { staticClass: "d-inline-flex" }, [
     _vm.new_answers !== null
       ? _c("div", {}, [
-          _c("span", { staticClass: "letter__spacing" }, [
-            _vm._v("\n                Yeni\n            ")
-          ]),
-          _vm._v(" "),
           _vm.new_answers.length > 0
-            ? _c("span", { staticClass: "badge badge-success mt-n2" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.new_answers.length) +
-                    "\n            "
+            ? _c("div", {}, [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "" },
+                    on: { click: _vm.showOnlyNewAnswers }
+                  },
+                  [
+                    _c("span", { staticClass: "letter__spacing" }, [
+                      _vm._v("\n                    Yeni\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "badge badge-success mt-n2" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.new_answers.length) +
+                          "\n                "
+                      )
+                    ])
+                  ]
                 )
               ])
-            : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                _vm._v("\n                0\n            ")
+            : _c("div", {}, [
+                _c("span", { staticClass: "letter__spacing" }, [
+                  _vm._v("\n                Yeni\n            ")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                  _vm._v("\n                0\n            ")
+                ])
               ])
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("span", { staticClass: "ml-1 mr-1" }, [
-      _vm._v("\n            |\n        ")
-    ]),
+    _c("span", { staticClass: "ml-2 mr-2" }, [_vm._v("\n        |\n    ")]),
     _vm._v(" "),
     _vm.old_answers != null
       ? _c("div", {}, [
-          _c("span", { staticClass: "letter__spacing" }, [
-            _vm._v("\n                 Ümumi\n            ")
-          ]),
-          _vm._v(" "),
           _vm.old_answers.length > 0
-            ? _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.old_answers.length) +
-                    "\n            "
+            ? _c("div", {}, [
+                _c(
+                  "a",
+                  { attrs: { href: "" }, on: { click: _vm.showAllAnswers } },
+                  [
+                    _c("span", { staticClass: "letter__spacing" }, [
+                      _vm._v("\n                     Ümumi\n                ")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.old_answers.length) +
+                          "\n                "
+                      )
+                    ])
+                  ]
                 )
               ])
-            : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                _vm._v("\n                0\n            ")
+            : _c("div", { staticClass: "badge badge-secondary mt-n2" }, [
+                _vm._v("\n            0\n        ")
               ])
         ])
       : _vm._e()

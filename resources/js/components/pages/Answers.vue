@@ -20,11 +20,20 @@
                 <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
                     <div v-if="answers_all != null" class="">
                         <div class="row mb-4 ml-1">
-                            <answer-count-show :reset_answers="reset_answers"></answer-count-show>
+                            <answer-count-show
+                                :reset_answers="reset_answers"
+                                @showOnlyNewAnswersInParent="showOnlyNewAnswersParent"
+                                @showAllnswersInParent="showAllAnswersParent"
+                            ></answer-count-show>
                         </div>
 
                         <div v-if="answers_all.length > 0" class="">
-                            <answer-all-announce @resetAnswersInUserSideBarSex="resetAnswersInUserSideBarSeven"></answer-all-announce>
+                            <answer-all-announce
+                                :showOnlyNewAnswers="showOnlyNewAnswers"
+                                :showAllAnswers="showAllAnswers"
+                                :collAnsweredUsersFilter="collAnsweredUsersFilter"
+                                @resetAnswersInUserSideBarSex="resetAnswersInUserSideBarSeven"
+                            ></answer-all-announce>
                         </div>
                         <div v-else class="">
                             <span class="">Yox</span>
@@ -49,9 +58,22 @@ export default {
     data(){
         return {
             reset_answers: null,
+            showOnlyNewAnswers: false,
+            showAllAnswers: false,
+            collAnsweredUsersFilter: false,
         }
     },
     methods: {
+        showOnlyNewAnswersParent(){
+            this.showOnlyNewAnswers = true;
+            this.collAnsweredUsersFilter = true;
+            this.showAllAnswers = false;
+        },
+        showAllAnswersParent(){
+            this.showOnlyNewAnswers = false;
+            this.collAnsweredUsersFilter = false;
+            this.showAllAnswers = true;
+        },
         resetAnswersInUserSideBarSeven(answer){
             if( answer.id != null ) {
                 this.reset_answers = answer.id;

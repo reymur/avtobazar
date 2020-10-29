@@ -2,20 +2,30 @@
     <div class="">
         <!-- Button trigger modal -->
         <a href="" @click="showSellers()" class="p-1" data-toggle="modal" :data-target="'#show_all_sellers-'+answer.id">
-            <span v-if="(not_seen !== null && not_seen.length > 0) && client_for_seen == null" class="">
+            <span v-if="show_only_new_answers != null && show_only_new_answers.length > 0" class="">
                 <span class="badge badge-success">
-                    {{ not_seen.length }}
+                    {{ show_only_new_answers.length }}
                 </span>
                 <span class="text-primary">
                     Cavab
                 </span>
             </span>
             <span v-else class="">
-                <span class="badge badge-secondary">
-                    {{ answer_seen.length }}
+                <span v-if="(not_seen != null && not_seen.length > 0) && client_for_seen == null" class="">
+                    <span class="badge badge-success">
+                        {{ not_seen.length }}
+                    </span>
+                    <span class="text-primary">
+                        Cavab
+                    </span>
                 </span>
-                <span class="text-secondary">
-                    Baxılıb
+                <span v-else class="">
+                    <span class="badge badge-secondary">
+                        {{ answer_seen.length }}
+                    </span>
+                    <span class="text-secondary">
+                        Baxılıb
+                    </span>
                 </span>
             </span>
         </a>
@@ -79,11 +89,11 @@
 
                                             <div class="d-flex answer__phone-div">
                                                 <a v-if="seller.phone" :href="'tel:'" class="answer__phone-a">
-                                                <span class="pr-1">
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-forward-fill text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                      <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
-                                                    </svg>
-                                                </span>
+                                                    <span class="pr-1">
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-forward-fill text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                          <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.761.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
+                                                        </svg>
+                                                    </span>
 
                                                     {{ seller.phone }}
                                                 </a>
@@ -117,10 +127,14 @@
 <script>
 export default {
     name: "ShowAllAnswerSellers",
-    props: ['answer','answer_users'],
+    props: [
+        'answer','new_answers_count','answer_users',
+        'collAnsweredUsersFilter'
+    ],
     data(){
         return {
             answered_users: [],
+            answers_count: this.new_answers_count,
             filtered_answer_users: 0,
             show_count: true,
             is_seen: [],
@@ -134,8 +148,45 @@ export default {
             close_modal: false,
             open_modal_window: false,
             count: null,
-            a: [],
-            b: [],
+            show_only_new_answers: [],
+        }
+    },
+    watch: {
+        collAnsweredUsersFilter(){
+            if( this.collAnsweredUsersFilter === true ) {
+                let answer = [];
+                let new_answers = [];
+                //
+                // if( this.answer_users.length > 0 ){
+                //     this.answer_users.filter( val => {
+                //         if( val.seen == null ){
+                //             return this.show_only_new_answers.push(val)
+                //         }
+                //     });
+                // }
+
+                console.log('answer = ', this.answer)
+                console.log('new_answers_count = ', this.answers_count)
+                if (this.answers_count != null) {
+                    this.answers_count.forEach((answer) => {
+                        answer.get_is_answers.forEach( isanswers => {
+                            // if (user.id == isanswers.user_id) {
+                                if (isanswers.seen == null) {
+                                    new_answers.push(answer)
+                                    answer = this.answer
+                                }
+                            // }
+                        });
+                    });
+
+                    // this.answer = answer;
+                    this.show_only_new_answers.push(new_answers);
+                    console.log('show_only_new_answers = ', this.show_only_new_answers.length)
+                }
+            }
+            else {
+                this.show_only_new_answers = [];
+            }
         }
     },
     methods:{
@@ -162,7 +213,6 @@ export default {
             if( this.filtered_answer_users.length > 0 ){
                 this.loader = true;
                 this.answered_users = [];
-                let i = 0;
 
                 this.filtered_answer_users.forEach(( user ) => {
                     setTimeout(() => {
@@ -172,29 +222,29 @@ export default {
                 });
             }
         },
-        updateUserSeenTable(answer_id, seller_id){
-            axios.post('/announce/answer-seen-update-vue',{
-                seller_id:seller_id,
-                announcement_id:answer_id,
-            })
-                .then( res => {
-                    if( res.status == 200 ) {
-                        if( res.data.answers !== undefined ) {
-                            this.answer_info2 = res.data.answers;
-                            this.answer_update = res.status;
-                        }
-                    }
-                })
-                .catch( err => {
-                    if( err.response !== undefined ) {
-                        if( err.response.data !== undefined ) {
-                            if( err.response.data.errors !== undefined ) {
-                                this.errors = err.response.data.errors;
-                            }
-                        }
-                    }
-                });
-        },
+        // updateUserSeenTable(answer_id, seller_id){
+        //     axios.post('/announce/answer-seen-update-vue',{
+        //         seller_id:seller_id,
+        //         announcement_id:answer_id,
+        //     })
+        //         .then( res => {
+        //             if( res.status == 200 ) {
+        //                 if( res.data.answers !== undefined ) {
+        //                     this.answer_info2 = res.data.answers;
+        //                     this.answer_update = res.status;
+        //                 }
+        //             }
+        //         })
+        //         .catch( err => {
+        //             if( err.response !== undefined ) {
+        //                 if( err.response.data !== undefined ) {
+        //                     if( err.response.data.errors !== undefined ) {
+        //                         this.errors = err.response.data.errors;
+        //                     }
+        //                 }
+        //             }
+        //         });
+        // },
         showSellers(){
             this.answeredUsersFilter(this.answer);
             this.user_click = true;
@@ -220,6 +270,10 @@ export default {
         },
         closeButton(){
             this.user_click = false;
+
+            this.$emit('resetAnswersInUserSideBarThree', {
+                id: Math.random(9)
+            });
 
             setTimeout(() => {
                 this.getAnswerSeen();

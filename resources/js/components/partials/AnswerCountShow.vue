@@ -1,35 +1,44 @@
 <template>
     <div class="d-inline-flex">
-<!--        <span class="pr-3">-->
-<!--             Cavablar:-->
-<!--        </span>-->
-
         <div v-if="new_answers !== null" class="">
-            <span class="letter__spacing">
-                Yeni
-            </span>
-            <span v-if="new_answers.length > 0" class="badge badge-success mt-n2">
-                {{ new_answers.length }}
-            </span>
-            <span v-else class="badge badge-secondary mt-n2">
-                0
-            </span>
+            <div v-if="new_answers.length > 0" class="">
+                <a @click="showOnlyNewAnswers" href="">
+                    <span class="letter__spacing">
+                        Yeni
+                    </span>
+                    <span class="badge badge-success mt-n2">
+                        {{ new_answers.length }}
+                    </span>
+                </a>
+            </div>
+            <div v-else class="">
+                <span class="letter__spacing">
+                    Yeni
+                </span>
+                <span class="badge badge-secondary mt-n2">
+                    0
+                </span>
+            </div>
         </div>
 
-        <span class="ml-1 mr-1">
+        <span class="ml-2 mr-2">
             |
         </span>
 
         <div v-if="old_answers != null" class="">
-            <span class="letter__spacing">
-                 Ümumi
-            </span>
-            <span v-if="old_answers.length > 0" class="badge badge-secondary mt-n2">
-                {{ old_answers.length }}
-            </span>
-            <span v-else class="badge badge-secondary mt-n2">
+            <div v-if="old_answers.length > 0" class="">
+                <a href="" @click="showAllAnswers">
+                    <span class="letter__spacing">
+                         Ümumi
+                    </span>
+                        <span class="badge badge-secondary mt-n2">
+                        {{ old_answers.length }}
+                    </span>
+                </a>
+            </div>
+            <div v-else class="badge badge-secondary mt-n2">
                 0
-            </span>
+            </div>
         </div>
     </div>
 </template>
@@ -45,6 +54,14 @@ export default {
         }
     },
     methods: {
+        showOnlyNewAnswers(e){
+            e.preventDefault();
+            this.$emit('showOnlyNewAnswersInParent');
+        },
+        showAllAnswers(e){
+            e.preventDefault();
+            this.$emit('showAllnswersInParent');
+        },
         getAnswers(){
             axios.post('/announce/side-bar-answers-vue')
                 .then( res => {

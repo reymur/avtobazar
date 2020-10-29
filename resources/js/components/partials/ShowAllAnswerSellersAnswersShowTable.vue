@@ -69,7 +69,10 @@
 <script>
 export default {
     name: "ShowAllAnswerSellersAnswersShowTable",
-    props: ['answer_users','answer_id','seller_id','close_modal'],
+    props: [
+        'answer_users','answer_id',
+        'seller_id','close_modal','clickToNewAnswers'
+    ],
     data(){
         return {
             answer_info: null,
@@ -141,9 +144,12 @@ export default {
             }
         },
         answeredUsersFilter(answer_users, seller_id){
-            return this.answer_info = answer_users.filter( user => {
+            let arr = [];
+            arr = this.answer_info = answer_users.filter( user => {
                 return user.user_id == seller_id;
             });
+
+            return arr;
         },
     },
     created() {
