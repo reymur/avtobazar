@@ -6,7 +6,9 @@
                     <span class="letter__spacing">
                         Yeni
                     </span>
-                    <span class="badge badge-success mt-n2">
+
+                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span v-else class="badge badge-success mt-n2">
                         {{ new_answers.length }}
                     </span>
                 </a>
@@ -15,7 +17,9 @@
                 <span class="letter__spacing">
                     Yeni
                 </span>
-                <span class="badge badge-secondary mt-n2">
+
+                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span v-else class="badge badge-secondary mt-n2">
                     0
                 </span>
             </div>
@@ -26,19 +30,21 @@
         </span>
 
         <div v-if="old_answers != null" class="">
-            <div v-if="old_answers.length > 0" class="">
-                <a href="" @click="showAllAnswers">
+            <a href="" @click="showAllAnswers">
+                <div v-if="old_answers.length > 0" class="">
                     <span class="letter__spacing">
                          Ümumi
                     </span>
-                        <span class="badge badge-secondary mt-n2">
+
+                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    <span v-else class="badge badge-secondary mt-n2">
                         {{ old_answers.length }}
                     </span>
-                </a>
-            </div>
-            <div v-else class="badge badge-secondary mt-n2">
-                0
-            </div>
+                </div>
+                <div v-else class="badge badge-secondary mt-n2">
+                    0
+                </div>
+            </a>
         </div>
     </div>
 </template>
@@ -51,6 +57,7 @@ export default {
         return {
             old_answers:[],
             new_answers:[],
+            loader: false,
         }
     },
     methods: {
@@ -68,6 +75,7 @@ export default {
                     if( res.status == 200 ) {
                         if( res.data.answers !== undefined ) {
                             this.getNewAnswers(res.data.answers);
+                            this.loader = false;
                         }
                     }
                 })
@@ -100,6 +108,7 @@ export default {
         }
     },
     created() {
+        this.loader = true;
         this.getAnswers();
     },
     mounted() {

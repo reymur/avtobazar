@@ -2,30 +2,20 @@
     <div class="">
         <!-- Button trigger modal -->
         <a href="" @click="showSellers()" class="p-1" data-toggle="modal" :data-target="'#show_all_sellers-'+answer.id">
-            <span v-if="show_only_new_answers != null && show_only_new_answers.length > 0" class="">
+            <span v-if="(not_seen != null && not_seen.length > 0) && client_for_seen == null" class="">
                 <span class="badge badge-success">
-                    {{ show_only_new_answers.length }}
+                    {{ not_seen.length }}
                 </span>
                 <span class="text-primary">
                     Cavab
                 </span>
             </span>
             <span v-else class="">
-                <span v-if="(not_seen != null && not_seen.length > 0) && client_for_seen == null" class="">
-                    <span class="badge badge-success">
-                        {{ not_seen.length }}
-                    </span>
-                    <span class="text-primary">
-                        Cavab
-                    </span>
+                <span class="badge badge-secondary">
+                    {{ answer_seen.length }}
                 </span>
-                <span v-else class="">
-                    <span class="badge badge-secondary">
-                        {{ answer_seen.length }}
-                    </span>
-                    <span class="text-secondary">
-                        Baxılıb
-                    </span>
+                <span class="text-secondary">
+                    Baxılıb
                 </span>
             </span>
         </a>
@@ -127,14 +117,10 @@
 <script>
 export default {
     name: "ShowAllAnswerSellers",
-    props: [
-        'answer','new_answers_count','answer_users',
-        'collAnsweredUsersFilter'
-    ],
+    props: ['answer','new_answers_count','answer_users','collAnsweredUsersFilter'],
     data(){
         return {
             answered_users: [],
-            answers_count: this.new_answers_count,
             filtered_answer_users: 0,
             show_count: true,
             is_seen: [],
@@ -149,48 +135,12 @@ export default {
             open_modal_window: false,
             count: null,
             show_only_new_answers: [],
-        }
-    },
-    watch: {
-        collAnsweredUsersFilter(){
-            if( this.collAnsweredUsersFilter === true ) {
-                let answer = [];
-                let new_answers = [];
-                //
-                // if( this.answer_users.length > 0 ){
-                //     this.answer_users.filter( val => {
-                //         if( val.seen == null ){
-                //             return this.show_only_new_answers.push(val)
-                //         }
-                //     });
-                // }
-
-                console.log('answer = ', this.answer)
-                console.log('new_answers_count = ', this.answers_count)
-                if (this.answers_count != null) {
-                    this.answers_count.forEach((answer) => {
-                        answer.get_is_answers.forEach( isanswers => {
-                            // if (user.id == isanswers.user_id) {
-                                if (isanswers.seen == null) {
-                                    new_answers.push(answer)
-                                    answer = this.answer
-                                }
-                            // }
-                        });
-                    });
-
-                    // this.answer = answer;
-                    this.show_only_new_answers.push(new_answers);
-                    console.log('show_only_new_answers = ', this.show_only_new_answers.length)
-                }
-            }
-            else {
-                this.show_only_new_answers = [];
-            }
+            answeredUsersFilterParam: false,
+            show_new_answer_count: [],
         }
     },
     methods:{
-        answeredUsersFilter(answer){
+        answeredUsersFilter(answer, only_new_answers){
             let arr = [];
             let new_answers = [];
             let old_answers = [];
@@ -206,7 +156,9 @@ export default {
                     });
                 });
 
-                return this.filtered_answer_users = arr.concat(new_answers, old_answers);
+                if( only_new_answers )
+                    return this.filtered_answer_users = arr.concat(new_answers);
+                else return this.filtered_answer_users = arr.concat(new_answers, old_answers);
             }
         },
         showAnsweredUsers(){
@@ -222,31 +174,12 @@ export default {
                 });
             }
         },
-        // updateUserSeenTable(answer_id, seller_id){
-        //     axios.post('/announce/answer-seen-update-vue',{
-        //         seller_id:seller_id,
-        //         announcement_id:answer_id,
-        //     })
-        //         .then( res => {
-        //             if( res.status == 200 ) {
-        //                 if( res.data.answers !== undefined ) {
-        //                     this.answer_info2 = res.data.answers;
-        //                     this.answer_update = res.status;
-        //                 }
-        //             }
-        //         })
-        //         .catch( err => {
-        //             if( err.response !== undefined ) {
-        //                 if( err.response.data !== undefined ) {
-        //                     if( err.response.data.errors !== undefined ) {
-        //                         this.errors = err.response.data.errors;
-        //                     }
-        //                 }
-        //             }
-        //         });
-        // },
         showSellers(){
-            this.answeredUsersFilter(this.answer);
+            if( this.answeredUsersFilterParam === true ) {
+                this.answeredUsersFilter(this.answer, true);
+            }
+            else this.answeredUsersFilter(this.answer, false);
+
             this.user_click = true;
             this.showAnsweredUsers();
         },
@@ -258,22 +191,32 @@ export default {
             }
         },
         getAnswerSeen(){
-            if( this.answer_users.length > 0 ){
-                this.answer_users.filter( val => {
-                    if( val.seen != null ){
-                        return this.is_seen.push(val)
-                    }else{
-                        return this.not_seen.push(val)
-                    }
-                });
+            const answer_id = this.answer.id;
+            const answers = this.new_answers;
+
+            if( answers != null ){
+                if( answers != null && answers.length != null && answers.length > 0 ){
+                    answers.filter( answer => {
+                        if( answer.id == answer_id ){
+                                return this.not_seen.push(answer)
+                        }
+                    });
+                }
+            }
+            else{
+                if( this.answer_users.length > 0 ){
+                    this.answer_users.filter( val => {
+                        if( val.seen != null ){
+                            return this.is_seen.push(val)
+                        }else{
+                            return this.not_seen.push(val)
+                        }
+                    });
+                }
             }
         },
         closeButton(){
             this.user_click = false;
-
-            this.$emit('resetAnswersInUserSideBarThree', {
-                id: Math.random(9)
-            });
 
             setTimeout(() => {
                 this.getAnswerSeen();
@@ -285,9 +228,11 @@ export default {
         }
     },
     created() {
+        this.answeredUsersFilterParam = this.collAnsweredUsersFilter;
         this.getAnswerSeen();
     },
     mounted(){
+        console.log('mounted collAnsweredUsersFilter = ', this.collAnsweredUsersFilter)
         // this.answeredUsersFilter(this.answer);
         // this.getAnswerSeen();
         // console.log( 'this.filtered_answer_users = ',  this.filtered_answer_users );

@@ -3750,23 +3750,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellers",
   props: ['answer', 'new_answers_count', 'answer_users', 'collAnsweredUsersFilter'],
   data: function data() {
     return {
       answered_users: [],
-      answers_count: this.new_answers_count,
       filtered_answer_users: 0,
       show_count: true,
       is_seen: [],
@@ -3780,49 +3769,13 @@ __webpack_require__.r(__webpack_exports__);
       close_modal: false,
       open_modal_window: false,
       count: null,
-      show_only_new_answers: []
+      show_only_new_answers: [],
+      answeredUsersFilterParam: false,
+      show_new_answer_count: []
     };
   },
-  watch: {
-    collAnsweredUsersFilter: function collAnsweredUsersFilter() {
-      var _this = this;
-
-      if (this.collAnsweredUsersFilter === true) {
-        var answer = [];
-        var new_answers = []; //
-        // if( this.answer_users.length > 0 ){
-        //     this.answer_users.filter( val => {
-        //         if( val.seen == null ){
-        //             return this.show_only_new_answers.push(val)
-        //         }
-        //     });
-        // }
-
-        console.log('answer = ', this.answer);
-        console.log('new_answers_count = ', this.answers_count);
-
-        if (this.answers_count != null) {
-          this.answers_count.forEach(function (answer) {
-            answer.get_is_answers.forEach(function (isanswers) {
-              // if (user.id == isanswers.user_id) {
-              if (isanswers.seen == null) {
-                new_answers.push(answer);
-                answer = _this.answer;
-              } // }
-
-            });
-          }); // this.answer = answer;
-
-          this.show_only_new_answers.push(new_answers);
-          console.log('show_only_new_answers = ', this.show_only_new_answers.length);
-        }
-      } else {
-        this.show_only_new_answers = [];
-      }
-    }
-  },
   methods: {
-    answeredUsersFilter: function answeredUsersFilter(answer) {
+    answeredUsersFilter: function answeredUsersFilter(answer, only_new_answers) {
       var arr = [];
       var new_answers = [];
       var old_answers = [];
@@ -3837,49 +3790,29 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
         });
-        return this.filtered_answer_users = arr.concat(new_answers, old_answers);
+        if (only_new_answers) return this.filtered_answer_users = arr.concat(new_answers);else return this.filtered_answer_users = arr.concat(new_answers, old_answers);
       }
     },
     showAnsweredUsers: function showAnsweredUsers() {
-      var _this2 = this;
+      var _this = this;
 
       if (this.filtered_answer_users.length > 0) {
         this.loader = true;
         this.answered_users = [];
         this.filtered_answer_users.forEach(function (user) {
           setTimeout(function () {
-            _this2.answered_users.push(user);
+            _this.answered_users.push(user);
 
-            _this2.loader = false;
+            _this.loader = false;
           }, 100);
         });
       }
     },
-    // updateUserSeenTable(answer_id, seller_id){
-    //     axios.post('/announce/answer-seen-update-vue',{
-    //         seller_id:seller_id,
-    //         announcement_id:answer_id,
-    //     })
-    //         .then( res => {
-    //             if( res.status == 200 ) {
-    //                 if( res.data.answers !== undefined ) {
-    //                     this.answer_info2 = res.data.answers;
-    //                     this.answer_update = res.status;
-    //                 }
-    //             }
-    //         })
-    //         .catch( err => {
-    //             if( err.response !== undefined ) {
-    //                 if( err.response.data !== undefined ) {
-    //                     if( err.response.data.errors !== undefined ) {
-    //                         this.errors = err.response.data.errors;
-    //                     }
-    //                 }
-    //             }
-    //         });
-    // },
     showSellers: function showSellers() {
-      this.answeredUsersFilter(this.answer);
+      if (this.answeredUsersFilterParam === true) {
+        this.answeredUsersFilter(this.answer, true);
+      } else this.answeredUsersFilter(this.answer, false);
+
       this.user_click = true;
       this.showAnsweredUsers();
     },
@@ -3891,38 +3824,50 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getAnswerSeen: function getAnswerSeen() {
-      var _this3 = this;
+      var _this2 = this;
 
-      if (this.answer_users.length > 0) {
-        this.answer_users.filter(function (val) {
-          if (val.seen != null) {
-            return _this3.is_seen.push(val);
-          } else {
-            return _this3.not_seen.push(val);
-          }
-        });
+      var answer_id = this.answer.id;
+      var answers = this.new_answers;
+
+      if (answers != null) {
+        if (answers != null && answers.length != null && answers.length > 0) {
+          answers.filter(function (answer) {
+            if (answer.id == answer_id) {
+              return _this2.not_seen.push(answer);
+            }
+          });
+        }
+      } else {
+        if (this.answer_users.length > 0) {
+          this.answer_users.filter(function (val) {
+            if (val.seen != null) {
+              return _this2.is_seen.push(val);
+            } else {
+              return _this2.not_seen.push(val);
+            }
+          });
+        }
       }
     },
     closeButton: function closeButton() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.user_click = false;
-      this.$emit('resetAnswersInUserSideBarThree', {
-        id: Math.random(9)
-      });
       setTimeout(function () {
-        _this4.getAnswerSeen();
+        _this3.getAnswerSeen();
 
-        _this4.is_seen = [];
-        _this4.not_seen = [];
+        _this3.is_seen = [];
+        _this3.not_seen = [];
       }, 400);
       this.close_modal = true;
     }
   },
   created: function created() {
+    this.answeredUsersFilterParam = this.collAnsweredUsersFilter;
     this.getAnswerSeen();
   },
-  mounted: function mounted() {// this.answeredUsersFilter(this.answer);
+  mounted: function mounted() {
+    console.log('mounted collAnsweredUsersFilter = ', this.collAnsweredUsersFilter); // this.answeredUsersFilter(this.answer);
     // this.getAnswerSeen();
     // console.log( 'this.filtered_answer_users = ',  this.filtered_answer_users );
   }
@@ -3994,9 +3939,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       reset_answers: null,
-      showOnlyNewAnswers: false,
+      showOnlyNewAnswers: true,
       showAllAnswers: false,
-      collAnsweredUsersFilter: false
+      collAnsweredUsersFilter: true,
+      loader: false
     };
   },
   methods: {
@@ -4095,34 +4041,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllAnnounce",
   props: ['showOnlyNewAnswers', 'showAllAnswers', 'collAnsweredUsersFilter'],
   data: function data() {
     return {
+      loader: false,
       answers: [],
       new_answers: [],
       answer_users: null,
-      isTrue: false
+      isTrue: false,
+      agree_show_only_new_answers: false
     };
   },
   watch: {
     showOnlyNewAnswers: function showOnlyNewAnswers() {
       if (this.showOnlyNewAnswers) {
+        this.loader = true;
         this.answersAnnounce(true);
         console.log('Old answers1 = ', this.answers);
       }
     },
     showAllAnswers: function showAllAnswers() {
       if (this.showAllAnswers) {
+        this.loader = true;
+        this.answers = [];
         this.answersAnnounce(false);
+        this.agree_show_only_new_answers = false;
         console.log('Old answers2 = ', this.answers);
       }
     },
     isTrue: function isTrue() {
       if (this.isTrue) {
         this.getNewAnswers();
-        console.log('New answers = ', this.answers);
+
+        if (this.new_answers[0].length != null && this.new_answers[1].length != null) {
+          if (this.new_answers[0].length > 0 && this.new_answers[1].length > 0) {
+            this.agree_show_only_new_answers = true;
+            console.log('New answers = ', this.new_answers[0]);
+          }
+        }
       }
     }
   },
@@ -4148,26 +4117,27 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.new_answers[0] = new_answers;
       this.new_answers[1] = arr;
-      console.log('answers -- ', this.new_answers[0].length > 0);
+      console.log('this.new_answers[1] === ', this.new_answers);
     },
     answersAnnounce: function answersAnnounce(count) {
       var _this = this;
 
       axios.post('/announce/answers-post').then(function (res) {
         if (res.status == 200) {
-          if (res.data.answers_all != null && res.data.answers_all !== undefined) {
+          if (res.data.answers_all !== undefined && res.data.answers_all != null) {
             _this.answers = res.data.answers_all;
-            if (count) _this.isTrue = true;else _this.isTrue = false;
+            _this.isTrue = !!count;
+            _this.loader = false;
           }
         }
       })["catch"](function (err) {
-        if (err.response.data != null) {
+        if (err.response !== undefined && err.response.data != null) {
           console.log('err_answers -- ', err.response.data);
         }
       });
     },
     resetAnswersInUserSideBarFife: function resetAnswersInUserSideBarFife(answer) {
-      this.answersAnnounce();
+      this.answersAnnounce(false);
 
       if (answer.id != null) {
         this.$emit('resetAnswersInUserSideBarSex', {
@@ -4176,18 +4146,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  computed: {},
   created: function created() {
-    this.answersAnnounce();
-  } // mounted(){
-  //     this.answersAnnounce();
-  //     let arr = [];
-  //     arr = [{
-  //         a:'qqqqqqq'
-  //     }];
-  //
-  //     console.log( 'Old answers --- ', this.answers )
-  // }
-
+    this.loader = true;
+    this.answersAnnounce(true);
+  },
+  mounted: function mounted() {//     console.log( 'Old answers --- ', this.answers )
+  }
 });
 
 /***/ }),
@@ -4246,13 +4211,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
   props: ['reset_answers'],
   data: function data() {
     return {
       old_answers: [],
-      new_answers: []
+      new_answers: [],
+      loader: false
     };
   },
   methods: {
@@ -4271,6 +4243,8 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           if (res.data.answers !== undefined) {
             _this.getNewAnswers(res.data.answers);
+
+            _this.loader = false;
           }
         }
       })["catch"](function (err) {
@@ -4305,6 +4279,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    this.loader = true;
     this.getAnswers();
   },
   mounted: function mounted() {// this.getAnswers();
@@ -4550,8 +4525,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
   props: ['answer_users', 'answer_id', 'seller_id', 'close_modal', 'clickToNewAnswers'],
@@ -4560,13 +4533,18 @@ __webpack_require__.r(__webpack_exports__);
       answer_info: null,
       answer_info2: null,
       answer_update: null,
-      loader: false
+      loader: false,
+      guard_for_show: null,
+      show_seen_guard: true
     };
   },
   methods: {
     AnswerTestOnSeen: function AnswerTestOnSeen(answer_info, answer_id, seller_id) {
-      if (answer_info != null && answer_info !== undefined) {
-        if (answer_info.seen == null && answer_info.seen !== undefined) {
+      if (answer_info !== undefined && answer_info != null) {
+        console.log('AAAAAAAAAA - ', answer_info.seen);
+
+        if (answer_info.seen !== undefined && answer_info.seen == null) {
+          this.loader = true;
           this.collGetNewAnswers(answer_id, seller_id);
           this.resetAnswersInUserSideBar(answer_id);
         } else {
@@ -4589,9 +4567,10 @@ __webpack_require__.r(__webpack_exports__);
         announcement_id: answer_id
       }).then(function (res) {
         if (res.status == 200) {
-          if (res.data.answers !== undefined) {
+          if (res.data.answers != null) {
             _this2.answer_info2 = res.data.answers;
             _this2.answer_update = res.status;
+            _this2.loader = false;
           }
         }
       })["catch"](function (err) {
@@ -4599,6 +4578,11 @@ __webpack_require__.r(__webpack_exports__);
           if (err.response.data !== undefined) {
             if (err.response.data.errors !== undefined) {
               _this2.errors = err.response.data.errors;
+            }
+
+            if (err.response.data.seen.id !== undefined) {
+              _this2.show_seen_guard = false;
+              console.log('err.seen_id = ', err.response.data.seen.id);
             }
           }
         }
@@ -4629,17 +4613,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     answeredUsersFilter: function answeredUsersFilter(answer_users, seller_id) {
       var arr = [];
-      arr = this.answer_info = answer_users.filter(function (user) {
+      arr = answer_users.filter(function (user) {
         return user.user_id == seller_id;
       });
-      return arr;
+      return this.answer_info = arr;
     }
   },
   created: function created() {
     // this.getUserAnswer();
+    // this.show_seen_guard = sessionStorage['session_seen_id'];
     this.getAnswersUser();
   },
-  mounted: function mounted() {// this.userClick();
+  mounted: function mounted() {
+    console.log('this.close_modal = ', this.close_modal); // this.userClick();
     // this.getUserAnswer();
     // console.log('answer_id = ', this.answer_id)
     // console.log('users = ', this.users)
@@ -44578,13 +44564,14 @@ var render = function() {
         }
       },
       [
-        _vm.show_only_new_answers != null &&
-        _vm.show_only_new_answers.length > 0
+        _vm.not_seen != null &&
+        _vm.not_seen.length > 0 &&
+        _vm.client_for_seen == null
           ? _c("span", {}, [
               _c("span", { staticClass: "badge badge-success" }, [
                 _vm._v(
                   "\n                " +
-                    _vm._s(_vm.show_only_new_answers.length) +
+                    _vm._s(_vm.not_seen.length) +
                     "\n            "
                 )
               ]),
@@ -44594,35 +44581,17 @@ var render = function() {
               ])
             ])
           : _c("span", {}, [
-              _vm.not_seen != null &&
-              _vm.not_seen.length > 0 &&
-              _vm.client_for_seen == null
-                ? _c("span", {}, [
-                    _c("span", { staticClass: "badge badge-success" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.not_seen.length) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-primary" }, [
-                      _vm._v("\n                    Cavab\n                ")
-                    ])
-                  ])
-                : _c("span", {}, [
-                    _c("span", { staticClass: "badge badge-secondary" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.answer_seen.length) +
-                          "\n                "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-secondary" }, [
-                      _vm._v("\n                    Baxılıb\n                ")
-                    ])
-                  ])
+              _c("span", { staticClass: "badge badge-secondary" }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.answer_seen.length) +
+                    "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-secondary" }, [
+                _vm._v("\n                Baxılıb\n            ")
+              ])
             ])
       ]
     ),
@@ -45072,9 +45041,9 @@ var render = function() {
                               _c("answer-all-announce", {
                                 attrs: {
                                   showOnlyNewAnswers: _vm.showOnlyNewAnswers,
-                                  showAllAnswers: _vm.showAllAnswers,
                                   collAnsweredUsersFilter:
-                                    _vm.collAnsweredUsersFilter
+                                    _vm.collAnsweredUsersFilter,
+                                  showAllAnswers: _vm.showAllAnswers
                                 },
                                 on: {
                                   resetAnswersInUserSideBarSex:
@@ -45137,8 +45106,19 @@ var render = function() {
       _c(
         "tbody",
         [
+          _c("tr", [
+            _vm.loader
+              ? _c(
+                  "td",
+                  { staticClass: "col-7 text-left send__all-td pt-3 pb-2" },
+                  [_vm._m(1)]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _vm._l(_vm.new_answers[0], function(answer) {
-            return _vm.showOnlyNewAnswers &&
+            return !_vm.loader &&
+              _vm.agree_show_only_new_answers &&
               _vm.new_answers[0] != null &&
               _vm.new_answers[0].length > 0
               ? _c("tr", [
@@ -45166,7 +45146,7 @@ var render = function() {
                           _c("show-all-answer-sellers", {
                             attrs: {
                               answer: answer,
-                              new_answers_count: _vm.answers[1],
+                              new_answers_count: _vm.new_answers[1],
                               answer_users: answer.get_is_answers,
                               collAnsweredUsersFilter:
                                 _vm.collAnsweredUsersFilter
@@ -45225,7 +45205,8 @@ var render = function() {
           }),
           _vm._v(" "),
           _vm._l(_vm.answers, function(answer) {
-            return !_vm.showOnlyNewAnswers &&
+            return !_vm.loader &&
+              !_vm.agree_show_only_new_answers &&
               _vm.answers != null &&
               _vm.answers.length > 0
               ? _c("tr", [
@@ -45255,8 +45236,7 @@ var render = function() {
                               answer: answer,
                               new_answers_count: null,
                               answer_users: answer.get_is_answers,
-                              collAnsweredUsersFilter:
-                                _vm.collAnsweredUsersFilter
+                              collAnsweredUsersFilter: false
                             },
                             on: {
                               resetAnswersInUserSideBarThree:
@@ -45326,6 +45306,19 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { staticClass: "text-right" }, [_vm._v(" Göndərilən yer ")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "m-auto text-right py-5 pr-3" }, [
+      _c("div", { staticClass: "m-auto py-5" }, [
+        _c("span", {
+          staticClass: "spinner-border spinner-border-md",
+          attrs: { role: "status", "aria-hidden": "true" }
+        })
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -45365,13 +45358,22 @@ var render = function() {
                       _vm._v("\n                    Yeni\n                ")
                     ]),
                     _vm._v(" "),
-                    _c("span", { staticClass: "badge badge-success mt-n2" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.new_answers.length) +
-                          "\n                "
-                      )
-                    ])
+                    _vm.loader
+                      ? _c("span", {
+                          staticClass: "spinner-border spinner-border-sm",
+                          attrs: { role: "status", "aria-hidden": "true" }
+                        })
+                      : _c(
+                          "span",
+                          { staticClass: "badge badge-success mt-n2" },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.new_answers.length) +
+                                "\n                "
+                            )
+                          ]
+                        )
                   ]
                 )
               ])
@@ -45380,9 +45382,14 @@ var render = function() {
                   _vm._v("\n                Yeni\n            ")
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                  _vm._v("\n                0\n            ")
-                ])
+                _vm.loader
+                  ? _c("span", {
+                      staticClass: "spinner-border spinner-border-sm",
+                      attrs: { role: "status", "aria-hidden": "true" }
+                    })
+                  : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                      _vm._v("\n                0\n            ")
+                    ])
               ])
         ])
       : _vm._e(),
@@ -45391,29 +45398,34 @@ var render = function() {
     _vm._v(" "),
     _vm.old_answers != null
       ? _c("div", {}, [
-          _vm.old_answers.length > 0
-            ? _c("div", {}, [
-                _c(
-                  "a",
-                  { attrs: { href: "" }, on: { click: _vm.showAllAnswers } },
-                  [
-                    _c("span", { staticClass: "letter__spacing" }, [
-                      _vm._v("\n                     Ümumi\n                ")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.old_answers.length) +
-                          "\n                "
+          _c("a", { attrs: { href: "" }, on: { click: _vm.showAllAnswers } }, [
+            _vm.old_answers.length > 0
+              ? _c("div", {}, [
+                  _c("span", { staticClass: "letter__spacing" }, [
+                    _vm._v("\n                     Ümumi\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _vm.loader
+                    ? _c("span", {
+                        staticClass: "spinner-border spinner-border-sm",
+                        attrs: { role: "status", "aria-hidden": "true" }
+                      })
+                    : _c(
+                        "span",
+                        { staticClass: "badge badge-secondary mt-n2" },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.old_answers.length) +
+                              "\n                "
+                          )
+                        ]
                       )
-                    ])
-                  ]
-                )
-              ])
-            : _c("div", { staticClass: "badge badge-secondary mt-n2" }, [
-                _vm._v("\n            0\n        ")
-              ])
+                ])
+              : _c("div", { staticClass: "badge badge-secondary mt-n2" }, [
+                  _vm._v("\n                0\n            ")
+                ])
+          ])
         ])
       : _vm._e()
   ])
@@ -45745,7 +45757,7 @@ var render = function() {
     _c("table", { staticClass: "table mt-1 mb-0" }, [
       _c("tbody", [
         _c("tr", [
-          _vm.answer_info2 != null && _vm.close_modal
+          _vm.answer_info2 != null && _vm.close_modal && !_vm.loader
             ? _c(
                 "td",
                 { staticClass: "text-right border-0 pt-1 pb-0 pl-0 pr-3" },
@@ -45758,16 +45770,14 @@ var render = function() {
                           "text-right border-0 answer__which letter__spacing"
                       },
                       [
-                        _vm.loader
-                          ? _c("span", {
-                              staticClass: "spinner-border spinner-border-sm",
-                              attrs: { role: "status", "aria-hidden": "true" }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.loader
-                          ? _c("span", [_vm._v("Gözlə...")])
-                          : _vm._e(),
+                        _c("div", { staticClass: "pt-2 tr-2" }, [
+                          _vm.loader
+                            ? _c("span", {
+                                staticClass: "spinner-border spinner-border-sm",
+                                attrs: { role: "status", "aria-hidden": "true" }
+                              })
+                            : _vm._e()
+                        ]),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-h1" }, [
                           _vm._v(
@@ -45802,25 +45812,11 @@ var render = function() {
                             )
                           ]
                         )
-                      : _c("div", { staticClass: "answer__price-div" }, [
-                          _c("span", { staticClass: "answer__price" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.answer_info2.price) +
-                                "\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            { staticClass: "answer__price-currency" },
-                            [_vm._v("AZE")]
-                          )
-                        ])
+                      : _vm._e()
                   ])
                 ]
               )
-            : _vm.answer_info
+            : _vm.answer_info && !_vm.loader
             ? _c("td", { staticClass: "text-right border-0 pt-1 pb-0 pr-3" }, [
                 _c("div", { staticClass: "d-inline-flex pt-1" }, [
                   _vm.answer_info.seen == null
@@ -45850,14 +45846,14 @@ var render = function() {
                         "text-right border-0 answer__which letter__spacing"
                     },
                     [
-                      _vm.loader
-                        ? _c("span", {
-                            staticClass: "spinner-border spinner-border-sm",
-                            attrs: { role: "status", "aria-hidden": "true" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.loader ? _c("span", [_vm._v("Gözlə...")]) : _vm._e(),
+                      _c("div", { staticClass: "pt-2 tr-2" }, [
+                        _vm.loader
+                          ? _c("span", {
+                              staticClass: "spinner-border spinner-border-sm",
+                              attrs: { role: "status", "aria-hidden": "true" }
+                            })
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _c("span", { staticClass: "text-h1" }, [
                         _vm._v(
@@ -45912,13 +45908,17 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.loader
-      ? _c("span", {
-          staticClass: "spinner-border spinner-border-sm",
-          attrs: { role: "status", "aria-hidden": "true" }
-        })
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.loader ? _c("span", [_vm._v("Gözlə...")]) : _vm._e()
+      ? _c("div", { staticClass: "pt-3 pr-4 d-inline-flex" }, [
+          _c("span", { staticClass: "answer__price-currency" }, [
+            _vm._v("     ")
+          ]),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "spinner-border spinner-border-sm",
+            attrs: { role: "status", "aria-hidden": "true" }
+          })
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

@@ -22,7 +22,8 @@ class AnnouncementController extends Controller
 
     public function index()
     {
-        return view('announcements.index')->with('sends', $this->sendsCount());
+        $arr = [1,2];
+        return view('announcements.index')->with( 'sends', $arr);
     }
 
     public function flash()
@@ -452,7 +453,12 @@ class AnnouncementController extends Controller
     }
 
     protected function answerSeenUpdate(Request $request){
-        if( !is_null($request->announcement_id) && !empty($request->announcement_id) ){
+        if(
+            !is_null( $request->announcement_id ) &&
+            !empty( $request->announcement_id ) &&
+            !is_null( $request->seller_id ) &&
+            !empty( $request->seller_id )
+        ){
             $answer = Answer::where([
                 'announcement_id' => $request->announcement_id,
                 'user_id' => $request->seller_id,
@@ -479,11 +485,13 @@ class AnnouncementController extends Controller
             }
 
             return response()->json([
-                'answers' => $answer,
-            ], 200);
+                'errors' => 'Uncurrent user ',
+            ], 404);
         }
 
-        return null;
+        return response()->json([
+            'errors' => 'Failed  announcement_id and seller_id',
+        ], 404);
     }
 
     public function getUserLeftBarAnswer(Request $request){

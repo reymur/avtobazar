@@ -3,11 +3,12 @@
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
-                    <td v-if="answer_info2 != null && close_modal" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
+                   <td v-if="answer_info2 != null && close_modal&& !loader" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
                         <div class="d-inline-flex pt-1">
                             <div class="text-right border-0 answer__which letter__spacing">
-                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <span v-if="loader">Gözlə...</span>
+                                <div class="pt-2 tr-2">
+                                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </div>
 
                                 <span class="text-h1">
                                     {{ answer_info2.which }}
@@ -20,24 +21,19 @@
                                 </span>
                                 <span class="answer__price-currency">AZE</span>
                             </div>
-                            <div v-else class="answer__price-div">
-                                 <span class="answer__price">
-                                    {{ answer_info2.price }}
-                                </span>
-                                <span class="answer__price-currency">AZE</span>
-                            </div>
                         </div>
                     </td>
 
-                    <td v-else-if="answer_info" class="text-right border-0 pt-1 pb-0 pr-3">
+                    <td v-else-if="answer_info && !loader" class="text-right border-0 pt-1 pb-0 pr-3">
                         <div class="d-inline-flex pt-1">
                             <div v-if="answer_info.seen == null" class="text-right border-0 m-0 answer__which letter__spacing">
                                 <span class="badge badge-success mr-2 text-uppercase new__price-el">Yeni</span>
                             </div>
 
                             <div class="text-right border-0 answer__which letter__spacing">
-                                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <span v-if="loader">Gözlə...</span>
+                                <div class="pt-2 tr-2">
+                                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                </div>
 
                                 <span class="text-h1">
                                     {{ answer_info.which }}
@@ -61,8 +57,10 @@
                 </tr>
             </tbody>
         </table>
-        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span v-if="loader">Gözlə...</span>
+        <div v-if="loader" class="pt-3 pr-4 d-inline-flex">
+            <span class="answer__price-currency">&nbsp; &nbsp; &nbsp;</span>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </div>
     </div>
 </template>
 
@@ -79,12 +77,16 @@ export default {
             answer_info2: null,
             answer_update: null,
             loader: false,
+            guard_for_show: null,
+            show_seen_guard: true,
         }
     },
     methods: {
         AnswerTestOnSeen(answer_info, answer_id, seller_id){
-            if( answer_info != null && answer_info !== undefined ){
-                if( answer_info.seen == null && answer_info.seen !== undefined ){
+            if( answer_info !== undefined && answer_info != null ){
+                console.log('AAAAAAAAAA - ', answer_info.seen )
+                if( answer_info.seen !== undefined && answer_info.seen == null ){
+                    this.loader = true;
                     this.collGetNewAnswers(answer_id, seller_id);
                     this.resetAnswersInUserSideBar(answer_id);
                 }else{
@@ -104,9 +106,11 @@ export default {
             })
             .then( res => {
                 if( res.status == 200 ) {
-                    if( res.data.answers !== undefined ) {
+                    if( res.data.answers != null ) {
                         this.answer_info2 = res.data.answers;
                         this.answer_update = res.status;
+
+                        this.loader = false;
                     }
                 }
             })
@@ -116,13 +120,17 @@ export default {
                         if( err.response.data.errors !== undefined ) {
                             this.errors = err.response.data.errors;
                         }
+                        if( err.response.data.seen.id !== undefined ) {
+                            this.show_seen_guard = false;
+                            console.log( 'err.seen_id = ', err.response.data.seen.id )
+                        }
                     }
                 }
             });
         },
         resetAnswersInUserSideBar(answer_id){
             if( answer_id != null ) {
-                this.$emit('resetAnswersInUserSideBarOne', {
+                this.$emit('resetAnswersInUserSideBarOne',{
                     id: answer_id
                 });
             }
@@ -134,7 +142,7 @@ export default {
                         this.answeredUsersFilter(this.answer_users, this.seller_id);
 
                         if( this.answer_info.length > 0 && this.answer_info[0] != null ) {
-                            this.answer_info = this.answer_info[0]
+                            this.answer_info = this.answer_info[0];
                             this.AnswerTestOnSeen(this.answer_info, this.answer_id, this.seller_id)
                         }else{
                             this.answer_info = null;
@@ -145,18 +153,20 @@ export default {
         },
         answeredUsersFilter(answer_users, seller_id){
             let arr = [];
-            arr = this.answer_info = answer_users.filter( user => {
+            arr = answer_users.filter( user => {
                 return user.user_id == seller_id;
             });
 
-            return arr;
+            return this.answer_info = arr;
         },
     },
     created() {
         // this.getUserAnswer();
+        // this.show_seen_guard = sessionStorage['session_seen_id'];
         this.getAnswersUser();
     },
     mounted(){
+        console.log( 'this.close_modal = ', this.close_modal )
         // this.userClick();
         // this.getUserAnswer();
         // console.log('answer_id = ', this.answer_id)

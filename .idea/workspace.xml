@@ -3,13 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +340,15 @@
       <workItem from="1603894294658" duration="3950000" />
       <workItem from="1603922347450" duration="3430000" />
       <workItem from="1603972216365" duration="9737000" />
-      <workItem from="1603982338491" duration="5786000" />
+      <workItem from="1603982338491" duration="6127000" />
+      <workItem from="1604004948845" duration="5292000" />
+      <workItem from="1604010686026" duration="1864000" />
+      <workItem from="1604055195204" duration="7215000" />
+      <workItem from="1604064648695" duration="1450000" />
+      <workItem from="1604066919576" duration="8223000" />
+      <workItem from="1604077196596" duration="19799000" />
+      <workItem from="1604142211485" duration="9338000" />
+      <workItem from="1604152170155" duration="25374000" />
     </task>
     <servers />
   </component>
@@ -371,10 +380,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="416" y="126" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.701@0.27.1366.701" timestamp="1602507271861" />
-    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601723671654">
+    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604172210981">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.701@0.27.1366.701" timestamp="1601723671654" />
+    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.701@0.27.1366.701" timestamp="1604172210981" />
     <state width="1320" height="150" key="GridCell.Tab.0.bottom" timestamp="1602017191906">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -423,10 +432,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1598037059930" />
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1603977418655">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1604060863045">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1603977418655" />
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1604060863045" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603983730116">
       <screen x="0" y="27" width="1366" height="701" />
     </state>

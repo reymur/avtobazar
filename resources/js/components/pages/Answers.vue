@@ -30,8 +30,8 @@
                         <div v-if="answers_all.length > 0" class="">
                             <answer-all-announce
                                 :showOnlyNewAnswers="showOnlyNewAnswers"
-                                :showAllAnswers="showAllAnswers"
                                 :collAnsweredUsersFilter="collAnsweredUsersFilter"
+                                :showAllAnswers="showAllAnswers"
                                 @resetAnswersInUserSideBarSex="resetAnswersInUserSideBarSeven"
                             ></answer-all-announce>
                         </div>
@@ -58,9 +58,10 @@ export default {
     data(){
         return {
             reset_answers: null,
-            showOnlyNewAnswers: false,
+            showOnlyNewAnswers: true,
             showAllAnswers: false,
-            collAnsweredUsersFilter: false,
+            collAnsweredUsersFilter: true,
+            loader: false,
         }
     },
     methods: {
