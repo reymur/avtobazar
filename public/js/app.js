@@ -3809,6 +3809,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showSellers: function showSellers() {
+      this.$emit('modalIsVisibleOne', {
+        data: 1
+      });
+
       if (this.answeredUsersFilterParam === true) {
         this.answeredUsersFilter(this.answer, true);
       } else this.answeredUsersFilter(this.answer, false);
@@ -3852,6 +3856,9 @@ __webpack_require__.r(__webpack_exports__);
     closeButton: function closeButton() {
       var _this3 = this;
 
+      this.$emit('modalIsVisibleOne', {
+        data: 0
+      });
       this.user_click = false;
       setTimeout(function () {
         _this3.getAnswerSeen();
@@ -3933,6 +3940,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersTable",
   props: ['answers_all', 'auth_user', 'auth_check', 'new_orders', 'orders', 'auth_user_get_sends'],
@@ -3942,9 +3951,20 @@ __webpack_require__.r(__webpack_exports__);
       showOnlyNewAnswers: true,
       showAllAnswers: false,
       collAnsweredUsersFilter: true,
-      loader: false
+      loader: false,
+      modal_is_visible: false
     };
   },
+  // watch:{
+  //     modal_is_visible(){
+  //         if( this.modal_is_visible == 1 ){
+  //             alert(1111111)
+  //         }
+  //         else if( this.modal_is_visible == 0 ){
+  //             alert(222222222)
+  //         }
+  //     }
+  // },
   methods: {
     showOnlyNewAnswersParent: function showOnlyNewAnswersParent() {
       this.showOnlyNewAnswers = true;
@@ -3959,6 +3979,11 @@ __webpack_require__.r(__webpack_exports__);
     resetAnswersInUserSideBarSeven: function resetAnswersInUserSideBarSeven(answer) {
       if (answer.id != null) {
         this.reset_answers = answer.id;
+      }
+    },
+    modalIsVisibleFour: function modalIsVisibleFour(el) {
+      if (el.data !== undefined) {
+        this.modal_is_visible = el.data;
       }
     }
   },
@@ -3977,6 +4002,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -4144,6 +4171,13 @@ __webpack_require__.r(__webpack_exports__);
           id: answer.id
         });
       }
+    },
+    modalIsVisibleTwo: function modalIsVisibleTwo(el) {
+      if (el.data !== undefined) {
+        this.$emit('modalIsVisibleThree', {
+          data: el.data
+        });
+      }
     }
   },
   computed: {},
@@ -4217,34 +4251,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
-  props: ['reset_answers'],
+  props: ['reset_answers', 'modal_is_visible'],
   data: function data() {
     return {
       old_answers: [],
       new_answers: [],
-      loader: false
+      loader: false,
+      new_answer_border: '',
+      old_answer_border: '',
+      add_disabled: false
     };
   },
+  watch: {
+    modal_is_visible: function modal_is_visible() {
+      this.resetNewAnswersIfItEmpty();
+    },
+    new_answers: function new_answers() {
+      this.addDisabled();
+      this.newAnswersBorderStyle();
+    },
+    reset_answers: function reset_answers() {
+      var _this = this;
+
+      if (this.new_answers != null) {
+        setTimeout(function () {
+          _this.getAnswers();
+        }, 1000);
+      }
+    }
+  },
   methods: {
+    resetNewAnswersIfItEmpty: function resetNewAnswersIfItEmpty() {
+      if (!this.new_answers.length) {
+        if (this.modal_is_visible === 0) {
+          this.$emit('showAllAnswersInParent');
+        }
+      }
+    },
     showOnlyNewAnswers: function showOnlyNewAnswers(e) {
-      e.preventDefault();
+      this.new_answer_border = ' border-bottom border-dark';
+      this.old_answer_border = '';
       this.$emit('showOnlyNewAnswersInParent');
     },
     showAllAnswers: function showAllAnswers(e) {
-      e.preventDefault();
-      this.$emit('showAllnswersInParent');
+      this.old_answer_border = ' border-bottom border-dark';
+      this.new_answer_border = '';
+      this.addDisabled();
+      this.$emit('showAllAnswersInParent');
     },
     getAnswers: function getAnswers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/announce/side-bar-answers-vue').then(function (res) {
         if (res.status == 200) {
           if (res.data.answers !== undefined) {
-            _this.getNewAnswers(res.data.answers);
+            _this2.getNewAnswers(res.data.answers);
 
-            _this.loader = false;
+            _this2.loader = false;
           }
         }
       })["catch"](function (err) {
@@ -4252,37 +4319,35 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getNewAnswers: function getNewAnswers(answers) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (answers != null && answers !== undefined) {
         this.new_answers = [];
         this.old_answers = [];
         answers.forEach(function (val) {
           if (val.seen == null) {
-            _this2.new_answers.push(val);
-          }
-
-          _this2.old_answers.push(val);
+            _this3.new_answers.push(val);
+          } else _this3.old_answers.push(val);
         });
       }
-    }
-  },
-  watch: {
-    reset_answers: function reset_answers() {
-      var _this3 = this;
-
-      if (this.new_answers != null) {
-        setTimeout(function () {
-          _this3.getAnswers();
-        }, 1000);
+    },
+    addDisabled: function addDisabled() {
+      if (!this.new_answers.length) this.add_disabled = 'disabled';else this.add_disable = false;
+    },
+    newAnswersBorderStyle: function newAnswersBorderStyle() {
+      if (this.new_answers.length) {
+        this.new_answer_border = ' border-bottom border-dark';
+        this.old_answer_border = '';
       }
     }
   },
+  computed: {},
   created: function created() {
     this.loader = true;
     this.getAnswers();
   },
-  mounted: function mounted() {// this.getAnswers();
+  mounted: function mounted() {// this.addDisabled()
+    // this.getAnswers();
   }
 });
 
@@ -45022,11 +45087,14 @@ var render = function() {
                         { staticClass: "row mb-4 ml-1" },
                         [
                           _c("answer-count-show", {
-                            attrs: { reset_answers: _vm.reset_answers },
+                            attrs: {
+                              reset_answers: _vm.reset_answers,
+                              modal_is_visible: _vm.modal_is_visible
+                            },
                             on: {
                               showOnlyNewAnswersInParent:
                                 _vm.showOnlyNewAnswersParent,
-                              showAllnswersInParent: _vm.showAllAnswersParent
+                              showAllAnswersInParent: _vm.showAllAnswersParent
                             }
                           })
                         ],
@@ -45047,7 +45115,8 @@ var render = function() {
                                 },
                                 on: {
                                   resetAnswersInUserSideBarSex:
-                                    _vm.resetAnswersInUserSideBarSeven
+                                    _vm.resetAnswersInUserSideBarSeven,
+                                  modalIsVisibleThree: _vm.modalIsVisibleFour
                                 }
                               })
                             ],
@@ -45153,7 +45222,8 @@ var render = function() {
                             },
                             on: {
                               resetAnswersInUserSideBarThree:
-                                _vm.resetAnswersInUserSideBarFife
+                                _vm.resetAnswersInUserSideBarFife,
+                              modalIsVisibleOne: _vm.modalIsVisibleTwo
                             }
                           })
                         ],
@@ -45240,7 +45310,8 @@ var render = function() {
                             },
                             on: {
                               resetAnswersInUserSideBarThree:
-                                _vm.resetAnswersInUserSideBarFife
+                                _vm.resetAnswersInUserSideBarFife,
+                              modalIsVisibleOne: _vm.modalIsVisibleTwo
                             }
                           })
                         ],
@@ -45343,66 +45414,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "d-inline-flex" }, [
-    _vm.new_answers !== null
-      ? _c("div", {}, [
-          _vm.new_answers.length > 0
-            ? _c("div", {}, [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "" },
-                    on: { click: _vm.showOnlyNewAnswers }
-                  },
-                  [
-                    _c("span", { staticClass: "letter__spacing" }, [
-                      _vm._v("\n                    Yeni\n                ")
-                    ]),
-                    _vm._v(" "),
-                    _vm.loader
-                      ? _c("span", {
-                          staticClass: "spinner-border spinner-border-sm",
-                          attrs: { role: "status", "aria-hidden": "true" }
-                        })
-                      : _c(
-                          "span",
-                          { staticClass: "badge badge-success mt-n2" },
-                          [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(_vm.new_answers.length) +
-                                "\n                "
-                            )
-                          ]
-                        )
-                  ]
-                )
-              ])
-            : _c("div", {}, [
-                _c("span", { staticClass: "letter__spacing" }, [
-                  _vm._v("\n                Yeni\n            ")
-                ]),
-                _vm._v(" "),
-                _vm.loader
-                  ? _c("span", {
-                      staticClass: "spinner-border spinner-border-sm",
-                      attrs: { role: "status", "aria-hidden": "true" }
-                    })
-                  : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
-                      _vm._v("\n                0\n            ")
-                    ])
-              ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("span", { staticClass: "ml-2 mr-2" }, [_vm._v("\n        |\n    ")]),
-    _vm._v(" "),
-    _vm.old_answers != null
-      ? _c("div", {}, [
-          _c("a", { attrs: { href: "" }, on: { click: _vm.showAllAnswers } }, [
-            _vm.old_answers.length > 0
-              ? _c("div", {}, [
+    _c("div", {}, [
+      _c("div", {}, [
+        _c(
+          "button",
+          {
+            staticClass: "btn p-0",
+            attrs: { disabled: _vm.add_disabled },
+            on: { click: _vm.showOnlyNewAnswers }
+          },
+          [
+            _vm.new_answers.length !== null && _vm.new_answers.length > 0
+              ? _c("span", { class: "pb-1 px-1 " + _vm.new_answer_border }, [
                   _c("span", { staticClass: "letter__spacing" }, [
-                    _vm._v("\n                     Ümumi\n                ")
+                    _vm._v(
+                      "\n                        Yeni\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.loader
+                    ? _c("span", {
+                        staticClass: "spinner-border spinner-border-sm",
+                        attrs: { role: "status", "aria-hidden": "true" }
+                      })
+                    : _c("span", { staticClass: "badge badge-success mt-n2" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.new_answers.length) +
+                            "\n                    "
+                        )
+                      ])
+                ])
+              : _c("span", {}, [
+                  _c("span", { staticClass: "letter__spacing" }, [
+                    _vm._v(
+                      "\n                        Yeni\n                    "
+                    )
                   ]),
                   _vm._v(" "),
                   _vm.loader
@@ -45415,17 +45462,52 @@ var render = function() {
                         { staticClass: "badge badge-secondary mt-n2" },
                         [
                           _vm._v(
-                            "\n                    " +
-                              _vm._s(_vm.old_answers.length) +
-                              "\n                "
+                            "\n                        0\n                    "
                           )
                         ]
                       )
                 ])
-              : _c("div", { staticClass: "badge badge-secondary mt-n2" }, [
-                  _vm._v("\n                0\n            ")
-                ])
-          ])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "ml-2 mr-2" }, [_vm._v("\n        |\n    ")]),
+    _vm._v(" "),
+    _vm.old_answers != null && _vm.old_answers.length > 0
+      ? _c("div", { class: "px-1 " + _vm.old_answer_border }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn p-0",
+              attrs: { disabled: _vm.add_disabled },
+              on: { click: _vm.showAllAnswers }
+            },
+            [
+              _c("span", { staticClass: "letter__spacing" }, [
+                _vm._v("\n                 Ümumi\n            ")
+              ]),
+              _vm._v(" "),
+              _vm.loader
+                ? _c("span", {
+                    staticClass: "spinner-border spinner-border-sm",
+                    attrs: { role: "status", "aria-hidden": "true" }
+                  })
+                : _c("span", { staticClass: "badge badge-secondary mt-n2" }, [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.old_answers.length) +
+                        "\n            "
+                    )
+                  ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm.old_answers != null && !_vm.old_answers.length
+            ? _c("div", { staticClass: "badge badge-secondary mt-n2" }, [
+                _vm._v("\n            0\n        ")
+              ])
+            : _vm._e()
         ])
       : _vm._e()
   ])

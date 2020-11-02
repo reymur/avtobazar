@@ -1,27 +1,30 @@
 <template>
     <div class="d-inline-flex">
-        <div v-if="new_answers !== null" class="">
-            <div v-if="new_answers.length > 0" class="">
-                <a @click="showOnlyNewAnswers" href="">
-                    <span class="letter__spacing">
-                        Yeni
+        <div class="">
+            <div class="">
+                <button class="btn p-0" :disabled="add_disabled"  @click="showOnlyNewAnswers">
+                    <span v-if="new_answers.length !== null && new_answers.length > 0" :class="'pb-1 px-1 '+new_answer_border">
+                        <span class="letter__spacing">
+                            Yeni
+                        </span>
+
+                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-else class="badge badge-success mt-n2">
+                            {{ new_answers.length }}
+                        </span>
                     </span>
 
-                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span v-else class="badge badge-success mt-n2">
-                        {{ new_answers.length }}
-                    </span>
-                </a>
-            </div>
-            <div v-else class="">
-                <span class="letter__spacing">
-                    Yeni
-                </span>
+                    <span v-else class="">
+                        <span class="letter__spacing">
+                            Yeni
+                        </span>
 
-                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span v-else class="badge badge-secondary mt-n2">
-                    0
-                </span>
+                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                         <span v-else class="badge badge-secondary mt-n2">
+                            0
+                        </span>
+                    </span>
+                </button>
             </div>
         </div>
 
@@ -29,22 +32,21 @@
             |
         </span>
 
-        <div v-if="old_answers != null" class="">
-            <a href="" @click="showAllAnswers">
-                <div v-if="old_answers.length > 0" class="">
-                    <span class="letter__spacing">
-                         Ümumi
-                    </span>
+        <div v-if="old_answers != null && old_answers.length > 0" :class="'px-1 '+old_answer_border">
+            <button class="btn p-0" :disabled="add_disabled" @click="showAllAnswers">
+                 <span class="letter__spacing">
+                     Ümumi
+                </span>
 
-                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span v-else class="badge badge-secondary mt-n2">
-                        {{ old_answers.length }}
-                    </span>
-                </div>
-                <div v-else class="badge badge-secondary mt-n2">
-                    0
-                </div>
-            </a>
+                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span v-else class="badge badge-secondary mt-n2">
+                    {{ old_answers.length }}
+                </span>
+            </button>
+
+            <div v-if="old_answers != null && !old_answers.length" class="badge badge-secondary mt-n2">
+                0
+            </div>
         </div>
     </div>
 </template>
@@ -52,22 +54,51 @@
 <script>
 export default {
     name: "UserSideBarOrders",
-    props: ['reset_answers'],
+    props: ['reset_answers','modal_is_visible'],
     data(){
         return {
             old_answers:[],
             new_answers:[],
             loader: false,
+            new_answer_border: '',
+            old_answer_border: '',
+            add_disabled: false,
         }
     },
+    watch:{
+        modal_is_visible(){
+            this.resetNewAnswersIfItEmpty();
+        },
+        new_answers(){
+            this.addDisabled();
+            this.newAnswersBorderStyle();
+        },
+        reset_answers(){
+            if( this.new_answers != null ) {
+                setTimeout(() => {
+                    this.getAnswers();
+                }, 1000);
+            }
+        },
+    },
     methods: {
+        resetNewAnswersIfItEmpty(){
+            if (!this.new_answers.length) {
+                if (this.modal_is_visible === 0) {
+                    this.$emit('showAllAnswersInParent');
+                }
+            }
+        },
         showOnlyNewAnswers(e){
-            e.preventDefault();
+            this.new_answer_border = ' border-bottom border-dark';
+            this.old_answer_border = '';
             this.$emit('showOnlyNewAnswersInParent');
         },
         showAllAnswers(e){
-            e.preventDefault();
-            this.$emit('showAllnswersInParent');
+            this.old_answer_border = ' border-bottom border-dark';
+            this.new_answer_border = '';
+            this. addDisabled();
+            this.$emit('showAllAnswersInParent');
         },
         getAnswers(){
             axios.post('/announce/side-bar-answers-vue')
@@ -92,26 +123,32 @@ export default {
                     if (val.seen == null) {
                         this.new_answers.push(val);
                     }
-
-                    this.old_answers.push(val);
+                    else this.old_answers.push(val);
                 });
+            }
+        },
+        addDisabled(){
+            if( !this.new_answers.length )
+                this.add_disabled = 'disabled';
+            else
+                this.add_disable = false;
+        },
+        newAnswersBorderStyle(){
+            if( this.new_answers.length ) {
+                this.new_answer_border = ' border-bottom border-dark';
+                this.old_answer_border = '';
             }
         }
     },
-    watch:{
-        reset_answers(){
-            if( this.new_answers != null ) {
-                setTimeout(() => {
-                    this.getAnswers();
-                }, 1000);
-            }
-        }
+    computed:{
+
     },
     created() {
         this.loader = true;
         this.getAnswers();
     },
     mounted() {
+        // this.addDisabled()
         // this.getAnswers();
     }
 }

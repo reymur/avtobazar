@@ -31,6 +31,7 @@
                             :answer_users="answer.get_is_answers"
                             :collAnsweredUsersFilter="collAnsweredUsersFilter"
                             @resetAnswersInUserSideBarThree="resetAnswersInUserSideBarFife"
+                            @modalIsVisibleOne="modalIsVisibleTwo"
                         ></show-all-answer-sellers>
                     </td>
 
@@ -57,6 +58,7 @@
                             :answer_users="answer.get_is_answers"
                             :collAnsweredUsersFilter="false"
                             @resetAnswersInUserSideBarThree="resetAnswersInUserSideBarFife"
+                            @modalIsVisibleOne="modalIsVisibleTwo"
                         ></show-all-answer-sellers>
                     </td>
 
@@ -167,6 +169,13 @@ export default {
                 this.$emit('resetAnswersInUserSideBarSex', {
                     id: answer.id
                 })
+            }
+        },
+        modalIsVisibleTwo(el){
+            if( el.data !== undefined ) {
+                this.$emit('modalIsVisibleThree', {
+                    data: el.data
+                });
             }
         }
     },

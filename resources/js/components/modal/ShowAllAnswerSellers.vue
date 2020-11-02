@@ -175,6 +175,10 @@ export default {
             }
         },
         showSellers(){
+            this.$emit('modalIsVisibleOne',{
+                data: 1
+            });
+
             if( this.answeredUsersFilterParam === true ) {
                 this.answeredUsersFilter(this.answer, true);
             }
@@ -216,6 +220,10 @@ export default {
             }
         },
         closeButton(){
+            this.$emit('modalIsVisibleOne',{
+                data: 0
+            });
+
             this.user_click = false;
 
             setTimeout(() => {

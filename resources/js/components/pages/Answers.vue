@@ -22,8 +22,9 @@
                         <div class="row mb-4 ml-1">
                             <answer-count-show
                                 :reset_answers="reset_answers"
+                                :modal_is_visible="modal_is_visible"
                                 @showOnlyNewAnswersInParent="showOnlyNewAnswersParent"
-                                @showAllnswersInParent="showAllAnswersParent"
+                                @showAllAnswersInParent="showAllAnswersParent"
                             ></answer-count-show>
                         </div>
 
@@ -33,6 +34,7 @@
                                 :collAnsweredUsersFilter="collAnsweredUsersFilter"
                                 :showAllAnswers="showAllAnswers"
                                 @resetAnswersInUserSideBarSex="resetAnswersInUserSideBarSeven"
+                                @modalIsVisibleThree="modalIsVisibleFour"
                             ></answer-all-announce>
                         </div>
                         <div v-else class="">
@@ -62,8 +64,19 @@ export default {
             showAllAnswers: false,
             collAnsweredUsersFilter: true,
             loader: false,
+            modal_is_visible: false,
         }
     },
+    // watch:{
+    //     modal_is_visible(){
+    //         if( this.modal_is_visible == 1 ){
+    //             alert(1111111)
+    //         }
+    //         else if( this.modal_is_visible == 0 ){
+    //             alert(222222222)
+    //         }
+    //     }
+    // },
     methods: {
         showOnlyNewAnswersParent(){
             this.showOnlyNewAnswers = true;
@@ -78,6 +91,11 @@ export default {
         resetAnswersInUserSideBarSeven(answer){
             if( answer.id != null ) {
                 this.reset_answers = answer.id;
+            }
+        },
+        modalIsVisibleFour(el){
+            if( el.data !== undefined ) {
+                this.modal_is_visible = el.data;
             }
         },
     },
