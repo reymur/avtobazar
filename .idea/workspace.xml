@@ -4,9 +4,6 @@
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -347,7 +344,9 @@
       <workItem from="1604142211485" duration="9338000" />
       <workItem from="1604152170155" duration="25374000" />
       <workItem from="1604310220827" duration="6961000" />
-      <workItem from="1604317759368" duration="5095000" />
+      <workItem from="1604317759368" duration="5918000" />
+      <workItem from="1604343875099" duration="6320000" />
+      <workItem from="1604397423664" duration="2048000" />
     </task>
     <servers />
   </component>
@@ -431,13 +430,13 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1598037059930" />
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1604060863045">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1604399398015">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1604060863045" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604322611118">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1604399398015" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604349402614">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1604322611118" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1604349402614" />
   </component>
 </project>

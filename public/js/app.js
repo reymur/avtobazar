@@ -4262,7 +4262,10 @@ __webpack_require__.r(__webpack_exports__);
       new_answers: [],
       loader: false,
       new_answer_border: '',
+      new_answer_text: '',
       old_answer_border: '',
+      old_answer_text: '',
+      old_answer_is_show: 0,
       add_disabled: false
     };
   },
@@ -4271,8 +4274,8 @@ __webpack_require__.r(__webpack_exports__);
       this.resetNewAnswersIfItEmpty();
     },
     new_answers: function new_answers() {
+      if (!this.new_answers.length) this.newAnswersStyle('text-dark');else this.newAnswersStyle('text-info');
       this.addDisabled();
-      this.newAnswersBorderStyle();
     },
     reset_answers: function reset_answers() {
       var _this = this;
@@ -4286,32 +4289,39 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     resetNewAnswersIfItEmpty: function resetNewAnswersIfItEmpty() {
+      var _this2 = this;
+
       if (!this.new_answers.length) {
-        if (this.modal_is_visible === 0) {
-          this.$emit('showAllAnswersInParent');
+        var session_answer = sessionStorage.getItem('is_new_answer_count');
+
+        if (this.modal_is_visible === 0 && session_answer != 0) {
+          setTimeout(function () {
+            _this2.old_answer_text = ' text-dark';
+            if (_this2.modal_is_visible === 0) _this2.$emit('showAllAnswersInParent');
+          }, 1500);
         }
       }
     },
     showOnlyNewAnswers: function showOnlyNewAnswers(e) {
-      this.new_answer_border = ' border-bottom border-dark';
-      this.old_answer_border = '';
+      this.old_answer_is_show = 1;
+      this.newAnswersStyle('text-info');
       this.$emit('showOnlyNewAnswersInParent');
     },
     showAllAnswers: function showAllAnswers(e) {
-      this.old_answer_border = ' border-bottom border-dark';
-      this.new_answer_border = '';
+      this.old_answer_is_show = 1;
+      this.oldAnswersStyle();
       this.addDisabled();
       this.$emit('showAllAnswersInParent');
     },
     getAnswers: function getAnswers() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/announce/side-bar-answers-vue').then(function (res) {
         if (res.status == 200) {
           if (res.data.answers !== undefined) {
-            _this2.getNewAnswers(res.data.answers);
+            _this3.getNewAnswers(res.data.answers);
 
-            _this2.loader = false;
+            _this3.loader = false;
           }
         }
       })["catch"](function (err) {
@@ -4319,31 +4329,42 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getNewAnswers: function getNewAnswers(answers) {
-      var _this3 = this;
+      var _this4 = this;
 
-      if (answers != null && answers !== undefined) {
-        this.new_answers = [];
-        this.old_answers = [];
-        answers.forEach(function (val) {
-          if (val.seen == null) {
-            _this3.new_answers.push(val);
-          } else _this3.old_answers.push(val);
-        });
+      if (answers !== undefined) {
+        if (answers != null) {
+          this.new_answers = [];
+          this.old_answers = [];
+          answers.forEach(function (val) {
+            if (val.seen == null) {
+              _this4.new_answers.push(val);
+            } else _this4.old_answers.push(val);
+          });
+
+          if (this.new_answers.length !== 0) {
+            sessionStorage.setItem('is_new_answer_count', this.new_answers.length);
+          }
+        }
       }
     },
     addDisabled: function addDisabled() {
       if (!this.new_answers.length) this.add_disabled = 'disabled';else this.add_disable = false;
     },
-    newAnswersBorderStyle: function newAnswersBorderStyle() {
-      if (this.new_answers.length) {
-        this.new_answer_border = ' border-bottom border-dark';
-        this.old_answer_border = '';
-      }
+    newAnswersStyle: function newAnswersStyle(text_color) {
+      this.new_answer_border = ' border-bottom border-dark';
+      this.old_answer_border = ' ';
+      this.old_answer_text = ' ' + text_color;
+    },
+    oldAnswersStyle: function oldAnswersStyle() {
+      this.old_answer_border = ' border-bottom border-dark';
+      this.old_answer_text = ' text-dark';
+      this.new_answer_border = ' text-info';
     }
   },
   computed: {},
   created: function created() {
     this.loader = true;
+    sessionStorage.setItem('is_new_answer_count', 0);
     this.getAnswers();
   },
   mounted: function mounted() {// this.addDisabled()
@@ -45484,7 +45505,7 @@ var render = function() {
               on: { click: _vm.showAllAnswers }
             },
             [
-              _c("span", { staticClass: "letter__spacing" }, [
+              _c("span", { class: "letter__spacing" + _vm.old_answer_text }, [
                 _vm._v("\n                 Ümumi\n            ")
               ]),
               _vm._v(" "),

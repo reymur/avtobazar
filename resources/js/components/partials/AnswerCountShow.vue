@@ -34,7 +34,7 @@
 
         <div v-if="old_answers != null && old_answers.length > 0" :class="'px-1 '+old_answer_border">
             <button class="btn p-0" :disabled="add_disabled" @click="showAllAnswers">
-                 <span class="letter__spacing">
+                 <span :class="'letter__spacing'+old_answer_text">
                      Ümumi
                 </span>
 
@@ -61,7 +61,10 @@ export default {
             new_answers:[],
             loader: false,
             new_answer_border: '',
+            new_answer_text: '',
             old_answer_border: '',
+            old_answer_text: '',
+            old_answer_is_show: 0,
             add_disabled: false,
         }
     },
@@ -70,8 +73,12 @@ export default {
             this.resetNewAnswersIfItEmpty();
         },
         new_answers(){
+            if (!this.new_answers.length)
+                this.newAnswersStyle('text-dark');
+            else
+                this.newAnswersStyle('text-info');
+
             this.addDisabled();
-            this.newAnswersBorderStyle();
         },
         reset_answers(){
             if( this.new_answers != null ) {
@@ -84,19 +91,23 @@ export default {
     methods: {
         resetNewAnswersIfItEmpty(){
             if (!this.new_answers.length) {
-                if (this.modal_is_visible === 0) {
-                    this.$emit('showAllAnswersInParent');
+                let session_answer = sessionStorage.getItem('is_new_answer_count');
+                if ( this.modal_is_visible === 0 && session_answer != 0 ) {
+                    setTimeout( () => {
+                        this.old_answer_text = ' text-dark';
+                        if (this.modal_is_visible === 0) this.$emit('showAllAnswersInParent');
+                    },1500 )
                 }
             }
         },
         showOnlyNewAnswers(e){
-            this.new_answer_border = ' border-bottom border-dark';
-            this.old_answer_border = '';
+            this.old_answer_is_show = 1;
+            this.newAnswersStyle('text-info');
             this.$emit('showOnlyNewAnswersInParent');
         },
         showAllAnswers(e){
-            this.old_answer_border = ' border-bottom border-dark';
-            this.new_answer_border = '';
+            this.old_answer_is_show = 1;
+            this.oldAnswersStyle();
             this. addDisabled();
             this.$emit('showAllAnswersInParent');
         },
@@ -114,17 +125,23 @@ export default {
                     console.log( 'err = ', err.response );
                 });
         },
-        getNewAnswers(answers){
-            if( answers != null && answers !== undefined ) {
-                this.new_answers = [];
-                this.old_answers = [];
+        getNewAnswers: function (answers) {
+            if ( answers !== undefined ) {
+                if ( answers != null) {
+                    this.new_answers = [];
+                    this.old_answers = [];
 
-                answers.forEach(val => {
-                    if (val.seen == null) {
-                        this.new_answers.push(val);
+                    answers.forEach(val => {
+                        if (val.seen == null) {
+                            this.new_answers.push(val);
+                        } else this.old_answers.push(val);
+                    });
+
+                    if (this.new_answers.length !== 0) {
+                        sessionStorage.setItem('is_new_answer_count', this.new_answers.length)
+
                     }
-                    else this.old_answers.push(val);
-                });
+                }
             }
         },
         addDisabled(){
@@ -133,18 +150,25 @@ export default {
             else
                 this.add_disable = false;
         },
-        newAnswersBorderStyle(){
-            if( this.new_answers.length ) {
-                this.new_answer_border = ' border-bottom border-dark';
-                this.old_answer_border = '';
-            }
-        }
+        newAnswersStyle(text_color){
+            this.new_answer_border = ' border-bottom border-dark';
+            this.old_answer_border = ' ';
+
+            this.old_answer_text = ' '+text_color;
+
+        },
+        oldAnswersStyle(){
+            this.old_answer_border = ' border-bottom border-dark';
+            this.old_answer_text = ' text-dark';
+            this.new_answer_border = ' text-info';
+        },
     },
     computed:{
 
     },
     created() {
         this.loader = true;
+        sessionStorage.setItem('is_new_answer_count', 0);
         this.getAnswers();
     },
     mounted() {
