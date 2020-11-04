@@ -149,8 +149,9 @@ export default {
             axios.post('/announce/answers-post')
                 .then( res => {
                     if( res.status == 200 ){
-                        if( res.data.answers_all !== undefined && res.data.answers_all != null ){
-                            this.answers = res.data.answers_all;
+                    console.log( 'AAAAAAAAAAAA  -- ',res.data.all_answers )
+                        if( res.data.all_answers !== undefined && res.data.all_answers != null ){
+                            this.answers = res.data.all_answers;
                             this.isTrue = !!count;
                             this.loader = false;
                         }

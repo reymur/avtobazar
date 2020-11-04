@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\AnnouncementUser;
 use App\Answer;
-use App\Condition;
+use App\Http\Resources\AnswerCollection;
+use App\Http\Resources\AnswerResource;
 use App\User;
 use App\Announcement;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
@@ -23,7 +25,7 @@ class AnswerController extends Controller
             $answers_all = $this->getAllAnswers();
 
 //            dd( $answers_all->get()[5]->getanswerusers );
-//            dd( mt_rand(0, 999) );
+//            dd( new AnswerResource( Answer::first() ) );
 
             $answers_paginate = $answers_all;
             $answers_all_paginate = $answers_paginate->orderByDesc('created_at')->paginate(2);
@@ -41,7 +43,8 @@ class AnswerController extends Controller
             ->where('user_id',Auth::user()->id)
             ->whereHas('getIsAnswers', function(Builder $builder){
                 return $builder->where('id','!=', null);
-            });
+            })
+            ->orderByDesc('created_at');
 
         return $answers_all ?? false;
     }
@@ -51,9 +54,9 @@ class AnswerController extends Controller
         $answers = $this->getAllAnswers();
 
         if( $answers && $answers->get()->count() > 0 ){
-            return response()->json([
-                'answers_all' => $answers->get()
-            ], 200);
+//            return new AnswerCollection( $answers->get() );
+            return ( new AnswerCollection( $answers->get() ) )
+                    ->response()->setStatusCode(200);
         }
 
         return response()->json([
@@ -79,7 +82,7 @@ class AnswerController extends Controller
             'price' => 'required|numeric'
         ]);
 
-        $answer = Answer::create([
+        $answer = AnswerResource::create([
             'announcement_id' => $request->order_id ?? 0,
             'user_id' => Auth::user()->id ?? 0,
             'which' => $request->which,
@@ -102,7 +105,7 @@ class AnswerController extends Controller
     public function getShowAllAnswerVue(Request $request)
     {
         if (isset($request->answer_id) && isset($request->seller_id)) {
-            $answer = Answer::where([
+            $answer = AnswerResource::where([
                 'announcement_id' => $request->answer_id,
                 'user_id' => $request->seller_id
             ])->first();

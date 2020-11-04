@@ -3,7 +3,7 @@
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
-                   <td v-if="answer_info2 != null && close_modal&& !loader" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
+                    <td v-if="answer_info2 != null && close_modal&& !loader" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
                         <div class="d-inline-flex pt-1">
                             <div class="text-right border-0 answer__which letter__spacing">
                                 <div class="pt-2 tr-2">
@@ -22,9 +22,15 @@
                                 <span class="answer__price-currency">AZE</span>
                             </div>
                         </div>
+
+                        <div :class="'position-absolute text-left d-flex answers__time-show'+is_answer_info2">
+                            <div class="">
+                                {{ answer_info2.created_at ? answer_info2.created_at : '' }}
+                            </div>
+                        </div>
                     </td>
 
-                    <td v-else-if="answer_info && !loader" class="text-right border-0 pt-1 pb-0 pr-3">
+                    <td v-else-if="answer_info && !loader" class="text-right border-0 pt-1 pb-0 pr-3 position-relative">
                         <div class="d-inline-flex pt-1">
                             <div v-if="answer_info.seen == null" class="text-right border-0 m-0 answer__which letter__spacing">
                                 <span class="badge badge-success mr-2 text-uppercase new__price-el">Yeni</span>
@@ -53,6 +59,12 @@
                                 <span class="answer__price-currency">AZE</span>
                             </div>
                         </div>
+
+                        <div class="position-absolute text-left d-flex answers__time-show">
+                            <div class="">
+                                {{ answer_info.created_at ? answer_info.created_at : '' }}
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -77,6 +89,7 @@ export default {
             answer_info2: null,
             answer_update: null,
             loader: false,
+            is_answer_info2: '',
             guard_for_show: null,
             show_seen_guard: true,
         }
@@ -108,6 +121,7 @@ export default {
                 if( res.status == 200 ) {
                     if( res.data.answers != null ) {
                         this.answer_info2 = res.data.answers;
+                        this.is_answer_info2 = ' pl-3';
                         this.answer_update = res.status;
 
                         this.loader = false;
@@ -166,7 +180,7 @@ export default {
         this.getAnswersUser();
     },
     mounted(){
-        console.log( 'this.close_modal = ', this.close_modal )
+        // console.log( 'this.is_new_answers = ', this.is_new_answers )
         // this.userClick();
         // this.getUserAnswer();
         // console.log('answer_id = ', this.answer_id)

@@ -3,11 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class Announcement extends Model
 {
     protected $guarded = [];
+
+    public function getCreatedAtAttribute(){
+        return Carbon::parse($this->attributes['created_at'])->format('d.m.Y | H:m');
+    }
 
     public function getImageName()
     {

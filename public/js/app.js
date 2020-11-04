@@ -4151,8 +4151,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/announce/answers-post').then(function (res) {
         if (res.status == 200) {
-          if (res.data.answers_all !== undefined && res.data.answers_all != null) {
-            _this.answers = res.data.answers_all;
+          console.log('AAAAAAAAAAAA  -- ', res.data.all_answers);
+
+          if (res.data.all_answers !== undefined && res.data.all_answers != null) {
+            _this.answers = res.data.all_answers;
             _this.isTrue = !!count;
             _this.loader = false;
           }
@@ -4611,6 +4613,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
   props: ['answer_users', 'answer_id', 'seller_id', 'close_modal', 'clickToNewAnswers'],
@@ -4620,6 +4634,7 @@ __webpack_require__.r(__webpack_exports__);
       answer_info2: null,
       answer_update: null,
       loader: false,
+      is_answer_info2: '',
       guard_for_show: null,
       show_seen_guard: true
     };
@@ -4655,6 +4670,7 @@ __webpack_require__.r(__webpack_exports__);
         if (res.status == 200) {
           if (res.data.answers != null) {
             _this2.answer_info2 = res.data.answers;
+            _this2.is_answer_info2 = ' pl-3';
             _this2.answer_update = res.status;
             _this2.loader = false;
           }
@@ -4710,8 +4726,8 @@ __webpack_require__.r(__webpack_exports__);
     // this.show_seen_guard = sessionStorage['session_seen_id'];
     this.getAnswersUser();
   },
-  mounted: function mounted() {
-    console.log('this.close_modal = ', this.close_modal); // this.userClick();
+  mounted: function mounted() {// console.log( 'this.is_new_answers = ', this.is_new_answers )
+    // this.userClick();
     // this.getUserAnswer();
     // console.log('answer_id = ', this.answer_id)
     // console.log('users = ', this.users)
@@ -45916,65 +45932,110 @@ var render = function() {
                           ]
                         )
                       : _vm._e()
-                  ])
-                ]
-              )
-            : _vm.answer_info && !_vm.loader
-            ? _c("td", { staticClass: "text-right border-0 pt-1 pb-0 pr-3" }, [
-                _c("div", { staticClass: "d-inline-flex pt-1" }, [
-                  _vm.answer_info.seen == null
-                    ? _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-right border-0 m-0 answer__which letter__spacing"
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "badge badge-success mr-2 text-uppercase new__price-el"
-                            },
-                            [_vm._v("Yeni")]
-                          )
-                        ]
-                      )
-                    : _vm._e(),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
                     {
-                      staticClass:
-                        "text-right border-0 answer__which letter__spacing"
+                      class:
+                        "position-absolute text-left d-flex answers__time-show" +
+                        _vm.is_answer_info2
                     },
                     [
-                      _c("div", { staticClass: "pt-2 tr-2" }, [
-                        _vm.loader
-                          ? _c("span", {
-                              staticClass: "spinner-border spinner-border-sm",
-                              attrs: { role: "status", "aria-hidden": "true" }
-                            })
-                          : _vm._e()
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "text-h1" }, [
+                      _c("div", {}, [
                         _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.answer_info.which) +
-                            "\n                            "
+                          "\n                            " +
+                            _vm._s(
+                              _vm.answer_info2.created_at
+                                ? _vm.answer_info2.created_at
+                                : ""
+                            ) +
+                            "\n                        "
                         )
                       ])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm.answer_info.seen != null
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "bg-secondary answer__price-div-for-seen"
-                        },
-                        [
+                  )
+                ]
+              )
+            : _vm.answer_info && !_vm.loader
+            ? _c(
+                "td",
+                {
+                  staticClass:
+                    "text-right border-0 pt-1 pb-0 pr-3 position-relative"
+                },
+                [
+                  _c("div", { staticClass: "d-inline-flex pt-1" }, [
+                    _vm.answer_info.seen == null
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "text-right border-0 m-0 answer__which letter__spacing"
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "badge badge-success mr-2 text-uppercase new__price-el"
+                              },
+                              [_vm._v("Yeni")]
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "text-right border-0 answer__which letter__spacing"
+                      },
+                      [
+                        _c("div", { staticClass: "pt-2 tr-2" }, [
+                          _vm.loader
+                            ? _c("span", {
+                                staticClass: "spinner-border spinner-border-sm",
+                                attrs: { role: "status", "aria-hidden": "true" }
+                              })
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text-h1" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.answer_info.which) +
+                              "\n                            "
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.answer_info.seen != null
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "bg-secondary answer__price-div-for-seen"
+                          },
+                          [
+                            _c("span", { staticClass: "answer__price" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.answer_info.price) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "answer__price-currency" },
+                              [_vm._v("AZE")]
+                            )
+                          ]
+                        )
+                      : _c("div", { staticClass: "answer__price-div" }, [
                           _c("span", { staticClass: "answer__price" }, [
                             _vm._v(
                               "\n                                " +
@@ -45988,23 +46049,31 @@ var render = function() {
                             { staticClass: "answer__price-currency" },
                             [_vm._v("AZE")]
                           )
-                        ]
-                      )
-                    : _c("div", { staticClass: "answer__price-div" }, [
-                        _c("span", { staticClass: "answer__price" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(_vm.answer_info.price) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "answer__price-currency" }, [
-                          _vm._v("AZE")
                         ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "position-absolute text-left d-flex answers__time-show"
+                    },
+                    [
+                      _c("div", {}, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(
+                              _vm.answer_info.created_at
+                                ? _vm.answer_info.created_at
+                                : ""
+                            ) +
+                            "\n                        "
+                        )
                       ])
-                ])
-              ])
+                    ]
+                  )
+                ]
+              )
             : _vm._e()
         ])
       ])

@@ -364,6 +364,13 @@ body {
         color: #105288;
     }
 
+.answers__time-show {
+    position:absolute;
+    margin: -12px 0 0 -66px;
+    color: #6a6a6a;
+    font-size: 13px;
+}
+
 .vertical__align {
     vertical-align: middle;
 }
