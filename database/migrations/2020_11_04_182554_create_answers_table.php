@@ -20,6 +20,7 @@ class CreateAnswersTable extends Migration
             $table->string('which')->nullable();
             $table->string('price')->nullable();
             $table->string('seen')->nullable();
+            $table->string('condition')->nullable();
             $table->timestamps();
         });
     }

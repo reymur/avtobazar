@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class AnswerResource extends JsonResource
 {
-    public static $wrap = 'all_answers';
+    public static $wrap = 'answers';
 
     /**
      * Transform the resource into an array.
@@ -18,7 +18,17 @@ class AnswerResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'created_at' => Carbon::parse($this->created_at)->diffForHumans()
+            'answers' => [
+                'id' => $this->id,
+                'announcement_id' => $this->announcement_id,
+                'user_id' => $this->user_id,
+                'which' => $this->which,
+                'price' => $this->price,
+                'seen' => $this->seen,
+                'created_at' => $this->created_at,
+//                'created_at' => Carbon::parse($this->created_at)->format('d/m/Y | H:m'),
+                'updated_at' => $this->updated_at,
+            ]
         ];
     }
 }

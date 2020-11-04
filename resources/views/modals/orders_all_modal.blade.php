@@ -42,7 +42,7 @@
                             </span>
                             <span class="px-3"></span>
                             <span>
-                                {{ Illuminate\Support\Carbon::now()->diffForHumans($order->announcement->created_at) }}
+                                {{ $order->announcement->created_at }}
                             </span>
                         </div>
                     @endif

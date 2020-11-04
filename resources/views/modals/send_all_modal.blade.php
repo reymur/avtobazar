@@ -9,13 +9,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="send_all-{{ $announce->id }}">
-                    @if( isset($announce->spare_parts) )
+                    @if( isset($announce->created_at) )
                         <span class="mr-0">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                             </svg>
                         </span>
-                        <span class="text-uppercase letter__spacing">{{ $announce->spare_parts }}</span>
+                        <span class="letter__spacing">{{ $announce->created_at }}</span>
                     @else
                         Yox
                     @endif
@@ -28,13 +28,13 @@
             <div class="modal-body pt-2 pb-1">
                 <table class="table table-bordered">
                     <tbody>
-                        @if( $announce->created_at )
-                            <div class="mr-3 mx-2 text-right text-black-50">
-                                <span>
-                                    {{ Illuminate\Support\Carbon::now()->diffForHumans($announce->created_at) }}
-                                </span>
-                            </div>
-                        @endif
+{{--                        @if( $announce->created_at )--}}
+{{--                            <div class="mr-3 mx-2 text-right text-black-50">--}}
+{{--                                <span>--}}
+{{--                                    {{ $announce->created_at }}--}}
+{{--                                </span>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
 
                         @if( $announce->spare_parts )
                             <tr>

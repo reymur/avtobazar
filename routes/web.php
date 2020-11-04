@@ -47,3 +47,4 @@ Route::prefix('seller')->middleware('auth')->group(function(){
     Route::post('/get-whos', 'SellerController@getWhos')->name('seller.getwhos');
 });
 
+Route::post('/get-conditions', 'ConditionController@getConditions');

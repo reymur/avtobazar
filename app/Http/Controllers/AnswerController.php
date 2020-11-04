@@ -170,25 +170,30 @@ class AnswerController extends Controller
                     ]);
 
                     if( $is_updated ){
-                        return response()->json([
-                            'answers' => $answer,
-                        ], 200);
+                        return $this->getAnswersResponse($answer, 200);
                     }
                 }
 
-                return response()->json([
-                    'answers' => $answer,
-                ], 200);
+                return $this->getAnswersResponse($answer, 200);
             }
 
             return response()->json([
-                'errors' => 'Uncurrent user ',
+                'errors' => 'Not user ',
             ], 404);
         }
 
         return response()->json([
             'errors' => 'Failed  announcement_id and seller_id',
         ], 404);
+    }
+
+    public function getAnswersResponse($model, $status = false){
+        if( $status ) {
+            return (new AnswerResource($model))
+                    ->response()->setStatusCode(200);
+        }
+
+        return new AnswerResource($model);
     }
 
     public function getUserLeftBarAnswer(Request $request){

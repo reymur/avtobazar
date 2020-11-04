@@ -37,8 +37,11 @@
                                 @modalIsVisibleThree="modalIsVisibleFour"
                             ></answer-all-announce>
                         </div>
-                        <div v-else class="">
-                            <span class="">Yox</span>
+
+                        <div v-else class="p-4">
+                            <h4 class="text-center letter__spacing">
+                                Cavab tapılmadı!
+                            </h4>
                         </div>
                     </div>
 

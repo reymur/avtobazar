@@ -19,8 +19,8 @@
                             Yeni
                         </span>
 
-                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                         <span v-else class="badge badge-secondary mt-n2">
+                        <span v-if="loader && new_answers.length" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                         <span v-else disabled="" class="badge badge-secondary mt-n2">
                             0
                         </span>
                     </span>
@@ -32,20 +32,31 @@
             |
         </span>
 
-        <div v-if="old_answers != null && old_answers.length > 0" :class="'px-1 '+old_answer_border">
-            <button class="btn p-0" :disabled="add_disabled" @click="showAllAnswers">
-                 <span :class="'letter__spacing'+old_answer_text">
-                     Ümumi
-                </span>
+        <div :class="'px-0 '+old_answer_border">
+            <div class="">
+                <button class="btn p-0" :disabled="add_disabled" @click="showAllAnswers">
+                    <span v-if="old_answers != null && old_answers.length > 0" class="">
+                        <span :class="'letter__spacing'+old_answer_text">
+                            Ümumi
+                        </span>
 
-                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span v-else class="badge badge-secondary mt-n2">
-                    {{ old_answers.length }}
-                </span>
-            </button>
+                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-else class="badge badge-secondary mt-n2">
+                            {{ old_answers.length }}
+                        </span>
+                    </span>
 
-            <div v-if="old_answers != null && !old_answers.length" class="badge badge-secondary mt-n2">
-                0
+                    <span v-else class="">
+                        <span class="letter__spacing">
+                            Ümumi
+                        </span>
+
+                        <span v-if="loader && old_answers.length" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-else class="badge badge-secondary mt-n2">
+                            0
+                        </span>
+                    </span>
+                </button>
             </div>
         </div>
     </div>
@@ -115,14 +126,29 @@ export default {
             axios.post('/announce/side-bar-answers-vue')
                 .then( res => {
                     if( res.status == 200 ) {
+                        console.log( 'AAAAAAAAAA ==== ',res.data.answers  )
                         if( res.data.answers !== undefined ) {
                             this.getNewAnswers(res.data.answers);
                             this.loader = false;
+
+                            if( res.data.answers == null ){
+                                this.new_disabled = 'disabled';
+                                this.add_disabled = 'disabled';
+                            }
                         }
                     }
                 })
                 .catch( err => {
-                    console.log( 'err = ', err.response );
+                    if( err.response != null && err.response.data != null ){
+                        if( err.response.data.errors != null ){
+                            if( !this.new_answers.length && !this.old_answers.length ){
+                                this.new_disabled = 'disabled';
+                                this.add_disabled = 'disabled';
+                                console.log( 'err 1111111 = ', this.new_answers, this.old_answers );
+                            }
+                            // console.log( 'err 1111111 = ', !this.new_answers.length, !this.new_answers.length );
+                        }
+                    }
                 });
         },
         getNewAnswers: function (answers) {
