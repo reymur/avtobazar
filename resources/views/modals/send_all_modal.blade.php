@@ -8,18 +8,36 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="send_all-{{ $announce->id }}">
-                    @if( isset($announce->created_at) )
+                    @if(isset($announce->getSender->name) || isset($announce->getSender->autoNumber) )
+                    <h5 class="modal-title" id="send_all-{{ $announce->id }}">
                         <span class="mr-0">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                             </svg>
                         </span>
-                        <span class="letter__spacing">{{ $announce->created_at }}</span>
+                        <span class="text-uppercase letter__spacing">
+                            {{
+                                $announce->getSender->name ??
+                                $announce->getSender->autoNumber
+                            }}
+                        </span>
+                    </h5>
+
+                    <span class="px-3"></span>
+
+                    <span class="pt-1">
+                        {{ $announce->created_at ?? '' }}
+                    </span>
+
+                    <span class="px-3"></span>
+
+                    <span class="pt-1">
+                        {{ $announce->city }}
+                    </span>
                     @else
                         Yox
                     @endif
-                </h5>
+
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -28,14 +46,6 @@
             <div class="modal-body pt-2 pb-1">
                 <table class="table table-bordered">
                     <tbody>
-{{--                        @if( $announce->created_at )--}}
-{{--                            <div class="mr-3 mx-2 text-right text-black-50">--}}
-{{--                                <span>--}}
-{{--                                    {{ $announce->created_at }}--}}
-{{--                                </span>--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
-
                         @if( $announce->spare_parts )
                             <tr>
                                 <td scope="row" class="text-right text-black-50 py-2">Ehtiyat hissəsi:</td>
@@ -50,31 +60,20 @@
                             </tr>
                         @endif
 
-                        @if( $announce->marka )
-                            <tr>
-                                <td scope="row" class="text-right text-black-50 py-2">Marka:</td>
-                                <td class="text-break text-center py-2">{{ $announce->marka }}</td>
-                            </tr>
-                        @endif
-
-                        @if( $announce->model )
+                        @if( $announce->model && $announce->marka && $announce->motor )
                             <tr>
                                 <td scope="row" class="text-right text-black-50 py-2">Model:</td>
-                                <td class="text-break text-center py-2">{{ $announce->model }}</td>
-                            </tr>
-                        @endif
-
-                        @if( $announce->year )
-                            <tr>
-                                <td scope="row" class="text-right text-black-50 py-2">Buraxılış:</td>
-                                <td class="text-break text-center py-2">{{ $announce->year }}</td>
-                            </tr>
-                        @endif
-
-                        @if( $announce->motor )
-                            <tr>
-                                <td scope="row" class="text-right text-black-50 py-2">Motor:</td>
-                                <td class="text-break text-center py-2">{{ $announce->motor }}</td>
+                                <td class="text-break text-center py-2">
+                                    {{ $announce->marka ?? 'Yox' }}
+                                    /
+                                    {{ $announce->model ?? 'Yox' }}
+                                    /
+                                    {{ $announce->motor ?? 'Yox' }}
+                                    /
+                                    {{ $announce->year ?? 'Yox' }}
+                                    /
+                                    {{ $announce->getFuelType->title ?? 'Yox' }}
+                                </td>
                             </tr>
                         @endif
 
@@ -96,7 +95,7 @@
                             <tr>
                                 <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                                 <td class="text-break text-center py-2">
-                                    <img class="flash__image" src="{{ asset('/images/users/announcement/'.$announce->image) }}" alt="Image">
+                                    <img class="flash__image" src="{{ asset('/images/users/announcement/orders/'.$announce->image) }}" alt="Image">
                                 </td>
                             </tr>
                         @endif

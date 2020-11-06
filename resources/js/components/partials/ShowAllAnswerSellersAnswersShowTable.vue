@@ -1,5 +1,5 @@
 <template>
-    <div class="position-relative">
+    <div class="">
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
@@ -33,21 +33,42 @@
                         </div>
                     </td>
 
-                    <td v-else-if="answer_info" class="text-right border-0 pt-1 pb-0 pr-3">
-                        <div v-if="!loader" class="d-inline-flex pt-1">
-                            <div class="text-right border-0 position-relative answer__which letter__spacing">
-                                <div class="pt-2 tr-2">
+                    <td v-if="answer_info" class="text-center border-0 pt-1 pb-0 pr-0">
+                        <div class="text-center">
+                            <div class="text-center mb-2">
+                                <div v-if="answer_info.image" class="text-center m-auto answer__image-div">
+                                    <img :src="image_path + answer_info.image" :alt="answer_info.image" class="answer__image-style">
+                                </div>
+                                <div v-else class="text-center m-auto answer__icon-div">
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-camera answer__icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M15 12V6a1 1 0 0 0-1-1h-1.172a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 9.173 3H6.828a1 1 0 0 0-.707.293l-.828.828A3 3 0 0 1 3.172 5H2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+                                        <path fill-rule="evenodd" d="M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                        <path d="M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </div>
+                            </div><!--Photo-->
+
+                            <span class="text-h1">
+                                {{ answer_info.condition }}
+                            </span><!--Condition-->
+
+                            <div class="text-left answers__time-style">
+                                {{ answer_info.created_at ? answer_info.created_at : '' }}
+                            </div>
+                        </div>
+                    </td>
+
+                    <td v-if="answer_info" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
+                        <div v-if="!loader" class="d-inline-flex pt-1 mt-2">
+                            <div class="text-right border-0 letter__spacing">
+                                <div class="pt-2">
                                     <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </div>
-
-                                <span class="text-h1 position-absolute answer__condition">
-                                    Yeni
-                                </span><!--Condition-->
-
-                                <span class="text-h1">
-                                    {{ answer_info.which }}
-                                </span>
                             </div>
+
+                            <span class="text-h1 mr-3 mt-2">
+                                {{ answer_info.which }}
+                            </span>
 
                             <div v-if="answer_info.seen != null" class="bg-secondary answer__price-div-for-seen">
                                  <span class="answer__price">
@@ -70,25 +91,21 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td class="border-0 pb-0 pt-1">
-                        <div class="text-left">
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-camera" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M15 12V6a1 1 0 0 0-1-1h-1.172a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 9.173 3H6.828a1 1 0 0 0-.707.293l-.828.828A3 3 0 0 1 3.172 5H2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
-                                <path fill-rule="evenodd" d="M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                                <path d="M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-                            </svg>
-                        </div>
-                    </td>
-                </tr><!--Photo icon-->
+<!--                <tr>-->
+<!--                    <td class="border-0 text-left pb-0 pt-1">-->
+<!--                        <div class="text-left answers__time-style">-->
+<!--                            {{ answer_info.created_at ? answer_info.created_at : '' }}-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                </tr>-->
             </tbody>
         </table>
 
-        <div class="position-absolute text-left d-flex answers__time-show">
-            <div class="">
-                {{ answer_info.created_at ? answer_info.created_at : '' }}
-            </div>
-        </div>
+<!--        <div class="position-absolute text-left d-flex answers__time-show">-->
+<!--            <div class="">-->
+<!--                {{ answer_info.created_at ? answer_info.created_at : '' }}-->
+<!--            </div>-->
+<!--        </div>-->
 
 <!--        <div v-if="loader" class="pt-3 pr-4 d-inline-flex">-->
 <!--            <span class="answer__price-currency">&nbsp; &nbsp; &nbsp;</span>-->
@@ -113,6 +130,7 @@ export default {
             is_answer_info2: '',
             guard_for_show: null,
             show_seen_guard: true,
+            image_path: '/images/users/announcement/answers/',
         }
     },
     methods: {

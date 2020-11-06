@@ -41,7 +41,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body pt-2 pb-1">
+                    <div class="modal-body pt-2 pb-1 px-sm-0">
                         <table class="table table-bordered">
                             <tbody>
                                 <tr v-if="loader">
@@ -67,7 +67,7 @@
                                         <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         <span v-if="loader">Gözlə...</span>
 
-                                        <div v-if="!loader" class="col-5 text-left pl-1 mt-2">
+                                        <div v-if="!loader" class="col-4 text-left pl-1 mt-2">
                                             <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             <span v-if="loader">Gözlə...</span>
 
@@ -89,7 +89,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <div v-if="seller.id && answer.id" class="col-7 text-right ml-auto pl-0 pr-0">
+                                        <div v-if="seller.id && answer.id" class="col-8 text-right ml-auto pl-0 pr-0">
                                             <show-all-answer-sellers-answers-show-table
                                                 :answer_users="answer_users"
                                                 :answer_id="answer.id"

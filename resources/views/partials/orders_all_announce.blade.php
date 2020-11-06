@@ -3,7 +3,6 @@
     <tbody>
         @if( isset($ordersPaginate) && ($ordersPaginate->count() > 0) )
             @foreach( $ordersPaginate as $order )
-{{--                {{ dd( $order->announcement->getSellerAnswers ) }}--}}
                 @if(    !is_null($order->announcement->getSellerAnswers) &&
                         $order->announcement->getSellerAnswers->count() > 0 &&
                         !is_null($order->announcement->getSellerAnswers->first()) &&
@@ -67,6 +66,12 @@
                     </td>
                 </tr>
             @endif
+        @else
+            <div class="d-block">
+                <h4 class="text-center p-5 letter__spacing">
+                    Sifariş tapılmadı!
+                </h4>
+            </div>
         @endif
     </tbody>
 </table>

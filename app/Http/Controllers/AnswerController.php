@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class AnswerController extends Controller
 {
@@ -77,29 +78,113 @@ class AnswerController extends Controller
 
     public function answersAnnounceCreate(Request $request)
     {
-        $request->validate([
-            'which' => 'required',
-            'price' => 'required|numeric'
-        ]);
+        if( Auth::check() ) {
+            if( $request->has('image') && $request->image !== "null" ) {
+                $this->answersAnnounceCreateValidate($request, true);
+                $image = $this->answersAnnounceCreateImageUpload($request);
 
-        $answer = AnswerResource::create([
-            'announcement_id' => $request->order_id ?? 0,
-            'user_id' => Auth::user()->id ?? 0,
-            'which' => $request->which,
-            'price' => $request->price,
-        ]);
+                if( $image )
+                    $this->answersAnnounceCreateWithImage($request, $image);
+                else {
+                    $message = 'answersAnnounceCreateImageUpload returned null';
+                    return $this->errorReturn($message);
+                }
+            }
+            else {
+                $this->answersAnnounceCreateValidate($request, false);
+                $this->answersAnnounceCreateWithOutImage($request);
+            }
+        }
+    }
 
-        if ($answer) {
-            return response()->json([
-                'message' => [
-                    ['Siz ' . ".$request->spare_parts." . ' elanına cavab verdiniz.']
-                ]
-            ], 200);
+    public function answersAnnounceCreateImageUpload($request){
+        if( $request->hasFile('image') ){
+            $new_image_name = $this->generateImageName($request->image);
+            $path = public_path('images/users/announcement/answers/');
+
+            if( is_dir( $path ) && $new_image_name ){
+                $img = Image::make($request->image);
+                $img->resize(500, null, function($constraint){
+                    $constraint->aspectRatio();
+                });
+                $is_saved = $img->save($path . $new_image_name );
+
+                if( $is_saved ) return $new_image_name;
+                else {
+                    $message = 'Answer Image no saved';
+                    return $this->errorReturn($message);
+                }
+            }
+
+            $message = 'Path is not dir or new_image_name failed';
+            return $this->errorReturn($message);
         }
 
+        $message = 'Path is not dir or new_image_name failed';
+        return $this->errorReturn($message);
+    }
+
+    public function errorReturn($message){
         return response()->json([
-            'errors' => ['Whops' => ['Whos!!!']]
-        ], 404);
+            'errors' => [
+                ['image' => $message]
+            ]
+        ]);
+    }
+
+    public function answersAnnounceCreateWithImage($request, $image){
+        $answer = Answer::create([
+            'announcement_id' => $request->order_id ?? 0,
+            'user_id' => Auth::user()->id ?? 0,
+            'which' => $request->which ?? null,
+            'price' => $request->price ?? null,
+            'condition' => $request->condition ?? null,
+            'image' => $image ?? null
+        ]);
+
+        return $answer;
+    }
+
+    public function generateImageName($image_name){
+        if( !empty($image_name) ){
+            $extension = $image_name->getClientOriginalExtension();
+
+            $new_name = time() . '_' . random_int(0, 9999) . '.' . $extension;
+
+            return $new_name ?? null;
+        }
+
+        return null;
+    }
+
+    public function answersAnnounceCreateWithOutImage($request){
+        $answer = Answer::create([
+            'announcement_id' => $request->order_id ?? 0,
+            'user_id' => Auth::user()->id ?? 0,
+            'which' => $request->which ?? null,
+            'price' => $request->price ?? null,
+            'condition' => $request->condition ?? null,
+            'image' => null,
+        ]);
+
+        return $answer;
+    }
+
+    public function answersAnnounceCreateValidate($request, $image = false ){
+        if( $image == true ){
+            return $request->validate([
+                'which' => 'required',
+                'price' => 'required|numeric',
+                'condition' => 'required|string',
+                'image' => 'mimes:jpg,jpeg,png,bmp,gif,webp, max:8000',
+            ]);
+        }
+
+        return $request->validate([
+            'which' => 'required',
+            'price' => 'required|numeric',
+            'condition' => 'required|string',
+        ]);
     }
 
     public function getShowAllAnswerVue(Request $request)

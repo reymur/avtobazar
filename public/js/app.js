@@ -2901,11 +2901,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllModal",
   props: ['answer'],
   data: function data() {
-    return {};
+    return {
+      image_path: '/images/users/announcement/orders/'
+    };
   },
   methods: {},
   mounted: function mounted() {}
@@ -3602,6 +3609,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderAnswerModal",
   props: ['order_id'],
@@ -3609,49 +3626,90 @@ __webpack_require__.r(__webpack_exports__);
     return {
       which: '',
       price: '',
-      condition: '',
+      conditionSelect: '',
+      img: null,
+      image: null,
       errors: [],
       loader: false,
+      imageLoader: false,
       disabled: false,
       conditions: []
     };
   },
   methods: {
+    setFormData: function setFormData() {
+      var form_data = new FormData();
+      form_data.append('which', this.which);
+      form_data.append('price', this.price);
+      form_data.append('order_id', this.order_id);
+      form_data.append('condition', this.conditionSelect);
+      form_data.append('image', this.image);
+      return form_data;
+    },
     saveAnswer: function saveAnswer() {
       var _this = this;
 
       this.errors = [];
       this.loader = true;
+      this.imageloader = true;
       this.disabled = 'disabled';
-      axios.post('/announce/answers-create', {
-        which: this.which,
-        price: this.price,
-        order_id: this.order_id
-      }).then(function (res) {
-        if (res.status === 200) {
-          window.location.href = '/announce/orders';
-        }
-      })["catch"](function (err) {
-        if (err.response.data.errors !== undefined) {
-          _this.errors.push(err.response.data.errors);
+      var image = [];
+      var upload_max_filesize = null;
+      image['image'] = ['Şəkil 8 meqabit-dən çox olmamalıdır!'];
+      if (this.image != null) upload_max_filesize = this.image.size / 1024 / 1024; // alert( upload_max_filesize )
 
-          _this.loader = false;
-          _this.disabled = false; // this.removeDisabled('disabled');
+      if (upload_max_filesize <= 8 || upload_max_filesize == null) {
+        axios.post('/announce/answers-create', this.setFormData(), {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (res) {
+          if (res.status === 200) {
+            window.location.href = '/announce/orders';
+          }
+        })["catch"](function (err) {
+          if (err.response.data.errors !== undefined) {
+            _this.errors.push(err.response.data.errors);
 
-          console.log('err = ', _this.errors);
-        }
-      });
+            _this.loader = false;
+            _this.disabled = false; // this.removeDisabled('disabled');
+
+            console.log('err = ', _this.errors);
+          }
+        });
+      } else {
+        this.errors = [];
+        this.errors.push(image);
+        this.sendLoader = false;
+      }
+    },
+    fileSelect: function fileSelect(e) {
+      var _this2 = this;
+
+      var file = (e.target.files || e.dataTransfer.file)[0];
+
+      if (file) {
+        this.fileLoader = true;
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          _this2.img = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+        return this.image = file;
+      }
     },
     getConditions: function getConditions() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/get-conditions').then(function (res) {
         if (res.status == 200) {
           if (res.data.conditions != null) {
-            _this2.conditions = res.data.conditions;
+            _this3.conditions = res.data.conditions;
           }
 
-          console.log('res condition - ', _this2.conditions);
+          console.log('res condition - ', _this3.conditions);
         }
       })["catch"](function (err) {
         if (err.response != null) {
@@ -4728,6 +4786,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
   props: ['answer_users', 'answer_id', 'seller_id', 'close_modal', 'clickToNewAnswers'],
@@ -4739,7 +4814,8 @@ __webpack_require__.r(__webpack_exports__);
       loader: false,
       is_answer_info2: '',
       guard_for_show: null,
-      show_seen_guard: true
+      show_seen_guard: true,
+      image_path: '/images/users/announcement/answers/'
     };
   },
   methods: {
@@ -43673,15 +43749,21 @@ var render = function() {
                           "td",
                           { staticClass: "text-break text-center py-2" },
                           [
-                            _c("img", {
-                              staticClass: "modal__image",
-                              attrs: {
-                                src:
-                                  "/images/users/announcement/" +
-                                  _vm.answer.image,
-                                alt: _vm.answer.image
-                              }
-                            })
+                            _vm.answer.image
+                              ? _c("span", {}, [
+                                  _c("img", {
+                                    staticClass: "modal__image",
+                                    attrs: {
+                                      src: _vm.image_path + _vm.answer.image,
+                                      alt: _vm.answer.image
+                                    }
+                                  })
+                                ])
+                              : _c("span", {}, [
+                                  _vm._v(
+                                    "\n                                            Yox\n                                        "
+                                  )
+                                ])
                           ]
                         )
                       ])
@@ -44700,8 +44782,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.condition,
-                      expression: "condition"
+                      value: _vm.conditionSelect,
+                      expression: "conditionSelect"
                     }
                   ],
                   staticClass: "custom-select",
@@ -44716,7 +44798,7 @@ var render = function() {
                           var val = "_value" in o ? o._value : o.value
                           return val
                         })
-                      _vm.condition = $event.target.multiple
+                      _vm.conditionSelect = $event.target.multiple
                         ? $$selectedVal
                         : $$selectedVal[0]
                     }
@@ -44762,7 +44844,8 @@ var render = function() {
               [
                 _c("input", {
                   staticClass: "custom-file-input invalidImage",
-                  attrs: { type: "file", value: "file", id: "file" }
+                  attrs: { type: "file", value: "file", id: "file" },
+                  on: { change: _vm.fileSelect }
                 }),
                 _vm._v(" "),
                 _c(
@@ -44813,7 +44896,24 @@ var render = function() {
                   ]
                 )
               ]
-            )
+            ),
+            _vm._v(" "),
+            _vm.imageLoader
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image",
+                    staticStyle: { width: "18rem" }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "imageId card-img-top",
+                      attrs: { src: _vm.img, id: "imageId", alt: "Image" }
+                    })
+                  ]
+                )
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -44838,6 +44938,26 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _vm._l(err["price"], function(e) {
+                        return _c("li", { staticClass: "py-2" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(e) +
+                              "\n                        "
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm._l(err["condition"], function(e) {
+                        return _c("li", { staticClass: "py-2" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(e) +
+                              "\n                        "
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _vm._l(err["image"], function(e) {
                         return _c("li", { staticClass: "py-2" }, [
                           _vm._v(
                             "\n                            " +
@@ -45062,7 +45182,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
+            _c("div", { staticClass: "modal-body pt-2 pb-1 px-sm-0" }, [
               _c("table", { staticClass: "table table-bordered" }, [
                 _c("tbody", [
                   _vm.loader
@@ -45175,7 +45295,7 @@ var render = function() {
                                   ? _c(
                                       "div",
                                       {
-                                        staticClass: "col-5 text-left pl-1 mt-2"
+                                        staticClass: "col-4 text-left pl-1 mt-2"
                                       },
                                       [
                                         _vm.loader
@@ -45286,7 +45406,7 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "col-7 text-right ml-auto pl-0 pr-0"
+                                          "col-8 text-right ml-auto pl-0 pr-0"
                                       },
                                       [
                                         _c(
@@ -46197,7 +46317,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "position-relative" }, [
+  return _c("div", {}, [
     _c("table", { staticClass: "table mt-1 mb-0" }, [
       _c("tbody", [
         _c("tr", [
@@ -46298,61 +46418,157 @@ var render = function() {
                     : _vm._e()
                 ]
               )
-            : _vm.answer_info
-            ? _c("td", { staticClass: "text-right border-0 pt-1 pb-0 pr-3" }, [
-                !_vm.loader
-                  ? _c("div", { staticClass: "d-inline-flex pt-1" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "text-right border-0 position-relative answer__which letter__spacing"
-                        },
-                        [
-                          _c("div", { staticClass: "pt-2 tr-2" }, [
-                            _vm.loader
-                              ? _c("span", {
-                                  staticClass:
-                                    "spinner-border spinner-border-sm",
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.answer_info
+            ? _c("td", { staticClass: "text-center border-0 pt-1 pb-0 pr-0" }, [
+                _c("div", { staticClass: "text-center" }, [
+                  _c("div", { staticClass: "text-center mb-2" }, [
+                    _vm.answer_info.image
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "text-center m-auto answer__image-div"
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "answer__image-style",
+                              attrs: {
+                                src: _vm.image_path + _vm.answer_info.image,
+                                alt: _vm.answer_info.image
+                              }
+                            })
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          {
+                            staticClass: "text-center m-auto answer__icon-div"
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bi bi-camera answer__icon",
+                                attrs: {
+                                  width: "1.5em",
+                                  height: "1.5em",
+                                  viewBox: "0 0 16 16",
+                                  fill: "currentColor",
+                                  xmlns: "http://www.w3.org/2000/svg"
+                                }
+                              },
+                              [
+                                _c("path", {
                                   attrs: {
-                                    role: "status",
-                                    "aria-hidden": "true"
+                                    "fill-rule": "evenodd",
+                                    d:
+                                      "M15 12V6a1 1 0 0 0-1-1h-1.172a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 9.173 3H6.828a1 1 0 0 0-.707.293l-.828.828A3 3 0 0 1 3.172 5H2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    "fill-rule": "evenodd",
+                                    d:
+                                      "M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d: "M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
                                   }
                                 })
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass:
-                                "text-h1 position-absolute answer__condition"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    Yeni\n                                "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "text-h1" }, [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.answer_info.which) +
-                                "\n                                "
+                              ]
                             )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm.answer_info.seen != null
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "bg-secondary answer__price-div-for-seen"
-                            },
-                            [
+                          ]
+                        )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-h1" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(_vm.answer_info.condition) +
+                        "\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-left answers__time-style" }, [
+                    _vm._v(
+                      "\n                                " +
+                        _vm._s(
+                          _vm.answer_info.created_at
+                            ? _vm.answer_info.created_at
+                            : ""
+                        ) +
+                        "\n                            "
+                    )
+                  ])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.answer_info
+            ? _c(
+                "td",
+                { staticClass: "text-right border-0 pt-1 pb-0 pl-0 pr-3" },
+                [
+                  !_vm.loader
+                    ? _c("div", { staticClass: "d-inline-flex pt-1 mt-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "text-right border-0 letter__spacing"
+                          },
+                          [
+                            _c("div", { staticClass: "pt-2" }, [
+                              _vm.loader
+                                ? _c("span", {
+                                    staticClass:
+                                      "spinner-border spinner-border-sm",
+                                    attrs: {
+                                      role: "status",
+                                      "aria-hidden": "true"
+                                    }
+                                  })
+                                : _vm._e()
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text-h1 mr-3 mt-2" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.answer_info.which) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm.answer_info.seen != null
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "bg-secondary answer__price-div-for-seen"
+                              },
+                              [
+                                _c("span", { staticClass: "answer__price" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.answer_info.price) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "answer__price-currency" },
+                                  [_vm._v("AZE")]
+                                )
+                              ]
+                            )
+                          : _c("div", { staticClass: "answer__price-div" }, [
                               _c("span", { staticClass: "answer__price" }, [
                                 _vm._v(
                                   "\n                                    " +
@@ -46366,100 +46582,34 @@ var render = function() {
                                 { staticClass: "answer__price-currency" },
                                 [_vm._v("AZE")]
                               )
-                            ]
-                          )
-                        : _c("div", { staticClass: "answer__price-div" }, [
-                            _c("span", { staticClass: "answer__price" }, [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.answer_info.price) +
-                                  "\n                                "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              { staticClass: "answer__price-currency" },
-                              [_vm._v("AZE")]
-                            )
-                          ])
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.loader
-                  ? _c("div", { staticClass: "pt-3 pr-4 pb-2 d-inline-flex" }, [
-                      _c("span", { staticClass: "answer__price-currency" }, [
-                        _vm._v("     ")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "spinner-border spinner-border-sm",
-                        attrs: { role: "status", "aria-hidden": "true" }
-                      })
-                    ])
-                  : _vm._e()
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "border-0 pb-0 pt-1" }, [
-            _c("div", { staticClass: "text-left" }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "bi bi-camera",
-                  attrs: {
-                    width: "1.5em",
-                    height: "1.5em",
-                    viewBox: "0 0 16 16",
-                    fill: "currentColor",
-                    xmlns: "http://www.w3.org/2000/svg"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M15 12V6a1 1 0 0 0-1-1h-1.172a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 9.173 3H6.828a1 1 0 0 0-.707.293l-.828.828A3 3 0 0 1 3.172 5H2a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"
-                    }
-                  }),
+                            ])
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("path", {
-                    attrs: {
-                      "fill-rule": "evenodd",
-                      d:
-                        "M8 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("path", {
-                    attrs: { d: "M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" }
-                  })
+                  _vm.loader
+                    ? _c(
+                        "div",
+                        { staticClass: "pt-3 pr-4 pb-2 d-inline-flex" },
+                        [
+                          _c(
+                            "span",
+                            { staticClass: "answer__price-currency" },
+                            [_vm._v("     ")]
+                          ),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticClass: "spinner-border spinner-border-sm",
+                            attrs: { role: "status", "aria-hidden": "true" }
+                          })
+                        ]
+                      )
+                    : _vm._e()
                 ]
               )
-            ])
-          ])
+            : _vm._e()
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "position-absolute text-left d-flex answers__time-show" },
-      [
-        _c("div", {}, [
-          _vm._v(
-            "\n                " +
-              _vm._s(
-                _vm.answer_info.created_at ? _vm.answer_info.created_at : ""
-              ) +
-              "\n            "
-          )
-        ])
-      ]
-    )
+    ])
   ])
 }
 var staticRenderFns = []

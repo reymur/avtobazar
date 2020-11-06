@@ -255,11 +255,14 @@ class AnnouncementController extends Controller
     protected function announceImageSave($file, $image, $User_id)
     {
         if ($file && $image && $User_id) {
-            $path = public_path('images/users/announcement/');
+            $path = public_path('images/users/announcement/orders/');
 
             if (is_dir($path)) {
-                Image::make($file)->resize(550, 450)
-                    ->save($path . '/' . $image);
+                $img = Image::make($file);
+                $img->resize(550, null, function ($constraint){
+                        $constraint->aspectRatio();
+                    });
+                $img->save($path . $image);
             }
         }
     }
@@ -378,33 +381,6 @@ class AnnouncementController extends Controller
         return redirect()->route('home');
     }
 
-    public function answersAnnounceCreate(Request $request)
-    {
-        $request->validate([
-            'which' => 'required',
-            'price' => 'required|numeric'
-        ]);
-
-        $answer = Answer::create([
-            'announcement_id' => $request->order_id ?? 0,
-            'user_id' => Auth::user()->id ?? 0,
-            'which' => $request->which,
-            'price' => $request->price,
-        ]);
-
-        if ($answer) {
-            return response()->json([
-                'message' => [
-                    ['Siz ' . ".$request->spare_parts." . ' elanına cavab verdiniz.']
-                ]
-            ], 200);
-        }
-
-        return response()->json([
-            'errors' => ['Whops' => ['Whos!!!']]
-        ], 404);
-    }
-
     public function getShowAllAnswerVue(Request $request)
     {
         if (isset($request->answer_id) && isset($request->seller_id)) {
@@ -518,8 +494,8 @@ class AnnouncementController extends Controller
     {
         if( Auth::check() ) {
             $user = Auth::user();
-            $orders = User::with('announcementUser')->where('id', $user->id);
-
+            $orders = User::with('getSellerAnswers')->where('id', $user->id);
+//            dd(  $orders->get() );
             if ( $orders->get()->count() == 0 && $orders->first()->announcement->count() == 0 ) {
                 return abort(404);
             }
@@ -549,7 +525,7 @@ class AnnouncementController extends Controller
                     'spare_parts' => 'required',
                     'when' => 'required',
                     'texpassport' => 'required',
-                    'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:4000',
+                    'image' => 'mimes:jpeg,png,bmp,gif,svg,webp, max:6000',
                 ]);
             }
         }

@@ -4,20 +4,34 @@
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/AnswerResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/AnswerResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_01_130910_create_answers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_04_182554_create_answers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_04_182554_create_answers_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1601757398.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1601760761.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602065494.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602099960.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602336590.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602337364.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602532209.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602532642.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602532870.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602533551.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602607082.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602608699.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1602619087.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1604403880.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/1604518509.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Answers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerCountShow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modals/orders_all_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/orders_all_modal.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/send_flash_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/send_flash_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/orders_all_announce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/orders_all_announce.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,15 +194,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
-      <recent name="$PROJECT_DIR$/resources/js/components" />
-      <recent name="$PROJECT_DIR$/resources/js/components/register" />
-      <recent name="$PROJECT_DIR$/resources/js/components/partials" />
-      <recent name="$PROJECT_DIR$/resources/views/partials" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/components/modal" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/users/announcement" />
+      <recent name="$PROJECT_DIR$/public/images/users/sellers" />
+      <recent name="$PROJECT_DIR$/public/images/users/sellers/orders" />
+      <recent name="$PROJECT_DIR$/resources/js/components/modal" />
+      <recent name="$PROJECT_DIR$/resources/js/components" />
     </key>
   </component>
   <component name="RunManager">
@@ -374,6 +388,10 @@
       <workItem from="1604482728307" duration="6505000" />
       <workItem from="1604501938923" duration="6075000" />
       <workItem from="1604512501916" duration="13822000" />
+      <workItem from="1604526611193" duration="6243000" />
+      <workItem from="1604538891554" duration="3721000" />
+      <workItem from="1604554130559" duration="16714000" />
+      <workItem from="1604612691752" duration="11590000" />
     </task>
     <servers />
   </component>
@@ -381,10 +399,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="312" y="59" width="732" height="644" key="#Inspections" timestamp="1600695073136">
+    <state x="312" y="59" width="732" height="644" key="#Inspections" timestamp="1604556019026">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="312" y="59" width="732" height="644" key="#Inspections/0.27.1366.701@0.27.1366.701" timestamp="1600695073136" />
+    <state x="312" y="59" width="732" height="644" key="#Inspections/0.27.1366.701@0.27.1366.701" timestamp="1604556019026" />
     <state x="388" y="200" width="579" height="361" key="#Notifications" timestamp="1597138348561">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -437,10 +455,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="172" y="27" width="1012" height="701" key="SettingsEditor/0.27.1366.701@0.27.1366.701" timestamp="1600373723876" />
-    <state width="544" height="446" key="SwitcherDM" timestamp="1601113229320">
+    <state width="544" height="446" key="SwitcherDM" timestamp="1604531687205">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state width="544" height="446" key="SwitcherDM/0.27.1366.701@0.27.1366.701" timestamp="1601113229320" />
+    <state width="544" height="446" key="SwitcherDM/0.27.1366.701@0.27.1366.701" timestamp="1604531687205" />
     <state x="266" y="27" width="815" height="645" key="dock-window-1" timestamp="1602148128924">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -453,17 +471,17 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="375" y="100" width="616" height="554" key="find.popup/0.27.1366.701@0.27.1366.701" timestamp="1597270134633" />
-    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog" timestamp="1598037059930">
+    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog" timestamp="1604557138425">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1598037059930" />
+    <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1604557138425" />
     <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1604488831866">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1604488831866" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604516138852">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604563329106">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1604516138852" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1604563329106" />
   </component>
 </project>

@@ -21,6 +21,7 @@ class CreateAnswersTable extends Migration
             $table->string('price')->nullable();
             $table->string('seen')->nullable();
             $table->string('condition')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

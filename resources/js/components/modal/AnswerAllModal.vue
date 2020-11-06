@@ -104,9 +104,14 @@
                                 <tr v-if="answer.image">
                                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                                     <td class="text-break text-center py-2">
-                                        <img :src="'/images/users/announcement/'+answer.image" :alt="answer.image"
-                                            class="modal__image"
-                                        >
+                                        <span v-if="answer.image" class="">
+                                            <img :src="image_path + answer.image" :alt="answer.image"
+                                                 class="modal__image"
+                                            >
+                                        </span>
+                                        <span v-else class="">
+                                            Yox
+                                        </span>
                                     </td>
                                 </tr>
 
@@ -129,7 +134,7 @@ export default {
     props: ['answer'],
     data(){
         return {
-
+            image_path: '/images/users/announcement/orders/'
         }
     },
     methods:{

@@ -364,15 +364,44 @@ body {
         color: #105288;
     }
 
-.answers__time-show {
-    position:absolute;
-    margin: -17px 0 0 -169px;
+.answers__time-style {
     color: #6a6a6a;
     font-size: 13px;
+    margin: -22px 0 0 -150px;
+}
+.answer__image-div-parent {
+    width: 80px;
+    background-color: #808488;
 }
 
-.answer__condition {
-    margin: 0 0 0 -95px;
+.answer__image-div {
+    width: 80px;
+    height: 70px;
+    display: flex;
+    border-radius: 2%;
+    box-shadow: 0 0 0 2px #dbdbdb;
+}
+
+.answer__image-style {
+    width: 100%;
+}
+
+.answer__icon-div {
+    width: 80px;
+    height: 50px;
+    margin-top: 25px;
+    border-radius: 2%;
+}
+    .answer__icon {
+        margin-top: 25px;
+    }
+
+.answer__which-position {
+    margin: -5px 0 0 -95px;
+}
+
+.answer__condition-position {
+    margin: 33px 79px 0 -103px;
 }
 
 .vertical__align {

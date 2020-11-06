@@ -34,7 +34,7 @@
                     <div class="d-inline-flex">
                         <div class="col-7 mb-3 pr-1">
                             <label for="which">Vəziyyəti?</label>
-                            <select v-model="condition" class="custom-select" id="condition" required>
+                            <select v-model="conditionSelect" class="custom-select" id="condition" required>
                                 <option selected disabled value="">Seçin...</option>
                                 <option v-for="condition in conditions" :value="condition.title">
                                     {{ condition.title }}
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="custom-file col-5 p-2 mt-4 ml-1" id=image-parent>
-                            <input type="file" value="file" class="custom-file-input invalidImage" id="file">
+                            <input @change="fileSelect" type="file" value="file" class="custom-file-input invalidImage" id="file">
                             <label class="custom-file-label pt-2 pl-2 mt-2" for="file" id="image" data-browse="Çək">
                                 <span class="p-0 border-0 input-group-text bg-transparent">
                                     <svg width="2.4em" height="2.4em" viewBox="0 0 16 16" class="bi bi-camera-fill mt-n2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +56,10 @@
                                 </span>
                             </label>
                         </div><!-- End Image Button -->
+
+                        <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image" style="width: 18rem;">
+                            <img :src="img" id="imageId" class="imageId card-img-top" alt="Image">
+                        </div><!-- End Image Show -->
                     </div>
                 </div>
 
@@ -66,6 +70,12 @@
                                 {{ e }}
                             </li>
                             <li v-for="e in err['price']" class="py-2">
+                                {{ e }}
+                            </li>
+                            <li v-for="e in err['condition']" class="py-2">
+                                {{ e }}
+                            </li>
+                            <li v-for="e in err['image']" class="py-2">
                                 {{ e }}
                             </li>
                         </ul>
@@ -93,38 +103,79 @@ export default {
         return {
             which: '',
             price: '',
-            condition: '',
+            conditionSelect: '',
+            img: null,
+            image: null,
             errors: [],
             loader: false,
+            imageLoader: false,
             disabled: false,
             conditions: [],
         }
     },
     methods: {
+        setFormData(){
+            const form_data = new FormData();
+            form_data.append('which',    this.which );
+            form_data.append('price',    this.price );
+            form_data.append('order_id', this.order_id );
+            form_data.append('condition', this.conditionSelect );
+            form_data.append('image',    this.image );
+
+            return form_data;
+        },
         saveAnswer(){
             this.errors = [];
             this.loader = true;
+            this.imageloader = true;
             this.disabled = 'disabled';
 
-            axios.post('/announce/answers-create',{
-                which: this.which,
-                price: this.price,
-                order_id:this.order_id,
-            })
-            .then(res => {
-                if( res.status === 200 ) {
-                    window.location.href = '/announce/orders'
-                }
-            })
-            .catch(err => {
-                if( err.response.data.errors !== undefined ) {
-                    this.errors.push(err.response.data.errors);
-                    this.loader = false;
-                    this.disabled = false;
-                    // this.removeDisabled('disabled');
-                    console.log('err = ', this.errors);
-                }
-            })
+            let image = [];
+            let upload_max_filesize = null;
+            image['image'] = ['Şəkil 8 meqabit-dən çox olmamalıdır!'];
+
+            if( this.image != null )
+                upload_max_filesize = this.image.size / 1024 / 1024;
+            // alert( upload_max_filesize )
+            if( upload_max_filesize <= 8 || upload_max_filesize == null ) {
+                axios.post('/announce/answers-create', this.setFormData(), {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                    .then(res => {
+                        if (res.status === 200) {
+                            window.location.href = '/announce/orders'
+                        }
+                    })
+                    .catch(err => {
+                        if (err.response.data.errors !== undefined) {
+                            this.errors.push(err.response.data.errors);
+                            this.loader = false;
+                            this.disabled = false;
+                            // this.removeDisabled('disabled');
+                            console.log('err = ', this.errors);
+                        }
+                    })
+            }
+            else {
+                this.errors = [];
+                this.errors.push(image);
+                this.sendLoader = false;
+            }
+        },
+        fileSelect(e){
+            const file = (e.target.files || e.dataTransfer.file)[0];
+
+            if( file ){
+                this.fileLoader = true;
+                const reader = new FileReader();
+
+                reader.onload = e => { this.img = e.target.result }
+                reader.readAsDataURL(file);
+
+                return this.image = file;
+            }
         },
         getConditions(){
             axios.post('/get-conditions')
