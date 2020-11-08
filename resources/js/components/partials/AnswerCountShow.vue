@@ -126,7 +126,6 @@ export default {
             axios.post('/announce/side-bar-answers-vue')
                 .then( res => {
                     if( res.status == 200 ) {
-                        console.log( 'AAAAAAAAAA ==== ',res.data.answers  )
                         if( res.data.answers !== undefined ) {
                             this.getNewAnswers(res.data.answers);
                             this.loader = false;
@@ -144,7 +143,6 @@ export default {
                             if( !this.new_answers.length && !this.old_answers.length ){
                                 this.new_disabled = 'disabled';
                                 this.add_disabled = 'disabled';
-                                console.log( 'err 1111111 = ', this.new_answers, this.old_answers );
                             }
                             // console.log( 'err 1111111 = ', !this.new_answers.length, !this.new_answers.length );
                         }
@@ -165,7 +163,6 @@ export default {
 
                     if (this.new_answers.length !== 0) {
                         sessionStorage.setItem('is_new_answer_count', this.new_answers.length)
-
                     }
                 }
             }

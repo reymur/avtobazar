@@ -70,16 +70,6 @@ export default {
             modal_is_visible: false,
         }
     },
-    // watch:{
-    //     modal_is_visible(){
-    //         if( this.modal_is_visible == 1 ){
-    //             alert(1111111)
-    //         }
-    //         else if( this.modal_is_visible == 0 ){
-    //             alert(222222222)
-    //         }
-    //     }
-    // },
     methods: {
         showOnlyNewAnswersParent(){
             this.showOnlyNewAnswers = true;
@@ -104,6 +94,9 @@ export default {
     },
     computed:{
 
+    },
+    created() {
+        sessionStorage.clear()
     },
     mounted() {
 

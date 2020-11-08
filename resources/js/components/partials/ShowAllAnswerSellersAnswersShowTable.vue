@@ -3,38 +3,12 @@
         <table class="table mt-1 mb-0">
             <tbody>
                 <tr>
-                    <td v-if="answer_info2 != null && close_modal" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
-                        <div v-if="!loader" class="d-inline-flex pt-1">
-                            <div class="text-right border-0 answer__which letter__spacing">
-                                <div class="pt-2 tr-2">
-                                    <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                </div>
-
-                                <span class="text-h1 position-absolute answer__condition">
-                                    Yeni
-                                </span><!--Condition-->
-
-                                <span class="text-h1">
-                                    {{ answer_info2.which }}
-                                </span>
-                            </div>
-
-                            <div v-if="answer_info2.seen != null" class="bg-secondary answer__price-div-for-seen">
-                                 <span class="answer__price">
-                                    {{ answer_info2.price }}
-                                </span>
-                                <span class="answer__price-currency">AZE</span>
-                            </div>
-                        </div>
-
-                        <div v-if="loader" class="pt-3 pr-4 pb-2 d-inline-flex">
-                            <span class="answer__price-currency">&nbsp; &nbsp; &nbsp;</span>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        </div>
-                    </td>
-
                     <td v-if="answer_info" class="text-center border-0 pt-1 pb-0 pr-0">
-                        <div class="text-center">
+                        <div class="text-center mt-1">
+                            <div class="text-h1 mb-1">
+                                {{ answer_info.condition }}
+                            </div><!--Condition-->
+
                             <div class="text-center mb-2">
                                 <div v-if="answer_info.image" class="text-center m-auto answer__image-div">
                                     <img :src="image_path + answer_info.image" :alt="answer_info.image" class="answer__image-style">
@@ -48,10 +22,6 @@
                                 </div>
                             </div><!--Photo-->
 
-                            <span class="text-h1">
-                                {{ answer_info.condition }}
-                            </span><!--Condition-->
-
                             <div class="text-left answers__time-style">
                                 {{ answer_info.created_at ? answer_info.created_at : '' }}
                             </div>
@@ -59,7 +29,7 @@
                     </td>
 
                     <td v-if="answer_info" class="text-right border-0 pt-1 pb-0 pl-0 pr-3">
-                        <div v-if="!loader" class="d-inline-flex pt-1 mt-2">
+                        <div v-if="!loader" class="d-inline-flex pt-1 mt-4">
                             <div class="text-right border-0 letter__spacing">
                                 <div class="pt-2">
                                     <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -70,18 +40,18 @@
                                 {{ answer_info.which }}
                             </span>
 
-                            <div v-if="answer_info.seen != null" class="bg-secondary answer__price-div-for-seen">
+                            <div v-if="is_updated === true" class="answer__price-div">
                                  <span class="answer__price">
                                     {{ answer_info.price }}
                                 </span>
                                 <span class="answer__price-currency">AZE</span>
-                            </div>
-                            <div v-else class="answer__price-div">
+                            </div><!--Show Seen is null-->
+                            <div v-else class="bg-secondary answer__price-div-for-seen">
                                  <span class="answer__price">
                                     {{ answer_info.price }}
                                 </span>
                                 <span class="answer__price-currency">AZE</span>
-                            </div>
+                            </div><!--Show Seen is not null-->
                         </div>
 
                         <div v-if="loader" class="pt-3 pr-4 pb-2 d-inline-flex">
@@ -90,27 +60,8 @@
                         </div>
                     </td>
                 </tr>
-
-<!--                <tr>-->
-<!--                    <td class="border-0 text-left pb-0 pt-1">-->
-<!--                        <div class="text-left answers__time-style">-->
-<!--                            {{ answer_info.created_at ? answer_info.created_at : '' }}-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                </tr>-->
             </tbody>
         </table>
-
-<!--        <div class="position-absolute text-left d-flex answers__time-show">-->
-<!--            <div class="">-->
-<!--                {{ answer_info.created_at ? answer_info.created_at : '' }}-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div v-if="loader" class="pt-3 pr-4 d-inline-flex">-->
-<!--            <span class="answer__price-currency">&nbsp; &nbsp; &nbsp;</span>-->
-<!--            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
-<!--        </div>-->
     </div>
 </template>
 
@@ -124,10 +75,10 @@ export default {
     data(){
         return {
             answer_info: null,
-            answer_info2: null,
+            new_answer_info2: null,
+            is_updated: false,
             answer_update: null,
             loader: false,
-            is_answer_info2: '',
             guard_for_show: null,
             show_seen_guard: true,
             image_path: '/images/users/announcement/answers/',
@@ -138,11 +89,19 @@ export default {
             if( answer_info !== undefined && answer_info != null ){
                 console.log('AAAAAAAAAA - ', answer_info.seen )
                 if( answer_info.seen !== undefined && answer_info.seen == null ){
-                    this.loader = true;
-                    this.collGetNewAnswers(answer_id, seller_id);
-                    this.resetAnswersInUserSideBar(answer_id);
-                }else{
-                    this.answer_info2 = null;
+                    if( sessionStorage.getItem('except_answer_'+answer_info.id) === null ) {
+                        this.loader = true;
+                        this.collGetNewAnswers(answer_id, seller_id);
+                    }
+                    else {
+                        if(
+                            sessionStorage.getItem('except_answer_'+answer_info.id) != null &&
+                            sessionStorage.getItem('except_answer_'+answer_info.id) != answer_info.id
+                        ) {
+                            this.loader = true;
+                            this.collGetNewAnswers(answer_id, seller_id);
+                        }
+                    }
                 }
             }
         },
@@ -158,13 +117,18 @@ export default {
             })
             .then( res => {
                 if( res.status == 200 ) {
-                    console.log( 'res.data.answers = ', res.data.answers )
-                    if( res.data.answers != null ) {
-                        this.answer_info2 = res.data.answers;
-                        this.is_answer_info2 = ' pl-3';
-                        this.answer_update = res.status;
-
+                    if( res.data.answer != null && this.is_updated !== undefined ) {
+                        const answer = res.data.answer;
+                        this.answer_info = answer;
+                        this.is_updated = res.data.is_updated;
                         this.loader = false;
+
+                        if( this.is_updated ) {
+                            sessionStorage.setItem(
+                                'except_answer_'+answer.id, answer.id
+                            );
+                            this.resetAnswersInUserSideBar(answer_id);
+                        }
                     }
                 }
             })
@@ -216,7 +180,7 @@ export default {
     },
     created() {
         // this.getUserAnswer();
-        // this.show_seen_guard = sessionStorage['session_seen_id'];
+
         this.getAnswersUser();
     },
     mounted(){

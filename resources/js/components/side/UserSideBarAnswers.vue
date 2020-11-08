@@ -4,7 +4,7 @@
             Cavablar
         </span>
 
-        <div v-if="old_answers.length > 0" class="">
+        <div v-if="old_answers.length || new_answers.length" class="">
             <span v-if="new_answers !== null && new_answers.length" class="badge badge-success">
                 {{ new_answers.length }}
             </span>
@@ -37,8 +37,10 @@ export default {
             axios.post('/announce/side-bar-answers-vue')
              .then( res => {
                  if( res.status == 200 ) {
-                     if( res.data.answers !== undefined ) {
-                         this.getNewAnswers(res.data.answers);
+                     if( res.data !== undefined ) {
+                         if( res.data.answers !== undefined && res.data.answers != null ) {
+                             this.getNewAnswers(res.data.answers);
+                         }
                      }
                  }
              })
@@ -47,7 +49,7 @@ export default {
              });
         },
         getNewAnswers(answers){
-            if( answers != null && answers !== undefined ) {
+            if( answers !== undefined && answers != null ) {
                 this.new_answers = [];
                 this.old_answers = [];
 
@@ -74,7 +76,7 @@ export default {
         this.getAnswers();
     },
     mounted() {
-        // this.getAnswers();
+
     }
 }
 </script>

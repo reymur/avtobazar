@@ -40,7 +40,7 @@ class AnswerController extends Controller
     }
 
     public function getAllAnswers(){
-        $answers_all = Announcement::with('getIsAnswers','user')
+        $answers_all = Announcement::with('user','getSender','getFuelType','getIsAnswers','getCondition')
             ->where('user_id',Auth::user()->id)
             ->whereHas('getIsAnswers', function(Builder $builder){
                 return $builder->where('id','!=', null);
@@ -255,11 +255,21 @@ class AnswerController extends Controller
                     ]);
 
                     if( $is_updated ){
-                        return $this->getAnswersResponse($answer, 200);
+                        return response()->json([
+                            'answer' => $answer,
+                            'is_updated' => true,
+                        ], 200);
+
+//                        return $this->getAnswersResponse($answer, 444, 200);
                     }
                 }
 
-                return $this->getAnswersResponse($answer, 200);
+                return response()->json([
+                    'answer' => $answer,
+                    'is_updated' => false,
+                ], 200);
+
+//                return $this->getAnswersResponse($answer, 000, 200);
             }
 
             return response()->json([
@@ -272,13 +282,13 @@ class AnswerController extends Controller
         ], 404);
     }
 
-    public function getAnswersResponse($model, $status = false){
+    public function getAnswersResponse($model, $is_updated, $status = false){
         if( $status ) {
-            return (new AnswerResource($model))
+            return ( new AnswerResource($model, $is_updated) )
                     ->response()->setStatusCode(200);
         }
 
-        return new AnswerResource($model);
+        return ( new AnswerResource($model) );
     }
 
     public function getUserLeftBarAnswer(Request $request){
@@ -298,6 +308,5 @@ class AnswerController extends Controller
             ], 200);
         }
 
-        return redrect()->route('home');
     }
 }

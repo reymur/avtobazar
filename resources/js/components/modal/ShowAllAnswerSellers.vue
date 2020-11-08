@@ -41,7 +41,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body pt-2 pb-1 px-sm-0">
+                    <div class="modal-body pt-2 pb-1 px-0">
                         <table class="table table-bordered">
                             <tbody>
                                 <tr v-if="loader">
@@ -63,11 +63,11 @@
                                             {{ answer.spare_parts }}
                                         </div>
                                     </td>
-                                    <td v-for="seller in answered_users" class="py-1 pr-0 d-flex">
+                                    <td v-for="seller in answered_users" class="pt-0 pb-1 pr-0 d-flex">
                                         <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         <span v-if="loader">Gözlə...</span>
 
-                                        <div v-if="!loader" class="col-4 text-left pl-1 mt-2">
+                                        <div v-if="!loader" class="col-4 text-left pl-1 mt-3">
                                             <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             <span v-if="loader">Gözlə...</span>
 
