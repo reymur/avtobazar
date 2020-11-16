@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\AnnouncementUser;
 use App\Answer;
+use App\Events\AnswerCount;
+use App\FuelType;
 use App\Http\Resources\AnswerCollection;
 use App\Http\Resources\AnswerResource;
 use App\User;
@@ -297,6 +299,8 @@ class AnswerController extends Controller
                 return $query->where('user_id', Auth::user()->id);
             })->get();
 
+            $this->getAnswersCountForMainMenu($answers);
+
             if( !$answers->count() ) {
                 return response()->json([
                     'errors' => 'Woops!!!'
@@ -307,6 +311,15 @@ class AnswerController extends Controller
                 'answers' => $answers
             ], 200);
         }
-
     }
+
+    public function getAnswersCountForMainMenu($answers)
+    {
+        event( new AnswerCount(
+            $answers->pluck('id')
+        ) ); /*For main (top-right) menu show answers count*/
+    }
+
+
+
 }

@@ -32,17 +32,17 @@
             |
         </span>
 
-        <div :class="'px-0 '+old_answer_border">
+        <div :class="'px-0 '+all_answers_border">
             <div class="">
                 <button class="btn p-0" :disabled="add_disabled" @click="showAllAnswers">
-                    <span v-if="old_answers != null && old_answers.length > 0" class="">
-                        <span :class="'letter__spacing'+old_answer_text">
+                    <span v-if="all_answers != null && all_answers.length > 0" class="">
+                        <span :class="'letter__spacing'+all_answers_text">
                             Ümumi
                         </span>
 
                         <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <span v-else class="badge badge-secondary mt-n2">
-                            {{ old_answers.length }}
+                            {{ all_answers.length }}
                         </span>
                     </span>
 
@@ -51,7 +51,7 @@
                             Ümumi
                         </span>
 
-                        <span v-if="loader && old_answers.length" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span v-if="loader && all_answers.length" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <span v-else class="badge badge-secondary mt-n2">
                             0
                         </span>
@@ -68,14 +68,14 @@ export default {
     props: ['reset_answers','modal_is_visible'],
     data(){
         return {
-            old_answers:[],
+            all_answers:[],
             new_answers:[],
             loader: false,
             new_answer_border: '',
             new_answer_text: '',
-            old_answer_border: '',
-            old_answer_text: '',
-            old_answer_is_show: 0,
+            all_answers_border: '',
+            all_answers_text: '',
+            all_answers_is_show: 0,
             add_disabled: false,
         }
     },
@@ -105,21 +105,21 @@ export default {
                 let session_answer = sessionStorage.getItem('is_new_answer_count');
                 if ( this.modal_is_visible === 0 && session_answer != 0 ) {
                     setTimeout( () => {
-                        this.old_answer_text = ' text-dark';
+                        this.all_answers_text = ' text-dark';
                         if (this.modal_is_visible === 0) this.$emit('showAllAnswersInParent');
                     },1500 )
                 }
             }
         },
         showOnlyNewAnswers(e){
-            this.old_answer_is_show = 1;
+            this.all_answers_is_show = 1;
             this.newAnswersStyle('text-info');
             this.$emit('showOnlyNewAnswersInParent');
         },
         showAllAnswers(e){
-            this.old_answer_is_show = 1;
+            this.all_answers_is_show = 1;
             this.oldAnswersStyle();
-            this. addDisabled();
+            this.addDisabled();
             this.$emit('showAllAnswersInParent');
         },
         getAnswers(){
@@ -140,7 +140,7 @@ export default {
                 .catch( err => {
                     if( err.response != null && err.response.data != null ){
                         if( err.response.data.errors != null ){
-                            if( !this.new_answers.length && !this.old_answers.length ){
+                            if( !this.new_answers.length && !this.all_answers.length ){
                                 this.new_disabled = 'disabled';
                                 this.add_disabled = 'disabled';
                             }
@@ -153,12 +153,14 @@ export default {
             if ( answers !== undefined ) {
                 if ( answers != null) {
                     this.new_answers = [];
-                    this.old_answers = [];
+                    this.all_answers = [];
 
                     answers.forEach(val => {
                         if (val.seen == null) {
                             this.new_answers.push(val);
-                        } else this.old_answers.push(val);
+                        }
+
+                        this.all_answers.push(val);
                     });
 
                     if (this.new_answers.length !== 0) {
@@ -175,14 +177,14 @@ export default {
         },
         newAnswersStyle(text_color){
             this.new_answer_border = ' border-bottom border-dark';
-            this.old_answer_border = ' ';
+            this.all_answers_border = ' ';
 
-            this.old_answer_text = ' '+text_color;
+            this.all_answers_text = ' '+text_color;
 
         },
         oldAnswersStyle(){
-            this.old_answer_border = ' border-bottom border-dark';
-            this.old_answer_text = ' text-dark';
+            this.all_answers_border = ' border-bottom border-dark';
+            this.all_answers_text = ' text-dark';
             this.new_answer_border = ' text-info';
         },
     },

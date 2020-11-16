@@ -10978,6 +10978,11 @@ body {
   border-radius: 50%;
 }
 
+.main__menu-answers-count {
+  position: absolute;
+  margin: -25px 0 0 -16px;
+}
+
 .border__b {
   color: #343434;
 }

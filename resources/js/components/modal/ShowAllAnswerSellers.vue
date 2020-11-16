@@ -202,7 +202,8 @@ export default {
                 if( answers != null && answers.length != null && answers.length > 0 ){
                     answers.filter( answer => {
                         if( answer.id == answer_id ){
-                                return this.not_seen.push(answer)
+                            this.not_seen.push(answer);
+                            this.is_seen.push(this.not_seen)
                         }
                     });
                 }
@@ -211,9 +212,9 @@ export default {
                 if( this.answer_users.length > 0 ){
                     this.answer_users.filter( val => {
                         if( val.seen != null ){
-                            return this.is_seen.push(val)
+                            this.is_seen.push(val);
                         }else{
-                            return this.not_seen.push(val)
+                            this.not_seen.push(val);
                         }
                     });
                 }

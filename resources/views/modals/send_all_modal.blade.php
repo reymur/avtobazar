@@ -8,7 +8,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            @include('partials.show_modal_details',[ 'data' => $announce ])
+            @include('partials.show_modal_content',[ 'data' => $announce ])
             <!--Show modal details-->
 
         </div>

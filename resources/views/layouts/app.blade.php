@@ -105,16 +105,21 @@
                             <a class="nav-link dropdown text-white outline__none" href="{{ route('buyer.profile', Auth::user()->id) }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
-                                <span class="badge badge-success badge__bg text-white rounded-circle badge__font_size">3</span>
                                 <span class="sr-only">unread messages</span>
+
+                                <answer-count></answer-count>
                             </a>
+
+
                         @elseif( Auth::user()->status === 2 )
                             <a class="nav-link dropdown text-white outline__none" href="{{ route('seller.profile', Auth::user()->id) }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
-                                <span class="badge badge-success badge__bg text-white rounded-circle badge__font_size">3</span>
                                 <span class="sr-only">unread messages</span>
+
+                                <answer-count></answer-count>
                             </a>
+
                         @endif
                     @endif
                 </div>

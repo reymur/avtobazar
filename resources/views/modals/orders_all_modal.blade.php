@@ -14,7 +14,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
 
-            @include('partials.show_modal_details',['data' => $order->announcement])
+            @include('partials.show_modal_content',['data' => $order->announcement])
             <!--Show modal details-->
 
         </div>

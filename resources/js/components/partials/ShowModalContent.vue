@@ -1,0 +1,192 @@
+<template>
+    <div v-if="data !== undefined && data != null" class="">
+        <div class="modal-header">
+<!--           <div v-if="data.getSender !== undefined && data.getSender" class="">-->
+<!--               <h5 v-if="data.getSender.name != null || data.getSender.autoNumber != null" class="modal-title" :id="'send_all-'+ data.id">-->
+<!--                    <span class="mr-0">-->
+<!--                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>-->
+<!--                        </svg>-->
+<!--                    </span>-->
+<!--                    <span class="text-uppercase letter__spacing">-->
+<!--                        {{ data.getSender.name ?? data.getSender.autoNumber }}-->
+<!--                    </span>-->
+<!--               </h5>-->
+
+<!--               <div class="">-->
+<!--                   <span class="px-3"></span>-->
+
+<!--                    <span class="pt-1 text-black-50">-->
+<!--                        {{ data.created_at ?? '' }}-->
+<!--                    </span>-->
+
+<!--                    <span class="px-3"></span>-->
+
+<!--                    <span class="pt-1 text-black-50">-->
+<!--                        {{ data.city ?? '' }}-->
+<!--                    </span>-->
+<!--               </div>-->
+<!--           </div>-->
+
+            <div class="">
+                Yox
+            </div>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body pt-2 pb-1">
+            <table class="table table-bordered">
+                <tr v-if="data.spare_parts">
+                    <td class="text-break text-center p-2" colspan="2">
+                        <div class="p-2 show__seller-text">
+                            {{ data.spare_parts }}
+                        </div>
+                    </td>
+                </tr>
+
+                <tr v-if="data.marka">
+                    <td scope="row" class="text-right text-black-50 py-2">Model:</td>
+                    <td class="text-break text-center py-2">
+                        {{ data.marka }}
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-slash ml-n1 mr-n1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        {{ data.model }}
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-slash ml-n1 mr-n1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        {{ data.motor }}
+                    </td>
+                </tr>
+
+                <tr v-if="data.year">
+                    <td scope="row" class="text-right text-black-50 py-2">Buraxılış:</td>
+                    <td class="text-break text-center py-2">
+                        {{ data.year }}
+                    </td>
+                </tr>
+
+                <tr v-if="getFuelType(data)">
+                    <td scope="row" class="text-right text-black-50 py-2">Yanacaq növü:</td>
+                    <td class="text-break text-center py-2">
+                        {{ fuel_type }}
+                    </td>
+                </tr>
+
+                <tr v-if="condition">
+                    <td scope="row" class="text-right text-black-50 py-2">Vəziyyəti:</td>
+                    <td class="text-break text-center py-2">
+                        {{ condition }}
+                    </td>
+                </tr>
+
+                <tr v-if="data.texpassport">
+                    <td scope="row" class="text-right text-black-50 py-2">Texpassport:</td>
+                    <td class="text-break text-center text-uppercase py-2 flash__texpass">
+                        {{ data.texpassport }}
+                    </td>
+                </tr>
+
+                <tr v-if="data.image">
+                    <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
+                    <td class="text-break text-center py-2">
+                        <img :src="'/images/users/announcement/orders/'+ data.image"
+                             :alt="data.image"
+                             class="flash__image"
+                        >
+                    </td>
+                </tr>
+
+                <tr v-if="data.note">
+                    <td scope="row" class="text-right text-black-50 py-2">Əlavə məlumat:</td>
+                    <td class="text-break text-center py-2">
+                        {{ data.note }}
+                    </td>
+                </tr>
+
+            </table>
+            <div class="modal-footer py-1">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bağla</button>
+
+                <div v-if="auth_check && auth_user_status == 2" class="">
+                    <button v-if="disabled" class="btn btn-secondary" :disabled="disabled"
+                        :data-target="'#answer-' + data.id">
+                        Cavab
+                    </button>
+
+                    <a v-else href="" class="btn btn-success" data-toggle="modal"
+                        :data-target="'#answer-' + data.id">
+                        Cavab
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "Show_modal_content",
+    props: ['data','auth_check','auth_user_status','disabled'],
+    data(){
+        return {
+            fuel_type: null,
+            condition: null,
+        }
+    },
+    computed: {
+
+    },
+    methods:{
+        getFuelType(data){
+            if( sessionStorage.getItem('announce_id.'+data.id) != data.id ) {
+                // alert(3333333)
+                axios.post('/api/get-fuel-type', {
+                    fuel: data.fuel_type,
+                    condition: data.condition
+                })
+                    .then(res => {
+                        if (res.data !== undefined && res.data != null) {
+                            if (res.data != null) {
+                                if ( res.data.fuel_type !== undefined && res.data.condition !== undefined ) {
+                                    if ( res.data.fuel_type != null && res.data.condition != null ) {
+                                        this.fuel_type = res.data.fuel_type;
+                                        this.condition = res.data.condition;
+                                        sessionStorage.setItem('announce_id.'+ data.id, data.id);
+                                        sessionStorage.setItem('fuel_type.'+ data.id, res.data.fuel_type);
+                                        sessionStorage.setItem('condition.'+ data.id, res.data.condition);
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.log('Err Fuel type - ', err.response)
+                    });
+
+                return this.fuel_type ?? true;
+            }else{
+                if( sessionStorage.getItem('announce_id.'+data.id) ){
+                    this.fuel_type = sessionStorage.getItem('fuel_type.'+data.id);
+                    this.condition = sessionStorage.getItem('condition.'+data.id);
+                    return true;
+                }
+            }
+        }
+    },
+    created() {
+        // sessionStorage.clear()
+        // this.getFuelType()
+    },
+    mounted() {
+        // console.log('Fuel type!!! - ', this.fuel_type)
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

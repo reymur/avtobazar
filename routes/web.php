@@ -30,6 +30,7 @@ Route::prefix('announce')->group(function() {
     Route::post('/get-show-all-answer-vue', 'AnswerController@getShowAllAnswerVue')->name('get_show_all_answer_vue');
     Route::post('/answer-seen-update-vue', 'AnswerController@answerSeenUpdate')->name('answer_seen_update_vue');
     Route::post('/side-bar-answers-vue', 'AnswerController@getUserLeftBarAnswer')->name('side_bar_answers_vue');
+    Route::post('/main-menu-answers-count', 'AnswerController@getUserLeftBarAnswer')->name('main_menu_answers_count');
     Route::post('/answers-details-vue', 'AnswerController@getAnswersDetailsVue')->name('answers_details_vue');
 
     Route::get('/orders', 'AnnouncementController@ordersAnnounce')->name('orders');
@@ -48,3 +49,6 @@ Route::prefix('seller')->middleware('auth')->group(function(){
 });
 
 Route::post('/get-conditions', 'ConditionController@getConditions');
+
+//Route::post('/get-fuel-type', 'AnswerController@getFuelType');
+

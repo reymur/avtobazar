@@ -494,15 +494,18 @@ class AnnouncementController extends Controller
     {
         if( Auth::check() ) {
             $user = Auth::user();
-            $orders = User::with('getSellerAnswers')->where('id', $user->id);
-//            dd(  $orders->get() );
-            if ( $orders->get()->count() == 0 && $orders->first()->announcement->count() == 0 ) {
+            $orders = AnnouncementUser::with('user','announcement','getSellerAnswers')
+                        ->whereIn('user_id', [ auth()->user()->id] )
+                        ->get();
+
+//            dd( $orders->first() );
+
+            if ( !$orders || $orders->count() == 0 ) {
                 return abort(404);
             }
 
             return view('announcements.orders', [
-                'orders' => $orders,
-                'ordersPaginate' => $this->getOrdersPaginate($orders, 2)
+                'orders' => $orders
             ]);
         }
         else {
