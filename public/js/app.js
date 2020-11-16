@@ -3882,10 +3882,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrdersAllModal",
   props: ['order', 'auth_check', 'auth_user', 'auth_user_status', 'disabled'],
@@ -57694,13 +57690,13 @@ var render = function() {
           },
           [
             _vm._v(
-              "\n            " +
+              "\n        " +
                 _vm._s(
                   _vm.order.announcement.spare_parts
                     ? _vm.order.announcement.spare_parts
                     : "Yox"
                 ) +
-                "\n        "
+                "\n    "
             )
           ]
         )
@@ -57718,13 +57714,13 @@ var render = function() {
           },
           [
             _vm._v(
-              "\n            " +
+              "\n        " +
                 _vm._s(
                   _vm.order.announcement.spare_parts
                     ? _vm.order.announcement.spare_parts
                     : "Yox"
                 ) +
-                "\n        "
+                "\n    "
             )
           ]
         ),
@@ -57752,7 +57748,7 @@ var render = function() {
                       data: _vm.order.announcement,
                       auth_check: _vm.auth_check,
                       auth_user_status: _vm.auth_user_status,
-                      disabled: null
+                      disabled: _vm.disabled
                     }
                   })
                 ],
@@ -57763,16 +57759,18 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      {},
-      [
-        _c("order-answer-modal-parent", {
-          attrs: { order: _vm.order.announcement }
-        })
-      ],
-      1
-    )
+    _vm.order.announcement
+      ? _c(
+          "div",
+          {},
+          [
+            _c("order-answer-modal-parent", {
+              attrs: { order: _vm.order.announcement }
+            })
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

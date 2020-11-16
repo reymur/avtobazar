@@ -17,21 +17,17 @@
                         :data="order.announcement"
                         :auth_check="auth_check"
                         :auth_user_status="auth_user_status"
-                        :disabled="null"
+                        :disabled="disabled"
                     ></show-modal-content>
                 </div>
             </div>
         </div>
 
-        <div class="">
+        <div v-if="order.announcement" class="">
             <order-answer-modal-parent
                 :order="order.announcement"
             ></order-answer-modal-parent>
         </div>
-
-<!--            'if( $order->announcement )'-->
-<!--                '@include('modals.order_answer_modal',['order' => $order->announcement ])'-->
-<!--            '@endif'-->
     </div>
 </template>
 
