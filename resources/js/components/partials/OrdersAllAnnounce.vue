@@ -45,7 +45,14 @@
                         </div>
                     </td>
                     <td class="text-right send__all-td pt-2 pb-1 pb-0 pr-0">
-                        <div class="d-block">
+                        <div v-if="is_seen[order.id] == null" class="d-block">
+                            <span class="badge badge-light">
+                                <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <div v-else class="d-block">
                             <span class="badge badge-light">
                                 <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-check2-all text-success" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                   <path fill-rule="evenodd" d="M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -80,6 +87,7 @@ export default {
     data(){
         return {
             is_answered: [],
+            is_seen: [],
             no_answered: null,
         }
     },
@@ -98,6 +106,7 @@ export default {
                                 order.get_seller_answers.filter((answer) => {
                                     if (order.announcement.id == answer.announcement_id && answer.user_id == this.auth_user.id) {
                                         this.is_answered.push(order);
+                                        this.is_seen[order.id] = answer.seen ?? null;
                                     }
                                 });
                             }
@@ -126,7 +135,7 @@ export default {
     },
     mounted() {
         this.isAnswered();
-        // console.log('OrdersAllAnnounce Page');
+        console.log('AAAAAAAAAAA Page - ', this.orders);
         // console.log('OrdersAllAnnounce Page is_answered', this.is_answered);
         // console.log('OrdersAllAnnounce Page no_answered', this.no_answered);
     }
