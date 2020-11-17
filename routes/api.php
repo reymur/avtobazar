@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/get-fuel-type', 'Api\GetAttributesController@getFuelType');
+Route::post('/get-announce-user', 'Api\GetAttributesController@getAnnounceSenderUser');

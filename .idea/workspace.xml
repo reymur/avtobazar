@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -379,7 +383,9 @@
       <workItem from="1605374810795" duration="10144000" />
       <workItem from="1605450812972" duration="23738000" />
       <workItem from="1605518767306" duration="13550000" />
-      <workItem from="1605533150019" duration="20386000" />
+      <workItem from="1605533150019" duration="20888000" />
+      <workItem from="1605636852075" duration="8181000" />
+      <workItem from="1605645506078" duration="2572000" />
     </task>
     <servers />
   </component>
@@ -467,9 +473,9 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1605536716306" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605350563819">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1605646989622">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1605350563819" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1605646989622" />
   </component>
 </project>

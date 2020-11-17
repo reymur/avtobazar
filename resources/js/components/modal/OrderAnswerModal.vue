@@ -3,7 +3,7 @@
         <div class="modal-content answer__modal-bg">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span @click="resetInputs" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body pt-2 pb-1">
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="modal-footer py-1">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Xeyir</button>
+                    <button @click="resetInputs" type="button" class="btn btn-secondary" data-dismiss="modal">Xeyir</button>
                     <button @click="saveAnswer" id="answerA" :disabled="disabled" type="button" class="btn btn-success">
                         <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         <span v-if="loader">Gözlə...</span>
@@ -102,7 +102,7 @@ export default {
     data(){
         return {
             which: '',
-            price: '',
+            price: null,
             conditionSelect: '',
             img: null,
             image: null,
@@ -145,16 +145,35 @@ export default {
                 })
                     .then(res => {
                         if (res.status === 200) {
+                            let err = ['which','price','image','condition'];
+                            err.forEach( err => {
+                                this.removeDangerBorder(err);
+                            });
+
                             window.location.href = '/announce/orders'
                         }
                     })
                     .catch(err => {
                         if (err.response.data.errors !== undefined) {
+                            let errors = err.response.data.errors;
                             this.errors.push(err.response.data.errors);
                             this.loader = false;
                             this.disabled = false;
                             // this.removeDisabled('disabled');
                             console.log('err = ', this.errors);
+
+                            if( this.errors.length ){
+                                this.errors.forEach( error => {
+                                    if( error['which'] ) this.addDangerBorder('which');
+                                    else this.removeDangerBorder('which');
+                                    if( error['price'] ) this.addDangerBorder('price');
+                                    else this.removeDangerBorder('price');
+                                    if( error['condition'] ) this.addDangerBorder('condition');
+                                    else this.removeDangerBorder('condition');
+                                    if( error['image'] ) this.addDangerBorder('image');
+                                    else this.removeDangerBorder('image');
+                                })
+                            }
                         }
                     })
             }
@@ -199,13 +218,40 @@ export default {
         removeDisabled(key){
             document.getElementById('answer').removeAttribute(key);
         },
+        addDangerBorder(id){
+            if( document.getElementById(id) ){
+            console.log( 'ID - ', document.getElementById(id).classList )
+                document.getElementById(id).classList.add('border-danger');
+            }
+        },
+        removeDangerBorder(id){
+            if( document.getElementById(id).classList.contains('border-danger') ){
+            console.log( 'ID - ', document.getElementById(id).classList )
+                document.getElementById(id).classList.remove('border-danger');
+            }
+        },
+        resetInputs(){
+                this.which = '';
+                this.price = '';
+                this.conditionSelect = '';
+                this.img = null;
+                this.image = null;
+                this.errors = [];
+
+                let err = ['which','price','image','condition'];
+
+                err.forEach( err => {
+                    if( document.getElementById(err).classList.contains('border-danger') ){
+                        document.getElementById(err).classList.remove('border-danger');
+                    }
+                })
+        }
     },
     created() {
         this.getConditions();
     },
     mounted() {
         console.log('res condition - ',this.conditions )
-        // this.addDisabled('disabled','disabled');
     }
 }
 </script>

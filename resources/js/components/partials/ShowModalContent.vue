@@ -1,34 +1,34 @@
 <template>
     <div v-if="data !== undefined && data != null" class="">
         <div class="modal-header">
-<!--           <div v-if="data.getSender !== undefined && data.getSender" class="">-->
-<!--               <h5 v-if="data.getSender.name != null || data.getSender.autoNumber != null" class="modal-title" :id="'send_all-'+ data.id">-->
-<!--                    <span class="mr-0">-->
-<!--                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">-->
-<!--                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>-->
-<!--                        </svg>-->
-<!--                    </span>-->
-<!--                    <span class="text-uppercase letter__spacing">-->
-<!--                        {{ data.getSender.name ?? data.getSender.autoNumber }}-->
-<!--                    </span>-->
-<!--               </h5>-->
+           <div v-if="data" class="d-flex">
+               <h5 v-if="sender_user != null || sender_user != null" class="modal-title" :id="'send_all-'+ data.id">
+                    <span class="mr-0">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                    </span>
+                    <span v-if="sender_user.name != null || sender_user.autoNumber != null" class="text-uppercase letter__spacing">
+                        {{ sender_user.name ? sender_user.name : sender_user.autoNumber }}
+                    </span>
+               </h5>
 
-<!--               <div class="">-->
-<!--                   <span class="px-3"></span>-->
+               <div class="pt-1">
+                   <span class="px-3"></span>
 
-<!--                    <span class="pt-1 text-black-50">-->
-<!--                        {{ data.created_at ?? '' }}-->
-<!--                    </span>-->
+                    <span class="pt-1 text-black-50">
+                        {{ data.created_at }}
+                    </span>
 
-<!--                    <span class="px-3"></span>-->
+                    <span class="px-3"></span>
 
-<!--                    <span class="pt-1 text-black-50">-->
-<!--                        {{ data.city ?? '' }}-->
-<!--                    </span>-->
-<!--               </div>-->
-<!--           </div>-->
+                    <span class="pt-1 text-black-50">
+                        {{ data.city }}
+                    </span>
+               </div>
+           </div>
 
-            <div class="">
+            <div v-else class="">
                 Yox
             </div>
 
@@ -69,7 +69,7 @@
                     </td>
                 </tr>
 
-                <tr v-if="getFuelType(data)">
+                <tr v-if="getFuelTypeAndCondition(data)">
                     <td scope="row" class="text-right text-black-50 py-2">Yanacaq növü:</td>
                     <td class="text-break text-center py-2">
                         {{ fuel_type }}
@@ -133,6 +133,7 @@ export default {
     props: ['data','auth_check','auth_user_status','disabled'],
     data(){
         return {
+            sender_user: null,
             fuel_type: null,
             condition: null,
         }
@@ -141,9 +142,32 @@ export default {
 
     },
     methods:{
-        getFuelType(data){
+        getSender(data){
+            if( sessionStorage.getItem('sender_id.'+data.user_id) != data.user_id ) {
+                axios.post('/api/get-announce-user', {
+                    announcement_user_id: data.user_id
+                })
+                .then(res => {
+                    if (res.data !== undefined && res.data != null) {
+                        if ( res.data.sender !== undefined && res.data.sender != null ) {
+                            this.sender_user = res.data.sender;
+                            sessionStorage.setItem('sender_id.'+data.user_id, res.data.sender);
+                            console.log('Res Sender - ', this.sender_user);
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log('Err Sender - ', err.response)
+                });
+
+                return this.sender_user
+            }else{
+                this.sender_user = sessionStorage.getItem('sender_id.'+data.user_id );
+                return this.sender_user;
+            }
+        },
+        getFuelTypeAndCondition(data){
             if( sessionStorage.getItem('announce_id.'+data.id) != data.id ) {
-                // alert(3333333)
                 axios.post('/api/get-fuel-type', {
                     fuel: data.fuel_type,
                     condition: data.condition
@@ -180,6 +204,7 @@ export default {
     created() {
         // sessionStorage.clear()
         // this.getFuelType()
+        this.getSender(this.data)
     },
     mounted() {
         // console.log('Fuel type!!! - ', this.fuel_type)

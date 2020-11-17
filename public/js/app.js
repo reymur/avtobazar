@@ -3699,7 +3699,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       which: '',
-      price: '',
+      price: null,
       conditionSelect: '',
       img: null,
       image: null,
@@ -3739,16 +3739,31 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (res) {
           if (res.status === 200) {
+            var err = ['which', 'price', 'image', 'condition'];
+            err.forEach(function (err) {
+              _this.removeDangerBorder(err);
+            });
             window.location.href = '/announce/orders';
           }
         })["catch"](function (err) {
           if (err.response.data.errors !== undefined) {
+            var errors = err.response.data.errors;
+
             _this.errors.push(err.response.data.errors);
 
             _this.loader = false;
             _this.disabled = false; // this.removeDisabled('disabled');
 
             console.log('err = ', _this.errors);
+
+            if (_this.errors.length) {
+              _this.errors.forEach(function (error) {
+                if (error['which']) _this.addDangerBorder('which');else _this.removeDangerBorder('which');
+                if (error['price']) _this.addDangerBorder('price');else _this.removeDangerBorder('price');
+                if (error['condition']) _this.addDangerBorder('condition');else _this.removeDangerBorder('condition');
+                if (error['image']) _this.addDangerBorder('image');else _this.removeDangerBorder('image');
+              });
+            }
           }
         });
       } else {
@@ -3797,13 +3812,39 @@ __webpack_require__.r(__webpack_exports__);
     },
     removeDisabled: function removeDisabled(key) {
       document.getElementById('answer').removeAttribute(key);
+    },
+    addDangerBorder: function addDangerBorder(id) {
+      if (document.getElementById(id)) {
+        console.log('ID - ', document.getElementById(id).classList);
+        document.getElementById(id).classList.add('border-danger');
+      }
+    },
+    removeDangerBorder: function removeDangerBorder(id) {
+      if (document.getElementById(id).classList.contains('border-danger')) {
+        console.log('ID - ', document.getElementById(id).classList);
+        document.getElementById(id).classList.remove('border-danger');
+      }
+    },
+    resetInputs: function resetInputs() {
+      this.which = '';
+      this.price = '';
+      this.conditionSelect = '';
+      this.img = null;
+      this.image = null;
+      this.errors = [];
+      var err = ['which', 'price', 'image', 'condition'];
+      err.forEach(function (err) {
+        if (document.getElementById(err).classList.contains('border-danger')) {
+          document.getElementById(err).classList.remove('border-danger');
+        }
+      });
     }
   },
   created: function created() {
     this.getConditions();
   },
   mounted: function mounted() {
-    console.log('res condition - ', this.conditions); // this.addDisabled('disabled','disabled');
+    console.log('res condition - ', this.conditions);
   }
 });
 
@@ -5475,19 +5516,42 @@ __webpack_require__.r(__webpack_exports__);
   props: ['data', 'auth_check', 'auth_user_status', 'disabled'],
   data: function data() {
     return {
+      sender_user: null,
       fuel_type: null,
       condition: null
     };
   },
   computed: {},
   methods: {
-    getFuelType: function getFuelType(data) {
+    getSender: function getSender(data) {
       var _this = this;
+
+      if (sessionStorage.getItem('sender_id.' + data.user_id) != data.user_id) {
+        axios.post('/api/get-announce-user', {
+          announcement_user_id: data.user_id
+        }).then(function (res) {
+          if (res.data !== undefined && res.data != null) {
+            if (res.data.sender !== undefined && res.data.sender != null) {
+              _this.sender_user = res.data.sender;
+              sessionStorage.setItem('sender_id.' + data.user_id, res.data.sender);
+              console.log('Res Sender - ', _this.sender_user);
+            }
+          }
+        })["catch"](function (err) {
+          console.log('Err Sender - ', err.response);
+        });
+        return this.sender_user;
+      } else {
+        this.sender_user = sessionStorage.getItem('sender_id.' + data.user_id);
+        return this.sender_user;
+      }
+    },
+    getFuelTypeAndCondition: function getFuelTypeAndCondition(data) {
+      var _this2 = this;
 
       if (sessionStorage.getItem('announce_id.' + data.id) != data.id) {
         var _this$fuel_type;
 
-        // alert(3333333)
         axios.post('/api/get-fuel-type', {
           fuel: data.fuel_type,
           condition: data.condition
@@ -5496,8 +5560,8 @@ __webpack_require__.r(__webpack_exports__);
             if (res.data != null) {
               if (res.data.fuel_type !== undefined && res.data.condition !== undefined) {
                 if (res.data.fuel_type != null && res.data.condition != null) {
-                  _this.fuel_type = res.data.fuel_type;
-                  _this.condition = res.data.condition;
+                  _this2.fuel_type = res.data.fuel_type;
+                  _this2.condition = res.data.condition;
                   sessionStorage.setItem('announce_id.' + data.id, data.id);
                   sessionStorage.setItem('fuel_type.' + data.id, res.data.fuel_type);
                   sessionStorage.setItem('condition.' + data.id, res.data.condition);
@@ -5518,8 +5582,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {// sessionStorage.clear()
+  created: function created() {
+    // sessionStorage.clear()
     // this.getFuelType()
+    this.getSender(this.data);
   },
   mounted: function mounted() {// console.log('Fuel type!!! - ', this.fuel_type)
   }
@@ -57255,7 +57321,29 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", {}, [
     _c("div", { staticClass: "modal-content answer__modal-bg" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "modal-header" }, [
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [
+            _c(
+              "span",
+              {
+                attrs: { "aria-hidden": "true" },
+                on: { click: _vm.resetInputs }
+              },
+              [_vm._v("×")]
+            )
+          ]
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
         _c("div", { staticClass: "mt-2 mb-2" }, [
@@ -57565,7 +57653,8 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-secondary",
-              attrs: { type: "button", "data-dismiss": "modal" }
+              attrs: { type: "button", "data-dismiss": "modal" },
+              on: { click: _vm.resetInputs }
             },
             [_vm._v("Xeyir")]
           ),
@@ -57595,27 +57684,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59697,7 +59766,90 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.data !== undefined && _vm.data != null
     ? _c("div", {}, [
-        _vm._m(0),
+        _c("div", { staticClass: "modal-header" }, [
+          _vm.data
+            ? _c("div", { staticClass: "d-flex" }, [
+                _vm.sender_user != null || _vm.sender_user != null
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "send_all-" + _vm.data.id }
+                      },
+                      [
+                        _c("span", { staticClass: "mr-0" }, [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "bi bi-arrow-right-short",
+                              attrs: {
+                                width: "1.5em",
+                                height: "1.5em",
+                                viewBox: "0 0 16 16",
+                                fill: "currentColor",
+                                xmlns: "http://www.w3.org/2000/svg"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  "fill-rule": "evenodd",
+                                  d:
+                                    "M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
+                                }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm.sender_user.name != null ||
+                        _vm.sender_user.autoNumber != null
+                          ? _c(
+                              "span",
+                              { staticClass: "text-uppercase letter__spacing" },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(
+                                      _vm.sender_user.name
+                                        ? _vm.sender_user.name
+                                        : _vm.sender_user.autoNumber
+                                    ) +
+                                    "\n                "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "pt-1" }, [
+                  _c("span", { staticClass: "px-3" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "pt-1 text-black-50" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.created_at) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "px-3" }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "pt-1 text-black-50" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.city) +
+                        "\n                "
+                    )
+                  ])
+                ])
+              ])
+            : _c("div", {}, [_vm._v("\n            Yox\n        ")]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
           _c("table", { staticClass: "table table-bordered" }, [
@@ -59712,9 +59864,9 @@ var render = function() {
                     [
                       _c("div", { staticClass: "p-2 show__seller-text" }, [
                         _vm._v(
-                          "\n                            " +
+                          "\n                        " +
                             _vm._s(_vm.data.spare_parts) +
-                            "\n                        "
+                            "\n                    "
                         )
                       ])
                     ]
@@ -59735,63 +59887,63 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.marka) +
-                        "\n                        "
-                    ),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "bi bi-slash ml-n1 mr-n1",
-                        attrs: {
-                          width: "1.5em",
-                          height: "1.5em",
-                          viewBox: "0 0 16 16",
-                          fill: "currentColor",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.data.model) +
-                        "\n                        "
-                    ),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "bi bi-slash ml-n1 mr-n1",
-                        attrs: {
-                          width: "1.5em",
-                          height: "1.5em",
-                          viewBox: "0 0 16 16",
-                          fill: "currentColor",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.data.motor) +
                         "\n                    "
+                    ),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-slash ml-n1 mr-n1",
+                        attrs: {
+                          width: "1.5em",
+                          height: "1.5em",
+                          viewBox: "0 0 16 16",
+                          fill: "currentColor",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.model) +
+                        "\n                    "
+                    ),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-slash ml-n1 mr-n1",
+                        attrs: {
+                          width: "1.5em",
+                          height: "1.5em",
+                          viewBox: "0 0 16 16",
+                          fill: "currentColor",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.motor) +
+                        "\n                "
                     )
                   ])
                 ])
@@ -59810,15 +59962,15 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.year) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.getFuelType(_vm.data)
+            _vm.getFuelTypeAndCondition(_vm.data)
               ? _c("tr", [
                   _c(
                     "td",
@@ -59831,9 +59983,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.fuel_type) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -59852,9 +60004,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.condition) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -59879,9 +60031,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                    " +
                           _vm._s(_vm.data.texpassport) +
-                          "\n                    "
+                          "\n                "
                       )
                     ]
                   )
@@ -59925,9 +60077,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.note) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -59958,7 +60110,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        Cavab\n                    "
+                            "\n                    Cavab\n                "
                           )
                         ]
                       )
@@ -59974,7 +60126,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        Cavab\n                    "
+                            "\n                    Cavab\n                "
                           )
                         ]
                       )
@@ -59990,22 +60142,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("div", {}, [_vm._v("\n                Yox\n            ")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
