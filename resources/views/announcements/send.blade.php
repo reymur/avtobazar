@@ -8,7 +8,13 @@
 
         <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
             <div class="col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2">
-                @include('users.partials.user_left_bar')
+                <user-left-side-bar
+                    :auth_check="{{ Auth::check() }}"
+                    :auth_user="{{ Auth::user() }}"
+                    :orders_count="{{ getUserLeftBarOrderCount()[0] }}"
+                    :new_orders="{{ getUserLeftBarOrderCount()[1] }}"
+                    :auth_user_get_sends="{{ Auth::user()->getSends }}"
+                ></user-left-side-bar>
             </div>
 
             <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0 pb-3 flash__bg border-left border-white">
