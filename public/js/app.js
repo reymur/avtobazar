@@ -3684,15 +3684,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderAnswerModal",
   props: ['order_id'],
@@ -4347,9 +4338,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Orders",
-  props: ['orders', 'auth_check', 'auth_user', 'auth_user_status'],
+  props: ['orders', 'new_orders', 'answers_all', 'auth_check', 'auth_user', 'auth_user_status', 'auth_user_get_sends'],
   data: function data() {
     return {};
   },
@@ -5106,12 +5103,14 @@ __webpack_require__.r(__webpack_exports__);
             }
           }
         }
+      } else if (this.orders.length) {
+        this.no_answered = this.orders;
       }
     }
   },
   mounted: function mounted() {
     this.isAnswered();
-    console.log('AAAAAAAAAAA Page - ', this.orders); // console.log('OrdersAllAnnounce Page is_answered', this.is_answered);
+    console.log('AAAAAAAAAAA Page ooo - ', this.orders); // console.log('OrdersAllAnnounce Page is_answered', this.is_answered);
     // console.log('OrdersAllAnnounce Page no_answered', this.no_answered);
   }
 });
@@ -6471,30 +6470,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserLeftSideBar",
-  props: ['auth_user', 'auth_check', 'auth_user_get_sends', 'orders', 'new_orders', 'reset_answers'],
+  props: ['auth_user', 'auth_check', 'auth_user_get_sends', 'orders_count', 'new_orders', 'reset_answers'],
   data: function data() {
     return {
       current_page: ''
     };
   },
   methods: {
-    currentPage: function currentPage() {
+    currentPage: function currentPage(page) {
       var curr = window.location.pathname;
-
-      if (curr.indexOf('/answers') != -1) {
-        this.current_page = 'border-bottom border-dark text-decoration-none';
-      } else if (curr.indexOf('/sends') != -1) {
-        this.current_page = 'border-bottom border-dark text-decoration-none';
-      } else if (curr.indexOf('/orders') != -1) {
-        this.current_page = 'border-bottom border-dark text-decoration-none';
-      }
+      if (curr.indexOf(page) != -1) return this.current_page = 'border-bottom border-dark text-black-50 text-decoration-none';else return this.current_page = 'border-0';
     }
   },
   mounted: function mounted() {
-    console.log(' window.location.pathname11 = ', window.location.pathname.indexOf('/sends'));
-    this.currentPage();
+    console.log(' window.location.pathname11 = ', window.location.pathname.indexOf('/answers')); // this.currentPage()
   }
 });
 
@@ -6629,14 +6621,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
-  props: ['orders', 'new_orders'],
+  props: ['orders_count', 'new_orders'],
   data: function data() {
     return {
-      orders_all: this.orders,
+      orders_all: this.orders_count,
       new_orders_count: this.new_orders
     };
   },
-  mounted: function mounted() {// console.log( 'AAAAAAAAAAAAAAa')
+  mounted: function mounted() {
+    console.log('AAAAAAAAAAAAAAa === ', this.orders_count);
   }
 });
 
@@ -57397,13 +57390,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("option", { attrs: { value: "Kopya" } }, [_vm._v("Kopya")])
                 ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-tooltip" }, [
-                _vm._v(
-                  "\n                            Please select a valid state.\n                        "
-                )
-              ])
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-5 mb-3 pl-1" }, [
@@ -57434,13 +57421,7 @@ var render = function() {
                     _vm.price = $event.target.value
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-tooltip" }, [
-                _vm._v(
-                  "\n                            Please provide a valid zip.\n                        "
-                )
-              ])
+              })
             ])
           ]),
           _vm._v(" "),
@@ -57499,13 +57480,7 @@ var render = function() {
                   })
                 ],
                 2
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "invalid-tooltip" }, [
-                _vm._v(
-                  "\n                            Please select a valid state.\n                        "
-                )
-              ])
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -58318,7 +58293,7 @@ var render = function() {
               auth_user: _vm.auth_user,
               auth_check: _vm.auth_check,
               auth_user_get_sends: _vm.auth_user_get_sends,
-              orders: _vm.orders,
+              orders_count: _vm.orders,
               new_orders: _vm.new_orders,
               reset_answers: _vm.reset_answers
             }
@@ -58452,7 +58427,18 @@ var render = function() {
           staticClass:
             "col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2"
         },
-        [_vm._v("\n            'users.partials.user_left_bar'\n    ")]
+        [
+          _c("user-left-side-bar", {
+            attrs: {
+              orders_count: _vm.orders.length,
+              new_orders: _vm.new_orders,
+              auth_user: _vm.auth_user,
+              auth_check: _vm.auth_check,
+              auth_user_get_sends: _vm.auth_user_get_sends
+            }
+          })
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
@@ -61119,13 +61105,15 @@ var render = function() {
                       _c(
                         "a",
                         {
-                          class: "d-lg-block text-black-50 " + _vm.current_page,
+                          class:
+                            "d-lg-block text-blue " +
+                            _vm.currentPage("/orders"),
                           attrs: { href: "/announce/orders" }
                         },
                         [
                           _c("user-side-bar-orders", {
                             attrs: {
-                              orders: _vm.orders,
+                              orders_count: _vm.orders_count,
                               new_orders: _vm.new_orders
                             }
                           })
@@ -61146,7 +61134,8 @@ var render = function() {
                     ? _c(
                         "a",
                         {
-                          class: "d-lg-block text-black-50 " + _vm.current_page,
+                          class:
+                            "d-lg-block text-blue " + _vm.currentPage("/sends"),
                           attrs: { href: "/announce/sends" }
                         },
                         [
@@ -61168,19 +61157,27 @@ var render = function() {
                                   ]
                                 )
                               ])
-                            : _vm._e()
+                            : _c(
+                                "span",
+                                { staticClass: "d-lg-block text-blue" },
+                                [
+                                  _vm._v(
+                                    "\n                            Göndərilənlər\n                            "
+                                  ),
+                                  _c(
+                                    "span",
+                                    { staticClass: "badge badge-secondary" },
+                                    [
+                                      _vm._v(
+                                        "\n                                0\n                            "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
                         ]
                       )
-                    : _c("div", {}, [
-                        _vm._v(
-                          "\n                        Göndərilənlər\n                        "
-                        ),
-                        _c("span", { staticClass: "badge badge-secondary" }, [
-                          _vm._v(
-                            "\n                            0\n                        "
-                          )
-                        ])
-                      ])
+                    : _vm._e()
                 ]
               )
             ]),
@@ -61196,7 +61193,8 @@ var render = function() {
                   _c(
                     "a",
                     {
-                      class: "d-lg-block text-black-50 " + _vm.current_page,
+                      class:
+                        "d-lg-block text-blue " + _vm.currentPage("/answers"),
                       attrs: { href: "/announce/answers" }
                     },
                     [
@@ -61290,7 +61288,7 @@ var render = function() {
   return _c("div", { staticClass: "d-inline-flex" }, [
     _c("span", { staticClass: "pr-1" }, [_vm._v("\n        Sifarişlər\n    ")]),
     _vm._v(" "),
-    _vm.orders !== null && _vm.orders > 0
+    _vm.orders_count !== null && _vm.orders_count > 0
       ? _c("div", {}, [
           _vm.new_orders_count !== null && _vm.new_orders_count > 0
             ? _c("span", { staticClass: "badge badge-success" }, [
@@ -61299,7 +61297,7 @@ var render = function() {
                 )
               ])
             : _c("span", { staticClass: "badge badge-secondary" }, [
-                _vm._v("\n            " + _vm._s(_vm.orders) + "\n        ")
+                _vm._v("\n            " + _vm._s(_vm.orders_all) + "\n        ")
               ])
         ])
       : _c("div", {}, [

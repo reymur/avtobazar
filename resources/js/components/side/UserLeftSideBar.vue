@@ -17,9 +17,9 @@
                 <tr v-if="auth_check && auth_user.status == 2">
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
                         <a :href="'/announce/orders'"
-                           :class="'d-lg-block text-black-50 '+current_page">
+                           :class="'d-lg-block text-blue '+ currentPage('/orders')">
                             <user-side-bar-orders
-                                :orders="orders"
+                                :orders_count="orders_count"
                                 :new_orders="new_orders"
                             ></user-side-bar-orders>
                         </a>
@@ -29,29 +29,30 @@
                 <tr>
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2">
                         <a v-if="auth_check" :href="'/announce/sends'"
-                           :class="'d-lg-block text-black-50 '+current_page">
+                           :class="'d-lg-block text-blue '+ currentPage('/sends')">
                             <span v-if="auth_user_get_sends != null && auth_user_get_sends.length > 0" class="">
                                 Göndərilənlər
                                 <span class="badge badge-success">
                                    {{ auth_user_get_sends.length }}
                                 </span>
                             </span>
-                        </a>
-
-                        <div v-else class="">
-                            Göndərilənlər
-                            <span class="badge badge-secondary">
-                                0
+                            <span v-else class="d-lg-block text-blue">
+                                Göndərilənlər
+                                <span class="badge badge-secondary">
+                                    0
+                                </span>
                             </span>
-                        </div>
+                        </a>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="text-left p-xl-1 p-lg-1 p-md-2 p-sm-2 d-inline-flex">
                         <a :href="'/announce/answers'"
-                           :class="'d-lg-block text-black-50 '+current_page">
-                            <user-side-bar-answers :reset_answers="reset_answers"></user-side-bar-answers>
+                           :class="'d-lg-block text-blue '+ currentPage('/answers')">
+                            <user-side-bar-answers
+                                :reset_answers="reset_answers"
+                            ></user-side-bar-answers>
                         </a>
                     </td>
                 </tr>
@@ -66,7 +67,7 @@ export default {
     name: "UserLeftSideBar",
     props: [
         'auth_user','auth_check',
-        'auth_user_get_sends','orders',
+        'auth_user_get_sends','orders_count',
         'new_orders','reset_answers'
     ],
     data(){
@@ -75,20 +76,18 @@ export default {
         }
     },
     methods:{
-        currentPage(){
+        currentPage( page ){
             let curr = window.location.pathname
-            if( curr.indexOf('/answers') != -1 ){
-                this.current_page = 'border-bottom border-dark text-decoration-none'
-            }else if( curr.indexOf('/sends') != -1 ){
-                this.current_page = 'border-bottom border-dark text-decoration-none'
-            }else if( curr.indexOf('/orders') != -1 ){
-                this.current_page = 'border-bottom border-dark text-decoration-none'
-            }
+
+            if( curr.indexOf( page ) != -1 )
+                return this.current_page = 'border-bottom border-dark text-black-50 text-decoration-none';
+            else
+                return this.current_page = 'border-0';
         }
     },
     mounted() {
-        console.log( ' window.location.pathname11 = ',  window.location.pathname.indexOf('/sends') )
-        this.currentPage()
+        console.log( ' window.location.pathname11 = ',  window.location.pathname.indexOf('/answers') )
+        // this.currentPage()
     }
 }
 </script>

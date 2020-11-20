@@ -17,17 +17,11 @@
                                 <option value="Pod orijinal">Pod orijinal</option>
                                 <option value="Kopya">Kopya</option>
                             </select>
-                            <div class="invalid-tooltip">
-                                Please select a valid state.
-                            </div>
                         </div>
 
                         <div class="col-5 mb-3 pl-1">
                             <label for="price">Qiymət</label>
                             <input type="text" v-model="price" class="form-control" id="price" placeholder="AZE" required>
-                            <div class="invalid-tooltip">
-                                Please provide a valid zip.
-                            </div>
                         </div>
                     </div>
 
@@ -40,9 +34,6 @@
                                     {{ condition.title }}
                                 </option>
                             </select>
-                            <div class="invalid-tooltip">
-                                Please select a valid state.
-                            </div>
                         </div>
 
                         <div class="custom-file col-5 p-2 mt-4 ml-1" id=image-parent>

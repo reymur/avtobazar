@@ -130,12 +130,14 @@ export default {
                         }
                     }
                 }
+            }else if( this.orders.length ){
+                this.no_answered = this.orders;
             }
         }
     },
     mounted() {
         this.isAnswered();
-        console.log('AAAAAAAAAAA Page - ', this.orders);
+        console.log('AAAAAAAAAAA Page ooo - ', this.orders);
         // console.log('OrdersAllAnnounce Page is_answered', this.is_answered);
         // console.log('OrdersAllAnnounce Page no_answered', this.no_answered);
     }

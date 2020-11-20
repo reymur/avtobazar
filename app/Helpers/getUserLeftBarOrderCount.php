@@ -5,7 +5,6 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 
     function getUserLeftBarOrderCount(){
-        $new_orders = 0;
         $user = Auth::user();
 
         if( $user->announcementUser->count() ) {

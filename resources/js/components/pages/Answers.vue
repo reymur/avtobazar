@@ -5,7 +5,7 @@
                 :auth_user="auth_user"
                 :auth_check="auth_check"
                 :auth_user_get_sends="auth_user_get_sends"
-                :orders="orders"
+                :orders_count="orders"
                 :new_orders="new_orders"
                 :reset_answers="reset_answers"
             ></user-left-side-bar>

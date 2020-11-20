@@ -4,14 +4,14 @@
             Sifarişlər
         </span>
 
-        <div v-if="orders !== null && orders > 0" class="">
+        <div v-if="orders_count !== null && orders_count > 0" class="">
 
             <span v-if="new_orders_count !== null && new_orders_count > 0" class="badge badge-success">
                 {{ new_orders_count }}
             </span>
 
             <span v-else class="badge badge-secondary">
-                {{ orders }}
+                {{ orders_all }}
             </span>
         </div>
 
@@ -26,15 +26,15 @@
 <script>
 export default {
     name: "UserSideBarOrders",
-    props: ['orders','new_orders'],
+    props: ['orders_count','new_orders'],
     data(){
         return {
-            orders_all:this.orders,
+            orders_all:this.orders_count,
             new_orders_count:this.new_orders
         }
     },
     mounted() {
-        // console.log( 'AAAAAAAAAAAAAAa')
+        console.log( 'AAAAAAAAAAAAAAa === ', this.orders_count)
     }
 }
 </script>
