@@ -46,29 +46,29 @@ class AnnouncementController extends Controller
 
         if ($request->when === 'Hamısı' && $request->image != 'null') {
             $pin = mt_rand(0, 999999);
-            $has_seller_types = $this->whenWithAllWithImage($request, $pin, $when);
+            $image_saved = $this->whenWithAllWithImage($request, $pin, $when);
 
-            return $this->jsonReturn($request, $has_seller_types);
+            return $this->jsonReturn($request, $image_saved);
         } elseif ($request->when === 'Hamısı' && $request->image == 'null') {
             $pin = mt_rand(0, 999999);
-            $has_seller_types = $this->whenWithAllWithoutImage($request, $pin);
+            $image_saved = $this->whenWithAllWithoutImage($request, $pin);
 
-            return $this->jsonReturn($request, $has_seller_types);
+            return $this->jsonReturn($request, $image_saved);
         } elseif ($request->when !== 'Hamısı' && $request->image != 'null') {
             if (count($when) > 0) {
                 $pin = mt_rand(0, 999999);
-                $has_seller_types = $this->whenWithoutAllWithImage($request, $when, $pin, $withimage = true);
+                $image_saved = $this->whenWithoutAllWithImage($request, $when, $pin, $withimage = true);
 
-                return $this->jsonReturn($request, $has_seller_types);
+                return $this->jsonReturn($request, $image_saved);
             }
 
             return false;
         } elseif ($request->when !== 'Hamısı' && $request->image == 'null') {
             if (count($when) > 0) {
                 $pin = mt_rand(0, 999999);
-                $has_seller_types = $this->whenWithoutAllWithoutImage($request, $when, $pin, $withimage = false);
+                $image_saved = $this->whenWithoutAllWithoutImage($request, $when, $pin, $withimage = false);
 
-                return $this->jsonReturn($request, $has_seller_types);
+                return $this->jsonReturn($request, $image_saved);
             }
 
             return false;
@@ -79,9 +79,9 @@ class AnnouncementController extends Controller
         ], 404);
     }
 
-    protected function jsonReturn($request, $has_seller_types)
+    protected function jsonReturn($request, $image_saved)
     {
-        if ($has_seller_types != 0) {
+        if ( $image_saved ) {
             return response()->json([
                 'data' => [
                     'user_id' => Auth::user()->id,
@@ -113,6 +113,11 @@ class AnnouncementController extends Controller
     {
         $time = time();
         $has_seller_type = 0;
+        $new_image_name = 0;
+
+        if ($request->image && $withimage) {
+            $new_image_name = $this->announceImageSave($request->image, $time);
+        }
 
         if (isset($when) && count($when) > 0) {
             $announce = Announcement::create([
@@ -127,13 +132,13 @@ class AnnouncementController extends Controller
                 'texpassport' => $request->texpassport ?? NULL,
                 'city' => $request->city ?? NULL,
                 'pin' => $pin,
-                'image' => $withimage ? $this->setImageName($time, $request->image) : NULL,
+                'image' => $withimage ? $new_image_name : NULL,
             ]);
 
             foreach ($when as $name) {
                 $user = User::with('sellerTypes')->where(['name' => $name, 'status' => 2])->first();
 
-                if (($user->count() > 0) && ($user->sellerTypes->count() > 0)) {
+                if ($user && $user->sellerTypes->count() > 0) {
                     foreach ($user->sellerTypes as $seller_type) {
                         if ($seller_type->title == $request->marka) {
                             $announce->user()->attach($user);
@@ -146,12 +151,7 @@ class AnnouncementController extends Controller
 
         if ($has_seller_type == 0) return $has_seller_type;
 
-        if (isset($announce->image) && $withimage) {
-            if ($request->image)
-                $this->announceImageSave($request->image, $announce->image, $announce->user_id);
-        }
-
-        return $has_seller_type;
+        return $withimage ? $new_image_name : $announce ;
     }
 
     protected function whenWithAllWithImage($request, $pin, $when)
@@ -160,48 +160,51 @@ class AnnouncementController extends Controller
         $status = Auth::user()->status;
         $has_seller_type = 0;
 
-        $users = User::with('sellerTypes')->where(['who' => $request->who, 'status' => 2])->get();
-
-        if ($request->who == 3) {
-            $users = User::with('sellerTypes')->where(['status' => 2])->get();
+        if ($request->image) {
+            $image_new_name = $this->announceImageSave($request->image, $time);
         }
 
-        if (count($users) > 0) {
-            $announce = Announcement::create([
-                'user_id' => Auth::user()->id,
-                'spare_parts' => $request->spare_parts ?? NULL,
-                'marka' => $request->marka ?? NULL,
-                'model' => $request->model ?? NULL,
-                'year' => $request->year ?? NULL,
-                'motor' => $request->motor ?? NULL,
-                'fuel_type' => $request->fuel_type ?? NULL,
-                'condition' => $request->condition ?? NULL,
-                'texpassport' => $request->texpassport ?? NULL,
-                'city' => $request->city ?? NULL,
-                'pin' => $pin,
-                'image' => $this->setImageName($time, $request->image) ?? NULL,
-            ]);
+        if( $image_new_name ) {
+            $users = User::with('sellerTypes')->where(['who' => $request->who, 'status' => 2])->get();
 
-            foreach ($users as $user) {
-                if ($user->id != Auth::user()->id) {
-                    foreach ($user->sellerTypes as $seller_type) {
-                        if ($seller_type->title == $request->marka) {
-                            $announce->user()->attach($user);
-                            $has_seller_type++;
+            if ($request->who == 3) {
+                $users = User::with('sellerTypes')->where(['status' => 2])->get();
+            }
+
+            if (count($users) > 0) {
+                $announce = Announcement::create([
+                    'user_id' => Auth::user()->id,
+                    'spare_parts' => $request->spare_parts ?? NULL,
+                    'marka' => $request->marka ?? NULL,
+                    'model' => $request->model ?? NULL,
+                    'year' => $request->year ?? NULL,
+                    'motor' => $request->motor ?? NULL,
+                    'fuel_type' => $request->fuel_type ?? NULL,
+                    'condition' => $request->condition ?? NULL,
+                    'texpassport' => $request->texpassport ?? NULL,
+                    'city' => $request->city ?? NULL,
+                    'pin' => $pin,
+                    'image' => $image_new_name ?? NULL,
+                ]);
+
+                foreach ($users as $user) {
+                    if ($user->id != Auth::user()->id) {
+                        foreach ($user->sellerTypes as $seller_type) {
+                            if ($seller_type->title == $request->marka) {
+                                $announce->user()->attach($user);
+                                $has_seller_type++;
+                            }
                         }
                     }
                 }
             }
+
+            if ($has_seller_type == 0) return $has_seller_type;
+
+            return $image_new_name;
         }
 
-        if ($has_seller_type == 0) return $has_seller_type;
-
-        if (isset($announce->image)) {
-            if ($request->image)
-                $this->announceImageSave($request->image, $announce->image, $announce->id);
-        }
-
-        return $has_seller_type;
+        return false;
     }
 
     protected function whenWithAllWithoutImage($request, $pin)
@@ -252,18 +255,22 @@ class AnnouncementController extends Controller
         }
     }
 
-    protected function announceImageSave($file, $image, $User_id)
+    protected function announceImageSave($file, $time)
     {
-        if ($file && $image && $User_id) {
+        if ($file && $time) {
+            $extension = $file->getClientOriginalExtension();
+            $new_name = $time .'_'. mt_rand(0,$time) .'.'. $extension;
             $path = public_path('images/users/announcement/orders/');
 
-            if (is_dir($path)) {
+            if ( is_dir($path) ) {
                 $img = Image::make($file);
-                $img->resize(550, null, function ($constraint){
-                        $constraint->aspectRatio();
-                    });
-                $img->save($path . $image);
+                $img->resize(650, 450 );
+                $img->resize(150, 120 );
+                $img->save($path . 'small_'.$new_name);
+                $img->save($path . $new_name);
             }
+
+            return $img ? $new_name : $new_name;
         }
     }
 
@@ -496,13 +503,10 @@ class AnnouncementController extends Controller
             $user = Auth::user();
             $orders = AnnouncementUser::with('user','announcement','getSellerAnswers')
                         ->whereIn('user_id', [ auth()->user()->id] )
+                        ->orderByDesc('created_at')
                         ->get();
 
 //            dd( $orders->first() );
-
-            if ( !$orders || $orders->count() == 0 ) {
-                return abort(404);
-            }
 
             return view('announcements.orders', [
                 'orders' => $orders
@@ -575,41 +579,96 @@ class AnnouncementController extends Controller
     public function orderAnnounceDelete($id)
     {
         if( Auth::check() ) {
-            $order = Announcement::find($id);
+            if( Auth::user()->status == 2 ){
+//                dd( $id );
+                $order = Announcement::find($id);
 
-            if( $order->count() == 0 ) redirect()->back();
+                if( ! $order ) redirect()->back();
 
-            $order->user()->detach(Auth::user()->id);
+                $order->user()->detach(Auth::user()->id); // Delete on AnnouncementUser table
 
-            return redirect()->back();
+                $this->deleteMyAnswer( $order );
+
+                return redirect()->back();
+            }
+        }
+    }
+
+    protected function deleteMyAnswer($order){
+        $is_answer = Answer::where([
+            'user_id' => Auth::user()->id,
+            'announcement_id' => $order->id
+        ])->get();
+
+        if( $is_answer->count() > 0 ){
+            foreach ( $is_answer as $answer ) {
+                $this->imagedelete($answer, 'answers');
+
+                $answer->delete();
+            }
+        }
+    }
+
+    protected function imagedelete($model, $path){
+        if($model->image && $path){
+            $path = public_path("images/users/announcement/{$path}/" );
+
+            if( is_dir($path) ){
+                if( is_file($path . $model->image) )
+                    unlink($path . $model->image);
+                if( is_file($path . 'small_' . $model->image) )
+                    unlink($path . 'small_' . $model->image);
+            }
         }
     }
 
     public function buyerAnnounceADelete($id)
     {
         if( Auth::check() ) {
-            $user = Auth::user();
             $announce = Announcement::find($id);
             $image = $announce->image ?? false;
-            $path = public_path('images/users/announcement/');
+            $path = public_path('images/users/announcement/orders/');
 
             if( !$announce ) return redirect()->back();
 
-            if( $announce->user_id == $user->id ){
-                $deleted = $announce->delete();
+            if( $announce->user_id == Auth::user()->id ){
+                $deleted_announce = $announce->delete();
+                $this->imagedelete($announce, 'orders');
 
-                if( $deleted ) {
-                    $deleted = AnnouncementUser::where('announcement_id',$announce->id)->delete();
-
-                    if( $deleted ) {
-                        $this->buyerImageDelete($path, $image);
-                    }
+                if( $deleted_announce ) {
+                    $this->deleteOnAnnouncementUsers($announce);
+                    $this->deleteOnAnswers($announce);
 
                     return redirect()->back();
                 }
             }
 
             return redirect()->back();
+        }
+    }
+
+    protected function deleteOnAnnouncementUsers($announce){
+        if( $announce ) {
+            $announcement_users = AnnouncementUser::where('announcement_id', $announce->id)->get();
+
+            if ($announcement_users->count() > 0) {
+                foreach ($announcement_users as $announcement) {
+                    $announcement->delete();
+                }
+            }
+        }
+    }
+
+    protected function deleteOnAnswers($announce){
+        if( $announce ) {
+            $answers = Answer::where('announcement_id', $announce->id)->get();
+
+            if ($answers->count() > 0) {
+                foreach ($answers as $answer) {
+                    $answer->delete();
+                    $this->imagedelete($answer, 'answers');
+                }
+            }
         }
     }
 

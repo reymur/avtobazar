@@ -47,27 +47,49 @@
                                 </span>
                             </label>
                         </div><!-- End Image Button -->
-
-                        <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image" style="width: 18rem;">
-                            <img :src="img" id="imageId" class="imageId card-img-top" alt="Image">
-                        </div><!-- End Image Show -->
                     </div>
+
+                    <div v-if="imageLoader" class="col-lg-6 col-md-6 col-sm-1 mt-2">
+                        <span @click="imageDelete()" class="d-block text-right mr-n3 mb-n1 image__close">
+                            <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </span><!-- Image close -->
+
+                        <div class="card 1 mt-1 mb-3 modal__image">
+                            <img :src="img" id="imageId" class="imageId card-img-top" alt="Image">
+                        </div>
+                    </div><!-- Image Show -->
                 </div>
 
                 <div class="">
                     <div v-if="errors.length" class="invalid-feedback d-block mb-2">
                         <ul v-for="err in errors" class="alert-danger my-1 py-2">
                             <li v-for="e in err['which']" class="py-2">
-                                {{ e }}
+                                <span class="letter__spacing">
+                                     {{ e }}
+                                </span>
                             </li>
                             <li v-for="e in err['price']" class="py-2">
-                                {{ e }}
+                                <span class="letter__spacing">
+                                     {{ e }}
+                                </span>
                             </li>
                             <li v-for="e in err['condition']" class="py-2">
-                                {{ e }}
+                                <span class="letter__spacing">
+                                     {{ e }}
+                                </span>
                             </li>
                             <li v-for="e in err['image']" class="py-2">
-                                {{ e }}
+                                <span class="letter__spacing">
+                                     {{ e }}
+                                </span>
+                            </li>
+
+                            <li v-for="e in err['notfound']" class="py-2">
+                                <span class="letter__spacing">
+                                     {{ e }}
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -98,6 +120,7 @@ export default {
             img: null,
             image: null,
             errors: [],
+            error_status: null,
             loader: false,
             imageLoader: false,
             disabled: false,
@@ -146,14 +169,14 @@ export default {
                     })
                     .catch(err => {
                         if (err.response.data.errors !== undefined) {
-                            let errors = err.response.data.errors;
                             this.errors.push(err.response.data.errors);
                             this.loader = false;
                             this.disabled = false;
-                            // this.removeDisabled('disabled');
-                            console.log('err = ', this.errors);
 
-                            if( this.errors.length ){
+                            console.log('err = ', this.errors);
+                            console.log('err status = ', err.response.data.errors.notfound );
+
+                            if( this.errors.length && err.response.status != 500 ){
                                 this.errors.forEach( error => {
                                     if( error['which'] ) this.addDangerBorder('which');
                                     else this.removeDangerBorder('which');
@@ -164,6 +187,10 @@ export default {
                                     if( error['image'] ) this.addDangerBorder('image');
                                     else this.removeDangerBorder('image');
                                 })
+                            }
+
+                            if(err.response.status == 500 ){
+                                this.error_status = 500;
                             }
                         }
                     })
@@ -178,7 +205,7 @@ export default {
             const file = (e.target.files || e.dataTransfer.file)[0];
 
             if( file ){
-                this.fileLoader = true;
+                this.imageLoader = true;
                 const reader = new FileReader();
 
                 reader.onload = e => { this.img = e.target.result }
@@ -186,6 +213,11 @@ export default {
 
                 return this.image = file;
             }
+        },
+        imageDelete(){
+            this.img = null;
+            this.image = null;
+            this.imageLoader = false;
         },
         getConditions(){
             axios.post('/get-conditions')
@@ -227,6 +259,7 @@ export default {
                 this.conditionSelect = '';
                 this.img = null;
                 this.image = null;
+                let not_found_error = this.errors;
                 this.errors = [];
 
                 let err = ['which','price','image','condition'];
@@ -235,7 +268,22 @@ export default {
                     if( document.getElementById(err).classList.contains('border-danger') ){
                         document.getElementById(err).classList.remove('border-danger');
                     }
+                });
+
+                if( this.error_status == 500 ){
+                    this.isNotFound(not_found_error);
+                }
+        },
+        isNotFound(not_found_error){
+            if( not_found_error.length != null ) {
+                not_found_error.forEach(error => {
+                    if ( error.notfound !== undefined ) {
+                        setTimeout( () => {
+                            window.location.reload();
+                        }, 1000 );
+                    }
                 })
+            }
         }
     },
     created() {
@@ -250,5 +298,9 @@ export default {
 <style scoped>
     #image-parent {
         width: 40px;
+    }
+
+    .image__close {
+        
     }
 </style>

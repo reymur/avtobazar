@@ -41,6 +41,9 @@ import vSelect from 'vue-select';
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 
+import VuePictureSwipe from 'vue-picture-swipe';
+Vue.component('vue-picture-swipe', VuePictureSwipe);
+
 Vue.component('v-select', vSelect);
 Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 

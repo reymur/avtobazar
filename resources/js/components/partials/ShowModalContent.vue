@@ -93,10 +93,20 @@
                 <tr v-if="data.image">
                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                     <td class="text-break text-center py-2">
-                        <img :src="'/images/users/announcement/orders/'+ data.image"
-                             :alt="data.image"
-                             class="flash__image"
-                        >
+                        <div class="image__box">
+                            <vue-picture-swipe
+                                class="flash__image"
+                                :items="items"
+                                :options="{
+                                clickToCloseNonZoomable: false,
+                            }"
+                            ></vue-picture-swipe>
+                        </div>
+
+<!--                        <img :src="'/images/users/announcement/orders/'+ data.image"-->
+<!--                             :alt="data.image"-->
+<!--                             class="flash__image"-->
+<!--                        >-->
                     </td>
                 </tr>
 
@@ -136,6 +146,13 @@ export default {
             sender_user: null,
             fuel_type: null,
             condition: null,
+            items: [{
+                src: '/images/users/announcement/orders/'+ this.data.image,
+                thumbnail: '/images/users/announcement/orders/'+ 'small_'+this.data.image,
+                w: 1200,
+                h: 800,
+                alt: this.data.image
+            }]
         }
     },
     computed: {

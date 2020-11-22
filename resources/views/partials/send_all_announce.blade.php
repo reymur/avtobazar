@@ -16,6 +16,8 @@
                 <td class="text-right pt-1 pb-1 pr-1">
                     @if( isset($announce->user) && count($announce->user) > 0 )
                         @include('modals.show_all_sellers')
+                    @else
+                        <div class="letter__spacing">Yoxdur!</div>
                     @endif
                 </td>
 

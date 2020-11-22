@@ -1,10 +1,10 @@
 <template>
     <div class="d-inline-flex">
         <div class="position-relative">
-            <div class="main__menu-answers-count">
+            <div v-if="new_answers.length != null && new_answers.length > 0" class="main__menu-answers-count">
 <!--                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
 
-                <span v-if="new_answers.length !== null && new_answers.length > 0" class="pb-1 px-1">
+                <span v-if="new_answers.length != null && new_answers.length > 0" class="pb-1 px-1">
                     <span class="badge badge-success badge__bg text-white rounded-circle badge__font_size">
                         {{ new_answers.length }}
                     </span>
@@ -58,8 +58,6 @@ export default {
         }
     },
     created() {
-        // this.loader = true;
-
         Echo.channel('answer')
             .listen('AnswerCount', ({data}) => {
                 this.getNewAnswers( data );
@@ -67,6 +65,7 @@ export default {
             });
     },
     mounted() {
+        // console.log( 'SSSSSSSS111 = ', this.new_answers)
         this.ifNoUpdateMainMenuAnswersCount();
     }
 }

@@ -83,6 +83,13 @@ class AnswerController extends Controller
         if( Auth::check() ) {
             if( $request->has('image') && $request->image !== "null" ) {
                 $this->answersAnnounceCreateValidate($request, true);
+
+                $announce = Announcement::find( $request->order_id );
+
+                if( ! $announce ) return response()->json([
+                    'errors' => ['notfound' => ['Sifariş silinmişdir!']]
+                ], 500);
+
                 $image = $this->answersAnnounceCreateImageUpload($request);
 
                 if( $image )
@@ -94,6 +101,13 @@ class AnswerController extends Controller
             }
             else {
                 $this->answersAnnounceCreateValidate($request, false);
+
+                $announce = Announcement::find( $request->order_id );
+
+                if( ! $announce ) return response()->json([
+                    'errors' => ['notfound' => ['Sifariş silinmişdir!']]
+                ], 500);
+
                 $this->answersAnnounceCreateWithOutImage($request);
             }
         }
@@ -106,12 +120,12 @@ class AnswerController extends Controller
 
             if( is_dir( $path ) && $new_image_name ){
                 $img = Image::make($request->image);
-                $img->resize(500, null, function($constraint){
-                    $constraint->aspectRatio();
-                });
+                $img->resize(650, 500);
+                $img->resize(150, 120);
+                $is_saved_small = $img->save($path . 'small_'.$new_image_name );
                 $is_saved = $img->save($path . $new_image_name );
 
-                if( $is_saved ) return $new_image_name;
+                if( $is_saved && $is_saved_small ) return $new_image_name;
                 else {
                     $message = 'Answer Image no saved';
                     return $this->errorReturn($message);
@@ -315,8 +329,12 @@ class AnswerController extends Controller
 
     public function getAnswersCountForMainMenu($answers)
     {
+        $answers = $answers->map(function($answer){
+            return $answer->only(['id','seen']);
+        });
+
         event( new AnswerCount(
-            $answers->pluck('id')
+            $answers
         ) ); /*For main (top-right) menu show answers count*/
     }
 

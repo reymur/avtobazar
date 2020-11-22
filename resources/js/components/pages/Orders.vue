@@ -16,7 +16,7 @@
                     <h5 class="text-uppercase send__title ml-4">Sifarişlər</h5>
                 </div>
 
-                <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
+                <div v-if="orders.length" class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-4 bg-white flash__shadow">
                     <div class="text-success">
                     </div>
 
@@ -26,6 +26,11 @@
                         :auth_user="auth_user"
                         :auth_user_status="auth_user_status"
                     ></orders-all-announce>
+                </div>
+                <div v-else class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-5 bg-white flash__shadow">
+                    <div class="text-center letter__spacing">
+                        <h4> Sifariş tapılmadı! </h4>
+                    </div>
                 </div>
             </div>
         </div>
