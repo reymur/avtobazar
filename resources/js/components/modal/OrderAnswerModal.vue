@@ -301,6 +301,6 @@ export default {
     }
 
     .image__close {
-        
+
     }
 </style>

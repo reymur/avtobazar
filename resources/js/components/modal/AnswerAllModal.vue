@@ -97,13 +97,17 @@
                                 <tr v-if="answer.image">
                                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                                     <td class="text-break text-center py-2">
-                                        <span v-if="answer.image" class="">
-                                            <img :src="image_path + answer.image" :alt="answer.image"
-                                                 class="modal__image"
-                                            >
-                                        </span>
-                                        <span v-else class="">
-                                            Yox
+                                        <span class="">
+                                             <vue-picture-swipe
+                                                 class="flash__image"
+                                                 :items="imageItems(answer.image)"
+                                                 :options="{
+                                                    clickToCloseNonZoomable: false,
+                                                }"
+                                             ></vue-picture-swipe>
+<!--                                            <img :src="image_path + answer.image" :alt="answer.image"-->
+<!--                                                 class="modal__image"-->
+<!--                                            >-->
                                         </span>
                                     </td>
                                 </tr>
@@ -127,11 +131,20 @@ export default {
     props: ['answer'],
     data(){
         return {
-            image_path: '/images/users/announcement/orders/'
+            image_path: '/images/users/announcement/orders/',
+
         }
     },
     methods:{
-
+        imageItems(image){
+            return [{
+                src: this.image_path + image,
+                thumbnail: this.image_path + 'small_'+image,
+                w: 1200,
+                h: 800,
+                alt: image
+            }]
+        }
     },
     mounted(){
         console.log('IIIIIIIIII - ', this.answer.get_sender)

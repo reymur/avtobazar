@@ -2978,6 +2978,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AnswerAllModal",
   props: ['answer'],
@@ -2986,7 +2990,17 @@ __webpack_require__.r(__webpack_exports__);
       image_path: '/images/users/announcement/orders/'
     };
   },
-  methods: {},
+  methods: {
+    imageItems: function imageItems(image) {
+      return [{
+        src: this.image_path + image,
+        thumbnail: this.image_path + 'small_' + image,
+        w: 1200,
+        h: 800,
+        alt: image
+      }];
+    }
+  },
   mounted: function mounted() {
     console.log('IIIIIIIIII - ', this.answer.get_sender);
   }
@@ -5223,6 +5237,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SendImageShowModalContent",
+  props: ['path', 'data'],
+  data: function data() {
+    return {
+      items: [{
+        src: this.path + this.data.image,
+        thumbnail: this.path + 'small_' + this.data.image,
+        w: 1200,
+        h: 800,
+        alt: this.data.image
+      }]
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue?vue&type=script&lang=js& ***!
@@ -5299,13 +5352,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowAllAnswerSellersAnswersShowTable",
   props: ['answer_users', 'answer_id', 'seller_id', 'close_modal', 'clickToNewAnswers'],
   data: function data() {
     return {
       answer_info: null,
-      new_answer_info2: null,
       is_updated: false,
       answer_update: null,
       loader: false,
@@ -5315,6 +5374,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    imageItems: function imageItems(answer_info) {
+      return [{
+        src: this.image_path + answer_info.image,
+        thumbnail: this.image_path + 'extra_small_' + answer_info.image,
+        w: 1200,
+        h: 800,
+        alt: answer_info.image
+      }];
+    },
     AnswerTestOnSeen: function AnswerTestOnSeen(answer_info, answer_id, seller_id) {
       if (answer_info !== undefined && answer_info != null) {
         console.log('AAAAAAAAAA - ', answer_info.seen);
@@ -5432,11 +5500,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -61460,7 +61523,7 @@ var render = function() {
           "data-target": "#send_all-" + _vm.answer.id
         }
       },
-      [_vm._v("\n        " + _vm._s(_vm.answer.spare_parts) + "\n    ")]
+      [_vm._v("\n            " + _vm._s(_vm.answer.spare_parts) + "\n        ")]
     ),
     _vm._v(" "),
     _c(
@@ -61513,19 +61576,19 @@ var render = function() {
                   _vm.answer.get_sender
                     ? _c("span", {}, [
                         _vm._v(
-                          "\n                            " +
+                          "\n                                " +
                             _vm._s(
                               _vm.answer.get_sender.name
                                 ? _vm.answer.get_sender.name
                                 : ""
                             ) +
-                            "\n                            " +
+                            "\n                                " +
                             _vm._s(
                               _vm.answer.get_sender.autoNumber
                                 ? _vm.answer.get_sender.autoNumber
                                 : ""
                             ) +
-                            "\n                        "
+                            "\n                            "
                         )
                       ])
                     : _vm._e()
@@ -61536,27 +61599,27 @@ var render = function() {
                 ? _c("span", { staticClass: "text-black-50 mt-1 ml-4" }, [
                     _c("span", {}, [
                       _vm._v(
-                        "\n                                " +
+                        "\n                                    " +
                           _vm._s(
                             _vm.answer.created_at
                               ? _vm.answer.created_at
                               : "Yox"
                           ) +
-                          "\n                            "
+                          "\n                                "
                       )
                     ]),
                     _vm._v(" "),
                     _c("span", { staticClass: "ml-2" }, [
                       _vm._v(
-                        "\n                                " +
+                        "\n                                    " +
                           _vm._s(_vm.answer.city ? _vm.answer.city : "Yox") +
-                          "\n                            "
+                          "\n                                "
                       )
                     ])
                   ])
                 : _c("span", { staticClass: "letter__spacing" }, [
                     _vm._v(
-                      "\n                            Yox\n                        "
+                      "\n                                Yox\n                            "
                     )
                   ]),
               _vm._v(" "),
@@ -61580,13 +61643,13 @@ var render = function() {
                               { staticClass: "p-2 show__seller-text" },
                               [
                                 _vm._v(
-                                  "\n                                        " +
+                                  "\n                                            " +
                                     _vm._s(
                                       _vm.answer.spare_parts
                                         ? _vm.answer.spare_parts
                                         : "Yox"
                                     ) +
-                                    "\n                                    "
+                                    "\n                                        "
                                 )
                               ]
                             )
@@ -61611,11 +61674,11 @@ var render = function() {
                           { staticClass: "text-break text-center py-2" },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.marka ? _vm.answer.marka : "Yox"
                                 ) +
-                                "\n                                        "
+                                "\n                                            "
                             ),
                             _c(
                               "svg",
@@ -61640,11 +61703,11 @@ var render = function() {
                               ]
                             ),
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.model ? _vm.answer.model : "Yox"
                                 ) +
-                                "\n                                        "
+                                "\n                                            "
                             ),
                             _c(
                               "svg",
@@ -61669,11 +61732,11 @@ var render = function() {
                               ]
                             ),
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.motor ? _vm.answer.motor : "Yox"
                                 ) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -61699,11 +61762,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.year ? _vm.answer.year : "Yox"
                                 ) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -61729,13 +61792,13 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.get_fuel_type.title
                                     ? _vm.answer.get_fuel_type.title
                                     : "Yox"
                                 ) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -61761,13 +61824,13 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.get_condition.title
                                     ? _vm.answer.get_condition.title
                                     : "Yox"
                                 ) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -61793,13 +61856,13 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    " +
+                              "\n                                        " +
                                 _vm._s(
                                   _vm.answer.texpassport
                                     ? _vm.answer.texpassport
                                     : "Yox"
                                 ) +
-                                "\n                                "
+                                "\n                                    "
                             )
                           ]
                         )
@@ -61821,21 +61884,22 @@ var render = function() {
                           "td",
                           { staticClass: "text-break text-center py-2" },
                           [
-                            _vm.answer.image
-                              ? _c("span", {}, [
-                                  _c("img", {
-                                    staticClass: "modal__image",
-                                    attrs: {
-                                      src: _vm.image_path + _vm.answer.image,
-                                      alt: _vm.answer.image
+                            _c(
+                              "span",
+                              {},
+                              [
+                                _c("vue-picture-swipe", {
+                                  staticClass: "flash__image",
+                                  attrs: {
+                                    items: _vm.imageItems(_vm.answer.image),
+                                    options: {
+                                      clickToCloseNonZoomable: false
                                     }
-                                  })
-                                ])
-                              : _c("span", {}, [
-                                  _vm._v(
-                                    "\n                                        Yox\n                                    "
-                                  )
-                                ])
+                                  }
+                                })
+                              ],
+                              1
+                            )
                           ]
                         )
                       ])
@@ -64077,7 +64141,7 @@ var render = function() {
                         {
                           staticClass: "text-dark",
                           attrs: {
-                            href: "announce/buyer-announce-delete/" + answer.id
+                            href: "/announce/buyer-announce-delete/" + answer.id
                           }
                         },
                         [
@@ -64165,7 +64229,7 @@ var render = function() {
                         {
                           staticClass: "text-dark",
                           attrs: {
-                            href: "announce/buyer-announce-delete/" + answer.id
+                            href: "/announce/buyer-announce-delete/" + answer.id
                           }
                         },
                         [
@@ -65018,6 +65082,45 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _c("vue-picture-swipe", {
+        staticClass: "flash__image",
+        attrs: {
+          items: _vm.items,
+          options: {
+            clickToCloseNonZoomable: false
+          }
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue?vue&type=template&id=2cafb170&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue?vue&type=template&id=2cafb170&scoped=true& ***!
@@ -65042,9 +65145,9 @@ var render = function() {
                 _c("div", { staticClass: "text-center mt-1" }, [
                   _c("div", { staticClass: "text-h1 mb-1" }, [
                     _vm._v(
-                      "\n                            " +
+                      "\n                                " +
                         _vm._s(_vm.answer_info.condition) +
-                        "\n                        "
+                        "\n                            "
                     )
                   ]),
                   _vm._v(" "),
@@ -65056,14 +65159,17 @@ var render = function() {
                             staticClass: "text-center m-auto answer__image-div"
                           },
                           [
-                            _c("img", {
-                              staticClass: "answer__image-style",
+                            _c("vue-picture-swipe", {
+                              staticClass: "flash__image",
                               attrs: {
-                                src: _vm.image_path + _vm.answer_info.image,
-                                alt: _vm.answer_info.image
+                                items: _vm.imageItems(_vm.answer_info),
+                                options: {
+                                  clickToCloseNonZoomable: false
+                                }
                               }
                             })
-                          ]
+                          ],
+                          1
                         )
                       : _c(
                           "div",
@@ -65113,13 +65219,13 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "text-left answers__time-style" }, [
                     _vm._v(
-                      "\n                            " +
+                      "\n                                " +
                         _vm._s(
                           _vm.answer_info.created_at
                             ? _vm.answer_info.created_at
                             : ""
                         ) +
-                        "\n                        "
+                        "\n                            "
                     )
                   ])
                 ])
@@ -65156,9 +65262,9 @@ var render = function() {
                         _vm._v(" "),
                         _c("span", { staticClass: "text-h1 mr-3 mt-2" }, [
                           _vm._v(
-                            "\n                            " +
+                            "\n                                " +
                               _vm._s(_vm.answer_info.which) +
-                              "\n                        "
+                              "\n                            "
                           )
                         ]),
                         _vm._v(" "),
@@ -65166,9 +65272,9 @@ var render = function() {
                           ? _c("div", { staticClass: "answer__price-div" }, [
                               _c("span", { staticClass: "answer__price" }, [
                                 _vm._v(
-                                  "\n                                " +
+                                  "\n                                    " +
                                     _vm._s(_vm.answer_info.price) +
-                                    "\n                            "
+                                    "\n                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -65187,9 +65293,9 @@ var render = function() {
                               [
                                 _c("span", { staticClass: "answer__price" }, [
                                   _vm._v(
-                                    "\n                                " +
+                                    "\n                                    " +
                                       _vm._s(_vm.answer_info.price) +
-                                      "\n                            "
+                                      "\n                                "
                                   )
                                 ]),
                                 _vm._v(" "),
@@ -65296,13 +65402,13 @@ var render = function() {
                               { staticClass: "text-uppercase letter__spacing" },
                               [
                                 _vm._v(
-                                  "\n                        " +
+                                  "\n                    " +
                                     _vm._s(
                                       _vm.sender_user.name
                                         ? _vm.sender_user.name
                                         : _vm.sender_user.autoNumber
                                     ) +
-                                    "\n                    "
+                                    "\n                "
                                 )
                               ]
                             )
@@ -65316,9 +65422,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", { staticClass: "pt-1 text-black-50" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.created_at) +
-                        "\n                    "
+                        "\n                "
                     )
                   ]),
                   _vm._v(" "),
@@ -65326,14 +65432,14 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", { staticClass: "pt-1 text-black-50" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.city) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
               ])
-            : _c("div", {}, [_vm._v("\n                Yox\n            ")]),
+            : _c("div", {}, [_vm._v("\n            Yox\n        ")]),
           _vm._v(" "),
           _vm._m(0)
         ]),
@@ -65351,9 +65457,9 @@ var render = function() {
                     [
                       _c("div", { staticClass: "p-2 show__seller-text" }, [
                         _vm._v(
-                          "\n                            " +
+                          "\n                        " +
                             _vm._s(_vm.data.spare_parts) +
-                            "\n                        "
+                            "\n                    "
                         )
                       ])
                     ]
@@ -65374,63 +65480,63 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.marka) +
-                        "\n                        "
-                    ),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "bi bi-slash ml-n1 mr-n1",
-                        attrs: {
-                          width: "1.5em",
-                          height: "1.5em",
-                          viewBox: "0 0 16 16",
-                          fill: "currentColor",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.data.model) +
-                        "\n                        "
-                    ),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "bi bi-slash ml-n1 mr-n1",
-                        attrs: {
-                          width: "1.5em",
-                          height: "1.5em",
-                          viewBox: "0 0 16 16",
-                          fill: "currentColor",
-                          xmlns: "http://www.w3.org/2000/svg"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.data.motor) +
                         "\n                    "
+                    ),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-slash ml-n1 mr-n1",
+                        attrs: {
+                          width: "1.5em",
+                          height: "1.5em",
+                          viewBox: "0 0 16 16",
+                          fill: "currentColor",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.model) +
+                        "\n                    "
+                    ),
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-slash ml-n1 mr-n1",
+                        attrs: {
+                          width: "1.5em",
+                          height: "1.5em",
+                          viewBox: "0 0 16 16",
+                          fill: "currentColor",
+                          xmlns: "http://www.w3.org/2000/svg"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            "fill-rule": "evenodd",
+                            d:
+                              "M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.data.motor) +
+                        "\n                "
                     )
                   ])
                 ])
@@ -65449,9 +65555,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.year) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -65470,9 +65576,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.fuel_type) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -65491,9 +65597,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.condition) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -65518,9 +65624,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                    " +
                           _vm._s(_vm.data.texpassport) +
-                          "\n                    "
+                          "\n                "
                       )
                     ]
                   )
@@ -65572,9 +65678,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-break text-center py-2" }, [
                     _vm._v(
-                      "\n                        " +
+                      "\n                    " +
                         _vm._s(_vm.data.note) +
-                        "\n                    "
+                        "\n                "
                     )
                   ])
                 ])
@@ -65605,7 +65711,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        Cavab\n                    "
+                            "\n                    Cavab\n                "
                           )
                         ]
                       )
@@ -65621,7 +65727,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        Cavab\n                    "
+                            "\n                    Cavab\n                "
                           )
                         ]
                       )
@@ -93985,6 +94091,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders', __webpack_require
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-all-announce', __webpack_require__(/*! ./components/partials/OrdersAllAnnounce.vue */ "./resources/js/components/partials/OrdersAllAnnounce.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-all-modal', __webpack_require__(/*! ./components/modal/OrdersAllModal.vue */ "./resources/js/components/modal/OrdersAllModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('show-modal-content', __webpack_require__(/*! ./components/partials/ShowModalContent.vue */ "./resources/js/components/partials/ShowModalContent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('send-image-show-modal-content', __webpack_require__(/*! ./components/partials/SendImageShowModalContent.vue */ "./resources/js/components/partials/SendImageShowModalContent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('order-answer-modal-parent', __webpack_require__(/*! ./components/modal/OrderAnswerModalParent.vue */ "./resources/js/components/modal/OrderAnswerModalParent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('order-answer-modal', __webpack_require__(/*! ./components/modal/OrderAnswerModal.vue */ "./resources/js/components/modal/OrderAnswerModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('user-left-side-bar', __webpack_require__(/*! ./components/side/UserLeftSideBar.vue */ "./resources/js/components/side/UserLeftSideBar.vue")["default"]);
@@ -95496,6 +95603,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saller_vue_vue_type_template_id_0f0d87bd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Saller_vue_vue_type_template_id_0f0d87bd_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/SendImageShowModalContent.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/partials/SendImageShowModalContent.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true& */ "./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true&");
+/* harmony import */ var _SendImageShowModalContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SendImageShowModalContent.vue?vue&type=script&lang=js& */ "./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SendImageShowModalContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "b9d936ac",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/partials/SendImageShowModalContent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendImageShowModalContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SendImageShowModalContent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendImageShowModalContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=template&id=b9d936ac&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendImageShowModalContent_vue_vue_type_template_id_b9d936ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

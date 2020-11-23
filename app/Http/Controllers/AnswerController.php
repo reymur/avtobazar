@@ -119,13 +119,11 @@ class AnswerController extends Controller
             $path = public_path('images/users/announcement/answers/');
 
             if( is_dir( $path ) && $new_image_name ){
-                $img = Image::make($request->image);
-                $img->resize(650, 500);
-                $img->resize(150, 120);
-                $is_saved_small = $img->save($path . 'small_'.$new_image_name );
-                $is_saved = $img->save($path . $new_image_name );
+                $is_saved = $this->makeImage($request->image, $path, 650,500, $new_image_name);
+                $is_saved_small = $this->makeImage($request->image, $path, 1550,120, 'small_'.$new_image_name);
+                $is_saved_extra_small = $this->makeImage($request->image, $path, 70,50, 'extra_small_'.$new_image_name);
 
-                if( $is_saved && $is_saved_small ) return $new_image_name;
+                if( $is_saved && $is_saved_small && $is_saved_extra_small ) return $new_image_name;
                 else {
                     $message = 'Answer Image no saved';
                     return $this->errorReturn($message);
@@ -138,6 +136,12 @@ class AnswerController extends Controller
 
         $message = 'Path is not dir or new_image_name failed';
         return $this->errorReturn($message);
+    }
+
+    public function makeImage($file, $path, $width, $height, $new_name ){
+        $img = Image::make( $file );
+        $img->resize($width, $height);
+        return $img->save($path . $new_name );
     }
 
     public function errorReturn($message){

@@ -105,10 +105,14 @@
                 <tr>
                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                     <td class="text-break text-center py-2">
-                        <img class="flash__image"
-                             src="{{
-                            asset('/images/users/announcement/orders/'.$data->image)
-                         }}" alt="{{ $data->image }}">
+                        <send-image-show-modal-content
+                            :path=" '/images/users/announcement/orders/' "
+                            :data="{{ $data }}"http://avtolavka/announce/orders
+                        ></send-image-show-modal-content>
+{{--                        <img class="flash__image"--}}
+{{--                             src="{{--}}
+{{--                            asset('/images/users/announcement/orders/'.$data->image)--}}
+{{--                         }}" alt="{{ $data->image }}">--}}
                     </td>
                 </tr>
             @endif

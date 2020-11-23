@@ -21,6 +21,7 @@ Vue.component('orders', require('./components/pages/Orders.vue').default);
 Vue.component('orders-all-announce', require('./components/partials/OrdersAllAnnounce.vue').default);
 Vue.component('orders-all-modal', require('./components/modal/OrdersAllModal.vue').default);
 Vue.component('show-modal-content', require('./components/partials/ShowModalContent.vue').default);
+Vue.component('send-image-show-modal-content', require('./components/partials/SendImageShowModalContent.vue').default);
 Vue.component('order-answer-modal-parent', require('./components/modal/OrderAnswerModalParent.vue').default);
 Vue.component('order-answer-modal', require('./components/modal/OrderAnswerModal.vue').default);
 Vue.component('user-left-side-bar', require('./components/side/UserLeftSideBar.vue').default);

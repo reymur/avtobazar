@@ -265,9 +265,11 @@ class AnnouncementController extends Controller
             if ( is_dir($path) ) {
                 $img = Image::make($file);
                 $img->resize(650, 450 );
+                $img->save($path . $new_name);
+
+                $img_small = Image::make($file);
                 $img->resize(150, 120 );
                 $img->save($path . 'small_'.$new_name);
-                $img->save($path . $new_name);
             }
 
             return $img ? $new_name : $new_name;
@@ -583,7 +585,7 @@ class AnnouncementController extends Controller
 //                dd( $id );
                 $order = Announcement::find($id);
 
-                if( ! $order ) redirect()->back();
+                if( ! $order ) return redirect()->back();
 
                 $order->user()->detach(Auth::user()->id); // Delete on AnnouncementUser table
 

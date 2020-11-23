@@ -98,15 +98,10 @@
                                 class="flash__image"
                                 :items="items"
                                 :options="{
-                                clickToCloseNonZoomable: false,
-                            }"
+                                    clickToCloseNonZoomable: false,
+                                }"
                             ></vue-picture-swipe>
                         </div>
-
-<!--                        <img :src="'/images/users/announcement/orders/'+ data.image"-->
-<!--                             :alt="data.image"-->
-<!--                             class="flash__image"-->
-<!--                        >-->
                     </td>
                 </tr>
 

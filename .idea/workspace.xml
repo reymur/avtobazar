@@ -3,39 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Announcement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Announcement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1604564504_7693.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1604570772_3299.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1604616317_9803.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1604874228_6943.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1605553899_8572.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1605556783_3894.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1605556860_6342.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1605648049_1075.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1605889875_557.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1604564277.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1604570436.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1604874078.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1605350075.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1605395439.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1605556674.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1605885224.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1605892490.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_1/1602089652.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_2/1602090289.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606073767_1087174037.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606073767_1087174037.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Orders.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerCount.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerCount.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/send_all_announce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/send_all_announce.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,7 +398,9 @@
       <workItem from="1605986730258" duration="9285000" />
       <workItem from="1606045612173" duration="8875000" />
       <workItem from="1606055572348" duration="7575000" />
-      <workItem from="1606066769719" duration="10652000" />
+      <workItem from="1606066769719" duration="10851000" />
+      <workItem from="1606132451441" duration="3760000" />
+      <workItem from="1606139814105" duration="4609000" />
     </task>
     <servers />
   </component>
