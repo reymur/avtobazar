@@ -6,7 +6,7 @@
 
         <div v-if="orders_count != null && orders_count > 0" class="">
 
-            <span v-if="new_orders_count != null && new_orders_count > 0" class="badge badge-success">
+            <span v-if="new_orders_count != null && new_orders_count > 0" class="badge badge-success badge__bg-orders">
                 {{ new_orders_count }}
             </span>
 

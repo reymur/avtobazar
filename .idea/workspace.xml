@@ -2,39 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/users/seller/forms/email_edit_form.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1606144061_3648.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/extra_small_1606144061_3648.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/small_1606144061_3648.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606144028_787857194.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606144028_787857194.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_1/1606049253.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_10/1602871753.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_11/1602871820.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_2/1606049368.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_3/1602090390.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_8/1602871634.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_9/1602871696.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/side/UserLeftSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/side/UserLeftSideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/OrdersAllAnnounce.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/side/UserSideBarOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/side/UserSideBarOrders.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -433,7 +411,8 @@
       <workItem from="1606323528653" duration="3243000" />
       <workItem from="1606327666579" duration="13362000" />
       <workItem from="1606386818839" duration="7583000" />
-      <workItem from="1606397940867" duration="2069000" />
+      <workItem from="1606397940867" duration="8453000" />
+      <workItem from="1606407588387" duration="6622000" />
     </task>
     <servers />
   </component>

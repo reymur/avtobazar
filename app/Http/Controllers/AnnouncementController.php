@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnnouncementUser;
 use App\Answer;
 use App\Condition;
+use App\Events\OrdersCount;
 use App\User;
 use App\Announcement;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,9 +35,37 @@ class AnnouncementController extends Controller
         }
     }
 
+    public function getOrders(){
+        if( Auth::check() ){
+            $user = Auth::user();
+            $orders = AnnouncementUser::where('user_id', $user->id)->get();
+            $ansers = Answer::where('user_id',$user->id)->get();
+
+            $announce_ids = $orders->pluck('announcement_id');
+            $my_ansers = $ansers->whereIn('announcement_id', $announce_ids)
+                ->where('user_id',$user->id);
+
+            return response()->json([
+                'orders' => $this->getNewOrderCount($announce_ids, $my_ansers)
+            ]);
+        }
+    }
+
+    public function getNewOrderCount($announce_ids, $my_ansers){
+        if( $announce_ids->count() > 0 && $my_ansers->count() > 0 ){
+            $a = (int)$announce_ids->count();
+            $m = (int)$my_ansers->count();
+
+            return $a - $m;
+        }
+    }
+
     public function sendAnnounce(Request $request)
     {
         $this->announceValidate($request);
+
+        $user = Auth::user();
+        event( new OrdersCount($user) );
 
         $when = [];
 

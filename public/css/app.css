@@ -11017,7 +11017,15 @@ body {
 }
 
 .badge__bg {
+  margin: 19px 0 0 -4px;
   background-color: #219533;
+}
+
+.badge__bg-orders {
+  z-index: 101;
+  position: relative;
+  color: #fff7f9;
+  background-color: #dbb135;
 }
 
 .list__style {

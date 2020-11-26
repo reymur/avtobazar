@@ -35,6 +35,8 @@ Route::prefix('announce')->group(function() {
 
     Route::get('/orders', 'AnnouncementController@ordersAnnounce')->name('orders');
     Route::get('/orders-delete/{id}', 'AnnouncementController@orderAnnounceDelete')->name('order_delete');
+    Route::get('/get-orders', 'AnnouncementController@getOrders')->name('order_delete');
+
     Route::get('/buyer-announce-delete/{id}', 'AnnouncementController@buyerAnnounceADelete')->name('buyer_announce_delete');
 });
 

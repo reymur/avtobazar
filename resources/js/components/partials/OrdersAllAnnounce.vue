@@ -17,7 +17,7 @@
                     </td>
                     <td class="text-right send__all-td pt-2 pb-1 pb-0 pr-0">
                         <div class="d-block">
-                            <span class="badge badge-success">
+                            <span class="badge badge-success badge__bg-orders">
                                 yeni
                             </span>
                         </div>

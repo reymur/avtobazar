@@ -48,14 +48,14 @@
                                 <div class="">
                                     @auth
                                         <div class="d-inline-flex">
-                                            @if( Auth::user()->status === 1 )
+                                            @if( Auth::user()->status == 1 )
                                                 <div class="mt-2">
                                                     {{ Auth::user()->autoNumber }}
                                                 </div>
-                                            @elseif( Auth::user()->status === 2 )
+                                            @elseif( Auth::user()->status == 2 )
                                                     @isset( Auth::user()->image )
                                                         <div class="d-inline-flex mr-2 user__nav-image-parent">
-                                                            <img src="{{ asset('images/users/sellers/id_'. Auth::user()->id.'/'. Auth::user()->image) }}"
+                                                            <img src="{{ asset('images/users/sellers/small_'. Auth::user()->image) }}"
                                                                  class="user__nav-image"
                                                                  alt="Image">
                                                         </div>
@@ -101,8 +101,8 @@
                         </div>
                     </div>
                     @if( Auth::check() )
-                        @if( Auth::user()->status === 1 )
-                            <a class="nav-link dropdown text-white outline__none" href="{{ route('buyer.profile', Auth::user()->id) }}"
+                        @if( Auth::user()->status == 1 )
+                            <a class="nav-link dropdown text-white outline__none" href="{{ route('answers') }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
                                 <span class="sr-only">unread messages</span>
@@ -111,12 +111,13 @@
                             </a>
 
 
-                        @elseif( Auth::user()->status === 2 )
-                            <a class="nav-link dropdown text-white outline__none" href="{{ route('seller.profile', Auth::user()->id) }}"
+                        @elseif( Auth::user()->status == 2 )
+                            <a class="nav-link dropdown text-white outline__none" href="{{ route('orders') }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
                                 <span class="sr-only">unread messages</span>
 
+                                <orders-count></orders-count>
                                 <answer-count></answer-count>
                             </a>
 
