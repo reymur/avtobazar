@@ -1,7 +1,8 @@
 <!-- Button trigger modal -->
 <a href="" class=" p-1" data-toggle="modal" data-target="#show_all_sellers-{{ $announce->id }}">
     Göndərildi
-    <span class="badge badge-success">
+
+    <span class="badge badge-secondary">
         {{ count($announce->user) ?? 0 }}
     </span>
 </a>

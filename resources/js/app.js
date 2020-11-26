@@ -15,6 +15,8 @@ Vue.component('buyer-login-form', require('./components/forms/BuyerLoginForm.vue
 Vue.component('buyer-register-form', require('./components/forms/BuyerRegisterForm.vue').default);
 Vue.component('seller-login-form', require('./components/forms/SellerLoginForm.vue').default);
 Vue.component('seller-register-form', require('./components/forms/SellerRegisterForm.vue').default);
+Vue.component('seller-photo', require('./components/seller/SellerPhoto.vue').default);
+Vue.component('seller-photo-edit', require('./components/seller/SellerPhotoEdit.vue').default);
 Vue.component('login-not-modal', require('./components/register/Login.vue').default);
 Vue.component('register-not-modal', require('./components/register/Register.vue').default);
 Vue.component('orders', require('./components/pages/Orders.vue').default);

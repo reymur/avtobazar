@@ -32,7 +32,7 @@
                            :class="'d-lg-block text-blue '+ currentPage('/sends')">
                             <span v-if="auth_user_get_sends != null && auth_user_get_sends.length > 0" class="">
                                 Göndərilənlər
-                                <span class="badge badge-success">
+                                <span class="badge badge-secondary">
                                    {{ auth_user_get_sends.length }}
                                 </span>
                             </span>

@@ -194,6 +194,20 @@ body {
     margin: 20px 0 0 0;
 }
 
+.seller__image-edit-div {
+    width: 500px;
+    height: 350px;
+    margin: auto;
+    vertical-align: middle;
+    display: table-cell;
+    background-color: #82807f;
+    box-shadow: 0px 1px 5px 1px #a0a2a4;
+}
+
+.seller__image-edit {
+    width: 100%;
+}
+
 .outline__none {
     outline:none;
 }
@@ -384,7 +398,6 @@ body {
     height: 55px;
     display: flex;
     border-radius: 2%;
-    box-shadow: 0 0 0 2px #dbdbdb;
 }
 
 .answer__image-style {

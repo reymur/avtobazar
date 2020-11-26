@@ -12,7 +12,6 @@
                             <div class="text-center mb-2">
                                 <div v-if="answer_info.image" class="text-center m-auto answer__image-div">
                                     <vue-picture-swipe
-                                        class="flash__image"
                                         :items="imageItems(answer_info)"
                                         :options="{
                                             clickToCloseNonZoomable: false,

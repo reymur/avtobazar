@@ -46,6 +46,9 @@ Route::prefix('seller')->middleware('auth')->group(function(){
     Route::get('/', 'SellerController@index')->name('seller.index');
     Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');
     Route::post('/get-whos', 'SellerController@getWhos')->name('seller.getwhos');
+    Route::get('/show/{user}/{slug}', 'SellerController@show')->name('seller-show');
+    Route::post('/edit/{id}/{slug}', 'SellerController@edit')->name('seller-edit');
+    Route::post('/save-user-photo', 'SellerController@saveUserImage');
 });
 
 Route::post('/get-conditions', 'ConditionController@getConditions');

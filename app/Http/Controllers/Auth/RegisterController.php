@@ -107,6 +107,8 @@ class RegisterController extends Controller
 
         if($data['status'] == 2) {
 
+            $image_name = $this->makeUserImageFolderWithImages( $data['image'] );
+
             $user = User::create([
                 'who' => $data['who'],
                 'name' => $data['name'],
@@ -115,7 +117,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
-                'image' => $this->getUserNewImageName($data['image']),
+                'image' => $image_name ?? null,
                 'status' => $data['status'],
             ]);
 
@@ -133,15 +135,6 @@ class RegisterController extends Controller
                 }
             }
 
-            if( ! is_null($user->image) ) {
-                $imageName = $user->image;
-                $this->makeUserImageFolderWithImages(
-                            $user,
-                            $data['image'],
-                            $imageName
-                        );
-            }
-
             return $user;
         }
 
@@ -151,29 +144,36 @@ class RegisterController extends Controller
 
     }
 
-    private function getUserNewImageName($image)
+    private function makeUserImageFolderWithImages( $image )
     {
-        if( $image != "null" && ! is_null($image) ){
-            $extension = $image->getClientOriginalExtension();
+        $dir = public_path("images/users/sellers/" );
 
-            return time() .'.'. $extension;
-        }
-
-        return NULL;
-    }
-
-    private function makeUserImageFolderWithImages($user, $image, $name )
-    {
-        $dir = public_path("images/users/sellers/id_{$user->id}" );
-
-        $this->clearSellerDir($dir);
-
-        $path = mkdir( $dir , 0777, true );
+//        $this->clearSellerDir($dir);
 
         if( is_dir($dir) ) {
-            return Image::make( $image )
-                ->resize(500, 450)
-                ->save( $dir .'/'. $name );
+            $new_name = $this->makeNewImageName($image);
+
+            $is_saved = $this->makeImage($image, 650, 500, $dir, $new_name);
+            $is_saved_small = $this->makeImage($image, 150, 120, $dir, 'small_'.$new_name);
+
+            return ($is_saved && $is_saved_small) ? $new_name : null;
+        }
+    }
+
+    public function makeImage($file, $width, $height, $dir, $new_name){
+        if( $file && $width && $height && $dir && $new_name ){
+            $img = Image::make( $file );
+            $img->resize($width, $height);
+            $saved = $img->save( $dir .'/'. $new_name );
+
+            return $saved ? $new_name : null;
+        }
+    }
+
+    public function makeNewImageName($image){
+        if( $image ){
+            $extension = $image->getClientOriginalExtension();
+            return time() .'_'. random_int( 0, time() ) .'.'. $extension;
         }
     }
 

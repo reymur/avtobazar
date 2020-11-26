@@ -99,15 +99,11 @@
                                     <td class="text-break text-center py-2">
                                         <span class="">
                                              <vue-picture-swipe
-                                                 class="flash__image"
                                                  :items="imageItems(answer.image)"
                                                  :options="{
                                                     clickToCloseNonZoomable: false,
                                                 }"
                                              ></vue-picture-swipe>
-<!--                                            <img :src="image_path + answer.image" :alt="answer.image"-->
-<!--                                                 class="modal__image"-->
-<!--                                            >-->
                                         </span>
                                     </td>
                                 </tr>

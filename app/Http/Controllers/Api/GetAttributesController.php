@@ -6,7 +6,10 @@ use App\Condition;
 use App\FuelType;
 use App\Http\Controllers\Controller;
 use App\User;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use NunoMaduro\Collision\Provider;
 
 class GetAttributesController extends Controller
 {

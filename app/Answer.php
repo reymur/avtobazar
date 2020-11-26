@@ -11,7 +11,7 @@ class Answer extends Model
     protected $fillable = ['announcement_id','user_id','which','price','seen','condition','image'];
 
     public function getCreatedAtAttribute(){
-        return Carbon::parse($this->attributes['created_at'])->format('d/m/Y | H:m');
+        return Carbon::parse($this->attributes['created_at'])->format('d/m/Y | H:i');
     }
 
     public function announcement()

@@ -163,17 +163,16 @@
                 </label>
             </div><!-- End Image Button -->
 
-            <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 mb-3 modal__image" style="width: 18rem;">
+            <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-0 p-0 m-auto border-0 modal__image" style="width: 18rem;">
+                <span @click="imageDelete()" class="d-block text-right mr-n4">
+                    <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </span><!-- Image close -->
                 <img :src="img" id="imageId" class="imageId card-img-top" alt="Image">
             </div><!-- End Image Show -->
 
-<!--            <div class="form-group">-->
-<!--                <label for="note">Əlavə məlumat</label>-->
-<!--                <textarea v-model="note" class="form-control" id="note" rows="2"-->
-<!--                          placeholder="Satıcının sizi anlanması üçün məlumatı dəqiq və konkret yazın"></textarea>-->
-<!--            </div>&lt;!&ndash; End Note (Əlavə məlumat) &ndash;&gt;-->
-
-            <div class="modal-footer pt-1 pb-3 mr-2">
+            <div class="modal-footer pt-1 pb-3 mt-4 mr-2">
                 <button type="button"
                         class="btn btn-secondary"
                         data-dismiss="modal">Xeyir</button>
@@ -193,10 +192,11 @@ export default {
     props: ['user','cars','types','cities','years','motors','fuelTypes','resetModalDetails'],
     data(){
         return {
-            imageLoader: false,
             texPass: 1,
             toloader: false,
             img: null,
+            image: null,
+            imageLoader: false,
             inputLoader: false,
             priceLoader: false,
             spare_parts: '',
@@ -211,7 +211,6 @@ export default {
             when: [],
             texPassInput: '',
             citySelect: 'Bakı',
-            image: null,
             note: null,
             carTypeReturns: [],
             exampleCar: {name:'BMW'},
@@ -221,6 +220,11 @@ export default {
         }
     },
     methods: {
+        imageDelete(){
+            this.img = null;
+            this.image = null;
+            this.imageLoader = false;
+        },
         whosChange(e){
             this.when.forEach( (key, val) => {
                 if( key === 'Hamısı' ){
@@ -385,10 +389,9 @@ export default {
                             }
 
                             window.location.href = '/announce/send-flash';
-                            console.log(res)
                         }
                         else{
-                            console.log(44444444444444444)
+
                         }
                     })
                     .catch(err => {
@@ -400,7 +403,6 @@ export default {
                             if( err.response.data && err.response.status == 333 ){
                                 if( err.response.data.data.errors ){
                                     this.errors.push( err.response.data.data.errors);
-                                    console.log( 'Seller - ', err.response.data.data.errors );
                                 }
                             }
 
@@ -416,12 +418,10 @@ export default {
                                 if( err.response.data.errors.image )
                                     this.addDangerBorder(err.response.data.errors, 'image');
                             }
-                            console.log( 'Err - ', err.response.data.errors )
                         }
                     })
                 }
-                else{
-                    console.log('2222 = ', document.getElementById('spare_parts').classList.contains('border-danger'))
+                else {
                     this.errors = [];
                     this.errors.push(image);
                     this.removeDisabled('disabled');
@@ -439,7 +439,7 @@ export default {
                 }
             }
             else{
-                console.log(99999999999)
+
             }
         },
         addDisabled(key, val){
@@ -508,7 +508,7 @@ export default {
         })
 
         // this.whosSelect();
-        console.log('AAAAAA - ',this.fuelTypes)
+        // console.log('AAAAAA - ',this.fuelTypes)
     }
 }
 </script>

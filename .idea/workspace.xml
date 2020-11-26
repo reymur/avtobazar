@@ -2,20 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/users/seller/forms/email_edit_form.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Answer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/GetAttributesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606073767_1087174037.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606073767_1087174037.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/1606144061_3648.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/extra_small_1606144061_3648.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/answers/small_1606144061_3648.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606144028_787857194.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606144028_787857194.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_1/1606049253.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_10/1602871753.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_11/1602871820.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_2/1606049368.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_3/1602090390.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_8/1602871634.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/id_9/1602871696.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/OrderAnswerModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/AnswerAllAnnounce.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowAllAnswerSellersAnswersShowTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/ShowModalContent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/side/UserLeftSideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/side/UserLeftSideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/side/UserSideBarOrders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/side/UserSideBarOrders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/send_all_modal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/show_modal_content.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/partials/user_left_bar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -400,7 +421,19 @@
       <workItem from="1606055572348" duration="7575000" />
       <workItem from="1606066769719" duration="10851000" />
       <workItem from="1606132451441" duration="3760000" />
-      <workItem from="1606139814105" duration="4609000" />
+      <workItem from="1606139814105" duration="5309000" />
+      <workItem from="1606148045641" duration="4971000" />
+      <workItem from="1606154661856" duration="4545000" />
+      <workItem from="1606217562031" duration="5487000" />
+      <workItem from="1606223998531" duration="6095000" />
+      <workItem from="1606231586049" duration="7806000" />
+      <workItem from="1606240803007" duration="7407000" />
+      <workItem from="1606149163122" duration="3845000" />
+      <workItem from="1606313753339" duration="8137000" />
+      <workItem from="1606323528653" duration="3243000" />
+      <workItem from="1606327666579" duration="13362000" />
+      <workItem from="1606386818839" duration="7583000" />
+      <workItem from="1606397940867" duration="2069000" />
     </task>
     <servers />
   </component>
@@ -428,10 +461,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="416" y="126" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.701@0.27.1366.701" timestamp="1602507271861" />
-    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605523864588">
+    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606340116175">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.701@0.27.1366.701" timestamp="1605523864588" />
+    <state x="416" y="135" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.27.1366.701@0.27.1366.701" timestamp="1606340116175" />
     <state width="1320" height="150" key="GridCell.Tab.0.bottom" timestamp="1602017191906">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -452,10 +485,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="447" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1605195523597" />
-    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog" timestamp="1604871697111">
+    <state x="451" y="221" width="399" height="164" key="NewPhpFileDialog" timestamp="1606318802588">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="554" y="296" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1604871697111" />
+    <state x="451" y="221" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1606318802588" />
     <state x="172" y="27" width="1012" height="701" key="SettingsEditor" timestamp="1600373723876">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -476,13 +509,13 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="396" y="146" width="563" height="470" key="refactoring.ChangeSignatureDialog/0.27.1366.701@0.27.1366.701" timestamp="1604781004421" />
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1605536716306">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup" timestamp="1606310783842">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1605536716306" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606047972478">
+    <state x="347" y="164" width="672" height="677" key="run.anything.popup/0.27.1366.701@0.27.1366.701" timestamp="1606310783842" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1606220000228">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1606047972478" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.27.1366.701@0.27.1366.701" timestamp="1606220000228" />
   </component>
 </project>

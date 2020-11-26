@@ -107,12 +107,8 @@
                     <td class="text-break text-center py-2">
                         <send-image-show-modal-content
                             :path=" '/images/users/announcement/orders/' "
-                            :data="{{ $data }}"http://avtolavka/announce/orders
+                            :data="{{ $data }}"
                         ></send-image-show-modal-content>
-{{--                        <img class="flash__image"--}}
-{{--                             src="{{--}}
-{{--                            asset('/images/users/announcement/orders/'.$data->image)--}}
-{{--                         }}" alt="{{ $data->image }}">--}}
                     </td>
                 </tr>
             @endif
@@ -128,20 +124,6 @@
         </table>
         <div class="modal-footer py-1">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Bağla</button>
-
-            @if( auth()->check() && auth()->user()->status == 2 )
-                @isset( $disabled )
-                    <button class="btn btn-secondary" disabled="disabled"
-                            data-target="#answer-{{ $data->id }}">
-                        Cavab
-                    </button>
-                @else
-                    <a href="" class="btn btn-success" data-toggle="modal"
-                       data-target="#answer-{{ $data->id }}">
-                        Cavab
-                    </a>
-                @endisset
-            @endif
         </div>
     </div>
 @endisset

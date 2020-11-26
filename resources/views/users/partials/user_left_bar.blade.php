@@ -35,7 +35,7 @@
                                    'text-black-50 border-bottom border-dark text-decoration-none' : ''
                                 }}">
                             <user-side-bar-orders
-                                :orders="{{ getUserLeftBarOrderCount()[0] }}"
+                                :orders_count="{{ getUserLeftBarOrderCount()[0] }}"
                                 :new_orders="{{ getUserLeftBarOrderCount()[1] }}"
                             ></user-side-bar-orders>
                         </a>
@@ -52,7 +52,7 @@
                         @if( Auth::check() )
                             @if( isset(Auth::user()->getSends) && Auth::user()->getSends->count() > 0 )
                                 Göndərilənlər
-                                <span class="badge badge-success">
+                                <span class="badge badge-secondary">
                                     {{ Auth::user()->getSends->count() }}
                                 </span>
                             @else
