@@ -38,6 +38,8 @@ Route::prefix('announce')->group(function() {
     Route::get('/get-orders', 'AnnouncementController@getOrders')->name('order_delete');
 
     Route::get('/buyer-announce-delete/{id}', 'AnnouncementController@buyerAnnounceADelete')->name('buyer_announce_delete');
+    Route::get('/show/{user}/{slug}', 'BuyerController@show')->name('buyer-show');
+    Route::post('/edit/{id}/{slug}', 'BuyerController@edit')->name('buyer-edit');
 });
 
 Route::prefix('buyer')->middleware('auth')->group(function(){

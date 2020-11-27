@@ -4637,8 +4637,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
+  props: ['auth_user'],
   data: function data() {
     return {
       old_answers: [],
@@ -4689,7 +4693,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   mounted: function mounted() {
-    // console.log( 'SSSSSSSS111 = ', this.new_answers)
+    console.log('SSSSSSSS111 = ', this.auth_user.status);
     this.ifNoUpdateMainMenuAnswersCount();
   }
 });
@@ -64585,20 +64589,39 @@ var render = function() {
         ? _c("div", { staticClass: "main__menu-answers-count" }, [
             _vm.new_answers.length != null && _vm.new_answers.length > 0
               ? _c("span", { staticClass: "pb-1 px-1" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass:
-                        "badge badge-success badge__bg text-white rounded-circle badge__font_size"
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.new_answers.length) +
-                          "\n                    "
+                  _vm.auth_user.status == 1
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "badge badge-success badge__bg-buyer text-white rounded-circle badge__font_size"
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.new_answers.length) +
+                              "\n                    "
+                          )
+                        ]
                       )
-                    ]
-                  )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.auth_user.status == 2
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "badge badge-success badge__bg text-white rounded-circle badge__font_size"
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.new_answers.length) +
+                              "\n                    "
+                          )
+                        ]
+                      )
+                    : _vm._e()
                 ])
               : _vm._e()
           ])

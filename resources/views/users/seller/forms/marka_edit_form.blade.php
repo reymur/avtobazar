@@ -1,7 +1,7 @@
 <tr>
-    <th>Marka:</th>
+    <th class="border-0">Marka:</th>
 
-    <td class="text-left">
+    <td class="text-left border-0">
         @error('marka')
             <div class="alert alert-danger mb-3">
                 {{ $message }}

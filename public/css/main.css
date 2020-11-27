@@ -104,6 +104,11 @@ body {
 .badge__font_size {
     font-size: 13px;
 }
+
+.badge__bg-buyer {
+    margin: 0 0 0 -2px;
+    background-color: #219533;
+}
 .badge__bg {
     margin: 19px 0 0 -4px;
     background-color: #219533;

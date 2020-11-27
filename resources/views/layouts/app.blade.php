@@ -107,7 +107,7 @@
                                 <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
                                 <span class="sr-only">unread messages</span>
 
-                                <answer-count></answer-count>
+                                <answer-count :auth_user="{{ Auth::user() }}"></answer-count>
                             </a>
 
 
@@ -118,7 +118,7 @@
                                 <span class="sr-only">unread messages</span>
 
                                 <orders-count></orders-count>
-                                <answer-count></answer-count>
+                                <answer-count :auth_user="{{ Auth::user() }}"></answer-count>
                             </a>
 
                         @endif

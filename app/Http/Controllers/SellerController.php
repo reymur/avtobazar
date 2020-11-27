@@ -14,7 +14,9 @@ use App\Who;
 use App\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Intervention\Image\Facades\Image;
 
 class SellerController extends Controller
@@ -117,6 +119,7 @@ class SellerController extends Controller
                 'name' => $request->input('name') ?? $request->input('name')
             ]);
         }
+
         elseif( $slug == 'who' ){
             $user->update([
                 'who' => $request->input('who') ?? $request->input('who')
@@ -186,6 +189,30 @@ class SellerController extends Controller
             $user->update([
                 'phone' => $request->input('phone') ?? $request->input('phone')
             ]);
+        }
+        elseif( $slug == 'password' ){
+
+            $request->validate([
+                'old_pass' => 'required|string|min:6|max:20',
+                'new_pass' => 'required|string|min:6|max:20',
+            ]);
+
+            $user = Auth::user();
+            $old_pass = $request->input('old_pass');
+            $new_pass = $request->input('new_pass');
+
+            if( Hash::check($old_pass, $user->password) ) {
+                $user->update([
+                    'password' => Hash::make($new_pass)
+                ]);
+            }
+            else{
+                return redirect()->back()
+                    ->with('old_pass', 'Old password does not match!');
+            }
+
+            return redirect()->route('seller.profile', Auth::user()->id)
+                ->with('message','"Parol" uğurla yeniləndi');
         }
 
         return redirect()->route('seller.profile', Auth::user()->id);

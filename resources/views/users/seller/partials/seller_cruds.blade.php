@@ -57,6 +57,10 @@
                                     @if( isset($slug) && $slug == 'photo' )
                                         @include('users.seller.forms.photo_edit_form')
                                     @endif
+
+                                    @if( isset($slug) && $slug == 'password' )
+                                        @include('users.seller.forms.password_edit_form')
+                                    @endif
                                 </tbody>
                             </table>
                         @endif

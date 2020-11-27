@@ -5,7 +5,10 @@
 <!--                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
 
                 <span v-if="new_answers.length != null && new_answers.length > 0" class="pb-1 px-1">
-                    <span class="badge badge-success badge__bg text-white rounded-circle badge__font_size">
+                    <span v-if="auth_user.status == 1" class="badge badge-success badge__bg-buyer text-white rounded-circle badge__font_size">
+                        {{ new_answers.length }}
+                    </span>
+                    <span v-if="auth_user.status == 2" class="badge badge-success badge__bg text-white rounded-circle badge__font_size">
                         {{ new_answers.length }}
                     </span>
                 </span>
@@ -17,6 +20,7 @@
 <script>
 export default {
     name: "UserSideBarOrders",
+    props: ['auth_user'],
     data(){
         return {
             old_answers:[],
@@ -65,7 +69,7 @@ export default {
             });
     },
     mounted() {
-        // console.log( 'SSSSSSSS111 = ', this.new_answers)
+        console.log( 'SSSSSSSS111 = ', this.auth_user.status)
         this.ifNoUpdateMainMenuAnswersCount();
     }
 }
