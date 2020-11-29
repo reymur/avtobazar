@@ -1,5 +1,5 @@
 
-<div class="">
+<div class="pl-5">
     @if( !is_null(getUserLeftBarAnswerCount()) && getUserLeftBarAnswerCount()->count() > 0 )
         @if( getUserLeftBarAnswerCount()->first()->seen )
             <a href="{{ route('answers') }}" class="text-dark">

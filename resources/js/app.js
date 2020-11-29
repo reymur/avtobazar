@@ -17,6 +17,7 @@ Vue.component('seller-login-form', require('./components/forms/SellerLoginForm.v
 Vue.component('seller-register-form', require('./components/forms/SellerRegisterForm.vue').default);
 Vue.component('seller-photo', require('./components/seller/SellerPhoto.vue').default);
 Vue.component('seller-photo-edit', require('./components/seller/SellerPhotoEdit.vue').default);
+Vue.component('card-image-swipe', require('./components/seller/CardImageSwipe.vue').default);
 Vue.component('login-not-modal', require('./components/register/Login.vue').default);
 Vue.component('register-not-modal', require('./components/register/Register.vue').default);
 Vue.component('orders', require('./components/pages/Orders.vue').default);
@@ -25,6 +26,7 @@ Vue.component('orders-all-modal', require('./components/modal/OrdersAllModal.vue
 Vue.component('orders-count', require('./components/partials/OrdersCount.vue').default);
 Vue.component('show-modal-content', require('./components/partials/ShowModalContent.vue').default);
 Vue.component('send-image-show-modal-content', require('./components/partials/SendImageShowModalContent.vue').default);
+Vue.component('send-flash-table-image-show', require('./components/partials/SendFlashTableImageShow.vue').default);
 Vue.component('order-answer-modal-parent', require('./components/modal/OrderAnswerModalParent.vue').default);
 Vue.component('order-answer-modal', require('./components/modal/OrderAnswerModal.vue').default);
 Vue.component('user-left-side-bar', require('./components/side/UserLeftSideBar.vue').default);
@@ -47,6 +49,9 @@ import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 
 import VuePictureSwipe from 'vue-picture-swipe';
 Vue.component('vue-picture-swipe', VuePictureSwipe);
+
+import VueTinyLazyloadImg from 'vue-tiny-lazyload-img'
+Vue.use(VueTinyLazyloadImg);
 
 Vue.component('v-select', vSelect);
 Vue.component('vue-phone-number-input', VuePhoneNumberInput);

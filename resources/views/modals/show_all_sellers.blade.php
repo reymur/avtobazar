@@ -31,14 +31,14 @@
                         @foreach( $announce->user as $seller )
                             <tr>
                                 <td class="py-2">
-                                    <a href="" class="col-12 d-inline-flex pr-1">
+                                    <a href="/seller/seller-store/{{ $seller->id }}" target="_blank" class="col-12 d-inline-flex pr-1">
                                         <div class="text-left mt-2">
                                             {{ $seller->name }}
                                         </div>
                                         <div class="text-right ml-auto">
                                             @if( $seller->image )
                                                 <img
-                                                    src="{{ asset('images/users/sellers/id_'. $seller->id .'/'. $seller->image ) }}"
+                                                    src="{{ asset('/images/users/sellers/'. 'small_'.$seller->image ) }}"
                                                     alt=""
                                                     class="show__seller-image">
                                             @else

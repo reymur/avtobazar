@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg container-xl">
+    <div class="container-lg container-xl px-md-0 px-sm-0">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         @include('partials.announcement_panel')
@@ -30,13 +30,7 @@
                                     <div class="d-inline-flex">
                                         <span class="mr-1">Elan göndərildi:</span>
                                         @if( isset($store) && $store->count() )
-                                            <a href="{{ route(
-                                                            'send_to_post',['who' => $store->first()->who,
-                                                            'pin' => $store->first()->pivot->pivotParent->pin]
-                                                        ) }}"
-                                               class="badge badge-success p-2">
-                                                {{ count($store) .' mağaza' ?? 0 }}
-                                            </a>
+                                            @include('modals.show_all_sellers_for_send_to', ['data' => $store, 'who' => 'store'])
                                         @endif
 
                                         @if( (isset($store) && $store->count()) && (isset($morg) && $morg->count()) )
@@ -44,6 +38,7 @@
                                         @endif
 
                                         @if( isset($morg) && $morg->count() )
+                                            @include('modals.show_all_sellers_for_send_to', ['data' => $morg, 'who' => 'morg'])
                                             <a href="{{ route(
                                                             'send_to_post',['who' => $morg->first()->who,
                                                             'pin' => $morg->first()->pivot->pivotParent->pin]
@@ -58,7 +53,11 @@
                                 &nbsp;
                                 @endif
 
-                                @include('partials.answer_count_show')
+                                @if( session()->has('send_flash') )
+                                    @include('partials.answer_count_show_for_flash_send')
+                                @else
+                                    @include('partials.answer_count_show')
+                                @endif
                             </div>
 
                             @if( session()->has('send_flash') )
@@ -71,9 +70,11 @@
                                 @endif
                             @endif
 
-                            <div class="mt-4 pt-1">
-                                {{ $announce_all->links() }}
-                            </div>
+                            @if( ! session()->has('send_flash') )
+                                <div class="mt-4 pt-1">
+                                    {{ $announce_all->links() }}
+                                </div>
+                            @endif
                         @else
                             <h3 class="text-center not__announce">Elan tapılmadı!</h3>
                         @endisset

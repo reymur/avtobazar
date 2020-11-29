@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-lg container-xl">
+<div class="container-lg container-xl px-md-0 px-sm-0">
     <div class="col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
         <!-- Crumbs _page_links -->
         @include('crumbs._page_links', ['link' => 'Home'])

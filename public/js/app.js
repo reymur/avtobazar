@@ -5295,6 +5295,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "SendFlashTableImageShow",
+  props: ['announce'],
+  data: function data() {},
+  methods: {
+    itemsFunc: function itemsFunc(image) {
+      if (image != null) {
+        return [{
+          src: '/images/users/announcement/orders/' + image,
+          thumbnail: '/images/users/announcement/orders/' + 'small_' + image,
+          w: 1200,
+          h: 800,
+          alt: image
+        }];
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/SendImageShowModalContent.vue?vue&type=script&lang=js& ***!
@@ -6581,6 +6619,46 @@ __webpack_require__.r(__webpack_exports__);
     // this.radio = 'buyer'
 
     console.log(this.registerLoade);
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "CardImageSwipe",
+  props: ['user'],
+  methods: {
+    imageItems: function imageItems(image) {
+      if (image.image != null) {
+        return [{
+          src: '/images/users/sellers/' + image.image,
+          thumbnail: '/images/users/sellers/' + 'small_' + image.image,
+          w: 1200,
+          h: 800,
+          alt: image.image
+        }];
+      }
+    }
+  },
+  mounted: function mounted() {
+    console.log('Fiqure - ', this.user);
   }
 });
 
@@ -13972,7 +14050,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "\n.pswp__top-bar {\n  text-align: right;\n}\n.pswp__caption__center {\n  text-align: center\n}\n.pswp__button--rotate {\n  background: url(" + escape(__webpack_require__(/*! ./icons/rotate.png */ "./node_modules/vue-picture-swipe/src/icons/rotate.png")) + ") 0 0 no-repeat;\n  background-size: 62px 24px;\n}\n.pswp__button--rotate--left {\n  background-position: 8px 10px;\n}\n.pswp__button--rotate--right {\n  background-position: -26px 10px;\n}\nfigure {\n  display: inline;\n  margin: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.pswp__top-bar {\n  text-align: right;\n}\n.pswp__caption__center {\n  text-align: center\n}\n.pswp__button--rotate {\n  background: url(" + escape(__webpack_require__(/*! ./icons/rotate.png */ "./node_modules/vue-picture-swipe/src/icons/rotate.png")) + ") 0 0 no-repeat;\n  background-size: 62px 24px;\n}\n.pswp__button--rotate--left {\n  background-position: 8px 10px;\n}\n.pswp__button--rotate--right {\n  background-position: -26px 10px;\n}\nfigure {\n  display: block;\n  margin: 0;\n}\nimg {\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -60018,6 +60096,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -60055,11 +60140,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data() {
     return {
+      path_name: window.location.host,
       pswp: null,
       angle: 0
     };
   },
   mounted() {
+      // alert('http://'+window.location.host);
     let that = this;
     let initPhotoSwipeFromDOM = function (gallerySelector) {
 
@@ -60349,8 +60436,17 @@ var render = function() {
               },
               [
                 _c("img", {
+                  directives: [{ name: "lazyload", rawName: "v-lazyload" }],
                   attrs: {
-                    src: item.thumbnail,
+                    src:
+                      "http://" +
+                      _vm.path_name +
+                      "/images/users/logo/placeholder.png",
+                    "data-src": item.thumbnail,
+                    "data-err":
+                      "http://" +
+                      _vm.path_name +
+                      "/images/users/logo/placeholder.png",
                     alt: item.alt,
                     itemprop: "thumbnail"
                   }
@@ -63927,7 +64023,12 @@ var render = function() {
                                           "a",
                                           {
                                             staticClass: "pb-2 answer__seller",
-                                            attrs: { href: "" }
+                                            attrs: {
+                                              href:
+                                                "/seller/seller-store/" +
+                                                seller.id,
+                                              target: "_blank"
+                                            }
                                           },
                                           [
                                             seller.name
@@ -63938,9 +64039,9 @@ var render = function() {
                                                   },
                                                   [
                                                     _vm._v(
-                                                      "\n                                            " +
+                                                      "\n                                                " +
                                                         _vm._s(seller.name) +
-                                                        "\n                                        "
+                                                        "\n                                            "
                                                     )
                                                   ]
                                                 )
@@ -65411,6 +65512,39 @@ var staticRenderFns = [
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _c("vue-picture-swipe", {
+        attrs: { items: _vm.itemsFunc(_vm.announce.image) }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -66969,6 +67103,35 @@ var staticRenderFns = [
     )
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [_c("vue-picture-swipe", { attrs: { items: _vm.imageItems(_vm.user) } })],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -82393,6 +82556,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-tiny-lazyload-img/dist/vue-tiny-lazyload-img.cjs.min.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/vue-tiny-lazyload-img/dist/vue-tiny-lazyload-img.cjs.min.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _V_LOADING="v-lazy-loading",_V_LOADED="v-lazy-loaded",_V_ERROR="v-lazy-error",constant={_V_LOADING:_V_LOADING,_V_LOADED:_V_LOADED,_V_ERROR:_V_ERROR},lazyImageObserver=null,clearDataSrc=function(e,r){e.classList.add(r),e.removeAttribute("data-src"),e.removeAttribute("data-err")};"IntersectionObserver"in window&&(lazyImageObserver=new IntersectionObserver(function(e,r){e.forEach(function(e){if(e.isIntersecting){var r=e.target;r.classList.add(constant._V_LOADING);var a=r.dataset.src,t=r.dataset.err,n=new Image;n.src=a,n.onload=function(){r.classList.remove(constant._V_LOADING),a&&(r.src=a,clearDataSrc(r,constant._V_LOADED))},n.onerror=function(){r.classList.remove(constant._V_LOADING),t&&(r.src=t,clearDataSrc(r,constant._V_ERROR))},lazyImageObserver.unobserve(r)}})}));var lazyImageObserver$1=lazyImageObserver,plugin={install:function(e){e.directive("lazyload",{bind:function(e){"IntersectionObserver"in window&&lazyImageObserver$1.observe(e)},componentUpdated:function(e){"IntersectionObserver"in window&&e.classList.contains(constant._V_LOADED)&&lazyImageObserver$1.observe(e)}})}};module.exports=plugin;
+//# sourceMappingURL=vue-tiny-lazyload-img.cjs.min.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/vue/dist/vue.common.dev.js":
 /*!*************************************************!*\
   !*** ./node_modules/vue/dist/vue.common.dev.js ***!
@@ -94541,6 +94718,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_phone_number_input_dist_vue_phone_number_input_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-phone-number-input/dist/vue-phone-number-input.css */ "./node_modules/vue-phone-number-input/dist/vue-phone-number-input.css");
 /* harmony import */ var vue_phone_number_input_dist_vue_phone_number_input_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_phone_number_input_dist_vue_phone_number_input_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue_picture_swipe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-picture-swipe */ "./node_modules/vue-picture-swipe/src/main.js");
+/* harmony import */ var vue_tiny_lazyload_img__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-tiny-lazyload-img */ "./node_modules/vue-tiny-lazyload-img/dist/vue-tiny-lazyload-img.cjs.min.js");
+/* harmony import */ var vue_tiny_lazyload_img__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_tiny_lazyload_img__WEBPACK_IMPORTED_MODULE_5__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window.Vue = require('vue');
 
 
@@ -94557,6 +94736,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('seller-login-form', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('seller-register-form', __webpack_require__(/*! ./components/forms/SellerRegisterForm.vue */ "./resources/js/components/forms/SellerRegisterForm.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('seller-photo', __webpack_require__(/*! ./components/seller/SellerPhoto.vue */ "./resources/js/components/seller/SellerPhoto.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('seller-photo-edit', __webpack_require__(/*! ./components/seller/SellerPhotoEdit.vue */ "./resources/js/components/seller/SellerPhotoEdit.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('card-image-swipe', __webpack_require__(/*! ./components/seller/CardImageSwipe.vue */ "./resources/js/components/seller/CardImageSwipe.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('login-not-modal', __webpack_require__(/*! ./components/register/Login.vue */ "./resources/js/components/register/Login.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('register-not-modal', __webpack_require__(/*! ./components/register/Register.vue */ "./resources/js/components/register/Register.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders', __webpack_require__(/*! ./components/pages/Orders.vue */ "./resources/js/components/pages/Orders.vue")["default"]);
@@ -94565,6 +94745,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-all-modal', __webpa
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('orders-count', __webpack_require__(/*! ./components/partials/OrdersCount.vue */ "./resources/js/components/partials/OrdersCount.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('show-modal-content', __webpack_require__(/*! ./components/partials/ShowModalContent.vue */ "./resources/js/components/partials/ShowModalContent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('send-image-show-modal-content', __webpack_require__(/*! ./components/partials/SendImageShowModalContent.vue */ "./resources/js/components/partials/SendImageShowModalContent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('send-flash-table-image-show', __webpack_require__(/*! ./components/partials/SendFlashTableImageShow.vue */ "./resources/js/components/partials/SendFlashTableImageShow.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('order-answer-modal-parent', __webpack_require__(/*! ./components/modal/OrderAnswerModalParent.vue */ "./resources/js/components/modal/OrderAnswerModalParent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('order-answer-modal', __webpack_require__(/*! ./components/modal/OrderAnswerModal.vue */ "./resources/js/components/modal/OrderAnswerModal.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('user-left-side-bar', __webpack_require__(/*! ./components/side/UserLeftSideBar.vue */ "./resources/js/components/side/UserLeftSideBar.vue")["default"]);
@@ -94583,6 +94764,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('show-all-answer-sellers-an
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('vue-picture-swipe', vue_picture_swipe__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_tiny_lazyload_img__WEBPACK_IMPORTED_MODULE_5___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_1___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('vue-phone-number-input', vue_phone_number_input__WEBPACK_IMPORTED_MODULE_2___default.a);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
@@ -96150,6 +96333,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/partials/SendFlashTableImageShow.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/partials/SendFlashTableImageShow.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true& */ "./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true&");
+/* harmony import */ var _SendFlashTableImageShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SendFlashTableImageShow.vue?vue&type=script&lang=js& */ "./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SendFlashTableImageShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0f681be0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/partials/SendFlashTableImageShow.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendFlashTableImageShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SendFlashTableImageShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendFlashTableImageShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/partials/SendFlashTableImageShow.vue?vue&type=template&id=0f681be0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SendFlashTableImageShow_vue_vue_type_template_id_0f681be0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/partials/SendImageShowModalContent.vue":
 /*!************************************************************************!*\
   !*** ./resources/js/components/partials/SendImageShowModalContent.vue ***!
@@ -96559,6 +96811,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_template_id_6377d50a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Registration_vue_vue_type_template_id_6377d50a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/seller/CardImageSwipe.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/seller/CardImageSwipe.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true& */ "./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true&");
+/* harmony import */ var _CardImageSwipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardImageSwipe.vue?vue&type=script&lang=js& */ "./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CardImageSwipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6cb941c4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/seller/CardImageSwipe.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardImageSwipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CardImageSwipe.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/seller/CardImageSwipe.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardImageSwipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/seller/CardImageSwipe.vue?vue&type=template&id=6cb941c4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardImageSwipe_vue_vue_type_template_id_6cb941c4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

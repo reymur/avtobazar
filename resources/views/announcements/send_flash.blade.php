@@ -51,8 +51,11 @@
                                 <tbody>
                                 @if( $announce->spare_parts )
                                     <tr>
-                                        <td scope="row" class="text-right text-black-50">Ehtiyat hissəsi:</td>
-                                        <td class="text-break text-center">{{ $announce->spare_parts }}</td>
+                                        <td class="text-break text-center p-2" colspan="2">
+                                            <div class="p-2 show__seller-text">
+                                                {{ $announce->spare_parts }}
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endif
 

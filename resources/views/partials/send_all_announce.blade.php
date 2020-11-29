@@ -7,13 +7,13 @@
         </thead>
         @foreach( $announce_all->unique('pin') as $announce )
             <tr>
-                <td class="text-left send__all-td pt-1 pb-0">
+                <td class="text-left send__all-td pt-1 pb-0 text-break">
                     <div class="d-block">
                         @include('modals.send_all_modal')
                     </div>
                 </td>
 
-                <td class="text-right pt-1 pb-1 pr-1">
+                <td class="text-right pt-2 pb-1 pr-1">
                     @if( isset($announce->user) && count($announce->user) > 0 )
                         @include('modals.show_all_sellers')
                     @else

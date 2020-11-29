@@ -71,10 +71,10 @@
                                             <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                             <span v-if="loader">Gözlə...</span>
 
-                                            <a href="" class="pb-2 answer__seller">
-                                            <span v-if="seller.name" class="d-flex pl-2">
-                                                {{ seller.name }}
-                                            </span>
+                                            <a :href="'/seller/seller-store/'+seller.id" target="_blank" class="pb-2 answer__seller">
+                                                <span v-if="seller.name" class="d-flex pl-2">
+                                                    {{ seller.name }}
+                                                </span>
                                             </a>
 
                                             <div class="d-flex answer__phone-div">

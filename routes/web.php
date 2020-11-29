@@ -48,6 +48,7 @@ Route::prefix('buyer')->middleware('auth')->group(function(){
 
 Route::prefix('seller')->middleware('auth')->group(function(){
     Route::get('/', 'SellerController@index')->name('seller.index');
+    Route::get('/seller-store/{id}', 'SellerController@SellerStore')->name('seller-store');
     Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');
     Route::post('/get-whos', 'SellerController@getWhos')->name('seller.getwhos');
     Route::get('/show/{user}/{slug}', 'SellerController@show')->name('seller-show');

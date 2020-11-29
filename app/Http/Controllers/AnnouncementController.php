@@ -29,7 +29,7 @@ class AnnouncementController extends Controller
 
     public function flash()
     {
-        if (Auth::check()) {
+        if ( Auth::check() ) {
             return redirect()->route('send')
                 ->with('send_flash', 1);
         }
@@ -328,19 +328,29 @@ class AnnouncementController extends Controller
                 $morg = $announce->last()->user->where('who', 2);
             }
 
-            if ($announce->count() < 0) {
+            if ($announce->count() == 0) {
                 $announce = null;
             }
 
             return view('announcements.send')
-                ->with([
-                    'announce' => $announce->last(),
-                    'announce_all' => $announce_all,
-                    'condition' => $condition,
-                    'store' => $store ?? NULL,
-                    'morg' => $morg ?? NULL,
-                ]);
+                        ->with([
+                            'announce' => $announce->last(),
+                            'announce_all' => $announce_all,
+                            'announce_answer' => $this->getLastAnnounceAnswe($announce->last()),
+                            'condition' => $condition,
+                            'store' => $store ?? NULL,
+                            'morg' => $morg ?? NULL,
+                        ]);
         }
+    }
+
+    public function getLastAnnounceAnswe($announce)
+    {
+        if( !empty($announce) && $announce->count() > 0 ){
+            return $announce->getIsAnswers->count() > 0 ? $announce->getIsAnswers : false ;
+        }
+
+        return false;
     }
 
     public function SendTo(Request $request)

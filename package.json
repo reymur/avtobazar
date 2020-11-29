@@ -37,6 +37,7 @@
         "vue-phone-number-input": "^1.1.10",
         "vue-picture-swipe": "^2.0.2",
         "vue-select": "^3.10.8",
+        "vue-tiny-lazyload-img": "^0.1.0",
         "vuetify": "^2.3.10",
         "watch": "^1.0.2"
     }

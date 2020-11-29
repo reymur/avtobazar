@@ -26,6 +26,18 @@ class SellerController extends Controller
         return view('users.seller');
     }
 
+    public function SellerStore($id)
+    {
+        $user = $id ? User::find($id) : null;
+
+        if( ! $user ) return abort(404);
+
+        if( $user->status == 2 ){
+            return view('users.seller.partials.seller_store')
+                ->with('user',$user);
+        }
+    }
+
     public function profile($id)
     {
         $user = User::where('status', 2)->with(['sellerTypes', 'statusName', 'whos'])->find($id);
