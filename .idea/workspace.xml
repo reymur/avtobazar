@@ -5,27 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/users/logo/placeholder.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672337_15138670.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672604_721645761.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672337_15138670.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672604_721645761.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnnouncementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/saller_auto_logo/saller_marka_logo.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/users/logo/saller_marka_logo.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/16063952601519533821.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/users/sellers/small_16063952601519533821.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ShowAllAnswerSellers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/send.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/send.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/send_flash.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/send_flash.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modals/show_all_sellers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/answer_count_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/answer_count_show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/send_all_announce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/send_all_announce.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/partials/send_flash_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/send_flash_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/OrdersCount.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/OrdersCount.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SendFlashTableImageShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SendFlashTableImageShow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/seller/SellerPhoto.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/seller/SellerPhoto.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -432,6 +428,10 @@
       <workItem from="1606557167600" duration="6781000" />
       <workItem from="1606565589989" duration="5228000" />
       <workItem from="1606580954033" duration="29052000" />
+      <workItem from="1606649907524" duration="11562000" />
+      <workItem from="1606668477841" duration="3036000" />
+      <workItem from="1606673815431" duration="751000" />
+      <workItem from="1606678800552" duration="1316000" />
     </task>
     <servers />
   </component>

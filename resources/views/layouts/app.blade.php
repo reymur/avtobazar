@@ -102,9 +102,9 @@
                     </div>
                     @if( Auth::check() )
                         @if( Auth::user()->status == 1 )
-                            <a class="nav-link dropdown text-white outline__none" href="{{ route('answers') }}"
+                            <a class="nav-link dropdown text-white p-0 outline__none" href="{{ route('answers') }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
+                                <img src="{{ asset('images/svg/answer.svg') }}" class="text-white pl-3" alt="answer">
                                 <span class="sr-only">unread messages</span>
 
                                 <answer-count :auth_user="{{ Auth::user() }}"></answer-count>
@@ -112,9 +112,9 @@
 
 
                         @elseif( Auth::user()->status == 2 )
-                            <a class="nav-link dropdown text-white outline__none" href="{{ route('orders') }}"
+                            <a class="nav-link dropdown text-white p-0 outline__none" href="{{ route('orders') }}"
                                id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('images/svg/answer.svg') }}" class="text-white" alt="answer">
+                                <img src="{{ asset('images/svg/answer.svg') }}" class="text-white pl-3" alt="answer">
                                 <span class="sr-only">unread messages</span>
 
                                 <orders-count></orders-count>

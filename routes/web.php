@@ -50,7 +50,7 @@ Route::prefix('seller')->middleware('auth')->group(function(){
     Route::get('/', 'SellerController@index')->name('seller.index');
     Route::get('/seller-store/{id}', 'SellerController@SellerStore')->name('seller-store');
     Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');
-    Route::post('/get-whos', 'SellerController@getWhos')->name('seller.getwhos');
+    Route::post('/get-whos', 'SellerController@getWhos');
     Route::get('/show/{user}/{slug}', 'SellerController@show')->name('seller-show');
     Route::post('/edit/{id}/{slug}', 'SellerController@edit')->name('seller-edit');
     Route::post('/save-user-photo', 'SellerController@saveUserImage');

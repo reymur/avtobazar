@@ -1,7 +1,7 @@
 <template>
     <div class="d-inline-flex">
         <div class="position-relative">
-            <div v-if="new_orders != null && new_orders != 0" class="main__menu-answers-count">
+            <div v-if="new_orders != null && new_orders != 0" class="main__menu-orders-count">
                 <!--                <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
 
                 <span class="mb-3 px-1">

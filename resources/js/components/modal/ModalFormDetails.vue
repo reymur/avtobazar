@@ -217,6 +217,9 @@ export default {
             exampleModel: [{name:'X5'}],
             errors: [],
             sendLoader: false,
+            protocol: window.location.protocol,
+            host: window.location.host,
+            url: this.protocol+'//'+ this.host,
         }
     },
     methods: {
@@ -241,7 +244,7 @@ export default {
         getWhos(){
             this.whos = [];
 
-            axios.post('seller/get-whos', {
+            axios.post('/seller/get-whos', {
                 id:this.toSelect
             })
             .then(res => {
@@ -266,7 +269,7 @@ export default {
             this.changeConditionValue();
         },
         carsSelect(){
-            axios.post('cars/json-models', {name: this.marka})
+            axios.post('/cars/json-models', {name: this.marka})
                 .then(types => {
                     this.carTypeReturns = [];
                     this.exampleCar = false;
@@ -346,7 +349,7 @@ export default {
                     formdata.append('texpassport', this.texPassInput.trim());
                     formdata.append('image', this.image);
 
-                    axios.post('announce/send-announce',formdata, {
+                    axios.post('/announce/send-announce',formdata, {
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
@@ -508,7 +511,7 @@ export default {
         })
 
         // this.whosSelect();
-        // console.log('AAAAAA - ',this.fuelTypes)
+        console.log('SSSSSSSSSS 222222 - ', this.host)
     }
 }
 </script>

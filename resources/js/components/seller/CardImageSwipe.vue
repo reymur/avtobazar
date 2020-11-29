@@ -10,6 +10,13 @@
 export default {
     name: "CardImageSwipe",
     props: ['user'],
+    data(){
+        return {
+            host: window.location.host,
+            protocol: window.location.protocol,
+            url: this.host,
+        }
+    },
     methods: {
         imageItems(image){
             if( image.image != null ){
@@ -24,7 +31,7 @@ export default {
         }
     },
     mounted(){
-        console.log('Fiqure - ', this.user )
+        // console.log('Fiqure Select - ', this.user )
     }
 }
 </script>

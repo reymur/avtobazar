@@ -68,9 +68,21 @@ body {
     border-radius: 50%;
 }
 
+.answer__all-modal-image {
+    width: 150px;
+    display: block;
+    height: 120px;
+    margin: auto;
+}
+
 .main__menu-answers-count {
     position: absolute;
-    margin: -25px 0 0 -16px;
+    margin: -59px 0 0 21px;
+}
+
+.main__menu-orders-count {
+    position: absolute;
+    margin: -56px 0 0 27px;
 }
 
 .border__b {
@@ -147,6 +159,12 @@ body {
     background-color: #e9ecef;
 }
 
+.send__flash-image {
+    width: 150px;
+    height: 120px;
+    margin: auto;
+}
+
 .flash__bg {
     background-color: #eee !important;
 }
@@ -154,7 +172,9 @@ body {
     box-shadow: 0 1px 1px 2px rgba(121, 121, 121, 0.23);
 }
 .flash__image {
-    width: 100px;
+    width: 150px;
+    margin: auto;
+    height: 120px;
 }
 
 .flash__texpass {
@@ -201,6 +221,16 @@ body {
 
 }
 
+.seller {
+    height: 250px;
+}
+    .seller_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0 30%;
+    }
+
 .seller__profile-image {
     width: 180px;
     margin: 20px 0 0 0;
@@ -224,8 +254,14 @@ body {
         }
         .seller__store-card-div {
             border: none;
+            padding: 25px 0 5px 0;
             background-color: #f7f6f6 !important;
         }
+
+.hover__element:hover {
+    background-color: #65f9003b;
+}
+
         .announce__title-text {
             font-family: Helvetica, Arial, sans-serif;
             display: inline-block;
@@ -234,6 +270,7 @@ body {
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin: 0 0 0 -11px;
         }
 
 .seller__image-edit-div {

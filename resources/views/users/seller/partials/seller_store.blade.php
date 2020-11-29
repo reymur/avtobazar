@@ -24,8 +24,13 @@
 
             <div class="col-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
                 <div class="card bg-dark text-white mb-4 seller__store-image-div">
-                    <img src="/images/users/sellers/{{ $user->image }}"
-                         class="card-img seller__store-image" alt="{{ $user->image }}">
+                    <seller-photo
+                        :user="{{ $user }}"
+                    ></seller-photo>
+
+{{--                    <img src="/images/users/sellers/{{ $user->image }}"--}}
+{{--                         class="card-img seller__store-image" alt="{{ $user->image }}">--}}
+
                     <div class="card-img-overlay d-table seller__store-image-text">
                         <h5 class="card-title ml-4 text-uppercase letter__spacing">{{ $user->name ?? '' }}</h5>
                         <p class="card-text ml-4 letter__spacing">
@@ -47,7 +52,7 @@
                 </div><!--Seller Store image div-->
 
                 <div class="col-10 m-auto">
-                    <div class="py-4 pl-n3">
+                    <div class="pt-4 pb-1 pl-n3">
                         <div class="announce__title-text">
                             İstifadəçinin bütün elanları
                         </div>
@@ -56,11 +61,11 @@
                     <div class="row row-cols-1 row-cols-md-4 seller__store-card-div">
                         @for( $i = 0; $i < 100; $i++ )
                             <div class="col mb-3 px-1">
-                                <div class="card h-100">
+                                <div class="card h-100 hover__element">
                                     <card-image-swipe
                                         :user="{{ $user }}"
                                     ></card-image-swipe>
-                                    
+
                                     <div class="card-body">
                                         <h5 class="card-title">Card title</h5>
                                         <p class="card-text">This is a longer card with supporting little bit longer.</p>

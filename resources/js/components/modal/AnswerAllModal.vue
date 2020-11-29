@@ -97,14 +97,14 @@
                                 <tr v-if="answer.image">
                                     <td scope="row" class="text-right text-black-50 py-2">Şəkil:</td>
                                     <td class="text-break text-center py-2">
-                                        <span class="">
+                                        <div class="answer__all-modal-image">
                                              <vue-picture-swipe
                                                  :items="imageItems(answer.image)"
                                                  :options="{
                                                     clickToCloseNonZoomable: false,
                                                 }"
                                              ></vue-picture-swipe>
-                                        </span>
+                                        </div>
                                     </td>
                                 </tr>
 

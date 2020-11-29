@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="send__flash-image">
         <vue-picture-swipe
             :items="itemsFunc(announce.image)"
         ></vue-picture-swipe>

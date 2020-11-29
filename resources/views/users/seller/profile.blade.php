@@ -33,7 +33,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-center border-0 pr-0" colspan="2">
-                                            <div class="col-12 ml-5 pr-0">
+                                            <div class="col-12 ml-4 pr-0">
                                                 <seller-photo
                                                     :user="{{ $user }}"
                                                 ></seller-photo>
