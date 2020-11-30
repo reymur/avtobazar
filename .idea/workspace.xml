@@ -5,23 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672337_15138670.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672604_721645761.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672337_15138670.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672604_721645761.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/announcements/announce_sale_make.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/SellerType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/SellerType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/AnswerAllModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modal/ModalFormDetails.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/OrdersCount.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/OrdersCount.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SendFlashTableImageShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SendFlashTableImageShow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/seller/SellerPhoto.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/seller/SellerPhoto.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/crumbs/annonce_button_for_all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/crumbs/annonce_button_for_all.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,7 +168,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/nuxt/plugin.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.css&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/demo.html&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/socket.io-client/build/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-picture-swipe/src/VuePictureSwipe.vue&#10;/home/reymur/domains/avtom/node_modules/engine.io/lib/server.js&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue/types/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/engine.io-client/lib/socket.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.common.js&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.css&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/node_modules/vue-picture-swipe/src/VuePictureSwipe.vue&#10;/home/reymur/domains/avtom/node_modules/engine.io/lib/server.js&#10;/home/reymur/domains/avtom/node_modules/vue/types/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/uploader.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/nuxt/plugin.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/demo.html&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/demo/App.vue&#10;/home/reymur/domains/avtom/node_modules/socket.io-client/build/index.d.ts&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/engine.io-client/lib/socket.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.common.js&#10;/home/reymur/domains/avtom/.env" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/users/saller_auto_logo" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -431,7 +428,11 @@
       <workItem from="1606649907524" duration="11562000" />
       <workItem from="1606668477841" duration="3036000" />
       <workItem from="1606673815431" duration="751000" />
-      <workItem from="1606678800552" duration="1316000" />
+      <workItem from="1606678800552" duration="5461000" />
+      <workItem from="1606692499198" duration="10142000" />
+      <workItem from="1606692639154" duration="3935000" />
+      <workItem from="1606697915415" duration="2381000" />
+      <workItem from="1606702538811" duration="25536000" />
     </task>
     <servers />
   </component>
@@ -447,10 +448,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="141" y="27" width="1084" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.701@0.27.1366.701" timestamp="1602813387137" />
-    <state x="376" y="169" width="618" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602507463435">
+    <state x="376" y="169" width="618" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606751207028">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="376" y="169" width="618" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.701@0.27.1366.701" timestamp="1602507463435" />
+    <state x="376" y="169" width="618" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.701@0.27.1366.701" timestamp="1606751207028" />
     <state x="394" y="98" width="558" height="572" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605525422877">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
@@ -483,10 +484,10 @@
       <screen x="0" y="27" width="1366" height="701" />
     </state>
     <state x="482" y="81" width="447" height="600" key="NewPhpClassDialog/0.27.1366.701@0.27.1366.701" timestamp="1605195523597" />
-    <state x="684" y="304" width="399" height="164" key="NewPhpFileDialog" timestamp="1606588814599">
+    <state x="549" y="302" width="399" height="164" key="NewPhpFileDialog" timestamp="1606756603027">
       <screen x="0" y="27" width="1366" height="701" />
     </state>
-    <state x="684" y="304" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1606588814599" />
+    <state x="549" y="302" width="399" height="164" key="NewPhpFileDialog/0.27.1366.701@0.27.1366.701" timestamp="1606756603027" />
     <state x="172" y="27" width="1012" height="701" key="SettingsEditor" timestamp="1600373723876">
       <screen x="0" y="27" width="1366" height="701" />
     </state>

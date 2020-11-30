@@ -28,11 +28,10 @@
                         :user="{{ $user }}"
                     ></seller-photo>
 
-{{--                    <img src="/images/users/sellers/{{ $user->image }}"--}}
-{{--                         class="card-img seller__store-image" alt="{{ $user->image }}">--}}
-
                     <div class="card-img-overlay d-table seller__store-image-text">
-                        <h5 class="card-title ml-4 text-uppercase letter__spacing">{{ $user->name ?? '' }}</h5>
+                        <h5 class="card-title ml-4 text-uppercase letter__spacing">
+                            {{ $user->name ?? '' }}
+                        </h5>
                         <p class="card-text ml-4 letter__spacing">
                             <span class="row pl-3">{{ $user->address ?? '' }}</span>
                             <span class="row pl-3 mb-2">{{ $user->email ?? '' }}</span>
@@ -49,10 +48,87 @@
                             </span>
                         </p>
                     </div>
+
+                    <div class="card-body bg-info">
+                        <div class=" d-flex">
+                            <div class="ml-4 pr-5 border-right border-secondary">
+                                <div class="card-title mb-1 d-inline-flex letter__spacing">
+                                    <h4 class="text-h3 pr-2 mb-1 text">{{ $user->name ?? '' }}</h4>
+                                    <span class="card-subtitle">{{ $user->whos->who }}</span>
+                                </div>
+
+                                <div class="card-text text-dark mb-1 d-flex">
+                                    @if( $user->address )
+                                        <span class="pr-1">
+                                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-geo-alt-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    </svg>
+                                </span>
+
+                                        <span class="text-break d-block pt-1">
+                                    {{ $user->address }}
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="card-text text-dark d-flex">
+                            <span class="pr-2">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-clock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm8-7A8 8 0 1 1 0 8a8 8 0 0 1 16 0z"/>
+                                    <path fill-rule="evenodd" d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                            </span>
+
+                                    <span class="text-break d-block work__time">
+                                Hər gün: 09:00–19:00
+                            </span>
+                                </div>
+
+                                <p class="card-text d-inline-block mt-3 ml-4 p-2 store__announce-dix">
+                                <span class="mr-1 store__announce-count">
+                                    54337
+                                </span>
+                                    <span class="">Elan</span>
+                                </p>
+                            </div>
+                            <div class="ml-4 mt-4">
+                                <div class="pt-2 text-light-50 letter__spacing">
+                                    <h5>Dəstəklədiyi markalar:</h5>
+                                </div>
+
+                                <div class="col-12 bg-primary text-break px-3 py-2">
+                                    @foreach( $user->sellerTypes as $key => $marka )
+                                        <div class="row m-0 seller__store-models letter__spacing">
+                                            <a href="{{ route('models', ['name' => $marka->model->title]) }}"
+                                               class="text-light"
+                                               target="_blank">
+
+                                                {{ $marka->title }}
+
+                                                @if( $user->sellerTypes->count() != $key + 1 )
+                                                    <span class="pl-0 pr-1">/</span>
+                                                @endif
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="d-flex mt-4 seller__store-info-text">
+                                    <div class="mr-3 seller__store-item">{{ $user->address ?? '' }}</div>
+                                    <div class="mr-3 seller__store-item">{{ $user->email ?? '' }}</div>
+                                    <div class="">
+                                        <a href="tel:{{ $user->phone }}" class="seller__store-a">
+                                            {{ $user->phone ?? '' }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div><!--Seller Store image div-->
 
                 <div class="col-10 m-auto">
-                    <div class="pt-4 pb-1 pl-n3">
+                    <div class="pt-2 pb-2 pl-n3">
                         <div class="announce__title-text">
                             İstifadəçinin bütün elanları
                         </div>

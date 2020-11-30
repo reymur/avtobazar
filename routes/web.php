@@ -42,6 +42,10 @@ Route::prefix('announce')->group(function() {
     Route::post('/edit/{id}/{slug}', 'BuyerController@edit')->name('buyer-edit');
 });
 
+Route::prefix('sale')->middleware('web')->group(function(){
+    Route::get('/', 'SaleController@saleMake')->name('sale_make');
+});
+
 Route::prefix('buyer')->middleware('auth')->group(function(){
     Route::get('/profile/{id}', 'BuyerController@profile')->name('buyer.profile');
 });

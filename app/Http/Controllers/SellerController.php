@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Announcement;
 use App\Car;
+use App\Category;
 use App\City;
 use App\Motor;
 use App\SellerType;
@@ -12,6 +13,7 @@ use App\Type;
 use App\User;
 use App\Who;
 use App\Year;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

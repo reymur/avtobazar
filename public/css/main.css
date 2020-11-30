@@ -237,8 +237,8 @@ body {
 }
 
 .seller__store-image-div {
-    height: 250px;
-    border-style: solid;
+    /*height: 250px;*/
+    border-style: none;
 }
     .seller__store-image {
         width: 100%;
@@ -255,8 +255,36 @@ body {
         .seller__store-card-div {
             border: none;
             padding: 25px 0 5px 0;
-            background-color: #f7f6f6 !important;
+            background-color: #e9ecef !important;
         }
+        .store__announce-dix {
+            background-color: darkcyan;
+        }
+            .store__announce-count {
+                color: #e9ecef !important;
+                font-weight: 700;
+            }
+        .seller__store-models {
+            display: inline;
+        }
+        .seller__store-info-text {
+            color: #e1fbfb;
+        }
+            .seller__store-item {
+
+            }
+                .seller__store-a {
+                    outline: none;
+                    color: #e1fbfb;
+                }
+
+.sale__make-text {
+    margin-top: 5px;
+}
+
+.work__time {
+    margin-top: 1px;
+}
 
 .hover__element:hover {
     background-color: #65f9003b;
@@ -331,12 +359,16 @@ body {
     border-radius: 0;
     padding-top: 11px;
     background-color: #3ac857;
-    margin: -5px 0 -9px -198px;
+    margin: -5px 0 -9px -196px;
     box-shadow: -2px 1px 3px 0 #959595;
 }
 
+.upload__img-title {
+    display: none;
+}
+
 .annonce__btn_for_all-text {
-    margin: 2px 0 0 0;
+    margin: 5px 0 0 0;
     font-weight: bold;
     letter-spacing: 1px;
     color: #ffffff;

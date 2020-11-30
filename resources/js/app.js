@@ -40,6 +40,9 @@ Vue.component('answer-all-modal', require('./components/modal/AnswerAllModal.vue
 Vue.component('show-all-answer-sellers', require('./components/modal/ShowAllAnswerSellers.vue').default);
 Vue.component('show-all-answer-sellers-answers-show-table', require('./components/partials/ShowAllAnswerSellersAnswersShowTable.vue').default);
 
+Vue.component('sale-make-form', require('./components/forms/SaleMakeForm.vue').default);
+Vue.component('vue-image-upload', require('./components/partials/VueImageUpload.vue').default);
+
 import Vue from 'vue';
 
 import vSelect from 'vue-select';
@@ -52,6 +55,9 @@ Vue.component('vue-picture-swipe', VuePictureSwipe);
 
 import VueTinyLazyloadImg from 'vue-tiny-lazyload-img'
 Vue.use(VueTinyLazyloadImg);
+
+import VueUploader from "vux-uploader-component";
+Vue.component('vux-uploader-component', VueUploader);
 
 Vue.component('v-select', vSelect);
 Vue.component('vue-phone-number-input', VuePhoneNumberInput);
