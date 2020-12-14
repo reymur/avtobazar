@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Car;
 use App\City;
+use App\Condition;
 use App\FuelType;
 use App\Motor;
 use App\Type;
@@ -40,6 +41,8 @@ class GlobalVarsProvider extends ServiceProvider
         $motors = Motor::all();
         $fuel_types = FuelType::all();
 
+        $conditions = Condition::all();
+
         View::share([
             'who' => $who,
             'cars' => $cars,
@@ -48,6 +51,7 @@ class GlobalVarsProvider extends ServiceProvider
             'years' => $years,
             'motors' => $motors,
             'fuel_types' => $fuel_types,
+            'conditions' => $conditions
         ]);
     }
 }

@@ -15,7 +15,6 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
             $table->string('title')->nullable();
             $table->integer('price')->nullable();
             $table->text('body')->nullable();
@@ -24,6 +23,7 @@ class CreateSalesTable extends Migration
             $table->string('user')->nullable();
             $table->string('email')->nullable();
             $table->integer('phone')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

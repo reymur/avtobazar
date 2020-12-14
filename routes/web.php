@@ -40,6 +40,9 @@ Route::prefix('announce')->group(function() {
     Route::get('/buyer-announce-delete/{id}', 'AnnouncementController@buyerAnnounceADelete')->name('buyer_announce_delete');
     Route::get('/show/{user}/{slug}', 'BuyerController@show')->name('buyer-show');
     Route::post('/edit/{id}/{slug}', 'BuyerController@edit')->name('buyer-edit');
+
+    /* Sale */
+    Route::post('/sale-announce-save', 'SaleController@saleAnnounceMake');
 });
 
 Route::prefix('sale')->middleware('web')->group(function(){

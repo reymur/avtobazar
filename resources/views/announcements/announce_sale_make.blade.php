@@ -27,8 +27,13 @@
                     <div class="text-uppercase mb-3 px-md-4 px-sm-4">
                         <h6>Yeni elan</h6>
                     </div>
-
-                    <sale-make-form></sale-make-form>
+{{--                    {{ dd( $conditions ) }}--}}
+                    <sale-make-form
+                        :cars="{{ $cars }}"
+                        :models="{{ $types }}"
+                        :cities="{{ $cities }}"
+                        :conditions="{{ $conditions }}"
+                    ></sale-make-form>
 
                 </div>
             </div>
