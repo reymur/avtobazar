@@ -31,13 +31,13 @@
 
         <div v-if="image_errors.length > 1">
             <div v-for="error in image_errors">
-                <div class="text-danger mt-1 ml-md-3 ml-sm-3">
+                <div class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
                     {{ imageErrorsReplace(error, image_limit) }}
                 </div>
             </div>
         </div>
         <div v-else-if="image_errors.length == 1">
-            <div v-for="error in image_errors" class="text-danger mt-1 ml-md-3 ml-sm-3">
+            <div v-for="error in image_errors" class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
                 {{ imageErrorsReplace(error, image_errors.length) }}
             </div>
         </div>
@@ -73,7 +73,7 @@ export default {
             let dot_replace = '';
             let error_org = '';
 
-            if (error.indexOf('images.'+num) != -1) {
+            if ( error.indexOf('images.'+num) != -1 ) {
                 number_replace = error.replace( 'images.'+num, 'images.'+(num+1) );
                 dot_replace = number_replace.replace(
                     'images.'+(num+1),
