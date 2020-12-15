@@ -74,6 +74,7 @@ export default {
             let error_org = '';
 
             if ( error.indexOf('images.'+num) != -1 ) {
+                alert(33333333)
                 number_replace = error.replace( 'images.'+num, 'images.'+(num+1) );
                 dot_replace = number_replace.replace(
                     'images.'+(num+1),
@@ -113,14 +114,12 @@ export default {
     mounted() {
         // console.log( '>>>>>>>> - ',this.image_errors_var )
 
-        // document.getElementsByClassName('vux-uploader_title')[0]
-        //     .classList.add('upload__img-title')
+        // document.getElementsByClassName('vux-uploader_input-box')[0]
+        //     .classList.add('image__upload-button-border');
     },
 }
 </script>
 
-<style lang="css" scoped>
-.vux-uploader_title {
-    display: none;
-}
+<style scoped>
+
 </style>

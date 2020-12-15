@@ -24,10 +24,10 @@
 
             <div class="col-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
                 <div class="col-lg-8 col-xl-8 col-md-10 col-sm-12 m-sm-0 p-sm-0 m-md-0 p-md-0 m-lg-auto">
-                    <div class="text-uppercase mb-3 px-md-4 px-sm-4">
-                        <h6>Yeni elan</h6>
+                    <div class="m-auto pl-0 pb-2 letter__spacing">
+                        <h5 class="text__bold">Yeni elan</h5>
                     </div>
-{{--                    {{ dd( $conditions ) }}--}}
+
                     <sale-make-form
                         :cars="{{ $cars }}"
                         :models="{{ $types }}"

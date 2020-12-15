@@ -281,6 +281,13 @@ body {
 .sale__make-text {
     margin-top: 5px;
 }
+    .bg__color {
+        background-color: #f0f0f0 !important;
+    }
+
+    .image__upload-button-border {
+        border: 1px solid #605f5f;
+    }
 
 .work__time {
     margin-top: 1px;

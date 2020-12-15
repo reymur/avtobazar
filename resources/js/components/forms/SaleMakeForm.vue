@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="py-3 bg__color">
         <!--Details section-->
         <div class="d-block m-auto col-lg-10 col-xl-10 px-md-4 px-sm-4">
             <div class="form-group col-md-11 col-sm-12 pb-3 m-auto">
@@ -18,7 +18,7 @@
                 </div>
 
                 <div v-if="errors">
-                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-3 pl-sm-3">
+                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-0 pl-sm-0">
                         <div v-if="error.marka" class="d-block invalid-feedback ml-lg-4 ml-xl-5 mt-1">
                             {{ error.marka[0] }}
                         </div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div v-if="errors">
-                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-3 pl-sm-3">
+                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-0 pl-sm-0">
                         <div v-if="error.model" class="d-block invalid-feedback ml-lg-4 ml-xl-5 mt-1">
                             {{ error.model[0] }}
                         </div>
@@ -63,7 +63,7 @@
                     </select>
                 </div>
 
-                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-3 ml-sm-3">
+                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-0 ml-sm-0">
                     <small class="text-black-50 ml-lg-5 ml-xl-5 letter__spacing">
                         &nbsp;Ehtiyyat hissəsinin vəziyyəti
                     </small>
@@ -83,17 +83,17 @@
                     <label for="title" class="col-lg-2 col-xl-2 px-lg-0 px-xl-0 px-md-0 px-sm-0 mt-lg-2 mt-xl-2 mr-lg-3 mr-xl-3 mr-xl-3 pl-md-0 pl-sm-0">
                         Elanın adı<span class="text-subtitle-2 text-danger">*</span>
                     </label>
-                    <input v-model="title" type="text" class="fcol-lg-8 col-xl-8 orm-control mb-1" id="title" placeholder="">
+                    <input v-model="title" type="text" class="col-lg-8 col-xl-8 orm-control mb-1" id="title" placeholder="">
                 </div>
 
-                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-3 ml-sm-3">
+                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-0 ml-sm-0 mt-n1">
                     <small class="text-black-50 ml-lg-5 ml-xl-5 letter__spacing">
                         &nbsp;Elanlın adı bölməsinə qiymət yazmayın!
                     </small>
                 </div>
 
                 <div v-if="errors">
-                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-3 pl-sm-3 mb-2">
+                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-0 pl-sm-0 mb-2">
                         <div v-if="error.title" class="d-block invalid-feedback ml-lg-4 ml-xl-5 mt-1">
                             {{ error.title[0] }}
                         </div>
@@ -110,7 +110,7 @@
                 </div>
 
                 <div v-if="errors">
-                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-3 pl-sm-3">
+                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-0 pl-sm-0">
                         <div v-if="error.price" class="d-block invalid-feedback ml-lg-4 ml-xl-5 mt-1">
                             {{ error.price[0] }}
                         </div>
@@ -141,14 +141,14 @@
                     <textarea v-model="note" class="col-lg-8 col-xl-8 form-control mb-1" id="body" rows="3"></textarea>
                 </div>
 
-                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-3 ml-sm-3">
-                    <small class="text-black-50 ml-lg-5 ml-xl-5 letter__spacing">
+                <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-0 ml-sm-0">
+                    <small class="text-black-50 ml-lg-5 ml-xl-5 ml-md-0 ml-sm-0 letter__spacing">
                         &nbsp;Məzmun bölməsinə qiymət yazmayın!
                     </small>
                 </div>
 
                 <div v-if="errors">
-                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-3 pl-sm-3">
+                    <div v-for="error in errors" class="ml-lg-5 pl-lg-1 ml-xl-5 pl-xl-1 ml-md-0 pl-sm-0">
                         <div v-if="error.note" class="d-block invalid-feedback ml-lg-4 ml-xl-5 mt-1">
                             {{ error.note[0] }}
                         </div>
@@ -167,8 +167,8 @@
         </div><!--VueImageUpload-->
 
         <!--Name section-->
-        <div class="form-group col-lg-10 col-xl-10 col-md-12 col-sm-12 m-lg-auto m-xl-auto mt-4 mb-3 p-md-0 p-sm-0 border border-info px-5 py-4 mt-4 px-md-4 px-sm-4">
-            <div class="form-group col-lg-7 col-xl-7 col-md-12 col-sm-12 m-lg-auto m-xl-auto pt-4">
+        <div class="form-group col-lg-10 col-xl-10 col-md-12 col-sm-12 m-lg-auto m-xl-auto px-md-4 px-sm-4 border border-info">
+            <div class="form-group col-lg-7 col-xl-7 col-md-12 col-sm-12 m-lg-auto m-xl-auto pb-lg-3 pt-4">
                 <label for="name">
                     Adınız<span class="text-subtitle-2 text-danger">*</span>
                 </label>
@@ -198,7 +198,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-lg-7 col-xl-7 col-md-12 col-sm-12 m-lg-auto m-xl-auto pt-4 pb-4 pt-md-2 pt-sm-2">
+            <div class="form-group col-lg-7 col-xl-7 col-md-12 col-sm-12 m-lg-auto m-xl-auto pt-lg-4 pt-xl-4 pb-4 pt-md-2 pt-sm-2">
                 <button @click="saleAnnounceMake" class="btn btn-success">Göndər</button>
             </div>
         </div>
@@ -275,18 +275,18 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-                 .then(res => {
-                     console.log('res sale --- ', res.data )
-                 })
-                 .catch( err => {
-                     if( err.response.data.errors !== undefined ){
-                         let errors = err.response.data.errors;
-                         this.errors.push( errors );
-                         this.getImageErrors();
-                     }
+             .then(res => {
+                 console.log('res sale --- ', res.data )
+             })
+             .catch( err => {
+                 if( err.response.data.errors !== undefined ){
+                     let errors = err.response.data.errors;
+                     this.errors.push( errors );
+                     this.getImageErrors();
+                 }
 
-                     console.log('err sale --- ', err.response.data )
-                 })
+                 console.log('err sale --- ', err.response.data.errors )
+             })
         },
         carTypes(){
             let car_name = null;
