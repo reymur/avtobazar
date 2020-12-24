@@ -2,29 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\SaleTrait;
+use App\Sale;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    use SaleTrait;
+
     public function saleMake(Request $request)
     {
         return view('announcements.announce_sale_make');
     }
 
+    public function saleInfo()
+    {
+        return view('announcements.announce_sale_flash_info');
+    }
+
+    public function saleShow(Request $request)
+    {
+        $sale = Sale::where('number', $request->number)->first();
+
+        if( empty($sale) ) return redirect()->route('home');
+
+        return view('announcements.sale_show')->with([
+            'sale' => $sale
+        ]);
+    }
+
     public function saleAnnounceMake(Request $request)
     {
-//        dd( $request->images[0]->getClientOriginalName() );
-        $request->validate([
-            'marka' => 'required',
-            'model' => 'required',
-            'title' => 'required|string|min:3|max:32',
-            'condition' => 'required',
-            'price' => 'required|numeric',
-            'note' => 'required|min:6|max:1000',
-            'name' => 'required|min:3|max:32',
-            'phone' => 'required|numeric|min:10|max:10',
-            'images' => 'array|required',
-            'images.*' => 'required|image|max:1000',
-        ]);
+        $this->saleAnnounceValidate($request);
+
+        $new_sale = $this->saleAnnounceSave($request);
+
+        return $this->responseData($new_sale);
     }
 }

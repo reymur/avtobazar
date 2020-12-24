@@ -127,7 +127,7 @@
             </div>
         </nav>
 
-        <div class="container ml-auto">
+        <div class="container ml-auto" id="search">
             <form class="form-inline my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="axtar..." aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Axtar</button>

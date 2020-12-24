@@ -288,6 +288,47 @@ body {
     .image__upload-button-border {
         border: 1px solid #605f5f;
     }
+    .image__upload-bg-color {
+        background-color: #f7f7f7;
+    }
+    .sale__flash-info {
+        margin: auto;
+        position: relative;
+        display: table;
+        padding: 40px 20px 30px 20px;
+    }
+    .sale__pin-bg-color {
+        background-color: #f9d270;
+    }
+    .sale__main-image {
+        width: 450px;
+        height: 370px;
+        float: left;
+        margin: 10px;
+    }
+    .sale__other-images {
+        width: 150px;
+        height: 120px;
+        float: left;
+        padding: 6px;
+        margin-top: 4px;
+    }
+    .for__sm {
+        float: none;
+        width: 100%;
+        padding: 0;
+        margin: 0 0 10px 0;
+    }
+    .for__md {
+        float: none;
+        width: 100%;
+        padding: 0;
+        margin: 0 0 10px 0;
+    }
+
+.text__italic {
+    font-style: italic;
+}
 
 .work__time {
     margin-top: 1px;

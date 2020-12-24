@@ -1,5 +1,5 @@
 <template>
-    <div class="border border-default p-4 mb-4">
+    <div class="border border-default image__upload-bg-color p-4 mb-4">
 
         <vux-uploader-component
             v-model="fileList"
@@ -74,7 +74,6 @@ export default {
             let error_org = '';
 
             if ( error.indexOf('images.'+num) != -1 ) {
-                alert(33333333)
                 number_replace = error.replace( 'images.'+num, 'images.'+(num+1) );
                 dot_replace = number_replace.replace(
                     'images.'+(num+1),

@@ -41,6 +41,8 @@ Vue.component('show-all-answer-sellers', require('./components/modal/ShowAllAnsw
 Vue.component('show-all-answer-sellers-answers-show-table', require('./components/partials/ShowAllAnswerSellersAnswersShowTable.vue').default);
 
 Vue.component('sale-make-form', require('./components/forms/SaleMakeForm.vue').default);
+Vue.component('sale-flash-info', require('./components/partials/SaleFlashInfo.vue').default);
+Vue.component('sale-image-show', require('./components/partials/SaleImageShow.vue').default);
 Vue.component('vue-image-upload', require('./components/partials/VueImageUpload.vue').default);
 
 import Vue from 'vue';

@@ -15,15 +15,19 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('marka')->nullable();
+            $table->string('model')->nullable();
             $table->string('title')->nullable();
             $table->integer('price')->nullable();
-            $table->text('body')->nullable();
             $table->string('condition')->nullable();
             $table->string('city')->nullable();
-            $table->string('user')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->integer('phone')->nullable();
             $table->text('note')->nullable();
+            $table->integer('pin')->nullable();
+            $table->integer('number')->nullable();
+            $table->integer('published')->default(0);
             $table->timestamps();
         });
     }

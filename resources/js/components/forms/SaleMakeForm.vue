@@ -57,7 +57,9 @@
                     <select @change="conditionChange" v-if="conditions != null && conditions.length > 0" v-model="condition_m"
                         class="col-lg-8 col-xl-8 form-control" id="condition">
                         <option :disabled="disabled_condition">{{ condition_m }}</option>
-                        <option v-for="condition in conditions" v-if="condition.title != condition_m" :value="condition.title">
+                        <option v-for="condition in conditions"
+                                v-if="condition.title != condition_m && condition.id != 6"
+                                :value="condition.title">
                             {{ condition.title }}
                         </option>
                     </select>
@@ -78,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-11 col-sm-12 pb-2 m-auto">
+            <div class="form-group col-md-11 col-sm-12 pb-3 m-auto">
                 <div class="d-lg-flex d-xl-flex">
                     <label for="title" class="col-lg-2 col-xl-2 px-lg-0 px-xl-0 px-md-0 px-sm-0 mt-lg-2 mt-xl-2 mr-lg-3 mr-xl-3 mr-xl-3 pl-md-0 pl-sm-0">
                         Elanın adı<span class="text-subtitle-2 text-danger">*</span>
@@ -106,7 +108,7 @@
                     <label for="price" class="pt-2 mr-3">
                         Qiymət, AZN<span class="text-left text-subtitle-2 text-danger">*</span>
                     </label>
-                    <input v-model="price" type="text" class="col-3 form-control" id="price" placeholder="">
+                    <input v-model="price" type="text" class="col-2 form-control" id="price" placeholder="">
                 </div>
 
                 <div v-if="errors">
@@ -138,7 +140,7 @@
                     <label for="body" class="col-lg-2 col-xl-2 px-lg-0 px-xl-0 mt-lg-2 mt-xl-2 mr-lg-3 mr-xl-3 mr-xl-3 pl-md-0 pl-sm-0">
                         Məzmun<span class="text-subtitle-2 text-danger">*</span>
                     </label>
-                    <textarea v-model="note" class="col-lg-8 col-xl-8 form-control mb-1" id="body" rows="3"></textarea>
+                    <textarea v-model="note" class="col-lg-8 col-xl-8 form-control mb-1" id="body" rows="6"></textarea>
                 </div>
 
                 <div class="text-black-50 ml-lg-5 ml-xl-5 ml-md-0 ml-sm-0">
@@ -187,7 +189,7 @@
                 <label for="phone">
                     Mobil nömrə<span class="text-subtitle-2 text-danger">*</span>
                 </label>
-                <input v-model="phone" type="email" class="form-control" id="phone" placeholder="">
+                <input v-model="phone" type="text" class="form-control" id="phone" placeholder="">
 
                 <div v-if="errors">
                     <div v-for="error in errors" class="ml-lg-0 pl-lg-0 ml-xl-0 pl-xl-0 ml-md-0 pl-sm-0">
@@ -232,7 +234,7 @@ export default {
         }
     },
     methods: {
-        getImageErrors(){
+        refactImageErrors(){
             let i = 0;
             this.image_errors = [];
 
@@ -261,10 +263,13 @@ export default {
 
             fd.append('marka', this.marka == 'Markanı seçin' ? '' : this.marka);
             fd.append('model', this.model_m == 'Modeli seçin' ? '' : this.model_m );
-            fd.append('condition', this.condition_m);
             fd.append('title', this.title);
+            fd.append('condition', this.condition_m);
             fd.append('price', this.price);
+            fd.append('city', this.city_m);
             fd.append('note', this.note);
+            fd.append('name', this.name);
+            fd.append('phone', this.phone);
 
             this.fileList.forEach( file => {
                 fd.append('images[]', file );
@@ -276,13 +281,16 @@ export default {
                 }
             })
              .then(res => {
-                 console.log('res sale --- ', res.data )
+                 if( res.status == 200 ){
+                     window.location.href = 'http://avtolavka/announce/sale-flash-info?pin='+res.data.pin+'&number='+res.data.number
+                     console.log('res sale --- ', res.data )
+                 }
              })
              .catch( err => {
                  if( err.response.data.errors !== undefined ){
                      let errors = err.response.data.errors;
                      this.errors.push( errors );
-                     this.getImageErrors();
+                     this.refactImageErrors();
                  }
 
                  console.log('err sale --- ', err.response.data.errors )

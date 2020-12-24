@@ -43,6 +43,8 @@ Route::prefix('announce')->group(function() {
 
     /* Sale */
     Route::post('/sale-announce-save', 'SaleController@saleAnnounceMake');
+    Route::get('/sale-flash-info', 'SaleController@saleInfo');
+    Route::get('/sale/show/{number}', 'SaleController@saleShow');
 });
 
 Route::prefix('sale')->middleware('web')->group(function(){
