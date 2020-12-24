@@ -24,11 +24,49 @@
             </div>
 
             <div class="col-xl-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
-                <div class="card col-xl-12 col-lg-12 bg-dark text-white p-3 mb-4 seller__store-image-div">
+                <div class="card col-xl-12 col-lg-12 bg-dark text-white p-3 mb-0 seller__store-image-div">
                     <sale-image-show
                         :sale="{{ $sale }}"
                     ></sale-image-show>
                 </div><!--Seller Store image div-->
+
+                <div class="p-3 sale__after-images d-flex">
+                    <div class="ml-5 text-white d-inline-block sale__main-price">
+                        {{ $sale->price }}
+                        <span class="text-subtitle sale__price-subtitle">AZE</span>
+                    </div>
+                    <div class="sale__main-title">
+                        {{ $sale->title }}
+                    </div>
+                </div>
+
+                <div class="col-lg-12 d-block m-auto">
+                    <div class="col-lg-7 d-block m-auto sale__info">
+                        <div class="sale__info-content">
+                            <div class="border-bottom border-info d-inline-block mb-2 px-4 text__bold">
+                                <span class="">{{ $sale->marka }}</span>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16">
+                                    <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                </svg>
+
+                                <span class="">{{ $sale->model }}</span>
+                            </div>
+
+                            <div class="border-bottom border-info d-inline-block mb-2 px-4 text__bold">
+                                {{ $sale->condition }}
+                            </div>
+
+                            <div class="border-bottom border-info d-inline-block px-4 text__bold">
+                                {{ $sale->city }}
+                            </div>
+                        </div>
+
+                        <div class="d-inline-block px-4 py-3 sale__note">
+                            {{ $sale->note }}
+                        </div>
+                    </div>
+                </div>
 
 {{--                <div class="col-10 m-auto">--}}
 {{--                    <div class="pt-2 pb-2 pl-n3">--}}
