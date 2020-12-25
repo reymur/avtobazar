@@ -312,7 +312,7 @@ body {
     .sale__main-price {
         font-weight: bold;
         font-size: 23px;
-        padding: 17px 55px 11px 26px;
+        padding: 17px 70px 11px 45px;
         background-color: #d0a521;
     }
         .sale__price-subtitle {
@@ -323,10 +323,27 @@ body {
             margin: -3px 0 0 3px;
             position: absolute;
         }
+    .sale__left-info {
+        background-color: #f7f6e1;
+    }
+        .sale__name {
+            font-size: 17px;
+            color: darkmagenta;
+        }
+            .sale__name-sub {
+                color: black;
+                font-size: 15px;
+            }
+        .sale__last-info {
+            font-size: 13px;
+        }
+    .sale__phone-bg {
+
+    }
     .sale__main-title {
         font-size: 25px;
         font-weight: bold;
-        margin: 18px 0 0 30px;
+        margin: 18px 0 0 0;
         display: inline;
     }
     .sale__info-content {
