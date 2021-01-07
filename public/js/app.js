@@ -2544,8 +2544,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         if (res.status == 200) {
-          window.location.href = 'http://avtolavka/announce/sale-flash-info?pin=' + res.data.pin + '&number=' + res.data.number;
           console.log('res sale --- ', res.data);
+          window.location.href = 'http://avtolavka/announce/sale-flash-info?' + 'marka=' + res.data.marka + '&pin=' + res.data.pin + '&number=' + res.data.number;
         }
       })["catch"](function (err) {
         if (err.response.data.errors !== undefined) {
@@ -5648,7 +5648,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Sale_flash_info",
-  props: ['pin', 'number'],
+  props: ['marka', 'pin', 'number'],
   data: function data() {
     return {};
   },
@@ -5669,6 +5669,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -5679,7 +5685,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SellerPhoto",
-  props: ['sale'],
+  props: ['sale', 'sale_images'],
   data: function data() {
     return {
       photo: this.sale.image,
@@ -5687,23 +5693,48 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    documentResize: function documentResize() {// addEventListener('resize',() => {
-      //     if( window.innerWidth <= 768 ){
-      //         alert(333333333)
-      //     }
-      // })
-    },
-    imagesShow: function imagesShow() {
-      var i = 0;
-
-      for (i = 0; i < 5; i++) {
+    imagesShow: function imagesShow(images) {
+      if (images !== null && images !== undefined && images.length > 0) {
         this.saleImage.push({
-          src: '/images/sale/' + this.sale.image,
-          thumbnail: '/images/sale/' + this.sale.image,
+          src: '/images/sale/' + images[0].title,
+          thumbnail: '/images/sale/' + images[0].title,
           w: 1200,
           h: 800,
-          alt: this.sale.image
-        });
+          alt: images[0].title
+        }); // Main Big Image
+
+        this.OtherImages(images, 'small'); // Other Small Images
+      }
+    },
+    OtherImages: function OtherImages(images, param) {
+      if (param !== undefined && param === 'big') {
+        for (var i = 1; i < images.length - 1; i++) {
+          if (images[i].title !== undefined) {
+            if (images[i].title.indexOf('big') > -1) {
+              this.saleImage.push({
+                src: '/images/sale/' + images[i].title,
+                thumbnail: '/images/sale/' + images[i].title,
+                w: 1200,
+                h: 800,
+                alt: images[i].title
+              });
+            }
+          }
+        }
+      } else if (param !== undefined && param === 'small') {
+        for (var _i = 1; _i < images.length - 1; _i++) {
+          if (images[_i].title !== undefined) {
+            if (images[_i].title.indexOf('small') > -1) {
+              this.saleImage.push({
+                src: '/images/sale/' + images[_i].title,
+                thumbnail: '/images/sale/' + images[_i].title,
+                w: 1200,
+                h: 800,
+                alt: images[_i].title
+              });
+            }
+          }
+        }
       }
     },
     imagesStyle: function imagesStyle() {
@@ -5762,6 +5793,8 @@ __webpack_require__.r(__webpack_exports__);
 
           for (i; i < figure.length; i++) {
             if (figure[i] !== undefined) {
+              figure[i].setAttribute("id", "fig-" + i);
+
               if (window.innerWidth <= 576) {
                 figure[i].classList.remove('sale__other-images');
                 figure[i].classList.remove('for__other-md');
@@ -5793,6 +5826,8 @@ __webpack_require__.r(__webpack_exports__);
 
         for (i; i < figure.length; i++) {
           if (figure[i] !== undefined) {
+            figure[i].setAttribute("id", "fig-" + i);
+
             if (window.innerWidth <= 576) {
               figure[i].classList.remove('sale__other-images');
               figure[i].classList.remove('for__other-md');
@@ -5821,16 +5856,56 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       }
+    },
+    imageSmallOnBigChange: function imageSmallOnBigChange() {
+      document.addEventListener('DOMContentLoaded', function () {
+        var pswps = document.getElementsByClassName('pswp__img');
+        document.addEventListener('click', function (e) {
+          var image = e.target;
+          setTimeout(function () {
+            var _iterator = _createForOfIteratorHelper(pswps),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var pswp = _step.value;
+
+                if (pswp !== undefined && image !== undefined) {
+                  if (pswp.src !== undefined && image.src !== undefined) {
+                    if (pswp.src === image.src) {
+                      pswp.src = pswp.src.replace('small', 'big');
+                    }
+                  }
+                }
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
+          }, 500);
+        }); // for (i; i < figure.length; i++) {
+        //     if (figure[i] !== undefined) {
+        //         figure[i].addEventListener('click', (e) => {
+        //             let id = this
+        //             let close = document.getElementsByClassName('pswp__button');
+        //
+        //             this.OtherImages(this.sale_images, 'big'); // Other Small Images
+        //
+        //             close[0].addEventListener('click', () => {
+        //                 this.OtherImages(this.sale_images, 'small'); // Other Small Images
+        //                 i = 1;
+        //             })
+        //         })
+        //     }
+        // }
+      });
     }
   },
   mounted: function mounted() {
-    this.documentResize();
-    this.imagesShow();
+    this.imagesShow(this.sale_images);
     this.imagesStyle();
-    document.addEventListener('DOMContentLoaded', function () {
-      var tags = document.getElementsByTagName('figure');
-      console.log('SSSSSSSSSSS = ', tags.length);
-    });
+    this.imageSmallOnBigChange();
   }
 });
 
@@ -7361,7 +7436,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardImageSwipe",
-  props: ['user'],
+  props: ['announce'],
   data: function data() {
     return {
       host: window.location.host,
@@ -7370,14 +7445,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    imageItems: function imageItems(image) {
-      if (image.image != null) {
+    imageItems: function imageItems(announce) {
+      if (announce.image != null) {
         return [{
-          src: '/images/users/sellers/' + image.image,
-          thumbnail: '/images/users/sellers/' + 'small_' + image.image,
+          src: '/images/users/sellers/' + announce.image,
+          thumbnail: '/images/users/sellers/' + 'small_' + announce.image,
           w: 1200,
           h: 800,
-          alt: image.image
+          alt: announce.image
         }];
       }
     }
@@ -67183,7 +67258,10 @@ var render = function() {
         _c(
           "a",
           {
-            attrs: { href: "http://avtolavka/announce/sale/show/" + _vm.number }
+            attrs: {
+              href:
+                "http://avtolavka/announce/sale/" + _vm.marka + "/" + _vm.number
+            }
           },
           [
             _vm._v(
@@ -67202,7 +67280,10 @@ var render = function() {
           "a",
           {
             staticClass: "text__italic",
-            attrs: { href: "http://avtolavka/announce/sale/show/" + _vm.number }
+            attrs: {
+              href:
+                "http://avtolavka/announce/sale/" + _vm.marka + "/" + _vm.number
+            }
           },
           [_vm._v("\n                tıklayın\n            ")]
         )
@@ -69150,7 +69231,11 @@ var render = function() {
   return _c(
     "div",
     {},
-    [_c("vue-picture-swipe", { attrs: { items: _vm.imageItems(_vm.user) } })],
+    [
+      _c("vue-picture-swipe", {
+        attrs: { items: _vm.imageItems(_vm.announce) }
+      })
+    ],
     1
   )
 }

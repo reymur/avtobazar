@@ -255,7 +255,7 @@ body {
         .seller__store-card-div {
             border: none;
             padding: 25px 0 5px 0;
-            background-color: #e9ecef !important;
+            background-color: #f0f0f0;;
         }
         .store__announce-dix {
             background-color: darkcyan;
@@ -277,7 +277,25 @@ body {
                     outline: none;
                     color: #e1fbfb;
                 }
-
+.title__size {
+    margin: 0;
+    padding: 0;
+    display: block;
+    display: -webkit-box;
+    max-height: 38.4px;
+    font-size: 16px;
+    line-height: 1.2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 12px 10px 10px;
+    min-height: 50px;
+    color: #444;
+    font-weight: bold;
+}
 .sale__make-text {
     margin-top: 5px;
 }
@@ -368,6 +386,13 @@ body {
         padding: 6px;
         margin-top: 4px;
     }
+    .text__decoration {
+        text-decoration: revert;
+    }
+        .text__decoration:hover {
+            text-decoration: none;
+        }
+
     .for__sm {
         float: none;
         width: 100%;
@@ -406,7 +431,7 @@ body {
 }
 
 .hover__element:hover {
-    background-color: #65f9003b;
+    background-color: #d3ffb5;
 }
 
         .announce__title-text {

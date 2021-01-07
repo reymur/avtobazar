@@ -44,7 +44,7 @@ Route::prefix('announce')->group(function() {
     /* Sale */
     Route::post('/sale-announce-save', 'SaleController@saleAnnounceMake');
     Route::get('/sale-flash-info', 'SaleController@saleInfo');
-    Route::get('/sale/show/{number}', 'SaleController@saleShow');
+    Route::get('/sale/{marka}/{number}', 'SaleController@saleShow')->name('sale-show');
 });
 
 Route::prefix('sale')->middleware('web')->group(function(){
@@ -55,7 +55,7 @@ Route::prefix('buyer')->middleware('auth')->group(function(){
     Route::get('/profile/{id}', 'BuyerController@profile')->name('buyer.profile');
 });
 
-Route::prefix('seller')->middleware('auth')->group(function(){
+Route::prefix('seller')->middleware('web')->group(function(){
     Route::get('/', 'SellerController@index')->name('seller.index');
     Route::get('/seller-store/{id}', 'SellerController@SellerStore')->name('seller-store');
     Route::get('/profile/{id}', 'SellerController@profile')->name('seller.profile');

@@ -28,7 +28,7 @@
                 Sizin elanınızın yoxlamadan uğurla keçməsindən əmin olmaq üçün,
                 linki özünüzdə qeyd edin:
 
-                <a :href="'http://avtolavka/announce/sale/show/'+number">
+                <a :href="'http://avtolavka/announce/sale/'+marka+'/'+number">
                     http://avtolavka/announce/sale/show/{{ number }}
                 </a>
             </div>
@@ -36,7 +36,7 @@
             <div class="d-flex">
                 <span class="mr-2">Elanınıza baxmaq üçün</span>
 
-                <a :href="'http://avtolavka/announce/sale/show/'+number" class="text__italic">
+                <a :href="'http://avtolavka/announce/sale/'+marka+'/'+number" class="text__italic">
                     tıklayın
                 </a>
             </div>
@@ -51,7 +51,7 @@
 <script>
 export default {
     name: "Sale_flash_info",
-    props: ['pin','number'],
+    props: ['marka','pin','number'],
     data(){
         return {
 

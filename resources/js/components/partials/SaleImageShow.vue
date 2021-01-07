@@ -9,7 +9,7 @@
 <script>
 export default {
     name: "SellerPhoto",
-    props: ['sale'],
+    props: ['sale','sale_images'],
     data(){
         return {
             photo: this.sale.image,
@@ -17,24 +17,48 @@ export default {
         }
     },
     methods: {
-        documentResize(){
-            // addEventListener('resize',() => {
-            //     if( window.innerWidth <= 768 ){
-            //         alert(333333333)
-            //     }
-            // })
-        },
-        imagesShow(){
-            let i = 0;
-
-            for(i=0; i<5; i++){
+        imagesShow(images){
+            if( images !== null && images !== undefined && images.length > 0 ) {
                 this.saleImage.push({
-                    src: '/images/sale/' + this.sale.image,
-                    thumbnail: '/images/sale/' + this.sale.image,
-                    w:1200,
-                    h:800,
-                    alt: this.sale.image
-                })
+                        src: '/images/sale/' + images[0].title,
+                        thumbnail: '/images/sale/' + images[0].title,
+                        w: 1200,
+                        h: 800,
+                        alt: images[0].title
+                    }); // Main Big Image
+
+                this.OtherImages(images,'small'); // Other Small Images
+            }
+        },
+        OtherImages(images, param) {
+            if( param !== undefined && param === 'big' ) {
+                for (let i = 1; i < (images.length - 1); i++) {
+                    if (images[i].title !== undefined) {
+                        if (images[i].title.indexOf('big') > -1) {
+                            this.saleImage.push({
+                                src: '/images/sale/' + images[i].title,
+                                thumbnail: '/images/sale/' + images[i].title,
+                                w: 1200,
+                                h: 800,
+                                alt: images[i].title
+                            });
+                        }
+                    }
+                }
+            }else if( param !== undefined && param === 'small'){
+                for (let i = 1; i < (images.length - 1); i++) {
+                    if (images[i].title !== undefined) {
+                        if (images[i].title.indexOf('small') > -1) {
+                            this.saleImage.push({
+                                src: '/images/sale/' + images[i].title,
+                                thumbnail: '/images/sale/' + images[i].title,
+                                w: 1200,
+                                h: 800,
+                                alt: images[i].title
+                            });
+                        }
+                    }
+                }
             }
         },
         imagesStyle(){
@@ -97,6 +121,9 @@ export default {
 
                     for (i; i < figure.length; i++) {
                         if (figure[i] !== undefined) {
+
+                            figure[i].setAttribute("id", "fig-"+i)
+
                             if(window.innerWidth <= 576){
                                 figure[i].classList.remove('sale__other-images');
                                 figure[i].classList.remove('for__other-md');
@@ -128,6 +155,9 @@ export default {
 
                 for (i; i < figure.length; i++) {
                     if (figure[i] !== undefined) {
+
+                        figure[i].setAttribute("id", "fig-"+i)
+
                         if(window.innerWidth <= 576){
                             figure[i].classList.remove('sale__other-images');
                             figure[i].classList.remove('for__other-md');
@@ -156,17 +186,49 @@ export default {
                     }
                 }
             }
-        }
+        },
+        imageSmallOnBigChange(){
+            document.addEventListener('DOMContentLoaded', () => {
+                let pswps = document.getElementsByClassName('pswp__img');
+
+                document.addEventListener('click',(e) => {
+                    let image = e.target;
+
+                    setTimeout( () => {
+                        for( let pswp of pswps ) {
+                            if( pswp !== undefined && image !== undefined ) {
+                                if( pswp.src !== undefined && image.src !== undefined ) {
+                                    if (pswp.src === image.src) {
+                                        pswp.src = pswp.src.replace('small', 'big');
+                                    }
+                                }
+                            }
+                        }
+                    },500)
+                })
+
+                // for (i; i < figure.length; i++) {
+                //     if (figure[i] !== undefined) {
+                //         figure[i].addEventListener('click', (e) => {
+                //             let id = this
+                //             let close = document.getElementsByClassName('pswp__button');
+                //
+                //             this.OtherImages(this.sale_images, 'big'); // Other Small Images
+                //
+                //             close[0].addEventListener('click', () => {
+                //                 this.OtherImages(this.sale_images, 'small'); // Other Small Images
+                //                 i = 1;
+                //             })
+                //         })
+                //     }
+                // }
+            });
+        },
     },
     mounted() {
-        this.documentResize();
-        this.imagesShow();
+        this.imagesShow(this.sale_images);
         this.imagesStyle();
-
-        document.addEventListener('DOMContentLoaded', ()=> {
-            let tags = document.getElementsByTagName('figure');
-            console.log('SSSSSSSSSSS = ', tags.length)
-        })
+        this.imageSmallOnBigChange();
     }
 }
 </script>

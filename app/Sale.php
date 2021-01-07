@@ -14,4 +14,16 @@ class Sale extends Model
     public function phone(){
         return $this->morphOne(Phone::class, 'phoneable');
     }
+
+    public function phones(){
+        return $this->morphMany(Phone::class, 'phoneable');
+    }
+
+    public function image(){
+        return $this->hasOne(SaleImage::class, 'sale_id', 'id');
+    }
+
+    public function images(){
+        return $this->hasMany(SaleImage::class, 'sale_id', 'id');
+    }
 }

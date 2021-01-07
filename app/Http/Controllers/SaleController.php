@@ -22,7 +22,10 @@ class SaleController extends Controller
 
     public function saleShow(Request $request)
     {
-        $sale = Sale::where('number', $request->number)->first();
+        $sale = Sale::where([
+            'marka' => $request->marka,
+            'number' => $request->number
+        ])->first();
 
         if( empty($sale) ) return redirect()->route('home');
 

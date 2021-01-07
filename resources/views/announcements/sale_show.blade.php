@@ -27,6 +27,7 @@
                 <div class="card col-xl-12 col-lg-12 bg-dark text-white p-3 mb-0 seller__store-image-div">
                     <sale-image-show
                         :sale="{{ $sale }}"
+                        :sale_images="{{ $sale->images }}"
                     ></sale-image-show>
                 </div><!--Seller Store image div-->
 
@@ -71,7 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="d-inline-block px-4 py-3 sale__note">
+                        <div class="d-block px-4 py-3 sale__note">
                             {{ $sale->note }}
                         </div>
                     </div>
@@ -85,16 +86,25 @@
                             </div>
 
                             <div class="">
-                                <div class="mb-n1">
-                                    <a href="tel:(050)2536564" class="text-dark">
-                                        (050)2536564
-                                    </a>
-                                </div>
+                                @if( $sale->phones->count() > 0 )
+                                    @foreach($sale->phones as $phone)
+                                        <div class="mb-n1">
+                                            <a href="tel:(050)2536564" class="text-dark text__decoration">
+                                                {{ $phone->number }}
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                @endif
 
                                 <div class="">
-                                    <a href="" class="sale__name">
-                                        {{ $sale->name }}
-                                    </a>
+                                    @if( getStatus($sale) )
+                                        <a href="{{ route('seller-store', ['id' => $sale->id]) }}"
+                                           target="_blank" class="text__decoration sale__name">
+                                            {{ $sale->name }}
+                                        </a>
+                                    @else
+                                        <div class=" text__bold">{{ $sale->name }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -102,13 +112,13 @@
                         <div class="col-xl-12 col-lg-12 mt-3 mx-auto py-2 d-flex sale__left-info">
                             <div class="d-flex text-success">
                                 <span class="mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                                     </svg>
                                 </span>
 
                                 <div class="">
-                                    <a href="">
+                                    <a href="" class="text__decoration">
                                         <span class="sale__name">
                                             {{ $sale->name }}
                                         </span>
@@ -124,45 +134,66 @@
                         <div class="text-left text-black-50 mt-4 sale__last-info">
                             <div class="">
                                 <span class="">Elanın nömrəsi:</span>
-                                <span class="">19038581</span>
+                                <span class="">{{ $sale->number }}</span>
                             </div>
                             <div class="">
                                 <span class=""></span>
                                 <span class="">Baxışların sayı:</span>
-                                <span class="">75651</span>
+                                <span class="">{{ $sale->seen }}</span>
                             </div>
                             <div class="">
                                 <span class="">Yeniləndi:</span>
-                                <span class="">Bugün, 09:21</span>
+                                <span class="">
+                                    {{ Carbon\Carbon::now()->diffForhumans( $sale->updated_at ) }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-{{--                <div class="col-10 m-auto">--}}
-{{--                    <div class="pt-2 pb-2 pl-n3">--}}
-{{--                        <div class="announce__title-text">--}}
-{{--                            İstifadəçinin bütün elanları--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                <div class="col-11 m-auto p-4">
+                    <div class="pt-2 pb-3 pl-n3">
+                        <div class="announce__title-text">
+                            Oxşar Elanlar
+                        </div>
+                    </div>
 
-{{--                    <div class="row row-cols-1 row-cols-md-4 seller__store-card-div">--}}
-{{--                        @for( $i = 0; $i < 100; $i++ )--}}
-{{--                            <div class="col mb-3 px-1">--}}
-{{--                                <div class="card h-100 hover__element">--}}
-{{--                                    <card-image-swipe--}}
-{{--                                        :user="{{ $user }}"--}}
-{{--                                    ></card-image-swipe>--}}
+                    <div class="row row-cols-1 row-cols-md-4 p-3 seller__store-card-div">
+                        @for( $i = 0; $i < 10; $i++ )
+                            <div class="col mb-3 px-2">
+                                <a href="{{ route('sale-show', ['marka' => $sale->marka, 'number' => $sale->number]) }}"
+                                class="text-decoration-none">
+                                    <div class="card h-100 hover__element">
+                                        <div class="">
+                                            <div class="">
+                                                <img src="/images/sale/{{ getFirstSmallImage($sale->images) }}"
+                                                     alt="{{ getFirstSmallImage($sale->images) }}">
+                                            </div>
+                                        </div>
 
-{{--                                    <div class="card-body">--}}
-{{--                                        <h5 class="card-title">Card title</h5>--}}
-{{--                                        <p class="card-text">This is a longer card with supporting little bit longer.</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endfor--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                                        <div class="card-body p-2">
+                                            <div class="">
+                                                <div class="card-title title__size text__bold">
+                                                    <span class="">
+                                                        "{{ $sale->marka }} {{ $sale->model }}"
+                                                        {{ $sale->title }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <p class="card-text text-black-50 mt-1 ml-3">
+                                                <span class="mr-1">
+                                                    {{ \Carbon\Carbon::now()->diffForHumans($sale->created_at) .',' }}
+                                                </span>
+                                                <span class="">{{ $sale->city }}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endfor
+                    </div>
+                </div>
             </div>
         </div>
 

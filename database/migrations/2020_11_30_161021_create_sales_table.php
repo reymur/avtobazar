@@ -27,6 +27,7 @@ class CreateSalesTable extends Migration
             $table->text('note')->nullable();
             $table->integer('pin')->nullable();
             $table->integer('number')->nullable();
+            $table->integer('seen')->default(0);
             $table->integer('published')->default(0);
             $table->timestamps();
         });

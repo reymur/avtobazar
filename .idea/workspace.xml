@@ -5,10 +5,132 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Helpers/getFirstSmallImage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Helpers/getStatus.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/Q�C���r%+�]�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_O���mv����.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_#15#O���mv��#10#��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_]�����49�v.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_#19#]�����49#6#�v.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_h{^}�p�a.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_#1f#h{^}�#19#p#13##1a#�a.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_1_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_2_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_3_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_4_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_5_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_6_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_6_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_6_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_6_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_6_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_BQ�:��A}�.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_BQ�:��A}�#1c#.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�&quot;�F&quot;��i$.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_�#10#&quot;�#5##1f#F&quot;��i$.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�&gt;ݢץ���9 �.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�@�Q�[Ӕ)�.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_�@�#1d##5#Q�[Ӕ)�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�G&#10;y!?��s�n.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_�G&#10;y!?#1b#��s�n.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�M���k)6Yڍ�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_�t��&quot;����.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_�t��&quot;#7##f#����#1c#.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_��F���z�S��.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_��#16#F���z�S��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_��2��,}8Wǰ?.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_���ԓ���T0�.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/big_���#e#ԓ���T0�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/big_���n�p��b�F�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/g�$\��(~u��.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/g�$\��(~#15#u��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_��͐���,&amp;�.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_#1#�#1d#�͐���,&amp;�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_�d��)T�&#9;In.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_#14#�d��)T�&#9;I#6#n.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_1_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_2_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_3_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_4�����Φk��.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_4����#13#�Φk��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_5_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_6_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_6_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_6_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_6_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_6_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_&gt;�xg�^P�'��G.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_V���V��w�j.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_V���#1b#V��w�#1f#j.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_j=M͕g�-y��.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_j=M͕#14#g�-y��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_mK��\�B��.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_mK�#2#�\�B��.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_o����D���i.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_o����D���#1e#i.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_с�}% ��pj,�.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_Վ�CL՟d�?u.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_Վ�CL՟d�?u#5#.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_����us�g�.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_�#1#���us#8#�g�#1e#.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_�9(Pmv&quot;{^�6.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_�9(Pm#17#v&quot;{^�6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_�b8m���A��:.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_�b8m���A#f#��:.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/sale/small_��m�Ǟ�7ݸA.png" afterPathEscaped="$PROJECT_DIR$/public/images/sale/small_��m�Ǟ�#16#7ݸA.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Sale.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Sale.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/SaleImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/SaleImage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_30_161021_create_sales_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_30_161021_create_sales_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SaleFlashInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SaleFlashInfo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/seller/CardImageSwipe.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/announce_sale_flash_info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/announce_sale_flash_info.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -432,7 +554,12 @@
       <workItem from="1608652985731" duration="20307000" />
       <workItem from="1608740970965" duration="21734000" />
       <workItem from="1608823393500" duration="24237000" />
-      <workItem from="1608919912643" duration="6830000" />
+      <workItem from="1608919912643" duration="7352000" />
+      <workItem from="1609069944389" duration="572000" />
+      <workItem from="1609079947170" duration="26813000" />
+      <workItem from="1609557873334" duration="9808000" />
+      <workItem from="1609990680860" duration="16368000" />
+      <workItem from="1610037954730" duration="14865000" />
     </task>
     <servers />
   </component>
