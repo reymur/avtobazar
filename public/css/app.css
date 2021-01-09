@@ -11308,7 +11308,18 @@ body {
   padding: 10px 15px 15px 15px;
 }
 
+.sale__main-text {
+  font-size: 16px;
+  line-height: 27px;
+  font-weight: bold;
+  border-bottom: 1px solid #e6e6e6;
+}
+
 .sale__note {
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+  word-wrap: break-word;
   background-color: #fbfbf5;
   margin: 17px 0 0 -15px;
   border-top: 1px solid #deb88770;
@@ -11322,6 +11333,19 @@ body {
   float: left;
   padding: 6px;
   margin-top: 4px;
+}
+
+.card__small-texts {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80%;
+  /*padding: 0 10px;*/
+  color: #b3b3b3;
+  font-size: 12px;
+  left: 0;
+  bottom: 8px;
+  box-sizing: border-box;
 }
 
 .text__decoration {

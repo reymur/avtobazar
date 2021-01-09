@@ -27,10 +27,13 @@ class SaleController extends Controller
             'number' => $request->number
         ])->first();
 
+        $similar_sales = Sale::where('marka', $request->marka)->get();
+
         if( empty($sale) ) return redirect()->route('home');
 
         return view('announcements.sale_show')->with([
-            'sale' => $sale
+            'sale' => $sale,
+            'similar_sales' => $similar_sales,
         ]);
     }
 

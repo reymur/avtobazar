@@ -51,7 +51,7 @@
                 <div class="row col-xl-11 col-lg-11 col-md-12 col-sm-12 px-md-0 px-sm-0 m-auto">
                     <div class="col-xl-8 col-lg-8 order-lg-last col-md-12 col-sm-12 sale__info">
                         <div class="pl-2 sale__info-content">
-                            <div class="border-bottom border-info d-inline-block mb-2 px-4 text__bold">
+                            <div class="border-bottom border-info d-inline-block mb-2 px-4 sale__main-text">
                                 <span class="">{{ $sale->marka }}</span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16">
@@ -61,11 +61,11 @@
                                 <span class="">{{ $sale->model }}</span>
                             </div>
 
-                            <div class="border-bottom border-info d-inline-block mb-2 px-4 text__bold">
+                            <div class="border-bottom border-info d-inline-block mb-2 px-4 sale__main-text">
                                 {{ $sale->condition }}
                             </div>
 
-                            <div class="border-bottom border-info d-inline-block px-4 d-flex text__bold">
+                            <div class="border-bottom border-info d-inline-block px-4 d-flex sale__main-text">
                                 <div class="">
                                     {{ $sale->city }}
                                 </div>
@@ -159,39 +159,43 @@
                     </div>
 
                     <div class="row row-cols-1 row-cols-md-4 p-3 seller__store-card-div">
-                        @for( $i = 0; $i < 10; $i++ )
-                            <div class="col mb-3 px-2">
-                                <a href="{{ route('sale-show', ['marka' => $sale->marka, 'number' => $sale->number]) }}"
-                                class="text-decoration-none">
-                                    <div class="card h-100 hover__element">
-                                        <div class="">
+                        @if( isset($similar_sales) && $similar_sales->count() > 0 )
+                            @foreach( $similar_sales as $similar_sale )
+                                @if( $similar_sale->number != $sale->number )
+                                    <div class="col mb-3 px-2">
+                                    <a href="{{ route('sale-show', ['marka' => $similar_sale->marka, 'number' => $similar_sale->number]) }}"
+                                    class="text-decoration-none">
+                                        <div class="card h-100 hover__element">
                                             <div class="">
-                                                <img src="/images/sale/{{ getFirstSmallImage($sale->images) }}"
-                                                     alt="{{ getFirstSmallImage($sale->images) }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="card-body p-2">
-                                            <div class="">
-                                                <div class="card-title title__size text__bold">
-                                                    <span class="">
-                                                        "{{ $sale->marka }} {{ $sale->model }}"
-                                                        {{ $sale->title }}
-                                                    </span>
+                                                <div class="">
+                                                    <img src="/images/sale/{{ getFirstSmallImage($similar_sale->images) }}"
+                                                         alt="{{ getFirstSmallImage($similar_sale->images) }}">
                                                 </div>
                                             </div>
 
-                                            <p class="card-text text-black-50 mt-1 ml-3">
-                                                <span class="mr-1">
-                                                    {{ \Carbon\Carbon::now()->diffForHumans($sale->created_at) .',' }}
-                                                </span>
-                                                <span class="">{{ $sale->city }}</span>
-                                            </p>
+                                            <div class="card-body p-2">
+                                                <div class="">
+                                                    <div class="card-title title__size text__bold">
+                                                        <span class="">
+                                                            "{{ $similar_sale->marka }} {{ $similar_sale->model }}"
+                                                            {{ $similar_sale->title }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <p class="card-text text-black-50 mt-2 ml-2 card__small-texts">
+                                                    <span class="mr-1">
+                                                        {{ \Carbon\Carbon::now()->diffForHumans($similar_sale->created_at) .',' }}
+                                                    </span>
+                                                    <span class="">{{ $similar_sale->city }}</span>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endfor
+                                    </a>
+                                </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

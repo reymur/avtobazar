@@ -5858,8 +5858,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     },
     imageSmallOnBigChange: function imageSmallOnBigChange() {
+      var _this2 = this;
+
       document.addEventListener('DOMContentLoaded', function () {
         var pswps = document.getElementsByClassName('pswp__img');
+        var left = document.getElementsByClassName('pswp__button pswp__button--arrow--left');
+        var right = document.getElementsByClassName('pswp__button pswp__button--arrow--right');
         document.addEventListener('click', function (e) {
           var image = e.target;
           setTimeout(function () {
@@ -5884,22 +5888,62 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
               _iterator.f();
             }
           }, 500);
-        }); // for (i; i < figure.length; i++) {
-        //     if (figure[i] !== undefined) {
-        //         figure[i].addEventListener('click', (e) => {
-        //             let id = this
-        //             let close = document.getElementsByClassName('pswp__button');
-        //
-        //             this.OtherImages(this.sale_images, 'big'); // Other Small Images
-        //
-        //             close[0].addEventListener('click', () => {
-        //                 this.OtherImages(this.sale_images, 'small'); // Other Small Images
-        //                 i = 1;
-        //             })
-        //         })
-        //     }
-        // }
+        });
+
+        _this2.forRightAndLeftPreviousButton(pswps, left, right);
       });
+    },
+    forRightAndLeftPreviousButton: function forRightAndLeftPreviousButton(pswps, left, right) {
+      this.leftPrevious(left, pswps);
+      this.rightPrevious(right, pswps);
+    },
+    leftPrevious: function leftPrevious(left, pswps) {
+      if (left !== undefined) {
+        left[0].addEventListener('click', function (e) {
+          var _iterator2 = _createForOfIteratorHelper(pswps),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var pswp = _step2.value;
+
+              if (pswp !== undefined) {
+                if (pswp.src !== undefined) {
+                  pswp.src = pswp.src.replace('small', 'big');
+                }
+              }
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        });
+      }
+    },
+    rightPrevious: function rightPrevious(right, pswps) {
+      if (right !== undefined) {
+        right[0].addEventListener('click', function (e) {
+          var _iterator3 = _createForOfIteratorHelper(pswps),
+              _step3;
+
+          try {
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              var pswp = _step3.value;
+
+              if (pswp !== undefined) {
+                if (pswp.src !== undefined) {
+                  pswp.src = pswp.src.replace('small', 'big');
+                }
+              }
+            }
+          } catch (err) {
+            _iterator3.e(err);
+          } finally {
+            _iterator3.f();
+          }
+        });
+      }
     }
   },
   mounted: function mounted() {

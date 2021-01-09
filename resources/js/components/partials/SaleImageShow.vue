@@ -187,9 +187,12 @@ export default {
                 }
             }
         },
+
         imageSmallOnBigChange(){
             document.addEventListener('DOMContentLoaded', () => {
                 let pswps = document.getElementsByClassName('pswp__img');
+                let left = document.getElementsByClassName('pswp__button pswp__button--arrow--left');
+                let right = document.getElementsByClassName('pswp__button pswp__button--arrow--right');
 
                 document.addEventListener('click',(e) => {
                     let image = e.target;
@@ -205,25 +208,42 @@ export default {
                             }
                         }
                     },500)
-                })
+                });
 
-                // for (i; i < figure.length; i++) {
-                //     if (figure[i] !== undefined) {
-                //         figure[i].addEventListener('click', (e) => {
-                //             let id = this
-                //             let close = document.getElementsByClassName('pswp__button');
-                //
-                //             this.OtherImages(this.sale_images, 'big'); // Other Small Images
-                //
-                //             close[0].addEventListener('click', () => {
-                //                 this.OtherImages(this.sale_images, 'small'); // Other Small Images
-                //                 i = 1;
-                //             })
-                //         })
-                //     }
-                // }
+                this.forRightAndLeftPreviousButton(pswps, left, right);
             });
         },
+        forRightAndLeftPreviousButton(pswps, left, right){
+            this.leftPrevious(left, pswps);
+            this.rightPrevious(right, pswps);
+
+        },
+        leftPrevious(left, pswps){
+            if( left !== undefined ) {
+                left[0].addEventListener('click', (e) => {
+                    for (let pswp of pswps) {
+                        if (pswp !== undefined) {
+                            if (pswp.src !== undefined) {
+                                pswp.src = pswp.src.replace('small', 'big');
+                            }
+                        }
+                    }
+                });
+            }
+        },
+        rightPrevious(right, pswps){
+            if( right !== undefined ) {
+                right[0].addEventListener('click', (e) => {
+                    for (let pswp of pswps) {
+                        if (pswp !== undefined) {
+                            if (pswp.src !== undefined) {
+                                pswp.src = pswp.src.replace('small', 'big');
+                            }
+                        }
+                    }
+                });
+            }
+        }
     },
     mounted() {
         this.imagesShow(this.sale_images);
