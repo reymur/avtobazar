@@ -19,36 +19,24 @@ export default {
     methods: {
         imagesShow(images){
             if( images !== null && images !== undefined && images.length > 0 ) {
-                this.saleImage.push({
-                        src: '/images/sale/' + images[0].title,
-                        thumbnail: '/images/sale/' + images[0].title,
-                        w: 1200,
-                        h: 800,
-                        alt: images[0].title
-                    }); // Main Big Image
-
-                this.OtherImages(images,'small'); // Other Small Images
+                this.mainVisibleImages(images); // Main visible Images
             }
         },
-        OtherImages(images, param) {
-            if( param !== undefined && param === 'big' ) {
-                for (let i = 1; i < (images.length - 1); i++) {
-                    if (images[i].title !== undefined) {
-                        if (images[i].title.indexOf('big') > -1) {
+        mainVisibleImages(images) {
+            for (let i = 1; i < (images.length - 1); i++) {
+                if (images[i].title !== undefined) {
+                    if (images[i].title.indexOf('small') > -1) {
+                        if( i === 1 ){
+                            let big_image = images[i].title.replace('small', 'big');
+
                             this.saleImage.push({
-                                src: '/images/sale/' + images[i].title,
-                                thumbnail: '/images/sale/' + images[i].title,
+                                src: '/images/sale/' + big_image,
+                                thumbnail: '/images/sale/' + big_image,
                                 w: 1200,
                                 h: 800,
-                                alt: images[i].title
+                                alt: big_image
                             });
-                        }
-                    }
-                }
-            }else if( param !== undefined && param === 'small'){
-                for (let i = 1; i < (images.length - 1); i++) {
-                    if (images[i].title !== undefined) {
-                        if (images[i].title.indexOf('small') > -1) {
+                        }else {
                             this.saleImage.push({
                                 src: '/images/sale/' + images[i].title,
                                 thumbnail: '/images/sale/' + images[i].title,
@@ -115,14 +103,17 @@ export default {
             let i = 1;
 
             if( figure !== undefined ) {
+                figure[0].setAttribute("id", "fig-"+0 ) // Main figure
+
                 window.addEventListener('resize', () => {
                     let i = 1;
                     let figure = document.getElementsByTagName('figure');
 
+                    figure[0].setAttribute("id", "fig-"+0 ) // Main figure
+
                     for (i; i < figure.length; i++) {
                         if (figure[i] !== undefined) {
-
-                            figure[i].setAttribute("id", "fig-"+i)
+                            figure[i].setAttribute("id", "fig-"+i ) // Other figures
 
                             if(window.innerWidth <= 576){
                                 figure[i].classList.remove('sale__other-images');
@@ -194,23 +185,25 @@ export default {
                 let left = document.getElementsByClassName('pswp__button pswp__button--arrow--left');
                 let right = document.getElementsByClassName('pswp__button pswp__button--arrow--right');
 
-                document.addEventListener('click',(e) => {
-                    let image = e.target;
+                this.changeSmallOnBig(pswps);
+                this.forRightAndLeftPreviousButton(pswps, left, right);
+            });
+        },
+        changeSmallOnBig(pswps){
+            document.addEventListener('click',(e) => {
+                let image = e.target;
 
-                    setTimeout( () => {
-                        for( let pswp of pswps ) {
-                            if( pswp !== undefined && image !== undefined ) {
-                                if( pswp.src !== undefined && image.src !== undefined ) {
-                                    if (pswp.src === image.src) {
-                                        pswp.src = pswp.src.replace('small', 'big');
-                                    }
+                setTimeout( () => {
+                    for( let pswp of pswps ) {
+                        if( pswp !== undefined && image !== undefined ) {
+                            if( pswp.src !== undefined && image.src !== undefined ) {
+                                if (pswp.src === image.src) {
+                                    pswp.src = pswp.src.replace('small', 'big');
                                 }
                             }
                         }
-                    },500)
-                });
-
-                this.forRightAndLeftPreviousButton(pswps, left, right);
+                    }
+                },500)
             });
         },
         forRightAndLeftPreviousButton(pswps, left, right){

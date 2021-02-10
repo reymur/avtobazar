@@ -6,88 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/getStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/getStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_9.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/announce_sale_make.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/announce_sale_make.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +38,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="2" />
@@ -236,7 +173,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.css&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/CHANGELOG.md&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/components/previewer.vue&#10;/home/reymur/domains/avtom/node_modules/vue-picture-swipe/src/VuePictureSwipe.vue&#10;/home/reymur/domains/avtom/node_modules/engine.io/lib/server.js&#10;/home/reymur/domains/avtom/node_modules/vue/types/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/uploader.js&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/components/uploader.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/utils.js&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/nuxt/plugin.js&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/demo.html&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/demo/App.vue&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/default-skin.svg&#10;/home/reymur/domains/avtom/node_modules/socket.io-client/build/index.d.ts&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/engine.io-client/lib/socket.js&#10;/home/reymur/domains/avtom/node_modules/bootstrap/dist/css/bootstrap-grid.css&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/uploader.js.map&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.common.js&#10;/home/reymur/domains/avtom/node_modules/mdbootstrap/css/bootstrap.css&#10;/home/reymur/domains/avtom/node_modules/bootstrap/dist/css/bootstrap.css&#10;/home/reymur/domains/avtom/.env" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/node_modules/vue-select/src/components/Select.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_search-input.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-menu.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.css&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/CHANGELOG.md&#10;/home/reymur/domains/avtom/node_modules/@jkryszto/mdb-for-laravel/scss/mdb.scss&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_component.scss&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/components/previewer.vue&#10;/home/reymur/domains/avtom/node_modules/vue-picture-swipe/src/VuePictureSwipe.vue&#10;/home/reymur/domains/avtom/node_modules/engine.io/lib/server.js&#10;/home/reymur/domains/avtom/node_modules/vue/types/index.d.ts&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/uploader.js&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/components/uploader.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/modules/_dropdown-toggle.scss&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/src/utils.js&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RedirectsUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/dist/vue-select.js&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/nuxt/plugin.js&#10;/home/reymur/domains/avtom/node_modules/vue-input-mask/src/InputMask.vue&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/global/_variables.scss&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/demo.html&#10;/home/reymur/domains/avtom/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/demo/App.vue&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/default-skin.svg&#10;/home/reymur/domains/avtom/node_modules/socket.io-client/build/index.d.ts&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/RegistersUsers.php&#10;/home/reymur/domains/avtom/vendor/laravel/ui/auth-backend/AuthenticatesUsers.php&#10;/home/reymur/domains/avtom/node_modules/vue-select/src/scss/vue-select.scss&#10;/home/reymur/domains/avtom/node_modules/engine.io-client/lib/socket.js&#10;/home/reymur/domains/avtom/node_modules/bootstrap/dist/css/bootstrap-grid.css&#10;/home/reymur/domains/avtom/node_modules/vue-input-facade/dist/vue-input-facade.umd.min.js&#10;/home/reymur/domains/avtom/node_modules/vux-uploader-component/dist/uploader.js.map&#10;/home/reymur/domains/avtom/node_modules/vue-phone-number-input/dist/vue-phone-number-input.common.js&#10;/home/reymur/domains/avtom/node_modules/mdbootstrap/css/bootstrap.css&#10;/home/reymur/domains/avtom/node_modules/bootstrap/dist/css/bootstrap.css&#10;/home/reymur/domains/avtom/.env" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/users/saller_auto_logo" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -517,7 +454,10 @@
       <workItem from="1609557873334" duration="9808000" />
       <workItem from="1609990680860" duration="16368000" />
       <workItem from="1610037954730" duration="15266000" />
-      <workItem from="1610215162566" duration="5861000" />
+      <workItem from="1610215162566" duration="19229000" />
+      <workItem from="1610276824868" duration="9030000" />
+      <workItem from="1612961870726" duration="147000" />
+      <workItem from="1612962671227" duration="19735000" />
     </task>
     <servers />
   </component>

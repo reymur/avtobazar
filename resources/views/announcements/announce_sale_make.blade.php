@@ -28,12 +28,25 @@
                         <h5 class="text__bold">Yeni elan</h5>
                     </div>
 
-                    <sale-make-form
-                        :cars="{{ $cars }}"
-                        :models="{{ $types }}"
-                        :cities="{{ $cities }}"
-                        :conditions="{{ $conditions }}"
-                    ></sale-make-form>
+{{--                    {{ dd( Auth::user() ) }}--}}
+
+                    @if( Auth::check() )
+                        <sale-make-form
+                            :user="{{ getStatus(Auth::user()) }}"
+                            :cars="{{ $cars }}"
+                            :models="{{ $types }}"
+                            :cities="{{ $cities }}"
+                            :conditions="{{ $conditions }}"
+                        ></sale-make-form>
+                    @else
+                        <sale-make-form
+                            :user="{{ $auth = 'null' }}"
+                            :cars="{{ $cars }}"
+                            :models="{{ $types }}"
+                            :cities="{{ $cities }}"
+                            :conditions="{{ $conditions }}"
+                        ></sale-make-form>
+                    @endif
 
                 </div>
             </div>

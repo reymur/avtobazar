@@ -49,6 +49,12 @@ import Vue from 'vue';
 
 import vSelect from 'vue-select';
 
+import PhoneInput from 'vue-input-facade'
+Vue.use(PhoneInput);
+
+import InputMask from 'vue-input-mask';
+Vue.component('input-mask', InputMask)
+
 import VuePhoneNumberInput from 'vue-phone-number-input';
 import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 

@@ -189,7 +189,37 @@
                 <label for="phone">
                     Mobil nömrə<span class="text-subtitle-2 text-danger">*</span>
                 </label>
-                <input v-model="phone" type="text" class="form-control" id="phone" placeholder="">
+
+                <div class="">
+                    <div v-if="true" class="">
+                        <div class="d-flex">
+                            <input v-model="phone" type="text" class="form-control" id="phone-0" placeholder="">
+                            <div @click="phoneNumberAdd" class="phone__number-add">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                                    <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div v-for="num of number_add" class="">
+                            <div v-if="num > 0" :id="'del-'+num" class="d-flex">
+                                <input type="text" class="form-control" :id="'phone-'+num" placeholder="">
+                                <div @click="phoneNumberDel" class="phone__number-del">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-file-minus" viewBox="0 0 16 16">
+                                        <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="">
+                        <input v-model="phone" type="text" class="form-control" id="phone" placeholder="">
+                    </div>
+                </div>
+
+<!--                <input-mask type="tel" v-model="phone" mask="999 99 99" maskChar=" " class="form-control"></input-mask>-->
 
                 <div v-if="errors">
                     <div v-for="error in errors" class="ml-lg-0 pl-lg-0 ml-xl-0 pl-xl-0 ml-md-0 pl-sm-0">
@@ -210,7 +240,7 @@
 <script>
 export default {
     name: "SaleMakeForm",
-    props:['cars','models','cities','conditions'],
+    props:['user','cars','models','cities','conditions'],
     data(){
         return {
             marka: 'Markanı seçin',
@@ -221,7 +251,12 @@ export default {
             name: '',
             title: '',
             price: '',
-            phone: '',
+            phone: [],
+            phone2: [],
+            phone_code: '',
+            number_add: [0],
+            add_num: 0,
+            svg_add: '',
             note: '',
             fileList: [],
             disabled_marka: 'disabled',
@@ -234,6 +269,35 @@ export default {
         }
     },
     methods: {
+        phoneNumberAdd(){
+            if( this.number_add.length < 5 ) {
+                let num = '';
+
+                this.number_add.push(this.add_num += 1);
+
+                for( let i = 0; i < this.number_add.length; i++ ) {
+                    if( document.getElementById('phone-' + i) !== null ) {
+                        this.phone2[i] = document.getElementById('phone-' + i).value;
+                        console.log( this.phone2 )
+                    }
+                }
+            }
+        },
+        phoneNumberDel(e){
+            if( this.number_add.length !== 0 ) {
+                this.number_add.pop();
+
+                if( e.target.parentElement.parentElement.id !== undefined ) {
+                    let id = e.target.parentElement.parentElement.id;
+                    let num = id.substr(-1, 2)
+
+                    document.getElementById('del-'+num).remove
+
+                    this.number_add[num];
+                    console.log('AAAAA - ', id )
+                }
+            }
+        },
         refactImageErrors(){
             let i = 0;
             this.image_errors = [];

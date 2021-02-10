@@ -396,6 +396,23 @@ body {
         padding: 6px;
         margin-top: 4px;
     }
+    .phone__number-add {
+        color: #8f8f8f;
+        cursor: pointer;
+    }
+        .phone__number-add:hover {
+            cursor: pointer;
+            color: #acacac;
+        }
+    .phone__number-del {
+        color: #f65b5b;
+        cursor: pointer;
+    }
+        .phone__number-del:hover {
+            cursor: pointer;
+            color: #f68d8d;
+        }
+
     .card__small-texts {
         overflow: hidden;
         text-overflow: ellipsis;
