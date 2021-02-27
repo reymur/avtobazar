@@ -202,16 +202,16 @@
                             </div>
                         </div>
 
-                        <div v-for="num of number_add" class="">
-                            <div v-if="num > 0" :id="'del-'+num" class="d-flex">
-                                <input type="text" class="form-control" :id="'phone-'+num" placeholder="">
-                                <div @click="phoneNumberDel" class="phone__number-del">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-file-minus" viewBox="0 0 16 16">
-                                        <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-                                    </svg>
-                                </div>
-                            </div>
+                        <div id="num-add" class="">
+<!--                            <div v-if="num > 0" :id="'del-'+num" class="d-flex">-->
+<!--                                <input type="text" class="form-control" :id="'phone-'+num" placeholder="">-->
+<!--                                <div @click="phoneNumberDel" class="phone__number-del">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-file-minus" viewBox="0 0 16 16">-->
+<!--                                        <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>-->
+<!--                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>-->
+<!--                                    </svg>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <div v-else class="">
@@ -254,7 +254,7 @@ export default {
             phone: [],
             phone2: [],
             phone_code: '',
-            number_add: [0],
+            number_add: 0,
             add_num: 0,
             svg_add: '',
             note: '',
@@ -270,33 +270,44 @@ export default {
     },
     methods: {
         phoneNumberAdd(){
-            if( this.number_add.length < 5 ) {
-                let num = '';
+            let div = document.getElementById("num-add");
+            let new_input = document.createElement("div");
+            let new_del_btn = document.createElement("div");
 
-                this.number_add.push(this.add_num += 1);
+            if( this.number_add < 4 ) {
+                new_input.id = 'new-phone-' + this.number_add++;
+                new_input.className = 'd-flex nums';
+                new_del_btn.addEventListener('click', this.addFunc)
+                new_input.innerHTML = "<input type='text' id=\"phone-num-"+this.number_add+"\" class='form-control'></div>"
+                new_del_btn.innerHTML = "<div class='phone__number-del' id=\"number-del-"+this.number_add+"\">" +
+                    "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" className=\"bi bi-file-minus\" viewBox=\"0 0 16 16\">" +
+                    "<path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"/>" +
+                    "<path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 " +
+                    "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>"
 
-                for( let i = 0; i < this.number_add.length; i++ ) {
-                    if( document.getElementById('phone-' + i) !== null ) {
-                        this.phone2[i] = document.getElementById('phone-' + i).value;
-                        console.log( this.phone2 )
-                    }
+                new_input.appendChild(new_del_btn);
+                div.appendChild(new_input);
+
+                let new_phone = document.getElementById("phone-num-"+ this.number_add ).value;
+
+                console.log( 'add - ', this.number_add )
+            }
+        },
+        addFunc(e){
+            if( this.number_add !== 0 ) {
+                let del_phone = e.target.parentElement.parentElement.parentElement.id;
+
+                if( del_phone.indexOf("new-phone-") !== -1 ) {
+                    this.number_add--;
+                    e.target.parentElement.parentElement.parentElement.remove();
+                    console.log('del - ', this.number_add )
                 }
             }
         },
         phoneNumberDel(e){
-            if( this.number_add.length !== 0 ) {
-                this.number_add.pop();
-
-                if( e.target.parentElement.parentElement.id !== undefined ) {
-                    let id = e.target.parentElement.parentElement.id;
-                    let num = id.substr(-1, 2)
-
-                    document.getElementById('del-'+num).remove
-
-                    this.number_add[num];
-                    console.log('AAAAA - ', id )
-                }
-            }
+            console.log(
+                e.target
+            )
         },
         refactImageErrors(){
             let i = 0;
@@ -324,6 +335,7 @@ export default {
         saleAnnounceMake(){
             this.errors = [];
             let fd = new FormData();
+            let phones = [];
 
             fd.append('marka', this.marka == 'Markanı seçin' ? '' : this.marka);
             fd.append('model', this.model_m == 'Modeli seçin' ? '' : this.model_m );
@@ -334,6 +346,25 @@ export default {
             fd.append('note', this.note);
             fd.append('name', this.name);
             fd.append('phone', this.phone);
+
+                if( document.getElementsByClassName("nums" ) !== undefined &&
+                    document.getElementsByClassName("nums" ) !== null )
+                {
+                    let nums = document.getElementsByClassName("nums" );
+
+                    for( let i=0; i <= nums.length; i++ ) {
+                        if( document.getElementsByClassName("nums" ) !== undefined ) {
+                            if( document.getElementsByClassName("nums" )[i] !== undefined ) {
+                                if( document.getElementsByClassName("nums" )[i].childNodes[0].value !== null &&
+                                    document.getElementsByClassName("nums" )[i].childNodes[0].value !== undefined ) {
+                                    phones[i] = document.getElementsByClassName("nums" )[i].childNodes[0].value;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            console.log( phones );
 
             this.fileList.forEach( file => {
                 fd.append('images[]', file );
