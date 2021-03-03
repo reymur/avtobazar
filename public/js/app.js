@@ -2502,6 +2502,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SaleMakeForm",
   props: ['user', 'cars', 'models', 'cities', 'conditions'],
@@ -2515,10 +2543,12 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       title: '',
       price: '',
-      phone: [],
+      phone: '',
       phone2: [],
+      phones: [],
+      phone_errors: [],
       phone_code: '',
-      number_add: 0,
+      number_add: 1,
       add_num: 0,
       svg_add: '',
       note: '',
@@ -2533,36 +2563,88 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    phoneNumberAdd: function phoneNumberAdd() {
-      var div = document.getElementById("num-add");
-      var new_input = document.createElement("div");
+    phoneNumberInputAdd: function phoneNumberInputAdd() {
+      var num_add = document.getElementById("num-add");
+      var new_phone_parent = document.createElement("div");
+      var new_phone = document.createElement("div");
       var new_del_btn = document.createElement("div");
 
-      if (this.number_add < 4) {
-        new_input.id = 'new-phone-' + this.number_add++;
-        new_input.className = 'd-flex nums';
-        new_del_btn.addEventListener('click', this.addFunc);
-        new_input.innerHTML = "<input type='text' id=\"phone-num-" + this.number_add + "\" class='form-control'></div>";
+      if (this.number_add < 5) {
+        new_phone_parent.className = 'new-phone-parent-' + this.number_add++;
+        new_phone.id = 'new-phone-' + this.number_add;
+        new_phone.className = 'd-flex nums';
+        new_del_btn.addEventListener('click', this.delPhoneInput);
+        new_phone.innerHTML = "<input type='text' id=\"phone-num-" + this.number_add + "\" class='form-control'></div>";
         new_del_btn.innerHTML = "<div class='phone__number-del' id=\"number-del-" + this.number_add + "\">" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" className=\"bi bi-file-minus\" viewBox=\"0 0 16 16\">" + "<path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"/>" + "<path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 " + "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>";
-        new_input.appendChild(new_del_btn);
-        div.appendChild(new_input);
-        var new_phone = document.getElementById("phone-num-" + this.number_add).value;
+        new_phone.appendChild(new_del_btn);
+        new_phone_parent.appendChild(new_phone);
+        num_add.appendChild(new_phone_parent);
+        var new_ph = document.getElementById("phone-num-" + this.number_add).value;
         console.log('add - ', this.number_add);
       }
     },
-    addFunc: function addFunc(e) {
+    delPhoneInput: function delPhoneInput(e) {
       if (this.number_add !== 0) {
-        var del_phone = e.target.parentElement.parentElement.parentElement.id;
+        var del_phone = e.target.parentElement.parentElement.parentElement.parentElement.className;
 
-        if (del_phone.indexOf("new-phone-") !== -1) {
+        if (del_phone.indexOf("new-phone-parent") !== -1) {
           this.number_add--;
-          e.target.parentElement.parentElement.parentElement.remove();
+          e.target.parentElement.parentElement.parentElement.parentElement.remove();
           console.log('del - ', this.number_add);
         }
       }
     },
     phoneNumberDel: function phoneNumberDel(e) {
       console.log(e.target);
+    },
+    refactPhoneErrors: function refactPhoneErrors() {
+      this.phone_errors = [];
+
+      if (this.errors.length > 0) {
+        for (var i = 0; i < 5; i++) {
+          if (this.errors[0]['phones.' + i] !== undefined) {
+            this.phone_errors.push(this.errors[0]['phones.' + i][0]);
+          } else if (this.errors[0]['phones'] !== undefined) {
+            this.phone_errors = [];
+            this.phone_errors.push(this.errors[0]['phones'][0]);
+          }
+        } // console.log( 'Phone = ', this.phone_errors );
+
+      }
+    },
+    phoneErrorsReplace: function phoneErrorsReplace(error, limit) {
+      var i = 0;
+      var next_error = null;
+
+      for (i; i < limit; i++) {
+        if (this.replaceLastLetter(error, i) !== undefined && this.replaceLastLetter(error, i) !== null) {
+          next_error = this.replaceLastLetter(error, i);
+        }
+      }
+
+      console.log('Phone 333 = ', next_error);
+      return next_error;
+    },
+    replaceLastLetter: function replaceLastLetter(error, num) {
+      var number_replace = '';
+      var dot_replace = '';
+      var error_org = '';
+
+      if (error !== undefined && error !== null && num !== undefined && num !== null) {
+        if (error.indexOf('phones.' + num) !== undefined && error.indexOf('phones.' + num) !== null) {
+          if (error.indexOf('phones.' + num) !== -1) {
+            number_replace = error.replace('phones.' + num, 'phones.' + (num + 1));
+            dot_replace = number_replace.replace('phones.' + (num + 1), '"phones - ' + (num + 1) + '"'); // console.log(num+1)
+
+            return dot_replace;
+          }
+        } else if (error.indexOf('phones') > -1 && error.indexOf('phones.') === -1) {
+          error_org = error.replace('phones', '"phones"');
+          return error_org;
+        }
+      }
+
+      return null;
     },
     refactImageErrors: function refactImageErrors() {
       var i = 0;
@@ -2587,12 +2669,56 @@ __webpack_require__.r(__webpack_exports__);
         _this.fileList.push(file.blob);
       });
     },
+    getOnlyNumbers: function getOnlyNumbers(str) {
+      var regexp = /\d/g;
+
+      if (str.match(regexp)) {
+        return str.match(regexp).join('');
+      }
+
+      return null;
+    },
+    phoneNumbers: function phoneNumbers() {
+      this.phones = [];
+      var nums = null;
+      var phone = null;
+      var phone2 = null;
+
+      if (document.getElementsByClassName("nums") !== undefined && document.getElementsByClassName("nums") !== null) {
+        nums = document.getElementsByClassName("nums");
+
+        if (nums !== null && nums !== undefined && nums.length > 0) {
+          for (var i = 0; i <= nums.length; i++) {
+            if (nums[i] !== null && nums[i] !== undefined) {
+              if (nums[i].childNodes[0].value !== null && nums[i].childNodes[0].value !== undefined) {
+                phone = nums[i].childNodes[0].value;
+                console.log('QQQQQQQQQQ = ', phone); // if( this.getOnlyNumbers( phone ) ) {
+
+                this.phones[i] = phone; // this.phones[i] = this.getOnlyNumbers( phone );
+                // }
+              }
+            }
+          }
+
+          if (
+          /*this.getOnlyNumbers( this.phone ) &&*/
+          this.phones.length > 0) {
+            phone2 = this.phone; // phone2 = this.getOnlyNumbers( this.phone );
+
+            this.phones.unshift(phone2);
+            return this.phones;
+          }
+        }
+      }
+
+      return this.getOnlyNumbers(this.phone);
+    },
     saleAnnounceMake: function saleAnnounceMake() {
       var _this2 = this;
 
       this.errors = [];
       var fd = new FormData();
-      var phones = [];
+      this.phoneNumbers();
       fd.append('marka', this.marka == 'Markanı seçin' ? '' : this.marka);
       fd.append('model', this.model_m == 'Modeli seçin' ? '' : this.model_m);
       fd.append('title', this.title);
@@ -2601,34 +2727,34 @@ __webpack_require__.r(__webpack_exports__);
       fd.append('city', this.city_m);
       fd.append('note', this.note);
       fd.append('name', this.name);
-      fd.append('phone', this.phone);
 
-      if (document.getElementsByClassName("nums") !== undefined && document.getElementsByClassName("nums") !== null) {
-        var nums = document.getElementsByClassName("nums");
+      if (this.phoneNumbers() !== null) {
+        var phones = this.phoneNumbers();
 
-        for (var i = 0; i <= nums.length; i++) {
-          if (document.getElementsByClassName("nums") !== undefined) {
-            if (document.getElementsByClassName("nums")[i] !== undefined) {
-              if (document.getElementsByClassName("nums")[i].childNodes[0].value !== null && document.getElementsByClassName("nums")[i].childNodes[0].value !== undefined) {
-                phones[i] = document.getElementsByClassName("nums")[i].childNodes[0].value;
-              }
-            }
-          }
+        if (Array.isArray(phones)) {
+          phones.forEach(function (num) {
+            fd.append('phones[]', num);
+          });
+        } else {
+          fd.append('phones[]', phones);
         }
       }
 
-      console.log(phones);
-      this.fileList.forEach(function (file) {
-        fd.append('images[]', file);
-      });
+      if (this.fileList !== null && this.fileList.length !== null) {
+        this.fileList.forEach(function (file) {
+          fd.append('images[]', file);
+        });
+      }
+
       axios.post('/announce/sale-announce-save', fd, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (res) {
         if (res.status == 200) {
-          console.log('res sale --- ', res.data);
-          window.location.href = 'http://avtolavka/announce/sale-flash-info?' + 'marka=' + res.data.marka + '&pin=' + res.data.pin + '&number=' + res.data.number;
+          console.log('res sale --- ', res.data); // window.location.href =
+          //     'http://avtolavka/announce/sale-flash-info?' +
+          //     'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
         }
       })["catch"](function (err) {
         if (err.response.data.errors !== undefined) {
@@ -2637,10 +2763,112 @@ __webpack_require__.r(__webpack_exports__);
           _this2.errors.push(errors);
 
           _this2.refactImageErrors();
+
+          _this2.refactPhoneErrors();
+
+          _this2.addPhoneErrorsHtmlDivs();
         }
 
         console.log('err sale --- ', err.response.data.errors);
       });
+    },
+    getAllPhoneParents: function getAllPhoneParents() {
+      var arr = [];
+
+      for (var i = 0; i < 5; i++) {
+        if (document.getElementsByClassName('new-phone-parent-' + i)[0] !== undefined && document.getElementsByClassName('new-phone-parent-' + i)[0] !== null) {
+          var el = document.getElementsByClassName('new-phone-parent-' + i)[0];
+          arr.push(el);
+        }
+      }
+
+      return arr.length > 0 ? arr : null;
+    },
+    replacePhoneOneError: function replacePhoneOneError(error, num) {
+      if (error !== null && num !== null) {
+        if (error.indexOf('phones') !== -1) {
+          return error.replace('phones', 'phones - ' + num);
+        }
+
+        return null;
+      }
+
+      return null;
+    },
+    delIfExists: function delIfExists(id) {
+      if (id !== null) {
+        var el = document.getElementById(id);
+
+        if (el !== null) {
+          console.log('EEEEEEE = ', el);
+          el.remove();
+        }
+      }
+    },
+    addPhoneErrorsHtmlDivs: function addPhoneErrorsHtmlDivs() {
+      var allPhones = this.getAllPhoneParents();
+
+      if (allPhones !== null && allPhones.length !== null) {
+        if (this.phone_errors.length !== null && this.phone_errors.length > 0) {
+          for (var i = 0; i < allPhones.length; i++) {
+            if (this.phone_errors.length < 2 && this.phone_errors[0] !== null) {
+              if (this.phone_errors[0].indexOf('phones.') === -1) {
+                this.delIfExists("error-parent-" + (i + 2));
+                var phone_error_parent_div = document.createElement("div");
+                var phone_error_div = document.createElement("div");
+                phone_error_parent_div.id = "error-parent-" + (i + 2);
+                phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                phone_error_div.innerHTML = this.replacePhoneOneError(this.phone_errors[0], i + 2);
+                phone_error_parent_div.appendChild(phone_error_div);
+                allPhones[i].appendChild(phone_error_parent_div);
+              }
+            }
+          }
+
+          if (this.phone_errors[0].match(/\./) !== null && this.phone_errors[0].match(/\d/) !== null) {
+            for (var j = 0; j < this.phone_errors.length; j++) {
+              var if_has_dot = this.phone_errors[j].match(/\./);
+              var error_num = this.phone_errors[j].match(/\d/);
+
+              for (var c = 0; c < allPhones.length; c++) {
+                if (if_has_dot !== null && if_has_dot[0] !== null && error_num !== null && error_num[0] !== null) {
+                  if (allPhones[c].firstElementChild !== undefined && allPhones[c].firstElementChild !== null) {
+                    var ph_child = allPhones[c].firstElementChild;
+
+                    if (ph_child.id !== undefined && ph_child.id !== null) {
+                      var ph_child_num = ph_child.id.match(/\d/) ? ph_child.id.match(/\d/)[0] : null;
+
+                      if (Number(error_num) + 1 == ph_child_num) {
+                        console.log('AAAAASS - ', ph_child_num, Number(error_num) + 1);
+                        this.delIfExists("error-parent-" + Number(ph_child_num));
+
+                        var _phone_error_parent_div = document.createElement("div");
+
+                        var _phone_error_div = document.createElement("div");
+
+                        _phone_error_parent_div.id = "error-parent-" + Number(ph_child_num);
+                        _phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                        _phone_error_div.innerHTML = this.phoneErrorsReplace(this.phone_errors[Number(error_num)], 5);
+
+                        _phone_error_parent_div.appendChild(_phone_error_div);
+
+                        allPhones[c].appendChild(_phone_error_parent_div);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      } // new_error_div.innerHTML = () => {
+      //     if( this.phone_errors.length > 0 ) {
+      //         "<div className=\"d-block invalid-feedback mt-1 ml-md-3 ml-sm-3\">"+
+      //         this.phoneErrorsReplace( this.phone_errors[0], this.phone_errors.length) +
+      //         "</div>"
+      //     }
+      // }
+
     },
     carTypes: function carTypes() {
       var _this3 = this;
@@ -62662,66 +62890,125 @@ var render = function() {
             _c("div", {}, [
               true
                 ? _c("div", {}, [
-                    _c("div", { staticClass: "d-flex" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.phone,
-                            expression: "phone"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "phone-0", placeholder: "" },
-                        domProps: { value: _vm.phone },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.phone = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "phone__number-add",
-                          on: { click: _vm.phoneNumberAdd }
-                        },
-                        [
-                          _c(
-                            "svg",
+                    _c("div", {}, [
+                      _c("div", { staticClass: "d-flex" }, [
+                        _c("input", {
+                          directives: [
                             {
-                              staticClass: "bi bi-file-plus",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                width: "35",
-                                height: "35",
-                                fill: "currentColor",
-                                viewBox: "0 0 16 16"
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.phone,
+                              expression: "phone"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "phone-0",
+                            placeholder: ""
+                          },
+                          domProps: { value: _vm.phone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
                               }
-                            },
-                            [
-                              _c("path", {
+                              _vm.phone = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "phone__number-add",
+                            on: { click: _vm.phoneNumberInputAdd }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "bi bi-file-plus",
                                 attrs: {
-                                  d:
-                                    "M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  width: "35",
+                                  height: "35",
+                                  fill: "currentColor",
+                                  viewBox: "0 0 16 16"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"
-                                }
-                              })
-                            ]
-                          )
-                        ]
-                      )
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.phone_errors[0] !== undefined &&
+                      _vm.phone_errors[0].match(/\d/) == 0 &&
+                      _vm.phone_errors[0].indexOf("phones.") !== -1
+                        ? _c("div", { staticClass: "mb-2" }, [
+                            _vm.phone_errors[0] !== null
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(
+                                          _vm.phoneErrorsReplace(
+                                            _vm.phone_errors[0],
+                                            1
+                                          )
+                                        ) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        : _vm.phone_errors[0] !== undefined &&
+                          _vm.phone_errors[0].indexOf("phones.") === -1
+                        ? _c("div", { staticClass: "mb-2" }, [
+                            _vm.phone_errors[0] !== null
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(
+                                          _vm.replacePhoneOneError(
+                                            this.phone_errors[0],
+                                            1
+                                          )
+                                        ) +
+                                        "\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("div", { attrs: { id: "num-add" } })

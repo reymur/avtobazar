@@ -192,30 +192,58 @@
 
                 <div class="">
                     <div v-if="true" class="">
-                        <div class="d-flex">
-                            <input v-model="phone" type="text" class="form-control" id="phone-0" placeholder="">
-                            <div @click="phoneNumberAdd" class="phone__number-add">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
-                                    <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
-                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                                </svg>
+                        <div class="">
+                            <div class="d-flex">
+                                <input v-model="phone" type="text" class="form-control" id="phone-0" placeholder="">
+                                <div @click="phoneNumberInputAdd" class="phone__number-add">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div v-if="phone_errors[0] !== undefined && phone_errors[0].match(/\d/) == 0 && phone_errors[0].indexOf('phones.') !== -1" class="mb-2">
+                                <div v-if="phone_errors[0] !== null" class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
+                                    {{ phoneErrorsReplace(phone_errors[0], 1) }}
+                                </div>
+                            </div>
+                            <div v-else-if="phone_errors[0] !== undefined && phone_errors[0].indexOf('phones.') === -1" class="mb-2">
+                                <div v-if="phone_errors[0] !== null" class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
+                                    {{ replacePhoneOneError( this.phone_errors[0], 1 ) }}
+                                </div>
                             </div>
                         </div>
 
                         <div id="num-add" class="">
-<!--                            <div v-if="num > 0" :id="'del-'+num" class="d-flex">-->
-<!--                                <input type="text" class="form-control" :id="'phone-'+num" placeholder="">-->
-<!--                                <div @click="phoneNumberDel" class="phone__number-del">-->
-<!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" className="bi bi-file-minus" viewBox="0 0 16 16">-->
-<!--                                        <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>-->
-<!--                                        <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>-->
-<!--                                    </svg>-->
+<!--                            <div v-if="phone_errors.length > 1">-->
+<!--                                <div v-for="error in phone_errors">-->
+<!--                                    <div class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">-->
+<!--                                        {{ phoneErrorsReplace(error, 5) }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div v-else-if="phone_errors.length == 1">-->
+<!--                                <div v-for="error in phone_errors" class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">-->
+<!--                                    {{ phoneErrorsReplace(error, phone_errors.length) }}-->
 <!--                                </div>-->
 <!--                            </div>-->
                         </div>
                     </div>
                     <div v-else class="">
                         <input v-model="phone" type="text" class="form-control" id="phone" placeholder="">
+                        <div v-if="phone_errors.length > 1">
+                            <div v-for="error in phone_errors">
+                                <div class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
+                                    {{ phoneErrorsReplace(error, 5) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else-if="phone_errors.length == 1">
+                            <div v-for="error in phone_errors" class="d-block invalid-feedback mt-1 ml-md-3 ml-sm-3">
+                                {{ phoneErrorsReplace(error, phone_errors.length) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -251,10 +279,12 @@ export default {
             name: '',
             title: '',
             price: '',
-            phone: [],
+            phone: '',
             phone2: [],
+            phones: [],
+            phone_errors: [],
             phone_code: '',
-            number_add: 0,
+            number_add: 1,
             add_num: 0,
             svg_add: '',
             note: '',
@@ -269,37 +299,40 @@ export default {
         }
     },
     methods: {
-        phoneNumberAdd(){
-            let div = document.getElementById("num-add");
-            let new_input = document.createElement("div");
+        phoneNumberInputAdd(){
+            let num_add = document.getElementById("num-add");
+            let new_phone_parent = document.createElement("div");
+            let new_phone = document.createElement("div");
             let new_del_btn = document.createElement("div");
 
-            if( this.number_add < 4 ) {
-                new_input.id = 'new-phone-' + this.number_add++;
-                new_input.className = 'd-flex nums';
-                new_del_btn.addEventListener('click', this.addFunc)
-                new_input.innerHTML = "<input type='text' id=\"phone-num-"+this.number_add+"\" class='form-control'></div>"
+            if( this.number_add < 5 ) {
+                new_phone_parent.className = 'new-phone-parent-'+ this.number_add++;
+                new_phone.id = 'new-phone-' + this.number_add;
+                new_phone.className = 'd-flex nums';
+                new_del_btn.addEventListener('click', this.delPhoneInput)
+                new_phone.innerHTML = "<input type='text' id=\"phone-num-"+this.number_add+"\" class='form-control'></div>"
                 new_del_btn.innerHTML = "<div class='phone__number-del' id=\"number-del-"+this.number_add+"\">" +
                     "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" className=\"bi bi-file-minus\" viewBox=\"0 0 16 16\">" +
                     "<path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"/>" +
                     "<path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 " +
-                    "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>"
+                    "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>";
 
-                new_input.appendChild(new_del_btn);
-                div.appendChild(new_input);
+                new_phone.appendChild(new_del_btn);
+                new_phone_parent.appendChild(new_phone);
+                num_add.appendChild(new_phone_parent);
 
-                let new_phone = document.getElementById("phone-num-"+ this.number_add ).value;
+                let new_ph = document.getElementById("phone-num-"+ this.number_add ).value;
 
                 console.log( 'add - ', this.number_add )
             }
         },
-        addFunc(e){
+        delPhoneInput(e){
             if( this.number_add !== 0 ) {
-                let del_phone = e.target.parentElement.parentElement.parentElement.id;
+                let del_phone = e.target.parentElement.parentElement.parentElement.parentElement.className;
 
-                if( del_phone.indexOf("new-phone-") !== -1 ) {
+                if( del_phone.indexOf("new-phone-parent") !== -1 ) {
                     this.number_add--;
-                    e.target.parentElement.parentElement.parentElement.remove();
+                    e.target.parentElement.parentElement.parentElement.parentElement.remove();
                     console.log('del - ', this.number_add )
                 }
             }
@@ -308,6 +341,60 @@ export default {
             console.log(
                 e.target
             )
+        },
+        refactPhoneErrors(){
+            this.phone_errors = [];
+
+            if( this.errors.length > 0 ) {
+                for (let i = 0; i < 5; i++) {
+                    if (this.errors[0]['phones.' + i] !== undefined) {
+                        this.phone_errors.push(this.errors[0]['phones.' + i][0])
+                    }
+                    else if( this.errors[0]['phones'] !== undefined ){
+                        this.phone_errors = [];
+                        this.phone_errors.push(this.errors[0]['phones'][0]);
+                    }
+                }
+
+                // console.log( 'Phone = ', this.phone_errors );
+            }
+        },
+        phoneErrorsReplace(error, limit){
+            let i = 0;
+            let next_error = null;
+
+            for( i; i < limit; i++ ) {
+                if( this.replaceLastLetter(error, i) !== undefined && this.replaceLastLetter(error, i) !== null ){
+                    next_error = this.replaceLastLetter(error, i);
+                }
+            }
+            console.log( 'Phone 333 = ', next_error );
+            return next_error;
+        },
+        replaceLastLetter(error, num){
+            let number_replace = '';
+            let dot_replace = '';
+            let error_org = '';
+
+            if ( (error !== undefined && error !== null) && (num !== undefined && num !== null) ) {
+                if ( error.indexOf('phones.'+num) !== undefined && error.indexOf('phones.'+num) !== null ) {
+                    if( error.indexOf('phones.'+num) !== -1 ) {
+                        number_replace = error.replace( 'phones.'+num, 'phones.'+(num+1) );
+                        dot_replace = number_replace.replace(
+                            'phones.'+(num+1),
+                            '"phones - '+(num+1)+'"'
+                        );
+                        // console.log(num+1)
+                        return dot_replace;
+                    }
+                }
+                else if( error.indexOf('phones') > -1 && error.indexOf('phones.') === -1 ){
+                    error_org = error.replace('phones', '"phones"');
+                    return error_org
+                }
+            }
+
+            return null;
         },
         refactImageErrors(){
             let i = 0;
@@ -332,10 +419,56 @@ export default {
                 this.fileList.push(file.blob)
             })
         },
+        getOnlyNumbers(str){
+            let regexp = /\d/g;
+            if( str.match( regexp ) ){
+                return str.match( regexp ).join('') ;
+            }
+
+            return null;
+        },
+        phoneNumbers(){
+            this.phones = [];
+            let nums    = null;
+            let phone   = null;
+            let phone2  = null;
+
+            if( document.getElementsByClassName("nums" ) !== undefined &&
+                document.getElementsByClassName("nums" ) !== null ) {
+
+                nums = document.getElementsByClassName("nums" );
+
+                if( nums !== null && nums !== undefined && nums.length > 0 ) {
+                    for( let i=0; i <= nums.length; i++ ) {
+                        if( nums[i] !== null && nums[i] !== undefined ) {
+                            if( nums[i].childNodes[0].value !== null &&
+                                nums[i].childNodes[0].value !== undefined )
+                            {
+                                phone = nums[i].childNodes[0].value;
+                                console.log( 'QQQQQQQQQQ = ', phone )
+                                // if( this.getOnlyNumbers( phone ) ) {
+                                    this.phones[i] = phone;
+                                    // this.phones[i] = this.getOnlyNumbers( phone );
+                                // }
+                            }
+                        }
+                    }
+
+                    if( /*this.getOnlyNumbers( this.phone ) &&*/ this.phones.length > 0 ) {
+                        phone2 = this.phone;
+                        // phone2 = this.getOnlyNumbers( this.phone );
+                        this.phones.unshift( phone2 )
+                        return this.phones;
+                    }
+                }
+            }
+
+            return this.getOnlyNumbers( this.phone );
+        },
         saleAnnounceMake(){
             this.errors = [];
-            let fd = new FormData();
-            let phones = [];
+            let fd      = new FormData();
+            this.phoneNumbers();
 
             fd.append('marka', this.marka == 'Markanı seçin' ? '' : this.marka);
             fd.append('model', this.model_m == 'Modeli seçin' ? '' : this.model_m );
@@ -345,30 +478,24 @@ export default {
             fd.append('city', this.city_m);
             fd.append('note', this.note);
             fd.append('name', this.name);
-            fd.append('phone', this.phone);
 
-                if( document.getElementsByClassName("nums" ) !== undefined &&
-                    document.getElementsByClassName("nums" ) !== null )
-                {
-                    let nums = document.getElementsByClassName("nums" );
+            if( this.phoneNumbers() !== null ) {
+                let phones = this.phoneNumbers();
 
-                    for( let i=0; i <= nums.length; i++ ) {
-                        if( document.getElementsByClassName("nums" ) !== undefined ) {
-                            if( document.getElementsByClassName("nums" )[i] !== undefined ) {
-                                if( document.getElementsByClassName("nums" )[i].childNodes[0].value !== null &&
-                                    document.getElementsByClassName("nums" )[i].childNodes[0].value !== undefined ) {
-                                    phones[i] = document.getElementsByClassName("nums" )[i].childNodes[0].value;
-                                }
-                            }
-                        }
-                    }
+                if( Array.isArray( phones ) ){
+                    phones.forEach(num => {
+                        fd.append('phones[]', num);
+                    });
+                }else{
+                    fd.append('phones[]', phones);
                 }
+            }
 
-            console.log( phones );
-
-            this.fileList.forEach( file => {
-                fd.append('images[]', file );
-            })
+            if( this.fileList !== null && this.fileList.length !== null ) {
+                this.fileList.forEach( file => {
+                    fd.append('images[]', file );
+                })
+            }
 
             axios.post('/announce/sale-announce-save', fd, {
                 headers: {
@@ -378,9 +505,9 @@ export default {
              .then(res => {
                  if( res.status == 200 ){
                      console.log('res sale --- ', res.data )
-                     window.location.href =
-                         'http://avtolavka/announce/sale-flash-info?' +
-                         'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
+                     // window.location.href =
+                     //     'http://avtolavka/announce/sale-flash-info?' +
+                     //     'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
                  }
              })
              .catch( err => {
@@ -388,10 +515,110 @@ export default {
                      let errors = err.response.data.errors;
                      this.errors.push( errors );
                      this.refactImageErrors();
+                     this.refactPhoneErrors();
+                     this.addPhoneErrorsHtmlDivs();
                  }
 
                  console.log('err sale --- ', err.response.data.errors )
              })
+        },
+        getAllPhoneParents(){
+            let arr = [];
+
+            for( let i = 0; i < 5; i++ ) {
+                if( document.getElementsByClassName('new-phone-parent-'+ i)[0] !== undefined &&
+                    document.getElementsByClassName('new-phone-parent-'+ i)[0] !== null) {
+
+                    let el = document.getElementsByClassName('new-phone-parent-'+ i)[0];
+                    arr.push( el );
+                }
+            }
+
+           return arr.length > 0 ? arr : null;
+        },
+        replacePhoneOneError( error, num ){
+            if( error !== null && num !== null ) {
+                if( error.indexOf('phones') !== -1 ) {
+                    return error.replace('phones', 'phones - '+ num)
+                }
+                return null;
+            }
+            return null;
+        },
+        delIfExists(id){
+            if( id !== null ) {
+                let el = document.getElementById(id);
+
+                if( el !== null ) {
+                    console.log('EEEEEEE = ',el);
+                    el.remove();
+                }
+            }
+        },
+        addPhoneErrorsHtmlDivs(){
+            let allPhones = this.getAllPhoneParents();
+
+            if( allPhones !== null && allPhones.length !== null ) {
+                if( this.phone_errors.length !== null && this.phone_errors.length > 0 ) {
+                    for( let i=0; i < allPhones.length; i++ ) {
+                        if (this.phone_errors.length < 2 && this.phone_errors[0] !== null) {
+                            if (this.phone_errors[0].indexOf('phones.') === -1) {
+                                this.delIfExists("error-parent-" + (i + 2));
+                                let phone_error_parent_div = document.createElement("div");
+                                let phone_error_div = document.createElement("div");
+
+                                phone_error_parent_div.id = "error-parent-" + (i + 2);
+                                phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                                phone_error_div.innerHTML = this.replacePhoneOneError(this.phone_errors[0], (i + 2));
+                                phone_error_parent_div.appendChild(phone_error_div);
+                                allPhones[i].appendChild(phone_error_parent_div);
+                            }
+                        }
+                    }
+
+                    if( this.phone_errors[0].match(/\./) !== null && this.phone_errors[0].match(/\d/) !== null ){
+                        for( let j=0; j < this.phone_errors.length; j++ ) {
+                            let if_has_dot = this.phone_errors[j].match(/\./);
+                            let error_num = this.phone_errors[j].match(/\d/);
+
+                            for( let c=0; c < allPhones.length; c++ ) {
+                                if( if_has_dot !== null && if_has_dot[0] !== null && error_num !== null && error_num[0] !== null ) {
+                                    if( allPhones[c].firstElementChild !== undefined && allPhones[c].firstElementChild !== null ) {
+                                        let ph_child = allPhones[c].firstElementChild;
+
+                                        if( ph_child.id !== undefined && ph_child.id !== null ) {
+                                            let ph_child_num = ph_child.id.match(/\d/) ? ph_child.id.match(/\d/)[0] : null;
+
+                                            if( (Number(error_num) + 1) == ph_child_num ) {
+                                                console.log( 'AAAAASS - ', ph_child_num, (Number(error_num) + 1) )
+
+                                                this.delIfExists("error-parent-" + Number(ph_child_num) );
+                                                let phone_error_parent_div = document.createElement("div");
+                                                let phone_error_div = document.createElement("div");
+
+                                                phone_error_parent_div.id = "error-parent-" + Number(ph_child_num);
+                                                phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                                                phone_error_div.innerHTML = this.phoneErrorsReplace(this.phone_errors[Number(error_num)], 5);
+                                                phone_error_parent_div.appendChild(phone_error_div);
+
+                                                allPhones[c].appendChild(phone_error_parent_div);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+
+            // new_error_div.innerHTML = () => {
+            //     if( this.phone_errors.length > 0 ) {
+            //         "<div className=\"d-block invalid-feedback mt-1 ml-md-3 ml-sm-3\">"+
+            //         this.phoneErrorsReplace( this.phone_errors[0], this.phone_errors.length) +
+            //         "</div>"
+            //     }
+            // }
         },
         carTypes(){
             let car_name = null;

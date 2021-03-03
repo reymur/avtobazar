@@ -12,16 +12,17 @@ trait SaleTrait
     {
         if( !empty($request) ) {
             $request->validate([
-                'marka' => 'required',
-                'model' => 'required',
-                'title' => 'required|string|min:3|max:72',
+                'marka'     => 'required',
+                'model'     => 'required',
+                'title'     => 'required|string|min:3|max:72',
                 'condition' => 'required',
-                'price' => 'required|numeric',
-                'note' => 'required|min:6|max:3000',
-                'name' => 'required|min:3|max:32',
-                'phone' => 'required|min:10|max:10',
-                'images' => 'array|required',
-                'images.*' => 'required|image|max:8000',
+                'price'     => 'required|numeric',
+                'note'      => 'required|min:6|max:3000',
+                'name'      => 'required|min:3|max:32',
+                'phones'    => 'array|required',
+                'phones.*'  => 'required|size:10',
+                'images'    => 'array|required',
+                'images.*'  => 'required|image|max:8000',
             ]);
         }
     }
@@ -29,17 +30,17 @@ trait SaleTrait
     protected function saleAnnounceSave($request)
     {
             $sale = Sale::create([
-                'user_id' => auth()->check() ? auth()->user()->id : NULL,
-                'marka' => $request->marka,
-                'model' => $request->model,
-                'title' => $request->title,
+                'user_id'   => auth()->check() ? auth()->user()->id : NULL,
+                'marka'     => $request->marka,
+                'model'     => $request->model,
+                'title'     => $request->title,
                 'condition' => $request->condition,
-                'price' => $request->price,
-                'city' => $request->city,
-                'note' => $request->note,
-                'name' => $request->name,
-                'pin' => $this->makePin(),
-                'number' => $this->makeNumber(),
+                'price'     => $request->price,
+                'city'      => $request->city,
+                'note'      => $request->note,
+                'name'      => $request->name,
+                'pin'       => $this->makePin(),
+                'number'    => $this->makeNumber(),
             ]);
 
             if (isset($sale->id)) {
@@ -84,7 +85,7 @@ trait SaleTrait
 
     public function imageSaleMake($image, $sale_id){
         SaleImage::create([
-            'title' => $image,
+            'title'   => $image,
             'sale_id' => $sale_id,
         ]);
     }
@@ -111,9 +112,9 @@ trait SaleTrait
     {
         if( $new_sale->number ){
             return response()->json([
-                'marka' => $new_sale->marka,
+                'marka'  => $new_sale->marka,
                 'number' => $new_sale->number,
-                'pin' => $new_sale->pin,
+                'pin'    => $new_sale->pin,
             ],200);
         }
     }
