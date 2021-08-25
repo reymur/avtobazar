@@ -2564,23 +2564,23 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     phoneNumberInputAdd: function phoneNumberInputAdd() {
+      console.log('aaaaaaaa00000 --- ');
       var num_add = document.getElementById("num-add");
       var new_phone_parent = document.createElement("div");
       var new_phone = document.createElement("div");
       var new_del_btn = document.createElement("div");
 
       if (this.number_add < 5) {
-        new_phone_parent.className = 'new-phone-parent-' + this.number_add++;
-        new_phone.id = 'new-phone-' + this.number_add;
+        new_phone_parent.className = 'new-phone-parent';
+        new_phone.id = 'new-phone';
         new_phone.className = 'd-flex nums';
         new_del_btn.addEventListener('click', this.delPhoneInput);
-        new_phone.innerHTML = "<input type='text' id=\"phone-num-" + this.number_add + "\" class='form-control'></div>";
-        new_del_btn.innerHTML = "<div class='phone__number-del' id=\"number-del-" + this.number_add + "\">" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" className=\"bi bi-file-minus\" viewBox=\"0 0 16 16\">" + "<path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"/>" + "<path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 " + "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>";
+        new_phone.innerHTML = "<input type='text' id=\"phone-num\" class='form-control'></div>";
+        new_del_btn.innerHTML = "<div class='phone__number-del' id=\"number-del\">" + "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"35\" height=\"35\" fill=\"currentColor\" className=\"bi bi-file-minus\" viewBox=\"0 0 16 16\">" + "<path d=\"M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z\"/>" + "<path d=\"M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 " + "1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z\"/></svg>";
         new_phone.appendChild(new_del_btn);
         new_phone_parent.appendChild(new_phone);
         num_add.appendChild(new_phone_parent);
-        var new_ph = document.getElementById("phone-num-" + this.number_add).value;
-        console.log('add - ', this.number_add);
+        this.number_add++;
       }
     },
     delPhoneInput: function delPhoneInput(e) {
@@ -2588,9 +2588,10 @@ __webpack_require__.r(__webpack_exports__);
         var del_phone = e.target.parentElement.parentElement.parentElement.parentElement.className;
 
         if (del_phone.indexOf("new-phone-parent") !== -1) {
-          this.number_add--;
+          // this.getNewPhoneInputs();
           e.target.parentElement.parentElement.parentElement.parentElement.remove();
           console.log('del - ', this.number_add);
+          this.number_add--;
         }
       }
     },
@@ -2612,30 +2613,27 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     },
-    phoneErrorsReplace: function phoneErrorsReplace(error, limit) {
-      var i = 0;
+    phoneErrorsReplace: function phoneErrorsReplace(error, num) {
       var next_error = null;
 
-      for (i; i < limit; i++) {
-        if (this.replaceLastLetter(error, i) !== undefined && this.replaceLastLetter(error, i) !== null) {
-          next_error = this.replaceLastLetter(error, i);
-        }
+      if (this.replaceLastLetter(error, num) !== undefined && this.replaceLastLetter(error, num) !== null) {
+        next_error = this.replaceLastLetter(error, num);
       }
 
-      console.log('Phone 333 = ', next_error);
+      console.log('Phone 333 = ', num);
       return next_error;
     },
     replaceLastLetter: function replaceLastLetter(error, num) {
       var number_replace = '';
       var dot_replace = '';
       var error_org = '';
+      console.log('ZZZZZ - ', num, error);
 
       if (error !== undefined && error !== null && num !== undefined && num !== null) {
         if (error.indexOf('phones.' + num) !== undefined && error.indexOf('phones.' + num) !== null) {
-          if (error.indexOf('phones.' + num) !== -1) {
+          if (error.indexOf('phones.' + num) > -1) {
             number_replace = error.replace('phones.' + num, 'phones.' + (num + 1));
-            dot_replace = number_replace.replace('phones.' + (num + 1), '"phones - ' + (num + 1) + '"'); // console.log(num+1)
-
+            dot_replace = number_replace.replace('phones.' + (num + 1), '"phones - ' + (num + 1) + '"');
             return dot_replace;
           }
         } else if (error.indexOf('phones') > -1 && error.indexOf('phones.') === -1) {
@@ -2772,18 +2770,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log('err sale --- ', err.response.data.errors);
       });
     },
-    getAllPhoneParents: function getAllPhoneParents() {
-      var arr = [];
-
-      for (var i = 0; i < 5; i++) {
-        if (document.getElementsByClassName('new-phone-parent-' + i)[0] !== undefined && document.getElementsByClassName('new-phone-parent-' + i)[0] !== null) {
-          var el = document.getElementsByClassName('new-phone-parent-' + i)[0];
-          arr.push(el);
-        }
-      }
-
-      return arr.length > 0 ? arr : null;
-    },
     replacePhoneOneError: function replacePhoneOneError(error, num) {
       if (error !== null && num !== null) {
         if (error.indexOf('phones') !== -1) {
@@ -2795,28 +2781,255 @@ __webpack_require__.r(__webpack_exports__);
 
       return null;
     },
-    delIfExists: function delIfExists(id) {
-      if (id !== null) {
-        var el = document.getElementById(id);
+    getErrorNumber: function getErrorNumber(num) {
+      if (num !== null && num !== undefined) {
+        if (this.phone_errors[num] !== undefined && this.phone_errors[num] !== null) {
+          var err_dot = this.phone_errors[num].match(/\./)[0];
+          var err_num = this.phone_errors[num].match(/\d/)[0];
 
-        if (el !== null) {
-          console.log('EEEEEEE = ', el);
-          el.remove();
+          if (err_dot && err_num) {
+            return err_num;
+          }
+
+          return null;
+        }
+
+        return null;
+      }
+
+      return null;
+    },
+    getErrorInputNumber: function getErrorInputNumber() {
+      var arr = [];
+      var err_class = document.getElementsByClassName('error-class');
+      var arr_errors = Array.prototype.slice.call(err_class);
+
+      if (arr_errors !== null && arr_errors !== undefined) {
+        if (arr_errors.length !== null && arr_errors.length !== undefined) {
+          for (var i = 0; i < arr_errors.length; i++) {
+            if (arr_errors[i] !== null && arr_errors[i] !== undefined) {
+              if (arr_errors[i].id !== null && arr_errors[i].id !== undefined) {
+                arr.push(arr_errors[i].id);
+              }
+            }
+          }
+
+          return arr_errors;
+        }
+
+        return null;
+      }
+
+      return null;
+    },
+    delIfExists: function delIfExists(id, err_num) {
+      var exists = id;
+      console.log('Exists = ', id);
+
+      if (id !== null) {
+        // exists = document.getElementById()
+        if (document.getElementById(id) !== undefined && document.getElementById(id) !== null) {
+          var el = document.getElementById(id);
+          console.log('VCCC = ', el);
+
+          if (el !== null) {
+            el.remove();
+          }
         }
       }
     },
+    delIfNotError: function delIfNotError(div, error) {
+      if (div !== undefined && div !== null && error !== undefined && error !== null) {
+        if (error.length !== undefined && error.length !== null) {
+          var error_num_arr = [];
+          var div_num_arr = [];
+
+          for (var i = 0; i < error.length; i++) {
+            var error_num = error[i].match(/\d/);
+
+            if (error_num !== undefined && error_num !== null) {
+              if (error_num[0] !== undefined && error_num[0] !== null) {
+                if (error_num[0] > 0) {
+                  error_num_arr.push(error_num[0]);
+                }
+              }
+            }
+          }
+
+          if (div.length !== undefined && div.length !== null) {
+            for (var j = 0; j < div.length; j++) {
+              if (div[j].lastChild !== undefined && div[j].lastChild !== null) {
+                var div_err = div[j].lastChild;
+
+                if (div_err.id !== undefined && div_err.id !== null) {
+                  var err_id = div_err.id;
+
+                  if (err_id.match(/\d/) !== null && err_id.match(/\d/) !== undefined) {
+                    var err_id_num = err_id.match(/\d/)[0];
+                    div_num_arr.push(err_id_num); // if (Number(error_num[0]) == Number(err_id_num)) {
+                    //
+                    //     is_has_num.push( Number(err_id_num) );
+                    //
+                    //     // if (document.getElementById('error-parent-' + err_id_num) !== null) {
+                    //     //     document.getElementById('error-parent-' + err_id_num).remove();
+                    //     //     console.log('DIV = ', Number(error_num[0]), Number(err_id_num))
+                    //     // }
+                    // }
+                  }
+                }
+              }
+            }
+          }
+
+          error_num_arr.filter(function (a) {
+            for (var _i = 0; _i < div_num_arr.length; _i++) {
+              if (a == div_num_arr[_i]) {
+                return delete div_num_arr[_i];
+              }
+            }
+          });
+
+          for (var _i2 = 0; _i2 < div_num_arr.length; _i2++) {
+            if (div_num_arr[_i2] !== undefined && div_num_arr[_i2] !== null) {
+              document.getElementById('error-parent-' + div_num_arr[_i2]).remove();
+            }
+          }
+
+          console.log('DIV2 = ', div_num_arr); // div_num_arr.filter( x => {
+          //     console.log('DIV2 = ', error_num_arr.includes(x) )
+          //
+          //     // if (document.getElementById('error-parent-' + x) !== null) {
+          //     //     return document.getElementById('error-parent-' + x).remove();
+          //     //     // console.log('DIV = ', x)
+          //     // }
+          // });
+          // console.log('div_num_arr = ', arr);
+        }
+      }
+    },
+    deleteDublicateErrorInputs: function deleteDublicateErrorInputs(id, errors) {
+      var id_num = id ? id.substr(-1, 1) : id;
+      var not_exists = null;
+      var error_parent = null;
+      var new_phone_parent = document.getElementsByClassName('new-phone-parent');
+      var arr = Array.prototype.slice.call(new_phone_parent);
+      console.log('TTTTT= = ', id_num);
+
+      if (arr !== null && arr !== undefined) {
+        if (arr.length !== null && arr.length !== undefined) {
+          for (var i = 0; i < arr.length; i++) {
+            if (arr[i].lastChild !== null) {
+              if (arr[i].lastChild.id !== null && arr[i].lastChild.id !== undefined) {
+                for (var _i3 = 1; _i3 < 5; _i3++) {
+                  var error_parent_num = document.getElementById('error-parent-' + _i3);
+
+                  if (error_parent_num !== null) {
+                    if (Number(error_parent_num.id !== null)) {
+                      var _id_num = Number(error_parent_num.id.substr(-1, 1));
+
+                      if (_id_num > Number(arr.length)) {
+                        if (document.getElementById('error-parent-' + _id_num)) {
+                          document.getElementById('error-parent-' + _id_num).remove();
+                        }
+                      }
+                    }
+                  }
+                } // if( arr_id.match(/\d/) !== null && arr_id.match(/\d/) !== undefined ) {
+                //     if( arr_id.match(/\d/)[0] !== null && arr_id.match(/\d/)[0] !== undefined ) {
+                //         let el_num = arr_id.match(/\d/)[0];
+                //
+                //
+                //
+                //         for( let j=0; j < errors.length; j++ ) {
+                //             if( this.getErrorNumber(j) != 0 ) {
+                //                 let err_num = this.getErrorNumber(j);
+                //                 console.log('REMOVED = ', j, ' - ', el_num, err_num);
+                //                 if (err_num != el_num) {
+                //                     not_exists = err_num;
+                //                     // arr[i].lastChild.remove();
+                //                 }
+                //             }
+                //         }
+                //
+                //         if( not_exists == el_num ) {
+                //             let remove_el_id = (Number(el_num) - 1);
+                //
+                //             if( arr[i].lastChild !== null && arr[i].lastChild !== undefined ) {
+                //                 let remove_el = document.getElementById('error-parent-'+Number(remove_el_id));
+                //
+                //                 if( remove_el !== null && remove_el !== undefined ) {
+                //                     remove_el.remove();
+                //                     console.log('NOT - ', not_exists, el_num, remove_el );
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
+
+              }
+            }
+          }
+        }
+
+        return null;
+      }
+
+      return null;
+    },
+    deleteAllErrorInputs: function deleteAllErrorInputs(errors) {
+      var remove_el = document.getElementsByClassName('error-class');
+      var arr = Array.prototype.slice.call(remove_el);
+
+      if (arr != null && arr) {
+        if (arr.length !== null && arr.length !== undefined) {
+          if (arr.length > 0) {
+            if (errors !== null) {
+              if (errors.length > 0 && errors.length < 2) {
+                if (errors[0].match(/\./) !== null && errors[0].match(/\d/) !== null) {
+                  var err_num = errors[0].match(/\d/);
+
+                  if (err_num[0] !== null) {
+                    if (err_num[0] == 0) {
+                      for (var i = 0; i < arr.length; i++) {
+                        var del = document.getElementsByClassName('error-class')[i];
+
+                        if (del !== null && del !== undefined) {
+                          del.remove();
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    getAllPhoneParents: function getAllPhoneParents() {
+      var el = null;
+
+      if (document.getElementsByClassName('new-phone-parent') !== undefined && document.getElementsByClassName('new-phone-parent') !== null) {
+        var _el = document.getElementsByClassName('new-phone-parent');
+      } // console.log('AAAAAA --- ', document.getElementsByClassName('new-phone-parent') );
+
+
+      return document.getElementsByClassName('new-phone-parent');
+    },
     addPhoneErrorsHtmlDivs: function addPhoneErrorsHtmlDivs() {
-      var allPhones = this.getAllPhoneParents();
+      var allPhones = this.getAllPhoneParents(); // console.log('DDDDd = ', allPhones.length)
+
+      console.log('QQQQQQQQQQ11111112222 = ', allPhones); //
 
       if (allPhones !== null && allPhones.length !== null) {
         if (this.phone_errors.length !== null && this.phone_errors.length > 0) {
           for (var i = 0; i < allPhones.length; i++) {
             if (this.phone_errors.length < 2 && this.phone_errors[0] !== null) {
               if (this.phone_errors[0].indexOf('phones.') === -1) {
-                this.delIfExists("error-parent-" + (i + 2));
+                this.delIfExists("error-parent");
                 var phone_error_parent_div = document.createElement("div");
                 var phone_error_div = document.createElement("div");
-                phone_error_parent_div.id = "error-parent-" + (i + 2);
+                phone_error_parent_div.id = "error-parent";
                 phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
                 phone_error_div.innerHTML = this.replacePhoneOneError(this.phone_errors[0], i + 2);
                 phone_error_parent_div.appendChild(phone_error_div);
@@ -2830,35 +3043,51 @@ __webpack_require__.r(__webpack_exports__);
               var if_has_dot = this.phone_errors[j].match(/\./);
               var error_num = this.phone_errors[j].match(/\d/);
 
-              for (var c = 0; c < allPhones.length; c++) {
-                if (if_has_dot !== null && if_has_dot[0] !== null && error_num !== null && error_num[0] !== null) {
-                  if (allPhones[c].firstElementChild !== undefined && allPhones[c].firstElementChild !== null) {
-                    var ph_child = allPhones[c].firstElementChild;
+              if (Number(error_num[0]) > 0) {
+                if (document.getElementById("new-phone-parent") !== undefined) {
+                  this.deleteDublicateErrorInputs("error-parent-" + Number(error_num), this.phone_errors);
+                  this.delIfExists("error-parent-" + Number(error_num[0]), this.phone_errors);
+                  console.log('SXXXX - ', allPhones.length, this.phone_errors.length);
 
-                    if (ph_child.id !== undefined && ph_child.id !== null) {
-                      var ph_child_num = ph_child.id.match(/\d/) ? ph_child.id.match(/\d/)[0] : null;
+                  if (allPhones.length == this.phone_errors.length) {
+                    console.log('ERRRR111 - ', Number(error_num));
 
-                      if (Number(error_num) + 1 == ph_child_num) {
-                        console.log('AAAAASS - ', ph_child_num, Number(error_num) + 1);
-                        this.delIfExists("error-parent-" + Number(ph_child_num));
+                    var _phone_error_parent_div = document.createElement("div");
 
-                        var _phone_error_parent_div = document.createElement("div");
+                    var _phone_error_div = document.createElement("div");
 
-                        var _phone_error_div = document.createElement("div");
+                    _phone_error_parent_div.id = "error-parent-" + Number(error_num);
+                    _phone_error_parent_div.className = "error-class";
+                    _phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                    _phone_error_div.innerHTML = this.phoneErrorsReplace(this.phone_errors[j], Number(error_num));
 
-                        _phone_error_parent_div.id = "error-parent-" + Number(ph_child_num);
-                        _phone_error_div.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
-                        _phone_error_div.innerHTML = this.phoneErrorsReplace(this.phone_errors[Number(error_num)], 5);
+                    _phone_error_parent_div.appendChild(_phone_error_div);
 
-                        _phone_error_parent_div.appendChild(_phone_error_div);
+                    allPhones[j].appendChild(_phone_error_parent_div);
+                  } else {
+                    var _phone_error_parent_div2 = document.createElement("div");
 
-                        allPhones[c].appendChild(_phone_error_parent_div);
-                      }
+                    var _phone_error_div2 = document.createElement("div");
+
+                    console.log('WQ - ', !(Number(error_num[0]) < 0));
+                    _phone_error_parent_div2.id = "error-parent-" + Number(error_num);
+                    _phone_error_parent_div2.className = "error-class";
+                    _phone_error_div2.className = "d-block invalid-feedback mt-1 ml-md-3 ml-sm-3";
+                    _phone_error_div2.innerHTML = this.phoneErrorsReplace(this.phone_errors[j], Number(error_num));
+
+                    _phone_error_parent_div2.appendChild(_phone_error_div2);
+
+                    if (!(Number(error_num[0]) < 0)) {
+                      var a = allPhones[error_num - 1].appendChild(_phone_error_parent_div2);
                     }
                   }
                 }
               }
+
+              this.deleteAllErrorInputs(this.phone_errors);
             }
+
+            this.delIfNotError(allPhones, this.phone_errors);
           }
         }
       } // new_error_div.innerHTML = () => {
@@ -62974,7 +63203,7 @@ var render = function() {
                                         _vm._s(
                                           _vm.phoneErrorsReplace(
                                             _vm.phone_errors[0],
-                                            1
+                                            0
                                           )
                                         ) +
                                         "\n                                "
@@ -62999,7 +63228,7 @@ var render = function() {
                                         _vm._s(
                                           _vm.replacePhoneOneError(
                                             this.phone_errors[0],
-                                            1
+                                            0
                                           )
                                         ) +
                                         "\n                                "
