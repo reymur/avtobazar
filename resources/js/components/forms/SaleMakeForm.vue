@@ -519,7 +519,7 @@ export default {
                      this.addPhoneErrorsHtmlDivs();
                  }
 
-                 console.log('err sale --- ', err.response.data.errors )
+                 console.log('err sale --- ', err.response.data )
              })
         },
         replacePhoneOneError( error, num ){

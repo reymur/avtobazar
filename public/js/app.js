@@ -2767,7 +2767,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.addPhoneErrorsHtmlDivs();
         }
 
-        console.log('err sale --- ', err.response.data.errors);
+        console.log('err sale --- ', err.response.data);
       });
     },
     replacePhoneOneError: function replacePhoneOneError(error, num) {

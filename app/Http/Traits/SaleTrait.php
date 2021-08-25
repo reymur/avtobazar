@@ -54,9 +54,18 @@ trait SaleTrait
 
     public function phonesSave($sale, $request)
     {
-        $sale->phone()->create([
-            'number' => $request->phone
-        ]);
+        if( is_array( $request->phones ) ) {
+            foreach ( $request->phones as $phone) {
+                $sale->phones()->create([
+                    'number' => $phone ?? NULL
+                ]);
+            }
+        }
+        else {
+            $sale->phone()->create([
+                'number' => $request->phones
+            ]);
+        }
     }
 
     public function imagesSave($request, $sale_id)

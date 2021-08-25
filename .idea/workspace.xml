@@ -4,7 +4,132 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="" />
+    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_1_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_2_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_3_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_4_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_5_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/big_6_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_1_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_2_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_3_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_4_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_5_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/sale/small_6_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606400779_29203446.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606403987_1307533902.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606405133_1279874900.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606414471_87315131.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606575415_454531389.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606575922_398402577.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606576085_922363447.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606576342_16222037.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606576648_1508435914.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606576791_416001445.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606576932_1135678690.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606577106_221989244.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606577889_1374524503.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606577988_1092928571.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578127_761533813.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578199_1209510557.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578248_1034992314.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578368_1354753092.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578459_102450265.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606578611_1520811377.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606582200_1440274925.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606582205_571115861.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606582275_391627624.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606582315_905028646.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606585039_1164292085.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606585221_1347435419.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606586294_1109939699.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606586956_149560243.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606587246_999855456.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606587911_350426063.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606588256_530191709.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606588318_1009213901.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606588504_1526576754.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606588551_1119290477.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606588947_117547521.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606589029_1574583997.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606591151_957633776.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606591222_87535453.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606591374_475059053.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606591446_151247268.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606591583_513272643.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606592395_1589929741.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672337_15138670.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/1606672604_721645761.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606400779_29203446.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606403987_1307533902.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606405133_1279874900.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606414471_87315131.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606575415_454531389.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606575922_398402577.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606576085_922363447.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606576342_16222037.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606576648_1508435914.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606576791_416001445.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606576932_1135678690.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606577106_221989244.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606577889_1374524503.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606577988_1092928571.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578127_761533813.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578199_1209510557.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578248_1034992314.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578368_1354753092.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578459_102450265.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606578611_1520811377.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606582200_1440274925.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606582205_571115861.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606582275_391627624.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606582315_905028646.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606585039_1164292085.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606585221_1347435419.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606586294_1109939699.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606586956_149560243.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606587246_999855456.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606587911_350426063.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606588256_530191709.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606588318_1009213901.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606588504_1526576754.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606588551_1119290477.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606588947_117547521.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606589029_1574583997.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606591151_957633776.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606591222_87535453.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606591374_475059053.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606591446_151247268.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606591583_513272643.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606592395_1589929741.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672337_15138670.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/users/announcement/orders/small_1606672604_721645761.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/forms/SaleMakeForm.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -474,7 +599,8 @@
       <workItem from="1618999271676" duration="434000" />
       <workItem from="1618999800287" duration="1729000" />
       <workItem from="1619001742917" duration="23489000" />
-      <workItem from="1629890894692" duration="12161000" />
+      <workItem from="1629890894692" duration="12761000" />
+      <workItem from="1629912842579" duration="5756000" />
     </task>
     <servers />
   </component>
