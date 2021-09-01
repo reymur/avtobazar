@@ -1,11 +1,11 @@
 <template>
-    <div class="">
+    <div class="d-block">
         <!-- Button trigger modal -->
         <a v-if="disabled" @click="showModalContent" href="" class="text-secondary" data-toggle="modal" :disabled="disabled" :data-target="'#send_all-' + order.announcement.id">
             {{ order.announcement.spare_parts ? order.announcement.spare_parts  : 'Yox' }}
         </a>
 
-        <a v-else href="" @click="showModalContent" class="text-primary" data-toggle="modal" :disabled="disabled" :data-target="'#send_all-' + order.announcement.id">
+        <a v-else @click="showModalContent" href="" class="d-block ow__anywvere text-primary" data-toggle="modal" :disabled="disabled" :data-target="'#send_all-' + order.announcement.id">
             {{ order.announcement.spare_parts ? order.announcement.spare_parts  : 'Yox' }}
         </a>
 

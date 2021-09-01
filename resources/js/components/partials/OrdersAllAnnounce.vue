@@ -1,8 +1,9 @@
 <template>
     <div class="">
-        <table v-if="orders != null && orders.length" class="table border-top-0 border-bottom">
-            <tbody>
-                <tr v-for="order in no_answered" v-if="order">
+        <table v-if="orders != null && orders.length"
+               class="table d-block border-top-0 border-bottom">
+            <tbody class="d-block">
+                <tr v-for="order in no_answered" v-if="order" class="">
                     <td class="text-left send__all-td pt-2 pb-1 pb-0">
                         <div class="d-block">
                             <orders-all-modal

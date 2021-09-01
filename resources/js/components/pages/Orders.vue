@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-lg-10 px-lg-2 px-md-0 px-sm-0 pb-3 flash__bg border-left border-white">
-            <div class="col-12 p-md-2 p-sm-0 mt-4 flash__bg">
+            <div class="col-md-12 p-md-2 p-sm-0 mt-4 flash__bg">
                 <div class="ml-5 mb-3">
                     <h5 class="text-uppercase send__title ml-4">Sifarişlər</h5>
                 </div>

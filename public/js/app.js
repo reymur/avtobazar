@@ -5994,6 +5994,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrdersAllAnnounce",
   props: ['orders', 'auth_check', 'auth_user', 'auth_user_status'],
@@ -66180,7 +66181,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", { staticClass: "d-block" }, [
     _vm.disabled
       ? _c(
           "a",
@@ -66209,7 +66210,7 @@ var render = function() {
       : _c(
           "a",
           {
-            staticClass: "text-primary",
+            staticClass: "d-block ow__anywvere text-primary",
             attrs: {
               href: "",
               "data-toggle": "modal",
@@ -66903,7 +66904,7 @@ var render = function() {
             "col-lg-10 px-lg-2 px-md-0 px-sm-0 pb-3 flash__bg border-left border-white"
         },
         [
-          _c("div", { staticClass: "col-12 p-md-2 p-sm-0 mt-4 flash__bg" }, [
+          _c("div", { staticClass: "col-md-12 p-md-2 p-sm-0 mt-4 flash__bg" }, [
             _vm._m(0),
             _vm._v(" "),
             _vm.orders.length
@@ -67619,236 +67620,245 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", {}, [
     _vm.orders != null && _vm.orders.length
-      ? _c("table", { staticClass: "table border-top-0 border-bottom" }, [
-          _c(
-            "tbody",
-            [
-              _vm._l(_vm.no_answered, function(order) {
-                return order
-                  ? _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticClass: "text-left send__all-td pt-2 pb-1 pb-0"
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "d-block" },
-                            [
-                              _c("orders-all-modal", {
-                                attrs: {
-                                  order: order,
-                                  auth_check: _vm.auth_check,
-                                  auth_user: _vm.auth_user,
-                                  auth_user_status: _vm.auth_user_status,
-                                  disabled: null
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(0, true),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "col-1 text-right  pt-1 pl-0" }, [
+      ? _c(
+          "table",
+          { staticClass: "table d-block border-top-0 border-bottom" },
+          [
+            _c(
+              "tbody",
+              { staticClass: "d-block" },
+              [
+                _vm._l(_vm.no_answered, function(order) {
+                  return order
+                    ? _c("tr", {}, [
                         _c(
-                          "a",
+                          "td",
                           {
-                            staticClass: "text-dark",
-                            attrs: {
-                              href:
-                                "/announce/orders-delete/" +
-                                order.announcement.id
-                            }
+                            staticClass: "text-left send__all-td pt-2 pb-1 pb-0"
                           },
                           [
                             _c(
-                              "svg",
+                              "div",
+                              { staticClass: "d-block" },
+                              [
+                                _c("orders-all-modal", {
+                                  attrs: {
+                                    order: order,
+                                    auth_check: _vm.auth_check,
+                                    auth_user: _vm.auth_user,
+                                    auth_user_status: _vm.auth_user_status,
+                                    disabled: null
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "col-1 text-right  pt-1 pl-0" },
+                          [
+                            _c(
+                              "a",
                               {
-                                staticClass: "bi bi-x",
+                                staticClass: "text-dark",
                                 attrs: {
-                                  width: "1.6em",
-                                  height: "1.6em",
-                                  viewBox: "0 0 16 16",
-                                  fill: "currentColor",
-                                  xmlns: "http://www.w3.org/2000/svg"
+                                  href:
+                                    "/announce/orders-delete/" +
+                                    order.announcement.id
                                 }
                               },
                               [
-                                _c("path", {
-                                  attrs: {
-                                    "fill-rule": "evenodd",
-                                    d:
-                                      "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                                  }
-                                })
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "bi bi-x",
+                                    attrs: {
+                                      width: "1.6em",
+                                      height: "1.6em",
+                                      viewBox: "0 0 16 16",
+                                      fill: "currentColor",
+                                      xmlns: "http://www.w3.org/2000/svg"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d:
+                                          "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                      }
+                                    })
+                                  ]
+                                )
                               ]
                             )
                           ]
                         )
                       ])
-                    ])
-                  : _vm._e()
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.is_answered, function(order) {
-                return order
-                  ? _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          staticClass: "text-left send__all-td pt-2 pb-1 pb-0"
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "d-block" },
-                            [
-                              _c("orders-all-modal", {
-                                attrs: {
-                                  order: order,
-                                  auth_check: _vm.auth_check,
-                                  auth_user: _vm.auth_user,
-                                  auth_user_status: _vm.auth_user_status,
-                                  disabled: "disabled"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass:
-                            "text-right send__all-td pt-2 pb-1 pb-0 pr-0"
-                        },
-                        [
-                          _vm.is_seen[order.id] == null
-                            ? _c("div", { staticClass: "d-block" }, [
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-light" },
-                                  [
-                                    _c(
-                                      "svg",
-                                      {
-                                        staticClass: "bi bi-check2",
-                                        attrs: {
-                                          width: "1.9em",
-                                          height: "1.9em",
-                                          viewBox: "0 0 16 16",
-                                          fill: "currentColor",
-                                          xmlns: "http://www.w3.org/2000/svg"
-                                        }
-                                      },
-                                      [
-                                        _c("path", {
-                                          attrs: {
-                                            "fill-rule": "evenodd",
-                                            d:
-                                              "M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                                          }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _c("div", { staticClass: "d-block" }, [
-                                _c(
-                                  "span",
-                                  { staticClass: "badge badge-light" },
-                                  [
-                                    _c(
-                                      "svg",
-                                      {
-                                        staticClass:
-                                          "bi bi-check2-all text-success",
-                                        attrs: {
-                                          width: "1.9em",
-                                          height: "1.9em",
-                                          viewBox: "0 0 16 16",
-                                          fill: "currentColor",
-                                          xmlns: "http://www.w3.org/2000/svg"
-                                        }
-                                      },
-                                      [
-                                        _c("path", {
-                                          attrs: {
-                                            "fill-rule": "evenodd",
-                                            d:
-                                              "M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M6.25 8.043l-.896-.897a.5.5 0 1 0-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0-.708-.708L8.5 10.293l-.543-.543-.707.707z"
-                                          }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "col-1 text-right pl-1 pt-1 pl-0" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "text-dark",
-                              attrs: {
-                                href:
-                                  "/announce/orders-delete/" +
-                                  order.announcement.id
-                              }
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "bi bi-x",
+                    : _vm._e()
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.is_answered, function(order) {
+                  return order
+                    ? _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "text-left send__all-td pt-2 pb-1 pb-0"
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "d-block" },
+                              [
+                                _c("orders-all-modal", {
                                   attrs: {
-                                    width: "1.6em",
-                                    height: "1.6em",
-                                    viewBox: "0 0 16 16",
-                                    fill: "currentColor",
-                                    xmlns: "http://www.w3.org/2000/svg"
+                                    order: order,
+                                    auth_check: _vm.auth_check,
+                                    auth_user: _vm.auth_user,
+                                    auth_user_status: _vm.auth_user_status,
+                                    disabled: "disabled"
                                   }
-                                },
-                                [
-                                  _c("path", {
+                                })
+                              ],
+                              1
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticClass:
+                              "text-right send__all-td pt-2 pb-1 pb-0 pr-0"
+                          },
+                          [
+                            _vm.is_seen[order.id] == null
+                              ? _c("div", { staticClass: "d-block" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "badge badge-light" },
+                                    [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticClass: "bi bi-check2",
+                                          attrs: {
+                                            width: "1.9em",
+                                            height: "1.9em",
+                                            viewBox: "0 0 16 16",
+                                            fill: "currentColor",
+                                            xmlns: "http://www.w3.org/2000/svg"
+                                          }
+                                        },
+                                        [
+                                          _c("path", {
+                                            attrs: {
+                                              "fill-rule": "evenodd",
+                                              d:
+                                                "M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              : _c("div", { staticClass: "d-block" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "badge badge-light" },
+                                    [
+                                      _c(
+                                        "svg",
+                                        {
+                                          staticClass:
+                                            "bi bi-check2-all text-success",
+                                          attrs: {
+                                            width: "1.9em",
+                                            height: "1.9em",
+                                            viewBox: "0 0 16 16",
+                                            fill: "currentColor",
+                                            xmlns: "http://www.w3.org/2000/svg"
+                                          }
+                                        },
+                                        [
+                                          _c("path", {
+                                            attrs: {
+                                              "fill-rule": "evenodd",
+                                              d:
+                                                "M12.354 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("path", {
+                                            attrs: {
+                                              d:
+                                                "M6.25 8.043l-.896-.897a.5.5 0 1 0-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 0 0 .708 0l7-7a.5.5 0 0 0-.708-.708L8.5 10.293l-.543-.543-.707.707z"
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "col-1 text-right pl-1 pt-1 pl-0" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "text-dark",
+                                attrs: {
+                                  href:
+                                    "/announce/orders-delete/" +
+                                    order.announcement.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "bi bi-x",
                                     attrs: {
-                                      "fill-rule": "evenodd",
-                                      d:
-                                        "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                      width: "1.6em",
+                                      height: "1.6em",
+                                      viewBox: "0 0 16 16",
+                                      fill: "currentColor",
+                                      xmlns: "http://www.w3.org/2000/svg"
                                     }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  : _vm._e()
-              })
-            ],
-            2
-          )
-        ])
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        "fill-rule": "evenodd",
+                                        d:
+                                          "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          ]
+        )
       : _c("div", { staticClass: "d-block" }, [
           _c("h4", { staticClass: "text-center p-5 letter__spacing" }, [
             _vm._v("\n            Sifariş tapılmadı!\n        ")

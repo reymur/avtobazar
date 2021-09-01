@@ -11430,6 +11430,10 @@ body {
   margin: 0 0 0 -11px;
 }
 
+.ow__anywvere {
+  overflow-wrap: anywhere;
+}
+
 .seller__image-edit-div {
   width: 500px;
   height: 350px;
