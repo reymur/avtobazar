@@ -3,7 +3,7 @@
         <div class="col-12 mb-1">
             <div v-if="errors.length" class="invalid-feedback d-block mb-2">
                 <ul class="alert-danger py-2 my-1">
-                    <li v-for="error in errors" class="py-2" v-if="error.autoNumber">{{ error.autoNumber[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.phone">{{ error.phone[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
                 </ul>
             </div>
@@ -24,12 +24,18 @@
 
         <div class="input-group mb-2">
             <div class="input-group-prepend">
-                <div class="input-group-text p-1">
-                    <img src="images/cars/registerNumbers/number.png" alt="" class="register__number-size ">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        Telefon
+                    </div>
                 </div>
+                <!--<div class="input-group-text p-1">-->
+<!--                    <img src="images/cars/registerNumbers/number.png" alt="" class="register__number-size ">-->
+<!--                </div>-->
             </div>
-            <input v-model="autoNumber" type="text" class="form-control text-uppercase"
-                   id="autoNumber" placeholder="Avtomobilin nömrəsini qeyd edin">
+
+            <input v-model="phone" type="text" class="form-control"
+                   id="phone" placeholder="Telefon nömrənizi qeyd edin">
         </div>
 
         <div class="col-12 input-group p-0">
@@ -39,7 +45,7 @@
                 </div>
             </div>
             <input v-model="password" type="password" class="form-control"
-                   id="passBuyer" placeholder="şifrəni yaz">
+                   id="password" placeholder="şifrəni yaz">
         </div>
 
         <div class="modal-footer pt-2 pb-2 pr-0 mr-0">
@@ -59,7 +65,7 @@ export default {
     data(){
         return {
             car: this.cars.length ? this.cars[76].name : '',
-            autoNumber: '',
+            phone: '',
             password: '',
             errors: [],
             status: 1,
@@ -77,46 +83,54 @@ export default {
             axios.post('/register', {
                 status: 1,
                 marka: this.car,
-                autoNumber: this.autoNumber.trim(),
+                phone: this.phone.trim(),
                 password: this.password.trim()
             }).then(res => {
-                if( res.status == 201 ){
-                    window.location.href = '/buyer/profile/'+ res.data.user.id
-                    this.sendLoader = false;
-                    console.log('res - ', res.data.data.id)
+                if( res.data ) {
+                    if (res.status == 201) {
+                        if( res.data.user ) {
+                            window.location.href = '/buyer/profile/' + res.data.user.id
+                            this.sendLoader = false;
+                        }
+                    }
                 }
-                console.log(res.status)
+                console.info(res)
+                console.log('Successfully - '+res.status+' - '+ res)
             })
             .catch(err => {
-                if(err.response.data.errors){
-                    this.errors.push(err.response.data.errors)
-                    this.sendLoader = false;
-                    this.removeDisabled('disabled');
-                    console.log('Err Buyer - ', this.errors )
+                if( err.response ) {
+                    if (err.response.data.errors) {
+                        this.errors.push(err.response.data.errors)
+                        this.sendLoader = false;
+                        this.removeDisabled('disabled');
+                        console.log('Err Buyer - ', this.errors)
+                    }
                 }
 
                 // For Buyer Start
                 for(let i=0; i < this.errors.length; i++ ) {
-                    if (this.errors[i]['autoNumber']) {
-                        document.getElementById('autoNumber')
+                    if (this.errors[i]['phone']) {
+                        document.getElementById('phone')
                             .classList.add('border-danger');
                         break;
                     } else {
-                        document.getElementById('autoNumber')
+                        document.getElementById('phone')
                             .classList.remove('border-danger')
                     }
                 }
 
                 for(let i=0; i < this.errors.length; i++ ) {
                     if (this.errors[i]['password']) {
-                        document.getElementById('passBuyer')
+                        document.getElementById('password')
                             .classList.add('border-danger');
                         break;
                     } else {
-                        document.getElementById('passBuyer')
+                        document.getElementById('password')
                             .classList.remove('border-danger')
                     }
                 }
+
+                console.log('Error BU - '+err)
                 // For Buyer End
             })
         },

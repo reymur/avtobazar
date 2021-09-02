@@ -150,8 +150,17 @@
                 </label>
             </div><!-- End Image Button -->
 
-            <div v-if="imageLoader" class="card col-lg-6 col-md-6 col-sm-11 mt-2 m-auto modal__regiser modal__image">
-                <img :src="img" id="img" class="imageId card-img-top" alt="Image">
+            <div v-if="imageLoader">
+                <div id="img-remove"  class="col-lg-6 col-md-6 col-sm-11 mt-2 m-auto">
+                    <div @click="imageRemove()" class="text-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                    <div class="card mt-2 m-auto modal__regiser modal__image">
+                        <img :src="img" id="img" class="imageId card-img-top" alt="Image">
+                    </div>
+                </div>
             </div><!-- End Image Show -->
         </div>
 
@@ -192,6 +201,12 @@ export default {
         }
     },
     methods: {
+        imageRemove(){
+            this.image = null
+            this.img = null
+
+            document.getElementById('img-remove').remove()
+        },
         setWhosValue(){
             if( this.whos.length ){
                 return this.who = this.whos[0].id;
@@ -248,6 +263,7 @@ export default {
                 if(err.response){
                     this.errors.push(err.response.data.errors)
                     this.sendLoader = false;
+                    this.image = null;
                     this.removeDisabled('disabled');
                     console.log('RES - ', this.errors )
                 }

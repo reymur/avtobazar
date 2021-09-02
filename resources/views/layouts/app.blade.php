@@ -49,8 +49,8 @@
                                     @auth
                                         <div class="d-inline-flex">
                                             @if( Auth::user()->status == 1 )
-                                                <div class="mt-2">
-                                                    {{ Auth::user()->autoNumber }}
+                                                <div class="mt-2 letter__spacing text__bold">
+                                                    {{ Auth::user()->phone }}
                                                 </div>
                                             @elseif( Auth::user()->status == 2 )
                                                     @isset( Auth::user()->image )

@@ -2028,11 +2028,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "buyerloginform",
   data: function data() {
     return {
-      autoNumber: '',
+      phone: '',
       password: '',
       errors: [],
       status: 1,
@@ -2049,7 +2054,7 @@ __webpack_require__.r(__webpack_exports__);
       this.sendLoader = true;
       axios.post('/login', {
         status: 1,
-        autoNumber: this.autoNumber.trim(),
+        phone: this.phone.trim(),
         password: this.password.trim()
       }).then(function (res) {
         if (res.status == 204 || res.status == 201) {
@@ -2078,20 +2083,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
         for (var i = 0; i < _this.errors.length; i++) {
-          if (_this.errors[i]['autoNumber']) {
-            document.getElementById('autoNumber').classList.add('border-danger');
+          if (_this.errors[i]['phone']) {
+            document.getElementById('phone').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('autoNumber').classList.remove('border-danger');
+            document.getElementById('phone').classList.remove('border-danger');
           }
         }
 
         for (var _i = 0; _i < _this.errors.length; _i++) {
           if (_this.errors[_i]['password']) {
-            document.getElementById('passBuyer').classList.add('border-danger');
+            document.getElementById('phone').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('passBuyer').classList.remove('border-danger');
+            document.getElementById('password').classList.remove('border-danger');
           }
         } // For Buyer End
 
@@ -2174,13 +2179,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "buyerregisterform",
   props: ['cars'],
   data: function data() {
     return {
       car: this.cars.length ? this.cars[76].name : '',
-      autoNumber: '',
+      phone: '',
       password: '',
       errors: [],
       status: 1,
@@ -2198,46 +2209,53 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/register', {
         status: 1,
         marka: this.car,
-        autoNumber: this.autoNumber.trim(),
+        phone: this.phone.trim(),
         password: this.password.trim()
       }).then(function (res) {
-        if (res.status == 201) {
-          window.location.href = '/buyer/profile/' + res.data.user.id;
-          _this.sendLoader = false;
-          console.log('res - ', res.data.data.id);
+        if (res.data) {
+          if (res.status == 201) {
+            if (res.data.user) {
+              window.location.href = '/buyer/profile/' + res.data.user.id;
+              _this.sendLoader = false;
+            }
+          }
         }
 
-        console.log(res.status);
+        console.info(res);
+        console.log('Successfully - ' + res.status + ' - ' + res);
       })["catch"](function (err) {
-        if (err.response.data.errors) {
-          _this.errors.push(err.response.data.errors);
+        if (err.response) {
+          if (err.response.data.errors) {
+            _this.errors.push(err.response.data.errors);
 
-          _this.sendLoader = false;
+            _this.sendLoader = false;
 
-          _this.removeDisabled('disabled');
+            _this.removeDisabled('disabled');
 
-          console.log('Err Buyer - ', _this.errors);
+            console.log('Err Buyer - ', _this.errors);
+          }
         } // For Buyer Start
 
 
         for (var i = 0; i < _this.errors.length; i++) {
-          if (_this.errors[i]['autoNumber']) {
-            document.getElementById('autoNumber').classList.add('border-danger');
+          if (_this.errors[i]['phone']) {
+            document.getElementById('phone').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('autoNumber').classList.remove('border-danger');
+            document.getElementById('phone').classList.remove('border-danger');
           }
         }
 
         for (var _i = 0; _i < _this.errors.length; _i++) {
           if (_this.errors[_i]['password']) {
-            document.getElementById('passBuyer').classList.add('border-danger');
+            document.getElementById('password').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('passBuyer').classList.remove('border-danger');
+            document.getElementById('password').classList.remove('border-danger');
           }
-        } // For Buyer End
+        }
 
+        console.log('Error BU - ' + err); // For Buyer End
       });
     },
     addDisabled: function addDisabled(val, key) {
@@ -3494,6 +3512,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "sellerregisterform",
   props: ['whos', 'cars', 'cities', 'ignoredCountries'],
@@ -3520,6 +3547,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    imageRemove: function imageRemove() {
+      this.image = null;
+      this.img = null;
+      document.getElementById('img-remove').remove();
+    },
     setWhosValue: function setWhosValue() {
       if (this.whos.length) {
         return this.who = this.whos[0].id;
@@ -3580,6 +3612,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.errors.push(err.response.data.errors);
 
           _this2.sendLoader = false;
+          _this2.image = null;
 
           _this2.removeDisabled('disabled');
 
@@ -62076,9 +62109,9 @@ var render = function() {
               { staticClass: "alert-danger py-2 my-1" },
               [
                 _vm._l(_vm.errors, function(error) {
-                  return error.autoNumber
+                  return error.phone
                     ? _c("li", { staticClass: "py-2" }, [
-                        _vm._v(_vm._s(error.autoNumber[0]))
+                        _vm._v(_vm._s(error.phone[0]))
                       ])
                     : _vm._e()
                 }),
@@ -62105,23 +62138,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.autoNumber,
-            expression: "autoNumber"
+            value: _vm.phone,
+            expression: "phone"
           }
         ],
-        staticClass: "form-control text-uppercase",
+        staticClass: "form-control",
         attrs: {
           type: "text",
-          id: "autoNumber",
-          placeholder: "Avtomobilin nömrəsini qeyd edin"
+          id: "buyerPhone",
+          placeholder: "Telefon nömrənizi qeyd edin"
         },
-        domProps: { value: _vm.autoNumber },
+        domProps: { value: _vm.phone },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.autoNumber = $event.target.value
+            _vm.phone = $event.target.value
           }
         }
       })
@@ -62187,11 +62220,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("div", { staticClass: "input-group-text p-1" }, [
-        _c("img", {
-          staticClass: "register__number-size ",
-          attrs: { src: "images/cars/registerNumbers/number.png", alt: "" }
-        })
+      _c("div", { staticClass: "input-group-prepend" }, [
+        _c("div", { staticClass: "input-group-text" }, [
+          _vm._v("\n                        Telefon\n                    ")
+        ])
       ])
     ])
   },
@@ -62201,7 +62233,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text" }, [
-        _vm._v("\n                Şifrə\n            ")
+        _vm._v("\n                    Şifrə\n                ")
       ])
     ])
   }
@@ -62236,9 +62268,9 @@ var render = function() {
               { staticClass: "alert-danger py-2 my-1" },
               [
                 _vm._l(_vm.errors, function(error) {
-                  return error.autoNumber
+                  return error.phone
                     ? _c("li", { staticClass: "py-2" }, [
-                        _vm._v(_vm._s(error.autoNumber[0]))
+                        _vm._v(_vm._s(error.phone[0]))
                       ])
                     : _vm._e()
                 }),
@@ -62293,7 +62325,9 @@ var render = function() {
           return _vm.cars.length
             ? _c("option", { domProps: { value: carName.name } }, [
                 _vm._v(
-                  "\n                " + _vm._s(carName.name) + "\n            "
+                  "\n                    " +
+                    _vm._s(carName.name) +
+                    "\n                "
                 )
               ])
             : _vm._e()
@@ -62310,23 +62344,23 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.autoNumber,
-            expression: "autoNumber"
+            value: _vm.phone,
+            expression: "phone"
           }
         ],
-        staticClass: "form-control text-uppercase",
+        staticClass: "form-control",
         attrs: {
           type: "text",
-          id: "autoNumber",
-          placeholder: "Avtomobilin nömrəsini qeyd edin"
+          id: "phone",
+          placeholder: "Telefon nömrənizi qeyd edin"
         },
-        domProps: { value: _vm.autoNumber },
+        domProps: { value: _vm.phone },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.autoNumber = $event.target.value
+            _vm.phone = $event.target.value
           }
         }
       })
@@ -62345,11 +62379,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: {
-          type: "password",
-          id: "passBuyer",
-          placeholder: "şifrəni yaz"
-        },
+        attrs: { type: "password", id: "password", placeholder: "şifrəni yaz" },
         domProps: { value: _vm.password },
         on: {
           input: function($event) {
@@ -62393,7 +62423,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text pl-2 pr-1" }, [
-        _vm._v("\n                Marka\n            ")
+        _vm._v("\n                    Marka\n                ")
       ])
     ])
   },
@@ -62402,11 +62432,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
-      _c("div", { staticClass: "input-group-text p-1" }, [
-        _c("img", {
-          staticClass: "register__number-size ",
-          attrs: { src: "images/cars/registerNumbers/number.png", alt: "" }
-        })
+      _c("div", { staticClass: "input-group-prepend" }, [
+        _c("div", { staticClass: "input-group-text" }, [
+          _vm._v("\n                        Telefon\n                    ")
+        ])
       ])
     ])
   },
@@ -62416,7 +62445,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text" }, [
-        _vm._v("\n                Şifrə\n            ")
+        _vm._v("\n                    Şifrə\n                ")
       ])
     ])
   }
@@ -64259,19 +64288,64 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm.imageLoader
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "card col-lg-6 col-md-6 col-sm-11 mt-2 m-auto modal__regiser modal__image"
-            },
-            [
-              _c("img", {
-                staticClass: "imageId card-img-top",
-                attrs: { src: _vm.img, id: "img", alt: "Image" }
-              })
-            ]
-          )
+        ? _c("div", [
+            _c(
+              "div",
+              {
+                staticClass: "col-lg-6 col-md-6 col-sm-11 mt-2 m-auto",
+                attrs: { id: "img-remove" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "text-right",
+                    on: {
+                      click: function($event) {
+                        return _vm.imageRemove()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "bi bi-x",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          width: "20",
+                          height: "20",
+                          fill: "currentColor",
+                          viewBox: "0 0 16 16"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card mt-2 m-auto modal__regiser modal__image"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "imageId card-img-top",
+                      attrs: { src: _vm.img, id: "img", alt: "Image" }
+                    })
+                  ]
+                )
+              ]
+            )
+          ])
         : _vm._e()
     ]),
     _vm._v(" "),

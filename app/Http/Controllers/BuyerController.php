@@ -12,6 +12,7 @@ use App\Who;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Symfony\Component\Console\Input\Input;
 
@@ -54,15 +55,24 @@ class BuyerController extends Controller
 
         if( ! $user && $user->id !== Auth::user()->id ) return redirect()->back();
 
-        if( $slug == 'avto_number' ) {
-            $request->validate([
-                'avto_number' => 'required|alpha_dash|min:7|max:7'
-            ]);
+        if( $slug == 'phone_number' ) {
+            $messages = [
+                'phone_number.required' => '"Telefon nömrəsi" mütləqdir!',
+                'phone_number.digits' => '"Telefon nömrəsi" 10 rəqəmdən ibarət olmalıdır!',
+                'phone_number.unique' => '"Telefon nömrəsi" zanitdir!!'
+            ];
 
-            $uppercase = strtoupper( $request->input('avto_number') );
+            $request->validate([
+                'phone_number' => [
+                        'required','digits:10',
+                        Rule::unique('users','phone')->ignore($user->id)
+                    ]
+                ], $messages);
+
+            $buyer_phone = $request->input('phone_number');
 
             $user->update([
-                'autoNumber' => $uppercase
+                'phone' => $buyer_phone
             ]);
         }
         elseif( $slug == 'marka' ){
@@ -81,6 +91,14 @@ class BuyerController extends Controller
             $request->validate([
                 'old_pass' => 'required|string|min:6|max:20',
                 'new_pass' => 'required|string|min:6|max:20',
+            ],[
+                'old_pass.required' => 'Köhnə Parol mütləqdir!',
+                'old_pass.min' => 'Parol 10 simvoldan az olmamalıdır!',
+                'old_pass.max' => 'Parol 10 simvoldan çox olmamalıdır!',
+
+                'new_pass.required' => 'Yeni Parol mütləqdir!',
+                'new_pass.min' => 'Parol 10 simvoldan az olmamalıdır!',
+                'new_pass.max' => 'Parol 10 simvoldan çox olmamalıdır!',
             ]);
 
             $user = Auth::user();
@@ -94,7 +112,7 @@ class BuyerController extends Controller
             }
             else{
                 return redirect()->back()
-                    ->with('old_pass', 'Old password does not match!');
+                    ->with('old_pass', 'Köhnə "Parol" düz deyil!');
             }
 
             return redirect()->route('buyer.profile', Auth::user()->id)

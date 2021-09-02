@@ -26,8 +26,8 @@
                                         @include('users.buyer.forms.marka_edit_form')
                                     @endif
 
-                                    @if( isset($slug) && $slug == 'avto_number' )
-                                        @include('users.buyer.forms.avtoNumber_edit_forms')
+                                    @if( isset($slug) && $slug == 'phone_number' )
+                                        @include('users.buyer.forms.phoneNumber_edit_forms')
                                     @endif
 
                                     @if( isset($slug) && $slug == 'password' )

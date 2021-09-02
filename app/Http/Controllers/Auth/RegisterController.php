@@ -53,38 +53,104 @@ class RegisterController extends Controller
     {
         if( $data['status'] == 1 ) {
             return Validator::make($data, [
-                'autoNumber' => ['required', 'string',  'min:7', 'max:7', 'unique:users'],
-                'password' => ['required', 'string', 'min:6'],
+                'phone' => ['required', 'unique:users', 'digits:10'],
+                'password' => ['required', 'string', 'min:8','max:36'],
             ]);
         }
 
         if ( $data['status'] == 2 ) {
             if( $data['phone'] ) $data['phone'] = $this->setPhoneNumber( $data['phone'] );
 
-            if ( isset($data['image']) && $data['image'] !== "null" ) {
+            if ( isset($data['image']) && $data['image'] !== 'null' ) {
                 return Validator::make($data, [
-                    'name' => ['required', 'string', 'max:255', 'unique:users'],
+                    'name' => ['required', 'string', 'min:2','max:50', 'unique:users'],
                     'marka' => ['required'],
-                    'address' => ['required', 'string', 'max:255'],
-                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                    'phone' => ['required', 'unique:users', 'min:10','max:10'],
-                    'password' => ['required', 'confirmed', 'string', 'min:8'],
-                    'password_confirmation' => ['required', 'string', 'min:8'],
+                    'address' => ['required', 'string', 'min:3','max:50'],
+                    'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+                    'phone' => ['required', 'unique:users', 'digits:10'],
+                    'password' => ['required', 'confirmed', 'string', 'min:8','max:36'],
+                    'password_confirmation' => ['required', 'string', 'min:8','max:36'],
                     'image' => 'mimes:jpeg,bmp,png',
-                ]);
+                ], $this->sellerValidateWithImageCastomMessages($data) );
             }
 
             return Validator::make($data, [
-                'name' => ['required', 'string', 'max:255', 'unique:users'],
+                'name' => ['required', 'string', 'min:2','max:50', 'unique:users'],
                 'marka' => ['required'],
-                'address' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'phone' => ['required', 'unique:users', 'min:10','max:10'],
-                'password' => ['required', 'confirmed', 'string', 'min:8'],
-                'password_confirmation' => ['required', 'string', 'min:8'],
-            ]);
+                'address' => ['required', 'string', 'min:3','max:50'],
+                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+                'phone' => ['required', 'unique:users', 'digits:10'],
+                'password' => ['required', 'confirmed', 'string', 'min:8','max:36'],
+                'password_confirmation' => ['required', 'string', 'min:8','max:36'],
+            ], $this->sellerValidateWithOutImageCastomMessages($data) );
         }
     }
+
+    public function buyerValidateCastomMessages($data){
+        return [
+            'password.required' => '"Parol" mütləqdir!',
+            'password.min' => '"Telefon" 8 simvoldan az olmamalıdır!',
+            'password.max' => '"Telefon" 36 simvoldan çox olmamalıdır!',
+            'phone.required' => '"Telefon" mütləqdir!',
+            'phone.unique' => $data['phone'] . ' məşquldur!',
+            'phone.min' => '"Telefon" 10 simvoldan az olmamalıdır!',
+            'phone.max' => '"Telefon" 10 simvoldan çox olmamalıdır!',
+        ];
+    }
+
+    public function sellerValidateWithImageCastomMessages($data){
+        return [
+            'name.required' => '"Ad" mütləqdir!',
+            'name.min' => '"Ad" 2 simvoldan çox olmamalıdır!',
+            'name.max' => '"Ad" 50 simvoldan çox olmamalıdır!',
+            'name.unique' => $data['name'] . ' məşquldur!',
+            'marka.required' => '"Marka" mütləqdir',
+            'address.required' => '"Ünvan" mütləqdir!',
+            'address.min' => '"Ünvan" 3 simvoldan az olmamalıdır!',
+            'address.max' => '"Ünvan" 50 simvoldan çox olmamalıdır!',
+            'email.required' => '"E-mail" mütləqdir!',
+            'email.email' => '"E-mail" yazılış formatı düz deyil!',
+            'email.max' => '"E-mail" 50 simvoldan çox olmamalıdır!',
+            'email.unique' => $data['email'] . ' məşquldur!',
+            'phone.required' => '"Telefon" mütləqdir!',
+            'phone.unique' => $data['phone'] . ' məşquldur!',
+            'phone.min' => '"Telefon" 10 simvoldan az olmamalıdır!',
+            'phone.max' => '"Telefon" 10 simvoldan çox olmamalıdır!',
+            'password.required' => '"Parol" mütləqdir!',
+            'password.min' => '"Telefon" 8 simvoldan az olmamalıdır!',
+            'password.max' => '"Telefon" 36 simvoldan çox olmamalıdır!',
+            'password_confirmation.required' => '"Parol" təstiqi mütləqdir!',
+            'password_confirmation.min' => '"Parol" təstiqi 8 simvoldan az olmamalıdır!',
+            'password_confirmation.max' => '"Parol" təstiqi 36 simvoldan çox olmamalıdır!',
+            'image.mimes' => '"Şəkil": jpeg,bmp,png formatında olmalıdıt!'
+        ];
+    }
+    public function sellerValidateWithOutImageCastomMessages($data){
+        return [
+            'name.required' => '"Ad" mütləqdir!',
+            'name.max' => '"Ad" 36 simvoldan çox olmamalıdır!',
+            'name.unique' => $data['name'] . ' məşquldur!',
+            'marka.required' => '"Marka" mütləqdir',
+            'address.required' => '"Ünvan" mütləqdir!',
+            'address.min' => '"Ünvan" 3 simvoldan çox olmamalıdır!',
+            'address.max' => '"Ünvan" 36 simvoldan az olmamalıdır!',
+            'email.required' => '"E-mail" mütləqdir!',
+            'email.email' => '"E-mail" yazılış formatı düz deyil!',
+            'email.max' => '"E-mail" 50 simvoldan çox olmamalıdır!',
+            'email.unique' => $data['email'] . ' məşquldur!',
+            'phone.required' => '"Telefon" mütləqdir!',
+            'phone.unique' => $data['phone'] . ' məşquldur!',
+            'phone.min' => '"Telefon" 10 simvoldan az olmamalıdır!',
+            'phone.max' => '"Telefon" 10 simvoldan çox olmamalıdır!',
+            'password.required' => '"Parol" mütləqdir!',
+            'password.min' => '"Telefon" 8 simvoldan az olmamalıdır!',
+            'password.max' => '"Telefon" 36 simvoldan çox olmamalıdır!',
+            'password_confirmation.required' => '"Parol" təstiqi mütləqdir!',
+            'password_confirmation.min' => '"Parol" təstiqi 8 simvoldan az olmamalıdır!',
+            'password_confirmation.max' => '"Parol" təstiqi 36 simvoldan çox olmamalıdır!',
+        ];
+    }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -97,7 +163,7 @@ class RegisterController extends Controller
         if ($data['status'] == 1) {
             $user = User::create([
                 'marka' => $data['marka'],
-                'autoNumber' => strtoupper($data['autoNumber']),
+                'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
                 'status' => $data['status']
             ]);
@@ -146,18 +212,24 @@ class RegisterController extends Controller
 
     private function makeUserImageFolderWithImages( $image )
     {
-        $dir = public_path("images/users/sellers/" );
+        if( $image !== 'false' ) {
+            $dir = public_path("images/users/sellers/");
 
 //        $this->clearSellerDir($dir);
 
-        if( is_dir($dir) ) {
-            $new_name = $this->makeNewImageName($image);
+            if (is_dir($dir)) {
+                $new_name = $this->makeNewImageName($image);
 
-            $is_saved = $this->makeImage($image, 650, 500, $dir, $new_name);
-            $is_saved_small = $this->makeImage($image, 150, 120, $dir, 'small_'.$new_name);
+                $is_saved = $this->makeImage($image, 650, 500, $dir, $new_name);
+                $is_saved_small = $this->makeImage($image, 150, 120, $dir, 'small_' . $new_name);
 
-            return ($is_saved && $is_saved_small) ? $new_name : null;
+                return ($is_saved && $is_saved_small) ? $new_name : null;
+            }
+
+            return false;
         }
+
+        return false;
     }
 
     public function makeImage($file, $width, $height, $dir, $new_name){
@@ -168,13 +240,17 @@ class RegisterController extends Controller
 
             return $saved ? $new_name : null;
         }
+
+        return false;
     }
 
     public function makeNewImageName($image){
-        if( $image ){
+        if( is_file($image) && $image && !empty($image) ){
             $extension = $image->getClientOriginalExtension();
             return time() .'_'. random_int( 0, time() ) .'.'. $extension;
         }
+
+        return false;
     }
 
     private function setPhoneNumber($phone)

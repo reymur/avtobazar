@@ -3,7 +3,7 @@
         <div class="col-12 mb-1">
             <div v-if="errors.length" class="invalid-feedback d-block mb-2">
                 <ul class="alert-danger py-2 my-1">
-                    <li v-for="error in errors" class="py-2" v-if="error.autoNumber">{{ error.autoNumber[0] }}</li>
+                    <li v-for="error in errors" class="py-2" v-if="error.phone">{{ error.phone[0] }}</li>
                     <li v-for="error in errors" class="py-2" v-if="error.password"> {{ error.password[0] }}</li>
                 </ul>
             </div>
@@ -11,12 +11,17 @@
 
         <div class="input-group mb-2">
             <div class="input-group-prepend">
-                <div class="input-group-text p-1">
-                    <img src="images/cars/registerNumbers/number.png" alt="" class="register__number-size ">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        Telefon
+                    </div>
                 </div>
+<!--                <div class="input-group-text p-1">-->
+<!--                    <img src="images/cars/registerNumbers/number.png" alt="" class="register__number-size ">-->
+<!--                </div>-->
             </div>
-            <input v-model="autoNumber" type="text" class="form-control text-uppercase"
-                   id="autoNumber" placeholder="Avtomobilin nömrəsini qeyd edin">
+            <input v-model="phone" type="text" class="form-control"
+                   id="buyerPhone" placeholder="Telefon nömrənizi qeyd edin">
         </div>
 
         <div class="col-12 input-group p-0">
@@ -44,7 +49,7 @@ export default {
     name: "buyerloginform",
     data(){
         return {
-            autoNumber: '',
+            phone: '',
             password: '',
             errors: [],
             status: 1,
@@ -61,7 +66,7 @@ export default {
 
             axios.post('/login', {
                 status: 1,
-                autoNumber: this.autoNumber.trim(),
+                phone: this.phone.trim(),
                 password: this.password.trim()
             }).then(res => {
                 if( res.status == 204 || res.status == 201 ){
@@ -85,23 +90,23 @@ export default {
 
                     // For Buyer Start
                     for(let i=0; i < this.errors.length; i++ ) {
-                        if (this.errors[i]['autoNumber']) {
-                            document.getElementById('autoNumber')
+                        if (this.errors[i]['phone']) {
+                            document.getElementById('phone')
                                 .classList.add('border-danger');
                             break;
                         } else {
-                            document.getElementById('autoNumber')
+                            document.getElementById('phone')
                                 .classList.remove('border-danger')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ) {
                         if (this.errors[i]['password']) {
-                            document.getElementById('passBuyer')
+                            document.getElementById('phone')
                                 .classList.add('border-danger');
                             break;
                         } else {
-                            document.getElementById('passBuyer')
+                            document.getElementById('password')
                                 .classList.remove('border-danger')
                         }
                     }
