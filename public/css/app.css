@@ -11679,6 +11679,10 @@ body {
   background-color: #edf2f7;
 }
 
+.display__ruby {
+  display: block ruby;
+}
+
 .v-select {
   position: relative;
   font-family: inherit;

@@ -55,7 +55,7 @@ class RegisterController extends Controller
             return Validator::make($data, [
                 'phone' => ['required', 'unique:users', 'digits:10'],
                 'password' => ['required', 'string', 'min:8','max:36'],
-            ]);
+            ], $this->buyerValidateCastomMessages($data));
         }
 
         if ( $data['status'] == 2 ) {
@@ -212,7 +212,7 @@ class RegisterController extends Controller
 
     private function makeUserImageFolderWithImages( $image )
     {
-        if( $image !== 'false' ) {
+        if( $image !== 'null' ) {
             $dir = public_path("images/users/sellers/");
 
 //        $this->clearSellerDir($dir);

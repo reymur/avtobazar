@@ -4,18 +4,18 @@
     <div class="container-lg container-xl">
         <div class="col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
             <!-- Crumbs _page_links -->
-            @include('crumbs._page_links', ['link' => $model->first()->title])
+            @include('crumbs._page_links', ['link' => 'Type'])
 
             @include('partials.announcement_panel')
 
             <div class="col-lg-12 col-md-12 col-sm-12 d-inline-flex mb-lg-4 mb-md-5 mb-sm-5 mt-xl-5 mt-lg-5 mt-md-4 mt-sm-4 text-center">
-                <div class="col-sm-7 d-inline-flex border-bottom border-danger px-sm-0 m-auto title__text">
-                    <div class="m-auto d-flex">
+                <div class="col-lg-10 col-md-10 col-sm-7 d-inline-flex border-bottom border-danger px-sm-0 m-auto title__text">
+                    <div class="col-md m-auto display__ruby">
                         <div class="mt-1 mr-2 text-uppercase">
                             <span class="text__bold">
-                                @isset($model)
-                                    {{ $model->name }}
-                                @endisset
+                                @if($type->title && $type->parent->name)
+                                    {{ $type->parent->name }} / {{ $type->title }}
+                                @endif
                             </span>
                             <span class="">ÜZRƏ Ehtiyyat Hissələrini</span>
 
@@ -32,25 +32,8 @@
             </div>
 
             <div class="container-lg p-lg-3 p-sm-0 mt-0">
-                <div class="row col-lg-12 p-sm-0 mx-auto">
-                    @isset($model->types)
-                        @foreach($model->types as $type)
-                            @if($type->title)
-                                <div class="col-lg-3 col-md-4 col-sm-6 p-sm-0">
-                                    @include('partials.models_card',['show_car_types' => true])
-                                </div>
-                            @else
-                                <table class="d-inline-flex m-auto">
-                                    <tr>
-                                        <td class="letter__spacing text-uppercase text__bold">
-                                            {{  $type->parent->title }} -
-                                        </td >
-                                        <td class="letter__spacing text-uppercase ">markasına uyğun model tapılmadı!</td>
-                                    </tr>
-                                </table>
-                            @endif
-                        @endforeach
-                    @endisset
+                <div class="row p-sm-0 col-lg-12 mx-auto">
+                    @include('partials.models_card',['show_car_types' => false])
                 </div>
             </div>
         </div>

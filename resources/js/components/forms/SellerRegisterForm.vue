@@ -19,7 +19,7 @@
             <div class="col-12 input-group p-1">
                 <div class="input-group-prepend">
                     <div class="input-group-text px-1">
-                        <img src="images/users/saller_auto_logo/saller_marka_logo.jpg" alt="Logo">
+                        <img src="images/users/logo/saller_marka_logo.jpg" alt="Logo">
                     </div>
                 </div>
                 <v-select id="marka" class="marka" taggable multiple
@@ -138,10 +138,10 @@
         </div>
 
         <div class="col-12 ml-1 mt-1">
-            <div class="custom-file col-3 p-2">
+            <div class="custom-file col-4 p-2">
                 <input @change="fileSelect" type="file" value="file" class="custom-file-input" id="file">
                 <label class="custom-file-label pt-2 pl-2" for="file" data-browse="Şəkil">
-                    <span class="p-0 border-0 input-group-text bg-transparent">
+                    <span class="mt-1 ml-2 p-0 border-0 input-group-text bg-transparent">
                         <svg width="2.4em" height="2.4em" viewBox="0 0 16 16" class="bi bi-camera-fill mt-n2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                           <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                           <path fill-rule="evenodd" d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
@@ -177,7 +177,10 @@
 <script>
 export default {
     name: "sellerregisterform",
-    props: ['whos','cars','cities','ignoredCountries'],
+    props: [
+        'whos','cars','cities',
+        'ignoredCountries','errorClearForSellerRegister'
+    ],
     data(){
         return {
             name: '',
@@ -198,6 +201,18 @@ export default {
             marka: [],
             car: [],
             sendLoader: false,
+            inputIdNames: [
+                'vs1__combobox','email','phone','name',
+                'address','password','password_confirmation'
+            ],
+        }
+    },
+    watch: {
+        errorClearForSellerRegister: function(){
+            this.errors = []
+            this.inputIdNames.forEach(id => {
+                this.dangerBorderRemove(id)
+            })
         }
     },
     methods: {
@@ -253,9 +268,12 @@ export default {
                 if( res.status == 201 ){
                     window.location.href = '/seller/profile/'+ res.data.user.id
                     this.sendLoader = false;
-                    this.removeAllDangerBorders();
+                    this.inputIdNames.forEach(id => {
+                        this.dangerBorderRemove(id)
+                    })
                     console.log('res - ', res.data.data.id)
                 }
+                console.log('res - ', res.data)
             })
             .catch(err => {
                 this.errors = [];
@@ -265,87 +283,97 @@ export default {
                     this.sendLoader = false;
                     this.image = null;
                     this.removeDisabled('disabled');
-                    console.log('RES - ', this.errors )
+                    console.log('ERR1 - ', err.response )
                 }
                 if(err.response){
                     this.errors.push(err.response.data.message)
                     this.sendLoader = false;
                     this.removeDisabled('disabled');
-                    console.log('ERR - ', this.errors)
+                    console.log('ERR2 - ', err.response)
                 }
 
                 if(  this.errors.length ) {
                     // For Seller Start
                     for(let i=0; i < this.errors.length; i++ ) {
                         if (this.errors[i]['marka']) {
-                            document.getElementById('vs1__combobox').classList.add('border-danger');
+                            this.dangerBorderAdd('vs1__combobox');
                             break;
-                        } else {
-                            document.getElementById('vs1__combobox').classList.remove('border-danger')
+                        }else {
+                            this.dangerBorderRemove('vs1__combobox')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['email'] ) {
-                            document.getElementById('email').classList.add('border-danger');
+                            this.dangerBorderAdd('email');
                             break;
                         }else {
-                            document.getElementById('email').classList.remove('border-danger')
+                            this.dangerBorderRemove('email')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['phone'] ) {
-                            document.getElementById('phone').classList.add('border__danger');
+                            this.dangerBorderAdd('phone')
                             break;
                         }else {
-                            document.getElementById('phone').classList.remove('border__danger')
+                            this.dangerBorderRemove('phone')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['name'] ) {
-                            document.getElementById('name').classList.add('border-danger');
+                            this.dangerBorderAdd('name')
                             break;
                         }else {
-                            if( document.getElementById('name').classList.contains('border-danger') ){
-                                document.getElementById('name').classList.remove('border-danger')
-                            }
+                            this.dangerBorderRemove('name')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['address'] ) {
-                            document.getElementById('address').classList.add('border-danger');
+                            this.dangerBorderAdd('address')
                             break;
                         }else {
-                            if( document.getElementById('address').classList.contains('border-danger') ){
-                                document.getElementById('address').classList.remove('border-danger')
-                            }
+                            this.dangerBorderRemove('address')
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['password'] ) {
-                            document.getElementById('password').classList.add('border-danger');
-                            document.getElementById('password_confirmation').classList.add('border-danger');
+                            this.dangerBorderAdd('password')
+                            this.dangerBorderAdd('password_confirmation')
                             break;
                         }else {
-                            document.getElementById('password').classList.remove('border-danger')
-                            document.getElementById('password_confirmation').classList.remove('border-danger')
+                            this.dangerBorderRemove('password')
+                            this.dangerBorderRemove('password_confirmation')
                         }
                     }
                     // For Seller End
                 }
             });
         },
+        ifIdExists(id){
+            if( document.getElementById(id) ){
+                return true;
+            }
+            return false;
+        },
+        ifDangerBorderExists(id){
+            if( document.getElementById(id).classList.contains('border-danger') ){
+                return true;
+            }
+            return false;
+        },
         addDisabled(val, key){
-            document.getElementById('send')
-                .setAttribute(val,key);
+            if( document.getElementById('send') ) {
+                document.getElementById('send').setAttribute(val, key);
+            }
         },
         removeDisabled(val){
-            document.getElementById('send')
-                .removeAttribute(val);
+            if( document.getElementById('send') ) {
+                document.getElementById('send').removeAttribute(val);
+            }
         },
         fileSelect(e){
             const file = (e.target.files || e.dataTransfer.files)[0];
@@ -363,29 +391,16 @@ export default {
         radioListener(){
             this.errors = [];
         },
-        removeAllDangerBorders(){
-            if ( document.getElementById('marka').classList.contains('border-danger') ) {
-                document.getElementById('vs1__combobox').classList.remove('border-danger')
+        dangerBorderAdd(id){
+            if ( this.ifIdExists(id) ) {
+                document.getElementById(id).classList.add('border-danger')
             }
-            if( document.getElementById('email').classList.contains('border-danger') ) {
-                document.getElementById('email').classList.remove('border-danger');
+        },
+        dangerBorderRemove(id){
+            if ( this.ifDangerBorderExists(id) ) {
+                document.getElementById(id).classList.remove('border-danger')
             }
-            if( document.getElementById('phone').classList.contains('border__danger') ) {
-                document.getElementById('phone').classList.remove('border__danger');
-            }
-            if( document.getElementById('name').classList.contains('border-danger') ) {
-                document.getElementById('name').classList.remove('border-danger')
-            }
-            if( document.getElementById('address').classList.contains('border-danger') ) {
-                document.getElementById('address').classList.remove('border-danger');
-            }
-            if( document.getElementById('password').classList.contains('border-danger') ) {
-                document.getElementById('password').classList.remove('border-danger');
-            }
-            if( document.getElementById('password_confirmation').classList.contains('border-danger') ) {
-                document.getElementById('password_confirmation').classList.remove('border-danger')
-            }
-        }
+        },
     },
     mounted(){
         this.getCarNames()
@@ -396,7 +411,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

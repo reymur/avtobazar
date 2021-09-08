@@ -49,6 +49,7 @@
 <script>
 export default {
     name: "sallerloginform",
+    props: ['errorClearForSellerLogin'],
     data(){
         return {
             name: '',
@@ -59,6 +60,15 @@ export default {
             status: 2,
             disable: 'disabled',
             sendLoader: false,
+            inputIdnames: ['email','password']
+        }
+    },
+    watch: {
+        errorClearForSellerLogin: function(){
+            this.errors = [];
+            this.inputIdnames.forEach(id => (
+                this.dangerBorderRemove(id)
+            ))
         }
     },
     methods: {
@@ -82,17 +92,20 @@ export default {
             axios.post('/login', formData).then(res => {
                 if( res.status == 201 ){
                     this.errors = [];
-                    document.getElementById('email').classList.remove('border-danger')
-                    document.getElementById('password').classList.remove('border-danger')
+                    this.inputIdnames.forEach(id => (
+                        this.dangerBorderRemove(id)
+                    ))
+
                     window.location.href = '/seller/profile/'+ res.data.user.id
-                    console.log('res - ', res.data.data.id)
+                    console.log('res - ', res)
                 }
+                console.log('res 222 - ', res)
             })
             .catch(err => {
                     if(err.response.data.errors){
                         this.errors.push(err.response.data.errors)
                         this.sendLoader = false;
-                        this.addDangerBorder();
+                        this.dangerBorderAdd();
                         this.removeDisabled('disabled');
                         console.log('ERR 1 - ', this.errors )
                     }
@@ -103,10 +116,10 @@ export default {
                         console.log('ERR 2 - ', this.errors)
                     }
 
-                    this.addDangerBorder();
+                    this.dangerBorderAdd();
                 });
         },
-        addDangerBorder(){
+        dangerBorderAdd(){
             if(  this.errors.length ) {
                 // For Seller Start
                     for(let i=0; i < this.errors.length; i++ ){
@@ -114,7 +127,7 @@ export default {
                             document.getElementById('email').classList.add('border-danger');
                             break;
                         }else {
-                            document.getElementById('email').classList.remove('border-danger')
+                            this.dangerBorderRemove('email')
                         }
                     }
 
@@ -123,10 +136,15 @@ export default {
                             document.getElementById('password').classList.add('border-danger');
                             break;
                         }else {
-                            document.getElementById('password').classList.remove('border-danger')
+                            this.dangerBorderRemove('password')
                         }
                     }
                 // For Seller End
+            }
+        },
+        dangerBorderRemove(id){
+            if( document.getElementById(id) ) {
+                document.getElementById(id).classList.remove('border-danger')
             }
         },
         addDisabled(val, key){

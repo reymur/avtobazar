@@ -16,7 +16,7 @@
                     @isset( $user )
                         <h5 class="ml-2 text-uppercase">{{ $user->phone ?? "Adsız" }}</h5>
                     @else
-
+                        <h5>Adsız</h5>
                     @endisset
                 </div>
                 <div class="col-lg-10 col-md-12 col-sm-12 mx-auto mt-lg-2 py-3 bg-white flash__shadow">
@@ -95,6 +95,11 @@
                                 </tbody>
                             </table>
                         @endisset
+
+
+                        <div class="">
+                            <a href="{{ redirect()->back() }}">Geri</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ class CarsController extends Controller
 
         if( ! $type ) return abort(404);
 
-        return view('partials.model_type', compact('type'));
+        return view('pages.cars.model_type', compact('type'));
     }
 
     public function getJsonModelTypes(Request $request)

@@ -49,7 +49,8 @@
             "app/Helpers/getUserCarTypes.php",
             "app/Helpers/changePasswordErrorMessage.php",
             "app/Helpers/getFirstSmallImage.php",
-            "app/Helpers/getStatus.php"
+            "app/Helpers/getStatus.php",
+            "app/Helpers/incrementVar.php"
         ],
         "classmap": [
             "database/seeds",

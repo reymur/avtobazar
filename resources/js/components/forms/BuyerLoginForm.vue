@@ -47,6 +47,7 @@
 <script>
 export default {
     name: "buyerloginform",
+    props:['errorClearForBuyerLogin'],
     data(){
         return {
             phone: '',
@@ -55,6 +56,11 @@ export default {
             status: 1,
             disable: 'disabled',
             sendLoader: false,
+        }
+    },
+    watch: {
+        errorClearForBuyerLogin: function(){
+            this.errors = []
         }
     },
     methods:{
@@ -81,6 +87,7 @@ export default {
                 console.log(res.status)
             })
                 .catch(err => {
+                    console.log('Err Buyer - ', err.response )
                     if(err.response.data.errors){
                         this.errors.push(err.response.data.errors)
                         this.sendLoader = false;
@@ -91,39 +98,45 @@ export default {
                     // For Buyer Start
                     for(let i=0; i < this.errors.length; i++ ) {
                         if (this.errors[i]['phone']) {
-                            document.getElementById('phone')
-                                .classList.add('border-danger');
-                            break;
+                            if( document.getElementById('phone') ) {
+                                document.getElementById('phone').classList.add('border-danger');
+                                break;
+                            }
                         } else {
-                            document.getElementById('phone')
-                                .classList.remove('border-danger')
+                            if( document.getElementById('phone') ) {
+                                document.getElementById('phone').classList.remove('border-danger')
+                            }
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ) {
                         if (this.errors[i]['password']) {
-                            document.getElementById('phone')
-                                .classList.add('border-danger');
-                            break;
+                            if( document.getElementById('phone') ) {
+                                document.getElementById('phone').classList.add('border-danger');
+                                break;
+                            }
                         } else {
-                            document.getElementById('password')
-                                .classList.remove('border-danger')
+                            if( document.getElementById('password') ) {
+                                document.getElementById('password').classList.remove('border-danger')
+                            }
                         }
                     }
                     // For Buyer End
                 })
         },
         addDisabled(val, key){
-            document.getElementById('send')
-                .setAttribute(val,key);
+            if( document.getElementById('send') ) {
+                document.getElementById('send').setAttribute(val, key);
+            }
         },
         removeDisabled(val){
-            document.getElementById('send')
-                .removeAttribute(val);
+            if(  document.getElementById('send') ) {
+                document.getElementById('send').removeAttribute(val);
+            }
         },
     },
     mounted() {
-        console.log(this.cars)
+        // console.log()
     }
 }
 </script>

@@ -2035,6 +2035,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "buyerloginform",
+  props: ['errorClearForBuyerLogin'],
   data: function data() {
     return {
       phone: '',
@@ -2044,6 +2045,11 @@ __webpack_require__.r(__webpack_exports__);
       disable: 'disabled',
       sendLoader: false
     };
+  },
+  watch: {
+    errorClearForBuyerLogin: function errorClearForBuyerLogin() {
+      this.errors = [];
+    }
   },
   methods: {
     sendBuyerData: function sendBuyerData() {
@@ -2071,6 +2077,8 @@ __webpack_require__.r(__webpack_exports__);
 
         console.log(res.status);
       })["catch"](function (err) {
+        console.log('Err Buyer - ', err.response);
+
         if (err.response.data.errors) {
           _this.errors.push(err.response.data.errors);
 
@@ -2084,33 +2092,44 @@ __webpack_require__.r(__webpack_exports__);
 
         for (var i = 0; i < _this.errors.length; i++) {
           if (_this.errors[i]['phone']) {
-            document.getElementById('phone').classList.add('border-danger');
-            break;
+            if (document.getElementById('phone')) {
+              document.getElementById('phone').classList.add('border-danger');
+              break;
+            }
           } else {
-            document.getElementById('phone').classList.remove('border-danger');
+            if (document.getElementById('phone')) {
+              document.getElementById('phone').classList.remove('border-danger');
+            }
           }
         }
 
         for (var _i = 0; _i < _this.errors.length; _i++) {
           if (_this.errors[_i]['password']) {
-            document.getElementById('phone').classList.add('border-danger');
-            break;
+            if (document.getElementById('phone')) {
+              document.getElementById('phone').classList.add('border-danger');
+              break;
+            }
           } else {
-            document.getElementById('password').classList.remove('border-danger');
+            if (document.getElementById('password')) {
+              document.getElementById('password').classList.remove('border-danger');
+            }
           }
         } // For Buyer End
 
       });
     },
     addDisabled: function addDisabled(val, key) {
-      document.getElementById('send').setAttribute(val, key);
+      if (document.getElementById('send')) {
+        document.getElementById('send').setAttribute(val, key);
+      }
     },
     removeDisabled: function removeDisabled(val) {
-      document.getElementById('send').removeAttribute(val);
+      if (document.getElementById('send')) {
+        document.getElementById('send').removeAttribute(val);
+      }
     }
   },
-  mounted: function mounted() {
-    console.log(this.cars);
+  mounted: function mounted() {// console.log()
   }
 });
 
@@ -2187,7 +2206,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "buyerregisterform",
-  props: ['cars'],
+  props: ['cars', 'errorClearForBuyerRegister'],
   data: function data() {
     return {
       car: this.cars.length ? this.cars[76].name : '',
@@ -2196,12 +2215,23 @@ __webpack_require__.r(__webpack_exports__);
       errors: [],
       status: 1,
       disable: 'disabled',
-      sendLoader: false
+      sendLoader: false,
+      inputIdNames: ['phone', 'password']
     };
+  },
+  watch: {
+    errorClearForBuyerRegister: function errorClearForBuyerRegister() {
+      var _this = this;
+
+      this.errors = [];
+      this.inputIdNames.forEach(function (id) {
+        _this.dangerBorderRemove(id);
+      });
+    }
   },
   methods: {
     sendBuyerData: function sendBuyerData() {
-      var _this = this;
+      var _this2 = this;
 
       this.errors = [];
       this.addDisabled('disabled', 'disabled');
@@ -2216,7 +2246,7 @@ __webpack_require__.r(__webpack_exports__);
           if (res.status == 201) {
             if (res.data.user) {
               window.location.href = '/buyer/profile/' + res.data.user.id;
-              _this.sendLoader = false;
+              _this2.sendLoader = false;
             }
           }
         }
@@ -2226,37 +2256,49 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         if (err.response) {
           if (err.response.data.errors) {
-            _this.errors.push(err.response.data.errors);
+            _this2.errors.push(err.response.data.errors);
 
-            _this.sendLoader = false;
+            _this2.sendLoader = false;
 
-            _this.removeDisabled('disabled');
+            _this2.removeDisabled('disabled');
 
-            console.log('Err Buyer - ', _this.errors);
+            console.log('Err Buyer - ', _this2.errors);
           }
         } // For Buyer Start
 
 
-        for (var i = 0; i < _this.errors.length; i++) {
-          if (_this.errors[i]['phone']) {
-            document.getElementById('phone').classList.add('border-danger');
+        for (var i = 0; i < _this2.errors.length; i++) {
+          if (_this2.errors[i]['phone']) {
+            _this2.dangerBorderAdd('phone');
+
             break;
           } else {
-            document.getElementById('phone').classList.remove('border-danger');
+            _this2.dangerBorderRemove('phone');
           }
         }
 
-        for (var _i = 0; _i < _this.errors.length; _i++) {
-          if (_this.errors[_i]['password']) {
-            document.getElementById('password').classList.add('border-danger');
+        for (var _i = 0; _i < _this2.errors.length; _i++) {
+          if (_this2.errors[_i]['password']) {
+            _this2.dangerBorderAdd('password');
+
             break;
           } else {
-            document.getElementById('password').classList.remove('border-danger');
+            _this2.dangerBorderRemove('password');
           }
         }
 
         console.log('Error BU - ' + err); // For Buyer End
       });
+    },
+    dangerBorderAdd: function dangerBorderAdd(id) {
+      if (document.getElementById(id)) {
+        document.getElementById(id).classList.add('border-danger');
+      }
+    },
+    dangerBorderRemove: function dangerBorderRemove(id) {
+      if (document.getElementById(id)) {
+        document.getElementById(id).classList.remove('border-danger');
+      }
     },
     addDisabled: function addDisabled(val, key) {
       document.getElementById('send').setAttribute(val, key);
@@ -3214,6 +3256,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "sallerloginform",
+  props: ['errorClearForSellerLogin'],
   data: function data() {
     return {
       name: '',
@@ -3223,8 +3266,19 @@ __webpack_require__.r(__webpack_exports__);
       errors: [],
       status: 2,
       disable: 'disabled',
-      sendLoader: false
+      sendLoader: false,
+      inputIdnames: ['email', 'password']
     };
+  },
+  watch: {
+    errorClearForSellerLogin: function errorClearForSellerLogin() {
+      var _this = this;
+
+      this.errors = [];
+      this.inputIdnames.forEach(function (id) {
+        return _this.dangerBorderRemove(id);
+      });
+    }
   },
   methods: {
     inputControlAndSend: function inputControlAndSend() {
@@ -3234,7 +3288,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     sendSellerData: function sendSellerData() {
-      var _this = this;
+      var _this2 = this;
 
       this.errors = [];
       var formData = new FormData();
@@ -3245,39 +3299,44 @@ __webpack_require__.r(__webpack_exports__);
       this.sendLoader = true;
       axios.post('/login', formData).then(function (res) {
         if (res.status == 201) {
-          _this.errors = [];
-          document.getElementById('email').classList.remove('border-danger');
-          document.getElementById('password').classList.remove('border-danger');
+          _this2.errors = [];
+
+          _this2.inputIdnames.forEach(function (id) {
+            return _this2.dangerBorderRemove(id);
+          });
+
           window.location.href = '/seller/profile/' + res.data.user.id;
-          console.log('res - ', res.data.data.id);
+          console.log('res - ', res);
         }
+
+        console.log('res 222 - ', res);
       })["catch"](function (err) {
         if (err.response.data.errors) {
-          _this.errors.push(err.response.data.errors);
+          _this2.errors.push(err.response.data.errors);
 
-          _this.sendLoader = false;
+          _this2.sendLoader = false;
 
-          _this.addDangerBorder();
+          _this2.dangerBorderAdd();
 
-          _this.removeDisabled('disabled');
+          _this2.removeDisabled('disabled');
 
-          console.log('ERR 1 - ', _this.errors);
+          console.log('ERR 1 - ', _this2.errors);
         }
 
         if (err.response.data) {
-          _this.errors.push(err.response.data.message);
+          _this2.errors.push(err.response.data.message);
 
-          _this.sendLoader = false;
+          _this2.sendLoader = false;
 
-          _this.removeDisabled('disabled');
+          _this2.removeDisabled('disabled');
 
-          console.log('ERR 2 - ', _this.errors);
+          console.log('ERR 2 - ', _this2.errors);
         }
 
-        _this.addDangerBorder();
+        _this2.dangerBorderAdd();
       });
     },
-    addDangerBorder: function addDangerBorder() {
+    dangerBorderAdd: function dangerBorderAdd() {
       if (this.errors.length) {
         // For Seller Start
         for (var i = 0; i < this.errors.length; i++) {
@@ -3285,7 +3344,7 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById('email').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('email').classList.remove('border-danger');
+            this.dangerBorderRemove('email');
           }
         }
 
@@ -3294,10 +3353,15 @@ __webpack_require__.r(__webpack_exports__);
             document.getElementById('password').classList.add('border-danger');
             break;
           } else {
-            document.getElementById('password').classList.remove('border-danger');
+            this.dangerBorderRemove('password');
           }
         } // For Seller End
 
+      }
+    },
+    dangerBorderRemove: function dangerBorderRemove(id) {
+      if (document.getElementById(id)) {
+        document.getElementById(id).classList.remove('border-danger');
       }
     },
     addDisabled: function addDisabled(val, key) {
@@ -3307,7 +3371,7 @@ __webpack_require__.r(__webpack_exports__);
       document.getElementById('send').removeAttribute(val);
     },
     fileSelect: function fileSelect(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       var file = (e.target.files || e.dataTransfer.files)[0];
 
@@ -3316,7 +3380,7 @@ __webpack_require__.r(__webpack_exports__);
         this.imageLoader = true;
 
         reader.onload = function (e) {
-          _this2.img = e.target.result;
+          _this3.img = e.target.result;
         };
 
         reader.readAsDataURL(file);
@@ -3523,7 +3587,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "sellerregisterform",
-  props: ['whos', 'cars', 'cities', 'ignoredCountries'],
+  props: ['whos', 'cars', 'cities', 'ignoredCountries', 'errorClearForSellerRegister'],
   data: function data() {
     return {
       name: '',
@@ -3543,8 +3607,19 @@ __webpack_require__.r(__webpack_exports__);
       disable: 'disabled',
       marka: [],
       car: [],
-      sendLoader: false
+      sendLoader: false,
+      inputIdNames: ['vs1__combobox', 'email', 'phone', 'name', 'address', 'password', 'password_confirmation']
     };
+  },
+  watch: {
+    errorClearForSellerRegister: function errorClearForSellerRegister() {
+      var _this = this;
+
+      this.errors = [];
+      this.inputIdNames.forEach(function (id) {
+        _this.dangerBorderRemove(id);
+      });
+    }
   },
   methods: {
     imageRemove: function imageRemove() {
@@ -3563,10 +3638,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getCarNames: function getCarNames() {
-      var _this = this;
+      var _this2 = this;
 
       this.cars.forEach(function (val) {
-        _this.car.push(val.name);
+        _this2.car.push(val.name);
       });
     },
     inputControlAndSend: function inputControlAndSend() {
@@ -3576,7 +3651,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     sendSellerData: function sendSellerData() {
-      var _this2 = this;
+      var _this3 = this;
 
       var formData = new FormData();
       formData.append('who', this.who);
@@ -3599,109 +3674,135 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         if (res.status == 201) {
           window.location.href = '/seller/profile/' + res.data.user.id;
-          _this2.sendLoader = false;
+          _this3.sendLoader = false;
 
-          _this2.removeAllDangerBorders();
+          _this3.inputIdNames.forEach(function (id) {
+            _this3.dangerBorderRemove(id);
+          });
 
           console.log('res - ', res.data.data.id);
         }
+
+        console.log('res - ', res.data);
       })["catch"](function (err) {
-        _this2.errors = [];
+        _this3.errors = [];
 
         if (err.response) {
-          _this2.errors.push(err.response.data.errors);
+          _this3.errors.push(err.response.data.errors);
 
-          _this2.sendLoader = false;
-          _this2.image = null;
+          _this3.sendLoader = false;
+          _this3.image = null;
 
-          _this2.removeDisabled('disabled');
+          _this3.removeDisabled('disabled');
 
-          console.log('RES - ', _this2.errors);
+          console.log('ERR1 - ', err.response);
         }
 
         if (err.response) {
-          _this2.errors.push(err.response.data.message);
+          _this3.errors.push(err.response.data.message);
 
-          _this2.sendLoader = false;
+          _this3.sendLoader = false;
 
-          _this2.removeDisabled('disabled');
+          _this3.removeDisabled('disabled');
 
-          console.log('ERR - ', _this2.errors);
+          console.log('ERR2 - ', err.response);
         }
 
-        if (_this2.errors.length) {
+        if (_this3.errors.length) {
           // For Seller Start
-          for (var i = 0; i < _this2.errors.length; i++) {
-            if (_this2.errors[i]['marka']) {
-              document.getElementById('vs1__combobox').classList.add('border-danger');
+          for (var i = 0; i < _this3.errors.length; i++) {
+            if (_this3.errors[i]['marka']) {
+              _this3.dangerBorderAdd('vs1__combobox');
+
               break;
             } else {
-              document.getElementById('vs1__combobox').classList.remove('border-danger');
+              _this3.dangerBorderRemove('vs1__combobox');
             }
           }
 
-          for (var _i = 0; _i < _this2.errors.length; _i++) {
-            if (_this2.errors[_i]['email']) {
-              document.getElementById('email').classList.add('border-danger');
+          for (var _i = 0; _i < _this3.errors.length; _i++) {
+            if (_this3.errors[_i]['email']) {
+              _this3.dangerBorderAdd('email');
+
               break;
             } else {
-              document.getElementById('email').classList.remove('border-danger');
+              _this3.dangerBorderRemove('email');
             }
           }
 
-          for (var _i2 = 0; _i2 < _this2.errors.length; _i2++) {
-            if (_this2.errors[_i2]['phone']) {
-              document.getElementById('phone').classList.add('border__danger');
+          for (var _i2 = 0; _i2 < _this3.errors.length; _i2++) {
+            if (_this3.errors[_i2]['phone']) {
+              _this3.dangerBorderAdd('phone');
+
               break;
             } else {
-              document.getElementById('phone').classList.remove('border__danger');
+              _this3.dangerBorderRemove('phone');
             }
           }
 
-          for (var _i3 = 0; _i3 < _this2.errors.length; _i3++) {
-            if (_this2.errors[_i3]['name']) {
-              document.getElementById('name').classList.add('border-danger');
+          for (var _i3 = 0; _i3 < _this3.errors.length; _i3++) {
+            if (_this3.errors[_i3]['name']) {
+              _this3.dangerBorderAdd('name');
+
               break;
             } else {
-              if (document.getElementById('name').classList.contains('border-danger')) {
-                document.getElementById('name').classList.remove('border-danger');
-              }
+              _this3.dangerBorderRemove('name');
             }
           }
 
-          for (var _i4 = 0; _i4 < _this2.errors.length; _i4++) {
-            if (_this2.errors[_i4]['address']) {
-              document.getElementById('address').classList.add('border-danger');
+          for (var _i4 = 0; _i4 < _this3.errors.length; _i4++) {
+            if (_this3.errors[_i4]['address']) {
+              _this3.dangerBorderAdd('address');
+
               break;
             } else {
-              if (document.getElementById('address').classList.contains('border-danger')) {
-                document.getElementById('address').classList.remove('border-danger');
-              }
+              _this3.dangerBorderRemove('address');
             }
           }
 
-          for (var _i5 = 0; _i5 < _this2.errors.length; _i5++) {
-            if (_this2.errors[_i5]['password']) {
-              document.getElementById('password').classList.add('border-danger');
-              document.getElementById('password_confirmation').classList.add('border-danger');
+          for (var _i5 = 0; _i5 < _this3.errors.length; _i5++) {
+            if (_this3.errors[_i5]['password']) {
+              _this3.dangerBorderAdd('password');
+
+              _this3.dangerBorderAdd('password_confirmation');
+
               break;
             } else {
-              document.getElementById('password').classList.remove('border-danger');
-              document.getElementById('password_confirmation').classList.remove('border-danger');
+              _this3.dangerBorderRemove('password');
+
+              _this3.dangerBorderRemove('password_confirmation');
             }
           } // For Seller End
 
         }
       });
     },
+    ifIdExists: function ifIdExists(id) {
+      if (document.getElementById(id)) {
+        return true;
+      }
+
+      return false;
+    },
+    ifDangerBorderExists: function ifDangerBorderExists(id) {
+      if (document.getElementById(id).classList.contains('border-danger')) {
+        return true;
+      }
+
+      return false;
+    },
     addDisabled: function addDisabled(val, key) {
-      document.getElementById('send').setAttribute(val, key);
+      if (document.getElementById('send')) {
+        document.getElementById('send').setAttribute(val, key);
+      }
     },
     removeDisabled: function removeDisabled(val) {
-      document.getElementById('send').removeAttribute(val);
+      if (document.getElementById('send')) {
+        document.getElementById('send').removeAttribute(val);
+      }
     },
     fileSelect: function fileSelect(e) {
-      var _this3 = this;
+      var _this4 = this;
 
       var file = (e.target.files || e.dataTransfer.files)[0];
 
@@ -3710,7 +3811,7 @@ __webpack_require__.r(__webpack_exports__);
         this.imageLoader = true;
 
         reader.onload = function (e) {
-          _this3.img = e.target.result;
+          _this4.img = e.target.result;
         };
 
         reader.readAsDataURL(file);
@@ -3722,33 +3823,14 @@ __webpack_require__.r(__webpack_exports__);
     radioListener: function radioListener() {
       this.errors = [];
     },
-    removeAllDangerBorders: function removeAllDangerBorders() {
-      if (document.getElementById('marka').classList.contains('border-danger')) {
-        document.getElementById('vs1__combobox').classList.remove('border-danger');
+    dangerBorderAdd: function dangerBorderAdd(id) {
+      if (this.ifIdExists(id)) {
+        document.getElementById(id).classList.add('border-danger');
       }
-
-      if (document.getElementById('email').classList.contains('border-danger')) {
-        document.getElementById('email').classList.remove('border-danger');
-      }
-
-      if (document.getElementById('phone').classList.contains('border__danger')) {
-        document.getElementById('phone').classList.remove('border__danger');
-      }
-
-      if (document.getElementById('name').classList.contains('border-danger')) {
-        document.getElementById('name').classList.remove('border-danger');
-      }
-
-      if (document.getElementById('address').classList.contains('border-danger')) {
-        document.getElementById('address').classList.remove('border-danger');
-      }
-
-      if (document.getElementById('password').classList.contains('border-danger')) {
-        document.getElementById('password').classList.remove('border-danger');
-      }
-
-      if (document.getElementById('password_confirmation').classList.contains('border-danger')) {
-        document.getElementById('password_confirmation').classList.remove('border-danger');
+    },
+    dangerBorderRemove: function dangerBorderRemove(id) {
+      if (this.ifDangerBorderExists(id)) {
+        document.getElementById(id).classList.remove('border-danger');
       }
     }
   },
@@ -7836,6 +7918,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "registration",
   props: ['whos', 'cars', 'cities'],
@@ -7856,6 +7947,7 @@ __webpack_require__.r(__webpack_exports__);
       image: null,
       imageLoader: false,
       errors: [],
+      errorClearVar: null,
       status: 1,
       disable: 'disabled',
       marka: [],
@@ -7865,6 +7957,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     registerLoadFunc: function registerLoadFunc(e) {
       e.preventDefault();
+      console.log('radio 2 - ', this.radio);
+      console.log('registerLoade 2 - ', this.registerLoade);
 
       if (this.registerLoade === 'login') {
         this.title = 'Registrasiya';
@@ -7938,19 +8032,27 @@ __webpack_require__.r(__webpack_exports__);
           // For Seller Start
           for (var i = 0; i < _this2.errors.length; i++) {
             if (_this2.errors[i]['marka']) {
-              document.getElementById('vs1__combobox').classList.add('border-danger');
-              break;
+              if (document.getElementById('vs1__combobox')) {
+                document.getElementById('vs1__combobox').classList.add('border-danger');
+                break;
+              }
             } else {
-              document.getElementById('vs1__combobox').classList.remove('border-danger');
+              if (document.getElementById('vs1__combobox')) {
+                document.getElementById('vs1__combobox').classList.remove('border-danger');
+              }
             }
           }
 
           for (var _i = 0; _i < _this2.errors.length; _i++) {
             if (_this2.errors[_i]['email']) {
-              document.getElementById('email').classList.add('border-danger');
-              break;
+              if (document.getElementById('email')) {
+                document.getElementById('email').classList.add('border-danger');
+                break;
+              }
             } else {
-              document.getElementById('email').classList.remove('border-danger');
+              if (document.getElementById('email')) {
+                document.getElementById('email').classList.remove('border-danger');
+              }
             }
           }
 
@@ -7967,8 +8069,10 @@ __webpack_require__.r(__webpack_exports__);
 
           for (var _i3 = 0; _i3 < _this2.errors.length; _i3++) {
             if (_this2.errors[_i3]['address']) {
-              document.getElementById('address').classList.add('border-danger');
-              break;
+              if (document.getElementById('address')) {
+                document.getElementById('address').classList.add('border-danger');
+                break;
+              }
             } else {
               if (document.getElementById('address').classList.contains('border-danger')) {
                 document.getElementById('address').classList.remove('border-danger');
@@ -7978,12 +8082,16 @@ __webpack_require__.r(__webpack_exports__);
 
           for (var _i4 = 0; _i4 < _this2.errors.length; _i4++) {
             if (_this2.errors[_i4]['password']) {
-              document.getElementById('password').classList.add('border-danger');
-              document.getElementById('password_confirmation').classList.add('border-danger');
-              break;
+              if (document.getElementById('password') && document.getElementById('password_confirmation')) {
+                document.getElementById('password').classList.add('border-danger');
+                document.getElementById('password_confirmation').classList.add('border-danger');
+                break;
+              }
             } else {
-              document.getElementById('password').classList.remove('border-danger');
-              document.getElementById('password_confirmation').classList.remove('border-danger');
+              if (document.getElementById('password') && document.getElementById('password_confirmation')) {
+                document.getElementById('password').classList.remove('border-danger');
+                document.getElementById('password_confirmation').classList.remove('border-danger');
+              }
             }
           } // For Seller End
 
@@ -7991,10 +8099,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addDisabled: function addDisabled(val, key) {
-      document.getElementById('send').setAttribute(val, key);
+      if (document.getElementById('send')) {
+        document.getElementById('send').setAttribute(val, key);
+      }
     },
     removeDisabled: function removeDisabled(val) {
-      document.getElementById('send').removeAttribute(val);
+      if (document.getElementById('send')) {
+        document.getElementById('send').removeAttribute(val);
+      }
     },
     fileSelect: function fileSelect(e) {
       var _this3 = this;
@@ -8015,8 +8127,9 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log(e);
     },
-    radioListener: function radioListener() {
+    errorClear: function errorClear() {
       this.errors = [];
+      this.errorClearVar = this.errors;
     }
   },
   mounted: function mounted() {
@@ -63727,10 +63840,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -64235,7 +64348,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 ml-1 mt-1" }, [
-      _c("div", { staticClass: "custom-file col-3 p-2" }, [
+      _c("div", { staticClass: "custom-file col-4 p-2" }, [
         _c("input", {
           staticClass: "custom-file-input",
           attrs: { type: "file", value: "file", id: "file" },
@@ -64251,7 +64364,10 @@ var render = function() {
           [
             _c(
               "span",
-              { staticClass: "p-0 border-0 input-group-text bg-transparent" },
+              {
+                staticClass:
+                  "mt-1 ml-2 p-0 border-0 input-group-text bg-transparent"
+              },
               [
                 _c(
                   "svg",
@@ -64381,10 +64497,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "input-group-prepend" }, [
       _c("div", { staticClass: "input-group-text px-1" }, [
         _c("img", {
-          attrs: {
-            src: "images/users/saller_auto_logo/saller_marka_logo.jpg",
-            alt: "Logo"
-          }
+          attrs: { src: "images/users/logo/saller_marka_logo.jpg", alt: "Logo" }
         })
       ])
     ])
@@ -69595,7 +69708,27 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c(
+                "button",
+                {
+                  staticClass: "close pt-4",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.errorClear()
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body pt-2 pb-1" }, [
@@ -69653,7 +69786,7 @@ var render = function() {
                                           function($event) {
                                             _vm.radio = "buyer"
                                           },
-                                          _vm.radioListener
+                                          _vm.errorClear
                                         ]
                                       }
                                     }),
@@ -69678,15 +69811,7 @@ var render = function() {
                                 _c(
                                   "div",
                                   {
-                                    staticClass: "custom-control custom-radio",
-                                    on: { change: _vm.radioListener },
-                                    model: {
-                                      value: _vm.radio,
-                                      callback: function($$v) {
-                                        _vm.radio = $$v
-                                      },
-                                      expression: "radio"
-                                    }
+                                    staticClass: "custom-control custom-radio"
                                   },
                                   [
                                     _c("input", {
@@ -69713,7 +69838,7 @@ var render = function() {
                                           function($event) {
                                             _vm.radio = "saller"
                                           },
-                                          _vm.radioListener
+                                          _vm.errorClear
                                         ]
                                       }
                                     }),
@@ -69925,7 +70050,11 @@ var render = function() {
                                     {},
                                     [
                                       _c("buyer-login-form", {
-                                        attrs: { cars: _vm.cars }
+                                        attrs: {
+                                          cars: _vm.cars,
+                                          errorClearForBuyerLogin:
+                                            _vm.errorClearVar
+                                        }
                                       })
                                     ],
                                     1
@@ -69936,7 +70065,11 @@ var render = function() {
                                     {},
                                     [
                                       _c("buyer-register-form", {
-                                        attrs: { cars: _vm.cars }
+                                        attrs: {
+                                          cars: _vm.cars,
+                                          errorClearForBuyerRegister:
+                                            _vm.errorClearVar
+                                        }
                                       })
                                     ],
                                     1
@@ -69948,8 +70081,20 @@ var render = function() {
                         _vm.radio === "saller"
                           ? _c("div", { staticClass: "form-group" }, [
                               _vm.registerLoade === "login"
-                                ? _c("div", {}, [_c("seller-login-form")], 1)
-                                : _vm.registerLoade == "register"
+                                ? _c(
+                                    "div",
+                                    {},
+                                    [
+                                      _c("seller-login-form", {
+                                        attrs: {
+                                          errorClearForSellerLogin:
+                                            _vm.errorClearVar
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm.registerLoade === "register"
                                 ? _c(
                                     "div",
                                     {},
@@ -69958,7 +70103,9 @@ var render = function() {
                                         attrs: {
                                           cars: _vm.cars,
                                           whos: _vm.whos,
-                                          cities: _vm.cities
+                                          cities: _vm.cities,
+                                          errorClearForSellerRegister:
+                                            _vm.errorClearVar
                                         }
                                       })
                                     ],
@@ -69979,25 +70126,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close pt-4",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -107883,7 +108012,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true& */ "./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true&");
+/* harmony import */ var _SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SellerRegisterForm.vue?vue&type=template&id=5b2df971& */ "./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&");
 /* harmony import */ var _SellerRegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SellerRegisterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/SellerRegisterForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -107895,11 +108024,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _SellerRegisterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "5b2df971",
+  null,
   null
   
 )
@@ -107925,19 +108054,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./SellerRegisterForm.vue?vue&type=template&id=5b2df971& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/SellerRegisterForm.vue?vue&type=template&id=5b2df971&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SellerRegisterForm_vue_vue_type_template_id_5b2df971___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

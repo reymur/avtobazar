@@ -10,7 +10,7 @@
                         {{ title }}
                     </div>
                     <!--MainCloseElement-->
-                    <button type="button" class="close pt-4" data-dismiss="modal" aria-label="Close">
+                    <button @click="errorClear()" type="button" class="close pt-4" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -22,14 +22,14 @@
                                 <div class="form-group mt-2 ml-3 mb-4">
                                     <div class="form-check form-check-inline">
                                         <div class="custom-control custom-radio">
-                                            <input v-model="radio" @change="radioListener" value="buyer"
+                                            <input v-model="radio" @change="errorClear" value="buyer"
                                                    type="radio" id="buyer" name="customRadio" class="custom-control-input">
                                             <label class="custom-control-label" for="buyer">Alıcı</label>
                                         </div>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <div v-model="radio" @change="radioListener" class="custom-control custom-radio">
-                                            <input v-model="radio" @change="radioListener" value="saller"
+                                        <div class="custom-control custom-radio">
+                                            <input v-model="radio" @change="errorClear" value="saller"
                                                    type="radio" id="saller" name="customRadio" class="custom-control-input">
                                             <label class="custom-control-label" for="saller">Satıcı</label>
                                         </div>
@@ -68,22 +68,31 @@
 
                                 <div v-if="radio === 'buyer'" class="col-auto">
                                     <div v-if="registerLoade === 'login'" class="">
-                                        <buyer-login-form :cars="cars"></buyer-login-form>
+                                        <buyer-login-form
+                                            :cars="cars"
+                                            :errorClearForBuyerLogin="errorClearVar"
+                                        ></buyer-login-form>
                                     </div>
                                     <div v-else-if="registerLoade == 'register'" class="">
-                                        <buyer-register-form :cars="cars"></buyer-register-form>
+                                        <buyer-register-form
+                                            :cars="cars"
+                                            :errorClearForBuyerRegister="errorClearVar"
+                                        ></buyer-register-form>
                                     </div>
                                 </div><!--Buyer End-->
 
                                 <div v-if="radio === 'saller'" class="form-group">
                                     <div v-if="registerLoade === 'login'" class="">
-                                        <seller-login-form></seller-login-form>
+                                        <seller-login-form
+                                            :errorClearForSellerLogin="errorClearVar"
+                                        ></seller-login-form>
                                     </div>
-                                    <div v-else-if="registerLoade == 'register'" class="">
+                                    <div v-else-if="registerLoade === 'register'" class="">
                                         <seller-register-form
                                             :cars="cars"
                                             :whos="whos"
                                             :cities="cities"
+                                            :errorClearForSellerRegister="errorClearVar"
                                         ></seller-register-form>
                                     </div>
                                 </div><!--Seller End-->
@@ -118,6 +127,7 @@ export default {
             image: null,
             imageLoader: false,
             errors: [],
+            errorClearVar: null,
             status: 1,
             disable: 'disabled',
             marka: [],
@@ -127,6 +137,8 @@ export default {
     methods: {
         registerLoadFunc(e){
             e.preventDefault();
+            console.log('radio 2 - ', this.radio)
+            console.log('registerLoade 2 - ', this.registerLoade)
             if( this.registerLoade === 'login' ){
                 this.title = 'Registrasiya';
                 this.registerLoade = 'register';
@@ -192,19 +204,27 @@ export default {
                     // For Seller Start
                     for(let i=0; i < this.errors.length; i++ ) {
                         if (this.errors[i]['marka']) {
-                            document.getElementById('vs1__combobox').classList.add('border-danger');
-                            break;
+                            if(document.getElementById('vs1__combobox')) {
+                                document.getElementById('vs1__combobox').classList.add('border-danger');
+                                break;
+                            }
                         } else {
-                            document.getElementById('vs1__combobox').classList.remove('border-danger')
+                            if( document.getElementById('vs1__combobox') ) {
+                                document.getElementById('vs1__combobox').classList.remove('border-danger')
+                            }
                         }
                     }
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['email'] ) {
-                            document.getElementById('email').classList.add('border-danger');
-                            break;
+                            if(  document.getElementById('email') ) {
+                                document.getElementById('email').classList.add('border-danger');
+                                break;
+                            }
                         }else {
-                            document.getElementById('email').classList.remove('border-danger')
+                            if( document.getElementById('email') ) {
+                                document.getElementById('email').classList.remove('border-danger')
+                            }
                         }
                     }
 
@@ -221,8 +241,10 @@ export default {
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['address'] ) {
-                            document.getElementById('address').classList.add('border-danger');
-                            break;
+                            if(  document.getElementById('address') ) {
+                                document.getElementById('address').classList.add('border-danger');
+                                break;
+                            }
                         }else {
                             if( document.getElementById('address').classList.contains('border-danger') ){
                                 document.getElementById('address').classList.remove('border-danger')
@@ -232,12 +254,16 @@ export default {
 
                     for(let i=0; i < this.errors.length; i++ ){
                         if( this.errors[i]['password'] ) {
-                            document.getElementById('password').classList.add('border-danger');
-                            document.getElementById('password_confirmation').classList.add('border-danger');
-                            break;
+                            if( document.getElementById('password') && document.getElementById('password_confirmation') ) {
+                                document.getElementById('password').classList.add('border-danger');
+                                document.getElementById('password_confirmation').classList.add('border-danger');
+                                break;
+                            }
                         }else {
-                            document.getElementById('password').classList.remove('border-danger')
-                            document.getElementById('password_confirmation').classList.remove('border-danger')
+                            if(document.getElementById('password') && document.getElementById('password_confirmation')) {
+                                document.getElementById('password').classList.remove('border-danger')
+                                document.getElementById('password_confirmation').classList.remove('border-danger')
+                            }
                         }
                     }
                     // For Seller End
@@ -245,12 +271,14 @@ export default {
             });
         },
         addDisabled(val, key){
-            document.getElementById('send')
-                .setAttribute(val,key);
+            if( document.getElementById('send') ) {
+                document.getElementById('send').setAttribute(val, key);
+            }
         },
         removeDisabled(val){
-            document.getElementById('send')
-                    .removeAttribute(val);
+            if( document.getElementById('send') ) {
+                document.getElementById('send').removeAttribute(val);
+            }
         },
         fileSelect(e){
             const file = (e.target.files || e.dataTransfer.files)[0];
@@ -265,8 +293,9 @@ export default {
             }
             console.log( e )
         },
-        radioListener(){
+        errorClear(){
             this.errors = [];
+            this.errorClearVar = this.errors;
         }
     },
     mounted(){

@@ -728,3 +728,7 @@ body {
     color: #0a0abf;
     background-color: #edf2f7;
 }
+
+.display__ruby {
+    display: block ruby;
+}

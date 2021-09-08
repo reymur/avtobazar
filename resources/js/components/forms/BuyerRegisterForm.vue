@@ -61,7 +61,7 @@
 <script>
 export default {
     name: "buyerregisterform",
-    props: ['cars'],
+    props: ['cars','errorClearForBuyerRegister'],
     data(){
         return {
             car: this.cars.length ? this.cars[76].name : '',
@@ -71,6 +71,15 @@ export default {
             status: 1,
             disable: 'disabled',
             sendLoader: false,
+            inputIdNames:['phone','password']
+        }
+    },
+    watch: {
+        errorClearForBuyerRegister: function(){
+            this.errors = []
+            this.inputIdNames.forEach( id => {
+                this.dangerBorderRemove(id)
+            })
         }
     },
     methods:{
@@ -110,29 +119,35 @@ export default {
                 // For Buyer Start
                 for(let i=0; i < this.errors.length; i++ ) {
                     if (this.errors[i]['phone']) {
-                        document.getElementById('phone')
-                            .classList.add('border-danger');
+                        this.dangerBorderAdd('phone');
                         break;
                     } else {
-                        document.getElementById('phone')
-                            .classList.remove('border-danger')
+                        this.dangerBorderRemove('phone')
                     }
                 }
 
                 for(let i=0; i < this.errors.length; i++ ) {
                     if (this.errors[i]['password']) {
-                        document.getElementById('password')
-                            .classList.add('border-danger');
+                        this.dangerBorderAdd('password');
                         break;
                     } else {
-                        document.getElementById('password')
-                            .classList.remove('border-danger')
+                        this.dangerBorderRemove('password')
                     }
                 }
 
                 console.log('Error BU - '+err)
                 // For Buyer End
             })
+        },
+        dangerBorderAdd(id){
+            if( document.getElementById(id) ){
+                document.getElementById(id).classList.add('border-danger')
+            }
+        },
+        dangerBorderRemove(id){
+            if( document.getElementById(id) ){
+                document.getElementById(id).classList.remove('border-danger')
+            }
         },
         addDisabled(val, key){
             document.getElementById('send')
