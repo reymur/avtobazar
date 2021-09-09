@@ -31,28 +31,8 @@
                 </div>
             </div>
 
-            <div class="container-lg p-lg-3 p-sm-0 mt-0">
-                <div class="row col-lg-12 p-sm-0 mx-auto">
-                    @isset($model->types)
-                        @foreach($model->types as $type)
-                            @if($type->title)
-                                <div class="col-lg-3 col-md-4 col-sm-6 p-sm-0">
-                                    @include('partials.models_card',['show_car_types' => true])
-                                </div>
-                            @else
-                                <table class="d-inline-flex m-auto">
-                                    <tr>
-                                        <td class="letter__spacing text-uppercase text__bold">
-                                            {{  $type->parent->title }} -
-                                        </td >
-                                        <td class="letter__spacing text-uppercase ">markasına uyğun model tapılmadı!</td>
-                                    </tr>
-                                </table>
-                            @endif
-                        @endforeach
-                    @endisset
-                </div>
-            </div>
+            @include('partials.car_models_card')
+
         </div>
     </div>
 @endsection

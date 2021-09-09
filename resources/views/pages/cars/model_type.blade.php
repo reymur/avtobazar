@@ -13,9 +13,11 @@
                     <div class="col-md m-auto display__ruby">
                         <div class="mt-1 mr-2 text-uppercase">
                             <span class="text__bold">
-                                @if($type->title && $type->parent->name)
-                                    {{ $type->parent->name }} / {{ $type->title }}
-                                @endif
+                                @isset($type)
+                                    @if($type->title && $type->parent->name)
+                                        {{ $type->parent->name }} / {{ $type->title }}
+                                    @endif
+                                @endisset
                             </span>
                             <span class="">ÜZRƏ Ehtiyyat Hissələrini</span>
 
@@ -31,11 +33,7 @@
                 </div>
             </div>
 
-            <div class="container-lg p-lg-3 p-sm-0 mt-0">
-                <div class="row p-sm-0 col-lg-12 mx-auto">
-                    @include('partials.models_card',['show_car_types' => false])
-                </div>
-            </div>
+            @include('partials.car_types_card')
         </div>
     </div>
 @endsection
