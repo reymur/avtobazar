@@ -16,6 +16,15 @@
                     <div class="letter__spacing text-uppercase text__bold">
                         bütün elanlar
                     </div>
+                    <div class="">
+                        @isset($announce_sales)
+                            @if($announce_sales->count())
+                                <div class="row col-lg-12 col-md-12 col-sm-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
+                                    @include('announcements.sales_section')
+                                </div><!-- Announce Sales -->
+                            @endif
+                        @endisset
+                    </div>
                 </div>
             @endif
 

@@ -21,8 +21,8 @@ export default {
         imageItems(announce){
             if( announce.image != null ){
                 return [{
-                    src: '/images/users/sellers/' + announce.image,
-                    thumbnail: '/images/users/sellers/' + 'small_'+ announce.image,
+                    src: '/images/sale/' + announce.image.title,
+                    thumbnail: '/images/sale/' + announce.image.title,
                     w:1200,
                     h:800,
                     alt: announce.image
@@ -31,7 +31,7 @@ export default {
         }
     },
     mounted(){
-        // console.log('Fiqure Select - ', this.user )
+        console.log('IMAGE - ', this.announce.image )
     }
 }
 </script>

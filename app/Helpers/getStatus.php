@@ -6,7 +6,7 @@
     {
         if( !empty($sale) && $sale != null ){
             return User::where('name', $sale->name)
-                ->orWhere('autoNumber', $sale->name)->first();
+                ->orWhere('phone', $sale->phone)->first();
         }
 
         return false;

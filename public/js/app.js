@@ -2810,9 +2810,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         if (res.status == 200) {
-          console.log('res sale --- ', res.data); // window.location.href =
-          //     'http://avtolavka/announce/sale-flash-info?' +
-          //     'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
+          console.log('res sale --- ', res.data);
+          window.location.href = 'http://avtolavka/announce/sale-flash-info?' + 'marka=' + res.data.marka + '&pin=' + res.data.pin + '&number=' + res.data.number;
         }
       })["catch"](function (err) {
         if (err.response.data.errors !== undefined) {
@@ -8173,8 +8172,8 @@ __webpack_require__.r(__webpack_exports__);
     imageItems: function imageItems(announce) {
       if (announce.image != null) {
         return [{
-          src: '/images/users/sellers/' + announce.image,
-          thumbnail: '/images/users/sellers/' + 'small_' + announce.image,
+          src: '/images/sale/' + announce.image.title,
+          thumbnail: '/images/sale/' + announce.image.title,
           w: 1200,
           h: 800,
           alt: announce.image
@@ -8182,7 +8181,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  mounted: function mounted() {// console.log('Fiqure Select - ', this.user )
+  mounted: function mounted() {
+    console.log('IMAGE - ', this.announce.image);
   }
 });
 

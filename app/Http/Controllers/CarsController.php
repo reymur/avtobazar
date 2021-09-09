@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Announcement;
 use App\Car;
+use App\Sale;
 use App\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,14 @@ class CarsController extends Controller
     public function getModelType(Request $request)
     {
         $type = Type::with('parent')->where('title', $request->title)->first();
-
+        $announce_sales = Sale::with('image')->where(['marka' => $type->parent->name, 'model' => $type->title])->get();
+//        dd( $sales );
         if( ! $type ) return abort(404);
 
-        return view('pages.cars.model_type', compact('type'));
+        return view('pages.cars.model_type', [
+            'type' => $type,
+            'announce_sales' => $announce_sales
+        ]);
     }
 
     public function getJsonModelTypes(Request $request)

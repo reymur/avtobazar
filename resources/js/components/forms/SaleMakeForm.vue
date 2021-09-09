@@ -505,9 +505,9 @@ export default {
              .then(res => {
                  if( res.status == 200 ){
                      console.log('res sale --- ', res.data )
-                     // window.location.href =
-                     //     'http://avtolavka/announce/sale-flash-info?' +
-                     //     'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
+                     window.location.href =
+                         'http://avtolavka/announce/sale-flash-info?' +
+                         'marka='+res.data.marka+'&pin='+res.data.pin+'&number='+res.data.number
                  }
              })
              .catch( err => {
