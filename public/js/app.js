@@ -8160,7 +8160,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CardImageSwipe",
-  props: ['announce'],
+  props: ['sale'],
   data: function data() {
     return {
       host: window.location.host,
@@ -8169,20 +8169,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    imageItems: function imageItems(announce) {
-      if (announce.image != null) {
+    imageItems: function imageItems(sale) {
+      if (sale.image != null) {
         return [{
-          src: '/images/sale/' + announce.image.title,
-          thumbnail: '/images/sale/' + announce.image.title,
+          src: '/images/sale/' + sale.image.title,
+          thumbnail: '/images/sale/' + sale.image.title,
           w: 1200,
           h: 800,
-          alt: announce.image
+          alt: sale.image.title
         }];
       }
     }
   },
   mounted: function mounted() {
-    console.log('IMAGE - ', this.announce.image);
+    console.log('IMAGE - ', this.sale.image);
   }
 });
 
@@ -70151,11 +70151,7 @@ var render = function() {
   return _c(
     "div",
     {},
-    [
-      _c("vue-picture-swipe", {
-        attrs: { items: _vm.imageItems(_vm.announce) }
-      })
-    ],
+    [_c("vue-picture-swipe", { attrs: { items: _vm.imageItems(_vm.sale) } })],
     1
   )
 }

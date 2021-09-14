@@ -23,9 +23,8 @@ class CarsController extends Controller
 
     public function getModelType(Request $request)
     {
-        $type = Type::with('parent')->where('title', $request->title)->first();
+        $type = Type::with('parent', 'sales')->where('title', $request->title)->first();
         $announce_sales = Sale::with('image')->where(['marka' => $type->parent->name, 'model' => $type->title])->get();
-//        dd( $sales );
         if( ! $type ) return abort(404);
 
         return view('pages.cars.model_type', [

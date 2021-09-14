@@ -9,6 +9,7 @@ use App\City;
 use App\Condition;
 use App\FuelType;
 use App\Motor;
+use App\Sale;
 use App\Status;
 use App\Type;
 use App\User;
@@ -50,10 +51,14 @@ class HomeController extends Controller
 //        }
 
         $cars= Car::all();
+        $sales = Sale::all();
 
         if( ! $cars ) return false;
 
-        return view('home', compact('cars'));
+        return view('home', [
+            'cars' => $cars,
+            'sales' => $sales
+        ]);
     }
 
     public function addItems()

@@ -14,4 +14,9 @@ class Type extends Model
     {
         return $this->belongsTo(Car::class, 'parent_id', 'id');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'model', 'title');
+    }
 }

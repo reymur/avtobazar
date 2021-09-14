@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <vue-picture-swipe
-            :items="imageItems(announce)"
+            :items="imageItems(sale)"
         ></vue-picture-swipe>
     </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 export default {
     name: "CardImageSwipe",
-    props: ['announce'],
+    props: ['sale'],
     data(){
         return {
             host: window.location.host,
@@ -18,20 +18,20 @@ export default {
         }
     },
     methods: {
-        imageItems(announce){
-            if( announce.image != null ){
+        imageItems(sale){
+            if( sale.image != null ){
                 return [{
-                    src: '/images/sale/' + announce.image.title,
-                    thumbnail: '/images/sale/' + announce.image.title,
+                    src: '/images/sale/' + sale.image.title,
+                    thumbnail: '/images/sale/' + sale.image.title,
                     w:1200,
                     h:800,
-                    alt: announce.image
+                    alt: sale.image.title
                 }]
             }
         }
     },
     mounted(){
-        console.log('IMAGE - ', this.announce.image )
+        console.log('IMAGE - ', this.sale.image )
     }
 }
 </script>

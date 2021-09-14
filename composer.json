@@ -50,7 +50,8 @@
             "app/Helpers/changePasswordErrorMessage.php",
             "app/Helpers/getFirstSmallImage.php",
             "app/Helpers/getStatus.php",
-            "app/Helpers/incrementVar.php"
+            "app/Helpers/incrementVar.php",
+            "app/Helpers/saleSmallImage.php"
         ],
         "classmap": [
             "database/seeds",

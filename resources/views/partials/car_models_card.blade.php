@@ -5,7 +5,7 @@
             @if( $model->types->count() )
                 <div class="col-lg-12 col-md-12 mb-4">
                     <div class="d-table m-auto">
-                        <h5 class="mb-3 letter__spacing text-uppercase">
+                        <h5 class="mb-3 text__bold letter__spacing text-uppercase">
                             {{ $model->name }}
                         </h5>
                     </div>
@@ -30,12 +30,6 @@
                         </div>
                     @endif
                 @endforeach
-
-                <div class="col-lg-12 col-md-12 mt-3">
-                    <div class="letter__spacing text-uppercase text__bold">
-                        bütün elanlar
-                    </div>
-                </div>
             @else
                 <table class="d-inline-flex m-auto">
                     <tr>
@@ -49,4 +43,18 @@
         @endisset
     </div>
 </div>
+
+@if( $model->sales->count() )
+    <div class="">
+        <div class="row col-lg-12 col-md-12 col-sm-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
+            @include('announcements.sales_section', ['sales' => $model->sales])
+        </div><!-- Announce Sales -->
+    </div>
+@else
+    <div class="d-table m-auto">
+        <h5 class="mt-4 mb-3 letter__spacing text-uppercase">
+            Elan tapılmadı!
+        </h5>
+    </div>
+@endif
 

@@ -12,4 +12,9 @@ class Car extends Model
     {
         return $this->hasMany(Type::class, 'parent_id', 'id');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'marka','name');
+    }
 }
