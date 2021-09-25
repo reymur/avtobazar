@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Traits/SaleTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Phone.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/partials/SaleImageShow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/announcements/sales_section.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/sales_section.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -511,7 +498,7 @@
       <workItem from="1632431388417" duration="4034000" />
       <workItem from="1632521185706" duration="126000" />
       <workItem from="1632521378704" duration="2282000" />
-      <workItem from="1632553883354" duration="11215000" />
+      <workItem from="1632553883354" duration="12073000" />
     </task>
     <servers />
   </component>
