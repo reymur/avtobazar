@@ -170,13 +170,12 @@
                     </div>
                 </div>
 
-                <!--Announces section-->
-                @include('announcements.user_announce_show')
+                <!--All sales show-->
+                @include('announcements.similar_sales_show')
             </div>
         </div>
 
         <!-- All cars -->
     </div>
-
 @endsection
 

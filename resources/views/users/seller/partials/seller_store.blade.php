@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg container-xl px-md-0 px-sm-0">
-        <div class="col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
+    <div class="px-md-0 px-sm-0">
+        <div class="col-lg-12 col-md-12 col-sm-12 m-xl-auto m-lg-auto m-md-0 m-sm-0">
             <!-- Crumbs _page_links -->
             @include('crumbs._page_links', ['link' => 'Home'])
 
@@ -99,7 +99,10 @@
                                 <div class="col-12 bg-primary text-break px-3 py-2">
                                     @foreach( $user->sellerTypes as $key => $marka )
                                         <div class="row m-0 seller__store-models letter__spacing">
-                                            <a href="{{ route('models', ['name' => $marka->model->title]) }}"
+                                            <a href="{{ route('user_supported_model', [
+                                                'user_id'=> $user->id,
+                                                'marka' => $marka->model->title
+                                            ]) }}"
                                                class="text-light"
                                                target="_blank">
 
@@ -127,30 +130,8 @@
                     </div>
                 </div><!--Seller Store image div-->
 
-                <div class="col-10 m-auto">
-                    <div class="pt-2 pb-2 pl-n3">
-                        <div class="announce__title-text">
-                            İstifadəçinin bütün elanları
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-md-4 seller__store-card-div">
-                        @for( $i = 0; $i < 100; $i++ )
-                            <div class="col mb-3 px-1">
-                                <div class="card h-100 hover__element">
-                                    <card-image-swipe
-                                        :user="{{ $user }}"
-                                    ></card-image-swipe>
-
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a longer card with supporting little bit longer.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endfor
-                    </div>
-                </div>
+                <!--sale_announcements_show-->
+                @include('crumbs._sale_announcements_show')
             </div>
         </div>
 

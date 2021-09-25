@@ -31,12 +31,16 @@ class SellerController extends Controller
     public function SellerStore($id)
     {
         $user = $id ? User::find($id) : null;
+        $all_sales = getUserAllAnnouncements($id);
 
         if( ! $user ) return abort(404);
 
         if( $user->status == 2 ){
             return view('users.seller.partials.seller_store')
-                ->with('user',$user);
+                ->with([
+                    'user' => $user,
+                    'all_sales' => $all_sales
+                ]);
         }
     }
 

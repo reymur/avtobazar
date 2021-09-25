@@ -1,7 +1,7 @@
 
 @isset($sales)
     @if( is_object($sales) )
-        <div class="col-lg-10 col-xl-10 col-md-12 col-sm-12 m-lg-auto m-md-0 m-sm-0 p-sm-0 p-md-0">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 m-lg-auto m-md-0 m-sm-0 p-sm-0 p-md-0">
             <div class="mb-2 letter__spacing text-uppercase text__bold">
                 bütün elanlar
             </div>
@@ -26,7 +26,6 @@
                         </div>
                     </div>
                 @endforeach
-    {{--        {{ dd( $announce->image->title ) }}--}}
             </div>
         </div>
     @endif

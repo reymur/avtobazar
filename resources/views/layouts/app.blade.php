@@ -27,9 +27,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div class="col-12 p-0 m-0" id="app">
         <nav class="navbar navbar-expand-lg navbar-dark mb-2 p-1 navbar__bg">
-            <div class="container-xl container-lg col-xl-10 col-lg-10 px-xl-0 px-lg-0 col-md-12 col-sm-12">
+            <div class="col-xl-10 col-lg-10 px-xl-0 px-lg-0 col-md-12 col-sm-12">
                 <a class="navbar-brand mr-auto mt-md-1 ml-md-3 mt-sm-1 ml-sm-3 outline__none" href="/">
                     <span class="d-inline-flex">
                         <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
@@ -127,14 +127,14 @@
             </div>
         </nav>
 
-        <div class="container ml-auto" id="search">
+        <div class="col-xl-10 col-lg-10 m-auto" id="search">
             <form class="form-inline my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="axtar..." aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Axtar</button>
             </form>
         </div>
 
-        <main class="pb-3 pt-2">
+        <main class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto pb-3 pt-2">
             @yield('content')
         </main>
     </div>

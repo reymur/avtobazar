@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="" />
+    <list default="true" id="6936a367-9e84-4f06-92fb-3ccc8b550a20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SaleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/auth_user_all_announce_show.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/guest_user_all_announce_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/user_all_announce_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/sale_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/sales_section.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/all_sales_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/announcements/user_announce_show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/announcements/similar_sales_show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/model_type.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/model_type.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/cars/models.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/car_models_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/car_models_card.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/car_types_card.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/car_types_card.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/seller/partials/seller_store.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -498,23 +516,12 @@
       <workItem from="1632431388417" duration="4034000" />
       <workItem from="1632521185706" duration="126000" />
       <workItem from="1632521378704" duration="2282000" />
-      <workItem from="1632553883354" duration="12073000" />
+      <workItem from="1632553883354" duration="25291000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/announcements/guest_user_all_announce_show.blade.php</url>
-          <line>5</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

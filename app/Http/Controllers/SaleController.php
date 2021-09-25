@@ -48,27 +48,35 @@ class SaleController extends Controller
     }
 
     public function saleUserAllSales($id){
-        $all_sales = Sale::where('user_id',$id)->get();
-        $user = User::find($id);
+        $all_sales = getUserAllAnnouncements($id);
+        $user = User::where('id', $id)->first();
 
         if( $user && ($user->who === 1) ){
-            return view('announcements.guest_user_all_announce_show', [
+            return view('users.seller.partials.seller_store', [
                 'all_sales' => $all_sales,
-                'user' => $this->AuthUserSaleInfo($all_sales)
+                'user' => $user
             ]);
         }else{
-            return view('announcements.guest_user_all_announce_show', [
+            return view('announcements.user_all_announce_show', [
                 'all_sales' => $all_sales,
                 'user' => $this->GuestSaleUserInfo($all_sales)
             ]);
         }
     }
 
-    public function AuthUserSaleInfo($user){
-        if( $user ){
-            return $user->name ?: ['tel' => $user->phone];
+    public function userSupportedModel($user_id, $marka){
+        if( !empty($user_id) && !empty($marka) ) {
+            $user = User::find($user_id);
+            $all_sales = getAnnouncementSaleCarModel($user_id, $marka);
+
+            if( $user && ($user->who === 1) ){
+                return view('users.seller.partials.seller_store', [
+                    'all_sales' => $all_sales,
+                    'sale_car_model' => $marka,
+                    'user' => $user
+                ]);
+            }
         }
-        return null;
     }
 
     public function GuestSaleUserInfo($sales){

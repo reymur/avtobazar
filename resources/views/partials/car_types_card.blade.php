@@ -17,7 +17,7 @@
                     @if( $type->sales->count() )
                         <div class="">
                             <div class="row col-lg-12 col-md-12 col-sm-12 col-lg-12 mb-3 m-sm-0 p-sm-0 m-md-0 p-md-0">
-                                @include('announcements.sales_section', ['sales' => $type->sales])
+                                @include('announcements.all_sales_show', ['sales' => $type->sales])
                             </div><!-- Announce Sales -->
                         </div>
                     @else

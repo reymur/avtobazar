@@ -51,7 +51,9 @@
             "app/Helpers/getFirstSmallImage.php",
             "app/Helpers/getStatus.php",
             "app/Helpers/incrementVar.php",
-            "app/Helpers/saleSmallImage.php"
+            "app/Helpers/saleSmallImage.php",
+            "app/Helpers/getUserAllAnnouncements.php",
+            "app/Helpers/getAnnouncementSaleCarModel.php"
         ],
         "classmap": [
             "database/seeds",
