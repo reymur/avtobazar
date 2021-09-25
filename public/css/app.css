@@ -11321,7 +11321,7 @@ body {
   line-height: 24px;
   word-wrap: break-word;
   background-color: #fbfbf5;
-  margin: 17px 0 0 -15px;
+  margin: 10px 0 0 -15px;
   border-top: 1px solid #deb88770;
   border-right: 1px solid #deb88770;
   border-bottom: 1px solid #deb88770;
@@ -11427,7 +11427,6 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin: 0 0 0 -11px;
 }
 
 .ow__anywvere {

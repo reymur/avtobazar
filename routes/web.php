@@ -45,6 +45,7 @@ Route::prefix('announce')->group(function() {
     Route::post('/sale-announce-save', 'SaleController@saleAnnounceMake');
     Route::get('/sale-flash-info', 'SaleController@saleInfo');
     Route::get('/sale/{marka}/{number}', 'SaleController@saleShow')->name('sale-show');
+    Route::get('/sale/user/{phone}/all/announces', 'SaleController@saleUserAllSales')->name('sale-user-all-sales');
 });
 
 Route::prefix('sale')->middleware('web')->group(function(){

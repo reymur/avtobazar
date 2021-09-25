@@ -49,27 +49,47 @@
                 </div>
 
                 <div class="row col-xl-11 col-lg-11 col-md-12 col-sm-12 px-md-0 px-sm-0 m-auto">
-                    <div class="col-xl-8 col-lg-8 order-lg-last col-md-12 col-sm-12 sale__info">
+                    <div class="col-xl-8 col-lg-8 border-lg-last col-md-12 col-sm-12 sale__info">
                         <div class="pl-2 sale__info-content">
-                            <div class="border-bottom border-info d-inline-block mb-2 px-4 sale__main-text">
-                                <span class="">{{ $sale->marka }}</span>
+                            <table class="table border-0 m-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-muted">Marka:</th>
+                                        <td>
+                                            <div class="d-inline-block text__bold">
+                                                <span class="">{{ $sale->marka }}</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16">
-                                    <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash" viewBox="0 0 16 16">
+                                                    <path d="M11.354 4.646a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                                                </svg>
 
-                                <span class="">{{ $sale->model }}</span>
-                            </div>
+                                                <span class="">{{ $sale->model }}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Vəziyyəti: </th>
+                                        <td>
+                                            <div class="">
+                                                <div class="d-inline-block text__bold">
+                                                    {{ $sale->condition }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Şəhər: </th>
+                                        <td>
+                                            <div class="d-inline-block text__bold">
+                                                <div class="">
+                                                    {{ $sale->city }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
 
-                            <div class="border-bottom border-info d-inline-block mb-2 px-4 sale__main-text">
-                                {{ $sale->condition }}
-                            </div>
-
-                            <div class="border-bottom border-info d-inline-block px-4 d-flex sale__main-text">
-                                <div class="">
-                                    {{ $sale->city }}
-                                </div>
-                            </div>
+                            </table>
                         </div>
 
                         <div class="d-block px-4 py-3 sale__note">
@@ -118,11 +138,10 @@
                                 </span>
 
                                 <div class="">
-                                    <a href="" class="text__decoration">
+                                    <a href="{{ route('sale-user-all-sales', ['phone' => $sale->user_id]) }}" class="text__decoration">
                                         <span class="sale__name">
                                             {{ $sale->name }}
                                         </span>
-
                                         <span class=".sale__name-sub">
                                             bütün elanlar
                                         </span>
@@ -151,53 +170,8 @@
                     </div>
                 </div>
 
-                <div class="col-11 m-auto p-4">
-                    <div class="pt-2 pb-3 pl-n3">
-                        <div class="announce__title-text">
-                            Oxşar Elanlar
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-md-4 p-3 seller__store-card-div">
-                        @if( isset($similar_sales) && $similar_sales->count() > 0 )
-                            @foreach( $similar_sales as $similar_sale )
-                                @if( $similar_sale->number != $sale->number )
-                                    <div class="col mb-3 px-2">
-                                    <a href="{{ route('sale-show', ['marka' => $similar_sale->marka, 'number' => $similar_sale->number]) }}"
-                                    class="text-decoration-none">
-                                        <div class="card h-100 hover__element">
-                                            <div class="">
-                                                <div class="">
-                                                    <img src="/images/sale/{{ getFirstSmallImage($similar_sale->images) }}"
-                                                         alt="{{ getFirstSmallImage($similar_sale->images) }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="card-body p-2">
-                                                <div class="">
-                                                    <div class="card-title title__size text__bold">
-                                                        <span class="">
-                                                            "{{ $similar_sale->marka }} {{ $similar_sale->model }}"
-                                                            {{ $similar_sale->title }}
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <p class="card-text text-black-50 mt-2 ml-2 card__small-texts">
-                                                    <span class="mr-1">
-                                                        {{ \Carbon\Carbon::now()->diffForHumans($similar_sale->created_at) .',' }}
-                                                    </span>
-                                                    <span class="">{{ $similar_sale->city }}</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                @endif
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
+                <!--Announces section-->
+                @include('announcements.user_announce_show')
             </div>
         </div>
 

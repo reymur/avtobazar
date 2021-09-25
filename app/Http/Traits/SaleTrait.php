@@ -30,7 +30,8 @@ trait SaleTrait
     protected function saleAnnounceSave($request)
     {
             $sale = Sale::create([
-                'user_id'   => auth()->check() ? auth()->user()->id : NULL,
+                'user_id'   => auth()->check() ? auth()->user()->id :
+                               is_array($request->phones) ? $request->phones[0] : $request->phones,
                 'marka'     => $request->marka,
                 'model'     => $request->model,
                 'title'     => $request->title,

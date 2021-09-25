@@ -23,20 +23,21 @@ export default {
             }
         },
         mainVisibleImages(images) {
-            for (let i = 1; i < (images.length - 1); i++) {
+            for (let i = 1; i < (images.length); i++) {
                 if (images[i].title !== undefined) {
-                    if (images[i].title.indexOf('small') > -1) {
-                        if( i === 1 ){
-                            let big_image = images[i].title.replace('small', 'big');
+                    if( i === 1 ){
+                        let big_image = images[i].title.replace('small', 'big');
 
-                            this.saleImage.push({
-                                src: '/images/sale/' + big_image,
-                                thumbnail: '/images/sale/' + big_image,
-                                w: 1200,
-                                h: 800,
-                                alt: big_image
-                            });
-                        }else {
+                        this.saleImage.push({
+                            src: '/images/sale/' + big_image,
+                            thumbnail: '/images/sale/' + big_image,
+                            w: 1200,
+                            h: 800,
+                            alt: big_image
+                        });
+                    }
+                    if (images[i].title.indexOf('small') > -1) {
+                        if( images[i].title.indexOf('small_1') !== 0 ) {
                             this.saleImage.push({
                                 src: '/images/sale/' + images[i].title,
                                 thumbnail: '/images/sale/' + images[i].title,
