@@ -189,7 +189,11 @@
 <script>
 export default {
     name: "formDetails",
-    props: ['user','cars','types','cities','years','motors','fuelTypes','resetModalDetails'],
+    props: [
+        'user','cars','types','cities','years','motors',
+        'fuelTypes','resetModalDetails','default_marka_name',
+        'default_type_name'
+    ],
     data(){
         return {
             texPass: 1,
@@ -200,8 +204,8 @@ export default {
             inputLoader: false,
             priceLoader: false,
             spare_parts: '',
-            marka: 'BMW',
-            model: '',
+            marka: this.defaultMarkaName() ?? 'BMW',
+            model: this.defaultTypeTitle() ?? '',
             yearSelect: 2020,
             motorSelect: 2000,
             fuelType: 1,
@@ -223,6 +227,24 @@ export default {
         }
     },
     methods: {
+        defaultMarkaName(){
+            if( this.default_marka_name.name !== undefined ) {
+                return this.default_marka_name.name
+            }else if( this.default_type_name.title !== undefined ) {
+                if( this.default_type_name.parent.name !== undefined ) {
+                    return this.default_type_name.parent.name;
+                }
+                return null;
+            }
+            return null;
+        },
+        defaultTypeTitle(){
+            if( this.default_type_name.title !== undefined ) {
+                console.log('!!!!!- ', this.default_type_name.title)
+                return this.default_type_name.title
+            }
+            return null;
+        },
         imageDelete(){
             this.img = null;
             this.image = null;
@@ -275,8 +297,9 @@ export default {
                     this.exampleCar = false;
                     this.exampleModel = false;
                     this.carTypeReturns.push(types.data.types)
-                    this.model = types.data.types[0].title
-                    console.log('exampleModel - ', this.exampleModel )
+                    this.model = this.defaultTypeTitle() ?? types.data.types[0].title
+                    console.log('getMarkaName - ', this.defaultMarkaName() )
+                    console.log('getTypeTitle - ', this.defaultTypeTitle() )
                 })
                 .catch(err => {
                     console.log('err - ', err)

@@ -10,6 +10,13 @@
                     </span>
                 </span>
             </div>
+            <div v-else class="main__menu-orders-count">
+                <span class="mb-3 px-1">
+                    <span class="badge badge-danger badge__bg-orders rounded-circle badge__font_size">
+                        0
+                    </span>
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +40,7 @@ export default {
                      if( res.data.orders !== undefined && res.data.orders != null ){
                          this.new_orders = res.data.orders;
                      }
-                     console.log('res get orders = ', res.data)
+                     console.log('res get orders1 = ', res.data)
                  })
                  .catch( err => {
                      console.log('err get orders = ', err.response.data)
@@ -50,7 +57,7 @@ export default {
                 this.new_orders.push(user)
             });
 
-        // console.log( 'Order Count = ', this.new_orders )
+        console.log( 'Order Count = ', this.new_orders )
     }
 }
 </script>

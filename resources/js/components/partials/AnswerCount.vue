@@ -13,6 +13,11 @@
                     </span>
                 </span>
             </div>
+            <div v-else class="main__menu-answers-not-count">
+                <span  class="badge badge-success text-white rounded-circle badge__font_size">
+                    0
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -69,7 +74,7 @@ export default {
             });
     },
     mounted() {
-        console.log( 'SSSSSSSS111 = ', this.auth_user.status)
+        console.log( 'SSSSSSSS111 = ', this.new_answers.length)
         this.ifNoUpdateMainMenuAnswersCount();
     }
 }

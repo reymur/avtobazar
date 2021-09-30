@@ -44,7 +44,7 @@
 
         @if( $announce->year )
             <tr>
-                <td scope="row" class="text-right text-black-50 py-2">Vəziyyəti:</td>
+                <td scope="row" class="text-right text-black-50 py-2">Il:</td>
                 <td class="text-break text-center py-2">
                     {{ $announce->year ?? 'Yox' }}
                 </td>

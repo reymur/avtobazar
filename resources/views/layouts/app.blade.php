@@ -29,7 +29,7 @@
 <body>
     <div class="col-12 p-0 m-0" id="app">
         <nav class="navbar navbar-expand-lg navbar-dark mb-2 p-1 navbar__bg">
-            <div class="col-xl-10 col-lg-10 px-xl-0 px-lg-0 col-md-12 col-sm-12">
+            <div class="col-xl-12 col-lg-12 px-xl-0 px-lg-0 col-md-12 col-sm-12 d-inline-flex">
                 <a class="navbar-brand mr-auto mt-md-1 ml-md-3 mt-sm-1 ml-sm-3 outline__none" href="/">
                     <span class="d-inline-flex">
                         <img src="{{ asset('images/cars/logos/logo5.png') }}" class="logo" alt="">
@@ -40,9 +40,9 @@
 
 
 
-                <div class="mr-sm-5 mr-md-5 mt-sm-2 mt-md-2 mr-lg-0 mr-xl-0 ml-lg-3 d-inline-flex">
+                <div class="mr-lg-5 mr-xl-5 ml-lg-3 mr-sm-3 mr-md-3 mt-sm-2 mt-md-2 d-inline-flex">
                     <div class="" id="navbarSupportedContent">
-                        <div class="ml-md-auto d-inline-flex">
+                        <div class="ml-xl-auto ml-lg-auto ml-md-auto d-inline-flex mt-3">
                             <a class="nav-link text-white p-sm-0 p-md-0 outline__none" href="#" id="navbarDropdown"
                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="">
@@ -81,6 +81,7 @@
                                     @endauth
                                 </div>
                             </a>
+
                             <div class="dropdown-menu drop__menu" aria-labelledby="navbarDropdown">
                                 @auth
                                     <a href="{{ route('logout') }}" class="dropdown-item"
@@ -127,14 +128,9 @@
             </div>
         </nav>
 
-        <div class="col-xl-10 col-lg-10 m-auto" id="search">
-            <form class="form-inline my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="axtar..." aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Axtar</button>
-            </form>
-        </div>
+        @include('forms.search')
 
-        <main class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto pb-3 pt-2">
+        <main class="col-xl-10 col-lg-10 col-md-12 col-sm-12 m-auto px-md-0 px-sm-0 pb-3 pt-2">
             @yield('content')
         </main>
     </div>

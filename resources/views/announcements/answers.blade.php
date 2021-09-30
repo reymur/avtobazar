@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg container-xl">
+    <div class="col-12 px-md-0 px-sm-0">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         @include('partials.announcement_panel')
+        @include('modals.spare_parts_find', ['title' => 'MODELLƏR'])
 
         <answers
             :answers_all="{{ getUserLeftBarAnswerCount() }}"

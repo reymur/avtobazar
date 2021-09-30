@@ -22,6 +22,8 @@
                             <form-details
                                 :user="user"
                                 :cars="cars"
+                                :default_marka_name="default_marka_name"
+                                :default_type_name="default_type_name"
                                 :types="types"
                                 :cities="cities"
                                 :years="years"
@@ -52,10 +54,14 @@
 
 export default {
     name: "index",
-    props: ['user','cars','types','cities','years','motors','fuelTypes'],
+    props: [
+        'user','cars','types','cities',
+        'years','motors','fuelTypes','default_marka_name',
+        'default_type_name'
+    ],
     data(){
         return {
-            resetModalDetails: 0
+            resetModalDetails: 0,
         }
     },
     methods: {
@@ -65,7 +71,7 @@ export default {
         }
     },
     mounted(){
-        // console.log()
+        // console.log('HHHHHH - ')
     }
 }
 </script>

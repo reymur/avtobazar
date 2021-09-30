@@ -42,21 +42,23 @@ class AnnouncementController extends Controller
             $ansers = Answer::where('user_id',$user->id)->get();
 
             $announce_ids = $orders->pluck('announcement_id');
-            $my_ansers = $ansers->whereIn('announcement_id', $announce_ids)
+            $my_answers = $ansers->whereIn('announcement_id', $announce_ids)
                 ->where('user_id',$user->id);
 
             return response()->json([
-                'orders' => $this->getNewOrderCount($announce_ids, $my_ansers)
+                'orders' => $this->getNewOrderCount($announce_ids, $my_answers)
             ]);
         }
     }
 
-    public function getNewOrderCount($announce_ids, $my_ansers){
-        if( $announce_ids->count() > 0 && $my_ansers->count() > 0 ){
-            $a = (int)$announce_ids->count();
-            $m = (int)$my_ansers->count();
+    public function getNewOrderCount($announce_ids, $my_answers){
+        if( $announce_ids->count() > 0 && $my_answers->count() > 0 ){
+            $ord =    (int)$announce_ids->count();
+            $my_ans = (int)$my_answers->count();
 
-            return $a - $m;
+            return ($ord - $my_ans);
+        }else {
+            return $announce_ids->count();
         }
     }
 
@@ -334,9 +336,9 @@ class AnnouncementController extends Controller
 
             return view('announcements.send')
                         ->with([
-                            'announce' => $announce->last(),
+                            'announce' => $announce ? $announce->last() : NULL,
                             'announce_all' => $announce_all,
-                            'announce_answer' => $this->getLastAnnounceAnswe($announce->last()),
+                            'announce_answer' => $announce ? $this->getLastAnnounceAnswe($announce->last()) : NULL,
                             'condition' => $condition,
                             'store' => $store ?? NULL,
                             'morg' => $morg ?? NULL,

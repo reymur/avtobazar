@@ -55,6 +55,7 @@ export default {
     },
     mounted() {
         console.log('Orders Page');
+        console.log('Orders AAAAAAAAa - ', this.orders);
     }
 }
 </script>

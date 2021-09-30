@@ -5,7 +5,7 @@
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         @include('partials.announcement_panel')
-
+{{--        {{ dd( getUserLeftBarOrderCount() ) }}--}}
         <orders
             :orders="{{ $orders }}"
             :new_orders="{{ getUserLeftBarOrderCount()[1] }}"

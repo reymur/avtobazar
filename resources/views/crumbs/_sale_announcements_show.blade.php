@@ -1,12 +1,14 @@
 
 @if( isset($all_sales) && !empty($all_sales) && $all_sales->count() > 0 )
-    <div class="col-lg-12 m-lg-auto mt-3 pt-2 pb-3 pl-xl-n3 pl-lg-n3">
+    <div class="col-lg-12 m-lg-auto mt-3 pt-1 pb-1 pl-xl-n3 pl-lg-n3">
         <div class="mt-lg-4 ml-lg-0 ml-md-1 ml-sm-1 announce__title-text">
-            İstifadəçinin bütün elanları
+            @isset( $title )
+                {{ $title }}
+            @endisset
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-4 col-lg-12 col-md-12 col-sm-12 m-lg-auto m-md-auto m-sm-auto p-md-0 p-sm-0 seller__store-card-div">
+    <div class="row row-cols-1 row-cols-md-4 col-lg-12 col-md-12 col-sm-12 m-lg-auto pt-lg-3 m-md-auto m-sm-auto p-md-0 p-sm-0 seller__store-card-div">
         @foreach( $all_sales as $sale )
             <div class="col mb-3 px-2">
                 <a href="{{ route('sale-show', ['marka' => $sale->marka, 'number' => $sale->number]) }}"

@@ -10987,12 +10987,27 @@ body {
 
 .main__menu-answers-count {
   position: absolute;
-  margin: -59px 0 0 21px;
+  margin: -51px 0 0 29px;
+}
+
+.main__menu-answers-not-count {
+  position: absolute;
+  margin: -31px 0 0 11px;
 }
 
 .main__menu-orders-count {
   position: absolute;
   margin: -56px 0 0 27px;
+}
+
+.sender__user-phone {
+  margin: 0 0 0 33px;
+  font-size: 16px;
+}
+
+.sender__user-name {
+  color: brown;
+  font-weight: bold;
 }
 
 .border__b {
@@ -11680,6 +11695,38 @@ body {
 
 .display__ruby {
   display: block ruby;
+}
+
+.castom__height {
+  height: 60px;
+}
+
+.m__top {
+  margin-top: 2px;
+}
+
+@media (max-width: 991px) {
+  .big__btn {
+    display: block;
+  }
+
+  .small__btn {
+    display: none;
+  }
+}
+
+.margin_top {
+  margin-top: 1px;
+}
+
+@media (min-width: 992px) {
+  .big__btn {
+    display: none;
+  }
+
+  .small__btn {
+    display: block;
+  }
 }
 
 .v-select {

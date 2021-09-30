@@ -1,6 +1,6 @@
 <tr>
     <td class="border-0">
-        @error('phone_number')
+        @error('phone')
             <div class="alert alert-danger text-center mb-4">
                 {{ $message }}
             </div>
@@ -11,7 +11,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-10 form-group m-auto">
                 <label for="phonenumber">Telefon nömrəsi:</label>
-                <input type="text" name="phone_number"
+                <input type="text" name="phone"
                        @if(Auth::user()->phone) value="{{ Auth::user()->phone  }}" @endif
                        id="phonenumber"
                        class="form-control mb-4 text-uppercase @error('phone_number') is-invalid @enderror"

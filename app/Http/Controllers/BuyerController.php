@@ -55,21 +55,21 @@ class BuyerController extends Controller
 
         if( ! $user && $user->id !== Auth::user()->id ) return redirect()->back();
 
-        if( $slug == 'phone_number' ) {
+        if( $slug == 'phone' ) {
             $messages = [
-                'phone_number.required' => '"Telefon nömrəsi" mütləqdir!',
-                'phone_number.digits' => '"Telefon nömrəsi" 10 rəqəmdən ibarət olmalıdır!',
-                'phone_number.unique' => '"Telefon nömrəsi" zanitdir!!'
+                'phone.required' => '"Telefon nömrəsi" mütləqdir!',
+                'phone.digits' => '"Telefon nömrəsi" 10 rəqəmdən ibarət olmalıdır!',
+                'phone.unique' => '"Telefon nömrəsi" məşquldur!'
             ];
 
             $request->validate([
-                'phone_number' => [
+                'phone' => [
                         'required','digits:10',
                         Rule::unique('users','phone')->ignore($user->id)
                     ]
                 ], $messages);
 
-            $buyer_phone = $request->input('phone_number');
+            $buyer_phone = $request->input('phone');
 
             $user->update([
                 'phone' => $buyer_phone

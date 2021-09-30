@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg container-xl px-md-0 px-sm-0">
+    <div class="col-12 px-md-0 px-sm-0">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         @include('partials.announcement_panel')
+        @include('modals.spare_parts_find', ['title' => 'MODELLƏR'])
 
         <div class="row col-lg-12 m-md-auto m-sm-auto px-md-0 px-sm-0">
             <div class="col-lg-2 text-right left__bar-bg py-lg-3 py-md-2 py-sm-2 mb-xl-0 mb-lg-0 mb-md-2 mb-sm-2">
@@ -39,6 +40,7 @@
 
                                         @if( isset($morg) && $morg->count() )
                                             @include('modals.show_all_sellers_for_send_to', ['data' => $morg, 'who' => 'morg'])
+
                                             <a href="{{ route(
                                                             'send_to_post',['who' => $morg->first()->who,
                                                             'pin' => $morg->first()->pivot->pivotParent->pin]
@@ -54,7 +56,7 @@
                                 @endif
 
                                 @if( session()->has('send_flash') )
-                                    @include('partials.answer_count_show_for_flash_send')
+                                    @in clude('partials.answer_count_show_for_flash_send')
                                 @else
                                     @include('partials.answer_count_show')
                                 @endif

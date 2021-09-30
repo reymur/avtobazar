@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-lg container-xl">
+    <div class="col-12 px-md-0 px-sm-0">
         @include('crumbs._page_links',['link' => 'Elanlar'])
 
         @include('partials.announcement_panel')
@@ -26,7 +26,7 @@
                                         @include('users.buyer.forms.marka_edit_form')
                                     @endif
 
-                                    @if( isset($slug) && $slug == 'phone_number' )
+                                    @if( isset($slug) && $slug == 'phone' )
                                         @include('users.buyer.forms.phoneNumber_edit_forms')
                                     @endif
 

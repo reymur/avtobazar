@@ -4242,8 +4242,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "formDetails",
-  props: ['user', 'cars', 'types', 'cities', 'years', 'motors', 'fuelTypes', 'resetModalDetails'],
+  props: ['user', 'cars', 'types', 'cities', 'years', 'motors', 'fuelTypes', 'resetModalDetails', 'default_marka_name', 'default_type_name'],
   data: function data() {
+    var _this$defaultMarkaNam, _this$defaultTypeTitl;
+
     return {
       texPass: 1,
       toloader: false,
@@ -4253,8 +4255,8 @@ __webpack_require__.r(__webpack_exports__);
       inputLoader: false,
       priceLoader: false,
       spare_parts: '',
-      marka: 'BMW',
-      model: '',
+      marka: (_this$defaultMarkaNam = this.defaultMarkaName()) !== null && _this$defaultMarkaNam !== void 0 ? _this$defaultMarkaNam : 'BMW',
+      model: (_this$defaultTypeTitl = this.defaultTypeTitle()) !== null && _this$defaultTypeTitl !== void 0 ? _this$defaultTypeTitl : '',
       yearSelect: 2020,
       motorSelect: 2000,
       fuelType: 1,
@@ -4280,6 +4282,27 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    defaultMarkaName: function defaultMarkaName() {
+      if (this.default_marka_name.name !== undefined) {
+        return this.default_marka_name.name;
+      } else if (this.default_type_name.title !== undefined) {
+        if (this.default_type_name.parent.name !== undefined) {
+          return this.default_type_name.parent.name;
+        }
+
+        return null;
+      }
+
+      return null;
+    },
+    defaultTypeTitle: function defaultTypeTitle() {
+      if (this.default_type_name.title !== undefined) {
+        console.log('!!!!!- ', this.default_type_name.title);
+        return this.default_type_name.title;
+      }
+
+      return null;
+    },
     imageDelete: function imageDelete() {
       this.img = null;
       this.image = null;
@@ -4334,14 +4357,17 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/cars/json-models', {
         name: this.marka
       }).then(function (types) {
+        var _this3$defaultTypeTit;
+
         _this3.carTypeReturns = [];
         _this3.exampleCar = false;
         _this3.exampleModel = false;
 
         _this3.carTypeReturns.push(types.data.types);
 
-        _this3.model = types.data.types[0].title;
-        console.log('exampleModel - ', _this3.exampleModel);
+        _this3.model = (_this3$defaultTypeTit = _this3.defaultTypeTitle()) !== null && _this3$defaultTypeTit !== void 0 ? _this3$defaultTypeTit : types.data.types[0].title;
+        console.log('getMarkaName - ', _this3.defaultMarkaName());
+        console.log('getTypeTitle - ', _this3.defaultTypeTitle());
       })["catch"](function (err) {
         console.log('err - ', err);
       });
@@ -5408,6 +5434,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {},
   mounted: function mounted() {
     console.log('Orders Page');
+    console.log('Orders AAAAAAAAa - ', this.orders);
   }
 });
 
@@ -5641,6 +5668,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserSideBarOrders",
   props: ['auth_user'],
@@ -5694,7 +5726,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   mounted: function mounted() {
-    console.log('SSSSSSSS111 = ', this.auth_user.status);
+    console.log('SSSSSSSS111 = ', this.new_answers.length);
     this.ifNoUpdateMainMenuAnswersCount();
   }
 });
@@ -5969,9 +6001,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
-  props: ['user', 'cars', 'types', 'cities', 'years', 'motors', 'fuelTypes'],
+  props: ['user', 'cars', 'types', 'cities', 'years', 'motors', 'fuelTypes', 'default_marka_name', 'default_type_name'],
   data: function data() {
     return {
       resetModalDetails: 0
@@ -5983,7 +6017,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$root.$emit('remove', this.resetModalDetails);
     }
   },
-  mounted: function mounted() {// console.log()
+  mounted: function mounted() {// console.log('HHHHHH - ')
   }
 });
 
@@ -6202,6 +6236,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrdersCount",
   data: function data() {
@@ -6220,7 +6261,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.new_orders = res.data.orders;
         }
 
-        console.log('res get orders = ', res.data);
+        console.log('res get orders1 = ', res.data);
       })["catch"](function (err) {
         console.log('err get orders = ', err.response.data);
       });
@@ -6236,7 +6277,8 @@ __webpack_require__.r(__webpack_exports__);
       alert(user);
 
       _this2.new_orders.push(user);
-    }); // console.log( 'Order Count = ', this.new_orders )
+    });
+    console.log('Order Count = ', this.new_orders);
   }
 });
 
@@ -7095,6 +7137,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Show_modal_content",
   props: ['data', 'auth_check', 'auth_user_status', 'disabled'],
@@ -7109,7 +7164,8 @@ __webpack_require__.r(__webpack_exports__);
         w: 1200,
         h: 800,
         alt: this.data.image
-      }]
+      }],
+      address: location.protocol + '//' + location.hostname
     };
   },
   computed: {},
@@ -7125,7 +7181,7 @@ __webpack_require__.r(__webpack_exports__);
             if (res.data.sender !== undefined && res.data.sender != null) {
               _this.sender_user = res.data.sender;
               sessionStorage.setItem('sender_id.' + data.user_id, res.data.sender);
-              console.log('Res Sender - ', _this.sender_user);
+              console.log('Res Sender - ', _this.sender_user.id);
             }
           }
         })["catch"](function (err) {
@@ -7178,7 +7234,8 @@ __webpack_require__.r(__webpack_exports__);
     // this.getFuelType()
     this.getSender(this.data);
   },
-  mounted: function mounted() {// console.log('Fuel type!!! - ', this.fuel_type)
+  mounted: function mounted() {
+    console.log('UUUUUUUUUU - ', location.protocol + '//' + location.hostname + '/' + location.pathname);
   }
 });
 
@@ -67459,7 +67516,16 @@ var render = function() {
                 ])
               : _vm._e()
           ])
-        : _vm._e()
+        : _c("div", { staticClass: "main__menu-answers-not-count" }, [
+            _c(
+              "span",
+              {
+                staticClass:
+                  "badge badge-success text-white rounded-circle badge__font_size"
+              },
+              [_vm._v("\n                    0\n                ")]
+            )
+          ])
     ])
   ])
 }
@@ -67702,6 +67768,8 @@ var render = function() {
                         attrs: {
                           user: _vm.user,
                           cars: _vm.cars,
+                          default_marka_name: _vm.default_marka_name,
+                          default_type_name: _vm.default_type_name,
                           types: _vm.types,
                           cities: _vm.cities,
                           years: _vm.years,
@@ -68117,11 +68185,27 @@ var render = function() {
               )
             ])
           ])
-        : _vm._e()
+        : _c("div", { staticClass: "main__menu-orders-count" }, [_vm._m(0)])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "mb-3 px-1" }, [
+      _c(
+        "span",
+        {
+          staticClass:
+            "badge badge-danger badge__bg-orders rounded-circle badge__font_size"
+        },
+        [_vm._v("\n                    0\n                ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -68753,20 +68837,80 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm.sender_user.name != null ||
-                        _vm.sender_user.autoNumber != null
+                        _vm.sender_user.phone != null &&
+                        _vm.sender_user.status == 1
                           ? _c(
                               "span",
                               { staticClass: "text-uppercase letter__spacing" },
                               [
-                                _vm._v(
-                                  "\n                    " +
-                                    _vm._s(
-                                      _vm.sender_user.name
-                                        ? _vm.sender_user.name
-                                        : _vm.sender_user.autoNumber
-                                    ) +
-                                    "\n                "
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-dark ",
+                                    attrs: {
+                                      href: "tel:" + _vm.sender_user.phone
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                        " +
+                                        _vm._s(_vm.sender_user.phone) +
+                                        "\n                    "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.sender_user.name != null &&
+                        _vm.sender_user.status == 2
+                          ? _c(
+                              "span",
+                              { staticClass: "text-uppercase letter__spacing" },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "sender__user-name",
+                                    attrs: {
+                                      href:
+                                        _vm.address +
+                                        "/seller/seller-store/" +
+                                        _vm.sender_user.id,
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                        " +
+                                        _vm._s(_vm.sender_user.name) +
+                                        "\n                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "d-block sender__user-phone" },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "text-dark ",
+                                        attrs: {
+                                          href: "tel:" + _vm.sender_user.phone
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(_vm.sender_user.phone) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                    )
+                                  ]
                                 )
                               ]
                             )

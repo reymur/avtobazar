@@ -8,9 +8,22 @@
                             <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                         </svg>
                     </span>
-                    <span v-if="sender_user.name != null || sender_user.autoNumber != null" class="text-uppercase letter__spacing">
-                        {{ sender_user.name ? sender_user.name : sender_user.autoNumber }}
+                    <span v-if="sender_user.phone != null && sender_user.status == 1" class="text-uppercase letter__spacing">
+                        <a :href="'tel:'+sender_user.phone" class="text-dark ">
+                            {{ sender_user.phone }}
+                        </a>
                     </span>
+                   <span v-if="sender_user.name != null && sender_user.status == 2" class="text-uppercase letter__spacing">
+                        <a :href="address+'/seller/seller-store/'+sender_user.id" target="_blank" class="sender__user-name">
+                            {{ sender_user.name }}
+                        </a>
+                       <span class="d-block sender__user-phone">
+                            <a :href="'tel:'+sender_user.phone" class="text-dark ">
+                                {{ sender_user.phone }}
+                            </a>
+                       </span>
+                    </span>
+
                </h5>
 
                <div class="pt-1">
@@ -147,7 +160,8 @@ export default {
                 w: 1200,
                 h: 800,
                 alt: this.data.image
-            }]
+            }],
+            address: location.protocol+'//'+location.hostname
         }
     },
     computed: {
@@ -164,7 +178,7 @@ export default {
                         if ( res.data.sender !== undefined && res.data.sender != null ) {
                             this.sender_user = res.data.sender;
                             sessionStorage.setItem('sender_id.'+data.user_id, res.data.sender);
-                            console.log('Res Sender - ', this.sender_user);
+                            console.log('Res Sender - ', this.sender_user.id);
                         }
                     }
                 })
@@ -219,7 +233,7 @@ export default {
         this.getSender(this.data)
     },
     mounted() {
-        // console.log('Fuel type!!! - ', this.fuel_type)
+        console.log('UUUUUUUUUU - ', location.protocol+'//'+location.hostname+'/'+location.pathname,  )
     }
 }
 </script>

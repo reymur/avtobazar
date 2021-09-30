@@ -1,7 +1,7 @@
 
 <div class="col-11 m-auto p-4">
-    @if( isset($similar_sales) && $similar_sales->count() > 0 )
-        <div class=" mt-3 pt-2 pb-3 pl-n3">
+    @if( !empty($similar_sales) && isset($similar_sales) && $similar_sales->count() > 0 )
+        <div class=" mt-3 pt-2 pb-2 pl-n3">
             <div class="announce__title-text">
                 Oxşar Elanlar
             </div>
@@ -46,7 +46,7 @@
     @else
         <div class="mt-3 pt-2 pb-3 pl-n3">
             <h5 class="d-flex justify-content-center">
-                Oxşar Elanlar tapılmadı!
+                Oxşar Elan tapılmadı!
             </h5>
         </div>
     @endif
