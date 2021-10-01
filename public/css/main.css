@@ -290,6 +290,7 @@ body {
                     outline: none;
                     color: #e1fbfb;
                 }
+
 .title__size {
     margin: 0;
     padding: 0;
@@ -605,6 +606,39 @@ body {
 .send__title {
     font-size: 16px;
     letter-spacing: 1.5px;
+}
+
+.sernd__store_bg-color   {
+    background-color: #06ec0626;
+}
+.sernd__morg_bg-color {
+    background-color: #faebd7c2;
+}
+.send__user-name-size {
+    color: #10101dd6;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+}
+
+.store__bg {
+    background-color: #b9f5b97a;
+}
+.morg__bg {
+    background-color: #fbf0e0a8;
+}
+
+.store__subtitle {
+        font-size: 0.8em;
+        margin: -11px 0 -10px 76px;
+        color: #60ab60;
+        display: block;
+    }
+.morg__subtitle {
+    display: block;
+    font-size: 0.8em;
+    margin: -13px 0 -10px 80px;
+    color: #7d5a27;
 }
 
 .send__all-td {

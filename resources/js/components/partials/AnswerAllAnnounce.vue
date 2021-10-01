@@ -20,7 +20,7 @@
                 <tr v-if="!loader && agree_show_only_new_answers && new_answers[0] != null && new_answers[0].length > 0" v-for="answer in new_answers[0]">
                     <td class="col-9 text-left send__all-td pt-3 pb-2">
                         <div class="d-block">
-                            <answer-all-modal :answer="answer"></answer-all-modal>
+                            <answer-sender-content-modal :answer="answer"></answer-sender-content-modal>
                         </div>
                     </td>
 
@@ -47,7 +47,7 @@
                 <tr v-if="!loader && !agree_show_only_new_answers && answers != null && answers.length > 0" v-for="answer in answers">
                     <td class="col-9 text-left send__all-td pt-3 pb-2">
                         <div class="d-block">
-                            <answer-all-modal :answer="answer"></answer-all-modal>
+                            <answer-sender-content-modal :answer="answer"></answer-sender-content-modal>
                         </div>
                     </td>
 

@@ -2,14 +2,14 @@
 <table class="table border-top-0 border-bottom">
     <tbody>
         <thead>
-            <th> Adı </th>
+            <th> Ehtiyat Hissəsi </th>
             <th class="text-right"> Göndərilən yer </th>
         </thead>
         @foreach( $announce_all->unique('pin') as $announce )
             <tr>
                 <td class="text-left send__all-td pt-1 pb-0 text-break">
                     <div class="d-block">
-                        @include('modals.send_all_modal')
+                        @include('modals.sender_content_modal')
                     </div>
                 </td>
 

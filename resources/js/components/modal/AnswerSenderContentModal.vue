@@ -11,30 +11,25 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" :id="'send_all-'+answer.id">
-                            <span class="mr-0">
-                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                                </svg>
-                            </span>
+                            <span class="text-muted text-uppercase mr-1">Göndərən:</span>
 
                             <span  v-if="answer.get_sender" class="">
                                 {{ answer.get_sender.name ? answer.get_sender.name : '' }}
-                                {{ answer.get_sender.autoNumber ? answer.get_sender.autoNumber : '' }}
+                                {{ answer.get_sender.phone ? answer.get_sender.phone : '' }}
                             </span>
                         </h5>
 
-
-                            <span v-if="answer.spare_parts" class="text-black-50 mt-1 ml-4">
-                                <span class="">
-                                    {{ answer.created_at ? answer.created_at : 'Yox' }}
-                                </span>
-                                <span class="ml-2">
-                                    {{ answer.city ? answer.city : 'Yox' }}
-                                </span>
+                        <span v-if="answer.spare_parts" class="text-black-50 mt-1 ml-4">
+                            <span class="">
+                                {{ answer.created_at ? answer.created_at : 'Yox' }}
                             </span>
-                            <span v-else class="letter__spacing">
-                                Yox
+                            <span class="ml-2">
+                                {{ answer.city ? answer.city : 'Yox' }}
                             </span>
+                        </span>
+                        <span v-else class="letter__spacing">
+                            Yox
+                        </span>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -132,6 +127,19 @@ export default {
         }
     },
     methods:{
+        refactorPhone(phone){
+            let new_app = '';
+            let new_phone = '';
+            let aperators = ['050','055','051','099','077','070']
+            aperators.forEach( app => {
+                if( phone.indexOf(app) > -1 ) {
+                    new_app = '('+app+')'+ ' ';
+                    new_phone = phone.replace(app, new_app);
+                }
+            })
+
+            return new_phone
+        },
         imageItems(image){
             return [{
                 src: this.image_path + image,

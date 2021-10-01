@@ -36,7 +36,7 @@ Vue.component('answer-count', require('./components/partials/AnswerCount.vue').d
 Vue.component('answers', require('./components/pages/Answers.vue').default);
 Vue.component('answer-all-announce', require('./components/partials/AnswerAllAnnounce.vue').default);
 Vue.component('user-side-bar-answers', require('./components/side/UserSideBarAnswers.vue').default);
-Vue.component('answer-all-modal', require('./components/modal/AnswerAllModal.vue').default);
+Vue.component('answer-sender-content-modal', require('./components/modal/AnswerSenderContentModal.vue').default);
 Vue.component('show-all-answer-sellers', require('./components/modal/ShowAllAnswerSellers.vue').default);
 Vue.component('show-all-answer-sellers-answers-show-table', require('./components/partials/ShowAllAnswerSellersAnswersShowTable.vue').default);
 

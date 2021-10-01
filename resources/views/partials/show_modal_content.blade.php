@@ -2,32 +2,31 @@
 @isset($data)
     <div class="modal-header">
 
-        @if( isset($data->getSender->name) || isset($data->getSender->autoNumber) )
-            <h5 class="modal-title" id="send_all-{{ $data->id }}">
-                <span class="mr-0">
-                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-right-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                    </svg>
-                </span>
-                <span class="text-uppercase letter__spacing">
-                    {{
-                        $data->getSender->name ??
-                        $data->getSender->autoNumber
-                    }}
-                </span>
-            </h5>
+        @if( isset($data->getSender->name) || isset($data->getSender->phone) )
+            <div class="d-inline-flex">
+                <div class="mr-4">
+                    <h5 class="modal-title d-inline-flex" id="send_all-{{ $data->id }}">
+                        <span class="text-uppercase text-muted mr-2">Göndərən:</span>
 
-            <span class="px-3"></span>
+                        <span class="text-uppercase letter__spacing">
+                        {{
+                            $data->getSender->name ??
+                            $data->getSender->phone
+                        }}
+                    </span>
+                    </h5>
+                </div>
 
-            <span class="pt-1 text-black-50">
-                {{ $data->created_at ?? '' }}
-            </span>
+                <div class="d-block mt-1">
+                    <span class="mr-2 pt-1 text-black-50">
+                        {{ $data->city ?? '' }}
+                    </span>
 
-            <span class="px-3"></span>
-
-            <span class="pt-1 text-black-50">
-                {{ $data->city ?? '' }}
-            </span>
+                    <span class="pt-1 text-black-50">
+                        {{ $data->created_at ?? $data->created_at }}
+                    </span>
+                </div>
+            </div>
         @else
             Yox
         @endif
@@ -65,18 +64,9 @@
                 </tr>
             @endif
 
-            @if( $data->year )
-                <tr>
-                    <td scope="row" class="text-right text-black-50 py-2">Vəziyyəti:</td>
-                    <td class="text-break text-center py-2">
-                        {{ $data->year ?? 'Yox' }}
-                    </td>
-                </tr>
-            @endif
-
             @if( $data->getFuelType->title )
                 <tr>
-                    <td scope="row" class="text-right text-black-50 py-2">Vəziyyəti:</td>
+                    <td scope="row" class="text-right text-black-50 py-2">Mühərrik:</td>
                     <td class="text-break text-center py-2">
                         {{ $data->getFuelType->title ?? 'Yox' }}
                     </td>

@@ -11,7 +11,7 @@ class Announcement extends Model
     protected $guarded = [];
 
     public function getCreatedAtAttribute(){
-        return Carbon::parse($this->attributes['created_at'])->format('d.m.Y | H:i');
+        return Carbon::parse($this->attributes['created_at'])->diffForHumans();
     }
 
     public function getImageName()

@@ -56,7 +56,7 @@
                                 @endif
 
                                 @if( session()->has('send_flash') )
-                                    @in clude('partials.answer_count_show_for_flash_send')
+                                    @include('partials.answer_count_show_for_flash_send')
                                 @else
                                     @include('partials.answer_count_show')
                                 @endif

@@ -99,7 +99,7 @@ export default {
         sessionStorage.clear()
     },
     mounted() {
-
+        console.log('>>>>>>>>>>>')
     }
 }
 </script>
